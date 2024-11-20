@@ -146,7 +146,7 @@ All activity may be monitored and reported.\'\ndisable-user-list=true\n",
 
               is_expected.to contain_exec('dpkg-gdm-reconfigure')
                 .with(
-                  'path'        => ['/bin', '/usr/bin'],
+                  'path'        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
                   'command'     => 'dpkg-reconfigure gdm3',
                   'refreshonly' => true,
                 )
