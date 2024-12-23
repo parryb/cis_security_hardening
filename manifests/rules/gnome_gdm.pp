@@ -146,7 +146,7 @@ class cis_security_hardening::rules::gnome_gdm (
           notify  => Exec['dpkg-gdm-reconfigure'],
         }
 
-        file { '/etc/dconf/db/gdm.d/00- login-screen':
+        file { '/etc/dconf/db/gdm.d/00-login-screen':
           ensure  => file,
           content => "[org/gnome/login-screen]\ndisable-user-list=true\n",
           owner   => 'root',
