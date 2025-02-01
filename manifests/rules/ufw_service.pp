@@ -31,7 +31,7 @@ class cis_security_hardening::rules::ufw_service (
     exec { 'enable-ufw':
       command => 'ufw --force enable',
       path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-      unless  => 'test -z "$(ufw status | grep \"Status: inactive\")"',
+      unless  => 'ufw status | grep -wq active',
     }
   }
 }

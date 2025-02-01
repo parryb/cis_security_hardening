@@ -25,17 +25,17 @@ class cis_security_hardening::rules::ufw_loopback (
     exec { 'add allow on lo':
       command => 'ufw allow in on lo',
       path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-      onlyif  => 'test -z "$(ufw status verbose | grep -E \"^Anywhere.*on lo.*ALLOW IN.*Anywhere\")""',
+      unless  => 'ufw status verbose | grep -E "^Anywhere.*on lo.*ALLOW IN.*Anywhere"',
     }
     exec { 'add deny on 127.0.0.0/8':
       command => 'ufw deny in from 127.0.0.0/8',
       path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-      onlyif  => 'test -z "$(ufw status verbose | grep -E \"^Anywhere.*DENY IN.*127.0.0.0/8\")""',
+      unless  => 'ufw status verbose | grep -E "^Anywhere.*DENY IN.*127.0.0.0/8"',
     }
     exec { 'add deny on ::1':
       command => 'ufw deny in from ::1',
       path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-      onlyif  => 'test -z "$(ufw status verbose | grep -E \"^Anywhere (v6).*DENY IN.*::1\")""',
+      unless  => 'ufw status verbose | grep -E "^Anywhere \(v6\).*DENY IN.*::1"',
     }
   }
 }
