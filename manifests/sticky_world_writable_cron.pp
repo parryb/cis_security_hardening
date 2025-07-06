@@ -49,4 +49,7 @@ class cis_security_hardening::sticky_world_writable_cron (
     group   => 'root',
     mode    => '0644',
   }
+  file { $filename:
+    ensure => stdlib::ensure($ensure, file),
+  }
 }

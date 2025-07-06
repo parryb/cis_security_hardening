@@ -86,7 +86,7 @@ class cis_security_hardening::rules::aide_regular_checks (
     } else {
       if ! empty($content) {
         file { '/etc/cron.d/aide.cron':
-          ensure  => absent,
+          ensure => absent,
         }
         file { '/etc/cron.d/aide':
           ensure  => file,
