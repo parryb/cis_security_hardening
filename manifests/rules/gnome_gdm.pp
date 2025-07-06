@@ -106,7 +106,7 @@ class cis_security_hardening::rules::gnome_gdm (
           }
         }
         exec { 'dpkg-gdm-reconfigure':
-          path        => ['/bin', '/usr/bin'],
+          path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
           command     => 'dpkg-reconfigure gdm3',
           refreshonly => true,
         }
@@ -122,7 +122,7 @@ class cis_security_hardening::rules::gnome_gdm (
         }
 
         exec { 'dpkg-gdm-reconfigure':
-          path        => ['/bin', '/usr/bin'],
+          path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
           command     => 'dpkg-reconfigure gdm3',
           refreshonly => true,
         }
