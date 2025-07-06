@@ -35,20 +35,20 @@ class cis_security_hardening::rules::ufw_default_deny (
     exec { "default incoming policy ${default_incoming}":
       command => "ufw default ${default_incoming} incoming", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
       path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-      onlyif  => "test -z \"$(ufw status verbose | grep '${default_incoming} (incoming)')\"",
+      unless  => "ufw status verbose | grep '${default_incoming} (incoming)'",
     }
 
     exec { "default outgoing policy ${default_outgoing}":
       command => "ufw default ${default_outgoing} outgoing", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
       path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-      onlyif  => "test -z \"$(ufw status verbose | grep '${default_outgoing} (outgoing)')\"",
+      unless  => "ufw status verbose | grep '${default_outgoing} (outgoing)'",
     }
 
     # exec only if default policy for routed traffic is not the desired state or id not completely disabled
     exec { "default routed policy ${default_routed}":
       command => "ufw default ${default_routed} routed", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
       path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-      onlyif  => "test -z \"$(ufw status verbose | grep -e '${default_routed} (routed)' -e 'disabled (routed)')\"",
+      unless  => "ufw status verbose | grep -e '${default_routed} (routed)' -e 'disabled (routed)'",
     }
   }
 }

@@ -37,21 +37,21 @@ describe 'cis_security_hardening::rules::ufw_default_deny' do
               .with(
                 'command' => 'ufw default deny incoming',
                 'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                'onlyif'  => "test -z \"$(ufw status verbose | grep 'deny (incoming)')\"",
+                'unless'  => "ufw status verbose | grep 'deny (incoming)'",
               )
 
             is_expected.to contain_exec('default outgoing policy deny')
               .with(
                 'command' => 'ufw default deny outgoing',
                 'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                'onlyif'  => "test -z \"$(ufw status verbose | grep 'deny (outgoing)')\"",
+                'unless'  => "ufw status verbose | grep 'deny (outgoing)'",
               )
 
             is_expected.to contain_exec('default routed policy deny')
               .with(
                 'command' => 'ufw default deny routed',
                 'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                'onlyif'  => "test -z \"$(ufw status verbose | grep -e 'deny (routed)' -e 'disabled (routed)')\"",
+                'unless'  => "ufw status verbose | grep -e 'deny (routed)' -e 'disabled (routed)'",
               )
           else
             is_expected.not_to contain_exec('default incoming policy deny')
