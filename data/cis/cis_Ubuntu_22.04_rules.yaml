@@ -57,6 +57,7 @@ cis_security_hardening::benchmark::ubuntu::22:
       level1:
         - gnome_gdm
         - gdm_auto_mount
+        - gdm_screensaver
         - xdmcp_config
       level2:
         - gnome_gdm_package
