@@ -63,5 +63,9 @@ class cis_security_hardening::auditd_cron (
       group   => 'root',
       mode    => '0700',
     }
+
+    file { $output_file:
+      ensure => stdlib::ensure($ensure, file),
+    }
   }
 }
