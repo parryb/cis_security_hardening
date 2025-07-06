@@ -39,6 +39,11 @@ describe 'cis_security_hardening::sticky_world_writable_cron' do
               'group'   => 'root',
               'mode'    => '0644',
             )
+
+          is_expected.to contain_file('/usr/share/cis_security_hardening/data/world-writable-files.txt')
+            .with(
+              'ensure' => 'file',
+            )
         end
       end
 
@@ -74,6 +79,11 @@ describe 'cis_security_hardening::sticky_world_writable_cron' do
               'owner'   => 'root',
               'group'   => 'root',
               'mode'    => '0644',
+            )
+
+          is_expected.to contain_file('/usr/share/cis_security_hardening/data/world-writable-files.txt')
+            .with(
+              'ensure' => 'absent',
             )
         end
       end
