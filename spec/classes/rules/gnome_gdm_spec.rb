@@ -183,7 +183,7 @@ All activity may be monitored and reported.\'\ndisable-user-list=true\n",
                 )
                 .that_notifies('Exec[dpkg-gdm-reconfigure]')
 
-              is_expected.to contain_file('/etc/dconf/db/gdm.d/00- login-screen')
+              is_expected.to contain_file('/etc/dconf/db/gdm.d/00-login-screen')
                 .with(
                   'ensure'  => 'file',
                   'content' => "[org/gnome/login-screen]\ndisable-user-list=true\n",
@@ -202,7 +202,7 @@ All activity may be monitored and reported.\'\ndisable-user-list=true\n",
             else
               is_expected.not_to contain_file('/etc/dconf/profile/gdm')
               is_expected.not_to contain_file('/etc/dconf/db/gdm.d/01-banner-message')
-              is_expected.not_to contain_file('/etc/dconf/db/gdm.d/00- login-screen')
+              is_expected.not_to contain_file('/etc/dconf/db/gdm.d/00-login-screen')
               is_expected.not_to contain_exec('dpkg-gdm-reconfigure')
             end
           end
