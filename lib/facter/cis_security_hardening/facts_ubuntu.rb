@@ -17,7 +17,7 @@ def facts_ubuntu(os, distid, release)
   cis_security_hardening[:apparmor] = read_apparmor_data
 
   # get gnome display manager information
-  cis_security_hardening[:gnome_gdm] = File.exist?('/etc/gdm3/greeter.dconf')
+  cis_security_hardening[:gnome_gdm] = File.exist?('/etc/gdm3/greeter.dconf-defaults')
 
   # get iptables config
   cis_security_hardening['iptables'] = read_iptables_rules('4')
