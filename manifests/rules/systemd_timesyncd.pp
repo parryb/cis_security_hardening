@@ -60,6 +60,10 @@ class cis_security_hardening::rules::systemd_timesyncd (
           ensure => $ensure,
       })
 
+      ensure_packages(['systemd-timesyncd'], {
+          ensure => installed,
+      })
+
       $servers = join($ntp_servers, ' ')
       file_line { 'ntp-timesyncd.conf':
         path               => '/etc/systemd/timesyncd.conf',

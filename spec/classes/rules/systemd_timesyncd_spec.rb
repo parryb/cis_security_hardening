@@ -70,6 +70,11 @@ describe 'cis_security_hardening::rules::systemd_timesyncd' do
                   )
               end
 
+              is_expected.to contain_package('systemd-timesyncd')
+                .with(
+                  'ensure' => 'installed',
+                )
+
               is_expected.to contain_service('systemd-timesyncd.service')
                 .with(
                   'enable' => true,
