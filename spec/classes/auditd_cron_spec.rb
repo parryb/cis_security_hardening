@@ -42,6 +42,11 @@ describe 'cis_security_hardening::auditd_cron' do
               'group'   => 'root',
               'mode'    => '0700',
             )
+
+          is_expected.to contain_file('/usr/share/cis_security_hardening/data/auditd_priv_cmds.txt')
+            .with(
+              'ensure' => 'file',
+            )
         end
       end
 
@@ -80,6 +85,11 @@ describe 'cis_security_hardening::auditd_cron' do
               'owner'   => 'root',
               'group'   => 'root',
               'mode'    => '0700',
+            )
+
+          is_expected.to contain_file('/usr/share/cis_security_hardening/data/auditd_priv_cmds.txt')
+            .with(
+              'ensure' => 'absent',
             )
         end
       end
