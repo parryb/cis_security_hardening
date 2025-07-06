@@ -13,7 +13,7 @@ fixtures:
     concat:                     "puppetlabs/concat"
     kmod:                       "puppet/kmod"
     echo:                       "ipcrm/echo"
-    sysctl:                     "fiddyspence/sysctl"
+    sysctl:                     "puppet/augeasproviders_sysctl"
     augeasproviders_pam:        "puppet/augeasproviders_pam"
     augeasproviders_core:       "puppet/augeasproviders_core"
     augeasproviders_grub:       "puppet/augeasproviders_grub"
