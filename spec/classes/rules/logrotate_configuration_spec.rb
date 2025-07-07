@@ -32,13 +32,17 @@ describe 'cis_security_hardening::rules::logrotate_configuration' do
         it {
           is_expected.to compile
 
-          is_expected.to contain_file_line('change /etc/logrotate.d/alternatives')
-            .with(
-              'ensure' => 'present',
-              'path'   => '/etc/logrotate.d/alternatives',
-              'line'   => 'create 640 root root',
-              'match'  => 'create 644 root root',
-            )
+          if enforce
+            is_expected.to contain_file_line('change /etc/logrotate.d/alternatives')
+              .with(
+                'ensure' => 'present',
+                'path'   => '/etc/logrotate.d/alternatives',
+                'line'   => 'create 640 root root',
+                'match'  => 'create 644 root root',
+              )
+          else
+            is_expected.not_to contain_file_line('change /etc/logrotate.d/alternatives')
+          end
         }
       end
     end
