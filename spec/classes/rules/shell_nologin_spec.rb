@@ -27,7 +27,9 @@ describe 'cis_security_hardening::rules::shell_nologin' do
           is_expected.to compile
 
           if enforce
-            if os_facts[:os]['name'].casecmp('debian').zero? && os_facts[:os]['release']['major'] == '12'
+            if (os_facts[:os]['name'].casecmp('debian').zero? && os_facts[:os]['release']['major'] == '12') ||
+               os_facts[:os]['name'].casecmp('ubuntu').zero? ||
+               os_facts[:os]['name'].casecmp('sles').zero?
               is_expected.to contain_exec('nologin test1')
                 .with(
                 'command' => 'usermod -s /usr/sbin/nologin test1',
