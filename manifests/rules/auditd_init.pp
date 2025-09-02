@@ -29,6 +29,8 @@ class cis_security_hardening::rules::auditd_init (
   Boolean $auto_reboot             = true,
 ) {
   if $enforce {
+    require cis_security_hardening::rules::auditd_package
+
     $notify = $auto_reboot ? {
       true  => [Exec['reload auditd rules'], Class['cis_security_hardening::reboot']],
       false => Exec['reload auditd rules'],
