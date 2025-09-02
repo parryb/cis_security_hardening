@@ -24,7 +24,7 @@ describe 'cis_security_hardening::rules::cron_restrict' do
                 'ensure' => 'file',
                 'owner'  => 'root',
                 'group'  => 'root',
-                'mode'   => '0600',
+                'mode'   => '0644',
               )
 
             is_expected.to contain_file('/etc/cron.deny')
