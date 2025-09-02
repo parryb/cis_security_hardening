@@ -12,6 +12,7 @@ describe 'cis_security_hardening::rules::apparmor_bootloader' do
         let(:params) do
           {
             'enforce' => enforce,
+            'grub_default_cmdline' => 'quiet splash',
           }
         end
 
@@ -28,7 +29,7 @@ describe 'cis_security_hardening::rules::apparmor_bootloader' do
 
               is_expected.to contain_file_line('cmdline_definition')
                 .with(
-                  'line'  => 'GRUB_CMDLINE_LINUX_DEFAULT="quiet"',
+                  'line'  => 'GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"',
                   'path'  => '/etc/default/grub',
                   'match' => '^GRUB_CMDLINE_LINUX_DEFAULT',
                 )
@@ -56,7 +57,7 @@ describe 'cis_security_hardening::rules::apparmor_bootloader' do
 
               is_expected.to contain_file_line('cmdline_definition')
                 .with(
-                  'line'  => 'GRUB_CMDLINE_LINUX_DEFAULT="quiet"',
+                  'line'  => 'GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"',
                   'path'  => '/etc/default/grub',
                   'match' => '^GRUB_CMDLINE_LINUX_DEFAULT',
                 )

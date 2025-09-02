@@ -11,6 +11,9 @@
 # @param enforce
 #    Enforce the rule.
 #
+# @param grub_default_cmdline
+#    the grub command line to set
+#
 # @example
 #   class { 'cis_security_hardening::rules::apparmor_bootloader':
 #       enforce => true,
@@ -19,6 +22,7 @@
 # @api private
 class cis_security_hardening::rules::apparmor_bootloader (
   Boolean $enforce = false,
+  String $grub_default_cmdline = 'quiet',
 ) {
   if  $enforce and ($facts['os']['family'].downcase() == 'debian' or $facts['os']['family'].downcase() == 'suse') {
     kernel_parameter { 'apparmor':
@@ -32,7 +36,7 @@ class cis_security_hardening::rules::apparmor_bootloader (
     }
 
     file_line { 'cmdline_definition':
-      line   => 'GRUB_CMDLINE_LINUX_DEFAULT="quiet"',
+      line   => "GRUB_CMDLINE_LINUX_DEFAULT=\"${grub_default_cmdline}\"",
       path   => '/etc/default/grub',
       match  => '^GRUB_CMDLINE_LINUX_DEFAULT',
       notify => Exec['apparmor-grub-config'],
