@@ -2,16 +2,20 @@
 	"name": "Puppet Development Kit (Community)",
 	"dockerFile": "Dockerfile",
 
-	"settings": {
-		"terminal.integrated.profiles.linux": {
-			"bash": {
-				"path": "bash"
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"terminal.integrated.profiles.linux": {
+					"bash": {
+						"path": "bash"
+					}
+				}
 			}
 		}
-	},
-
-	"extensions": [
-		"puppet.puppet-vscode",
-		"rebornix.Ruby"
-	]
+	,
+		"extensions": [
+			"puppet.puppet-vscode",
+			"rebornix.Ruby"
+		]
+	}
 }

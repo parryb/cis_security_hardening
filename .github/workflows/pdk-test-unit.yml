@@ -1,8 +1,14 @@
 name: Run pdk test unit
 
 on:
-  - pull_request
-  - workflow_dispatch
+  pull_request:
+  push:
+    branches:
+    - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   unit:
@@ -31,10 +37,10 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
-          bundler-cache: true
-          cache-version: 2
-          bundler: '2.1.0'
+          bundler-cache: false
+      - name: Install dependencies
+        run: bundle install --jobs 4
       - name: Validate
-        run: bundle exec rake validate lint check rubocop syntax lint metadata_lint
+        run: bundle exec rake validate check rubocop syntax lint metadata_lint
       - name: Run tests
         run: bundle exec rake parallel_spec
