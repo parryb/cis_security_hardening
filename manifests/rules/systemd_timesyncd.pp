@@ -70,6 +70,7 @@ class cis_security_hardening::rules::systemd_timesyncd (
         line               => "NTP=${servers}",
         match              => '^NTP=',
         append_on_no_match => true,
+        notify             => Service['systemd-timesyncd.service'],
       }
     }
 
@@ -80,6 +81,7 @@ class cis_security_hardening::rules::systemd_timesyncd (
         line               => "FallbackNTP=${fallback}",
         match              => '^FallbackNTP=',
         append_on_no_match => true,
+        notify             => Service['systemd-timesyncd.service'],
       }
     }
 
