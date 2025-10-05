@@ -11,6 +11,7 @@
 /bin/
 /doc/
 /Gemfile.local
+/Gemfile.lock
 /junit/
 /log/
 /pkg/
@@ -27,4 +28,3 @@
 /spec/fixtures/litmus_inventory.yaml
 failed.txt
 scripts/cis
-Gemfile.lock
