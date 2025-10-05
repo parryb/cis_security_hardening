@@ -66,10 +66,4 @@ class cis_security_hardening::services {
     path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
     refreshonly => true,
   }
-
-  exec { 'reload-sysctl-system':
-    command     => 'sysctl --system',
-    path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-    refreshonly => true,
-  }
 }

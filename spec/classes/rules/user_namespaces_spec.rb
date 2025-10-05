@@ -5,16 +5,6 @@ require 'spec_helper'
 enforce_options = [true, false]
 
 describe 'cis_security_hardening::rules::user_namespaces' do
-  let(:pre_condition) do
-    <<-EOF
-    exec { 'reload-sysctl-system':
-      command     => 'sysctl --system',
-      path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-      refreshonly => true,
-    }
-    EOF
-  end
-
   on_supported_os.each do |os, os_facts|
     enforce_options.each do |enforce|
       context "on #{os}" do
@@ -33,7 +23,6 @@ describe 'cis_security_hardening::rules::user_namespaces' do
               .with(
                 'value' => 0,
               )
-              .that_notifies('Exec[reload-sysctl-system]')
           else
             is_expected.not_to contain_sysctl('user.max_user_namespaces')
           end
