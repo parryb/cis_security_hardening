@@ -35,6 +35,9 @@ class cis_security_hardening::rules::shell_nologin (
           default => '/sbin/nologin',
         }
       }
+      'ubuntu', 'sles': {
+        $nologin = '/usr/sbin/nologin'
+      }
       default: {
         $nologin = '/sbin/nologin'
       }
