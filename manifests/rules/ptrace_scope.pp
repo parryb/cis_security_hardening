@@ -21,11 +21,9 @@ class cis_security_hardening::rules::ptrace_scope (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    sysctl {
-      'kernel.yama.ptrace_scope':
-        ensure => present,
-        value  => '1',
-        notify => Exec['reload-sysctl-system'],
+    sysctl { 'kernel.yama.ptrace_scope':
+      ensure => present,
+      value  => '1',
     }
   }
 }

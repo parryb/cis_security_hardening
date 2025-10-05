@@ -38,11 +38,9 @@ class cis_security_hardening::rules::dac_on_hardlinks (
   Boolean $enforce = false
 ) {
   if $enforce {
-    sysctl {
-      'fs.protected_hardlinks':
-        ensure => present,
-        value  => 1,
-        notify => Exec['reload-sysctl-system'],
+    sysctl { 'fs.protected_hardlinks':
+      ensure => present,
+      value  => 1,
     }
   }
 }

@@ -83,13 +83,6 @@ describe 'cis_security_hardening::services' do
             'refreshonly' => true,
           )
 
-        is_expected.to contain_exec('reload-sysctl-system')
-          .with(
-          'command'     => 'sysctl --system',
-          'path'        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-          'refreshonly' => true,
-        )
-
         # is_expected.to contain_reboot('after_run')
         #   .with(
         #     'timeout' => 60,
