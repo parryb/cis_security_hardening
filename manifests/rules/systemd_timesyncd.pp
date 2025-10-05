@@ -60,7 +60,7 @@ class cis_security_hardening::rules::systemd_timesyncd (
           ensure => $ensure,
       })
 
-      ensure_packages(['systemd-timesyncd'], {
+      stdlib::ensure_packages(['systemd-timesyncd'], {
           ensure => installed,
       })
 
