@@ -26,7 +26,7 @@ class cis_security_hardening::rules::sudo_timeout (
     file_line { 'set sudo timeout':
       path               => '/etc/sudoers',
       match              => '^Defaults\s+timestamp_timeout=',
-      line               => "Defaults timestamp_timeout=${timeout}",
+      line               => "Defaults\ttimestamp_timeout=${timeout}",
       append_on_no_match => true,
     }
   }

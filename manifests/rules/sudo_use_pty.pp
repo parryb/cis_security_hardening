@@ -24,7 +24,7 @@ class cis_security_hardening::rules::sudo_use_pty (
       path               => '/etc/sudoers',
       match              => 'Defaults.*use_pty',
       append_on_no_match => true,
-      line               => 'Defaults use_pty',
+      line               => "Defaults\tuse_pty",
       after              => '# Defaults specification',
     }
   }

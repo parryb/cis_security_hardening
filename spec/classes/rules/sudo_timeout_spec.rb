@@ -24,7 +24,7 @@ describe 'cis_security_hardening::rules::sudo_timeout' do
               .with(
                 'path'               => '/etc/sudoers',
                 'match'              => '^Defaults\s+timestamp_timeout=',
-                'line'               => 'Defaults timestamp_timeout=10',
+                'line'               => "Defaults\ttimestamp_timeout=10",
                 'append_on_no_match' => true,
               )
           else
