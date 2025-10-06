@@ -116,8 +116,16 @@ Bundler/GemFilename:
   Enabled: false
 Bundler/InsecureProtocolSource:
   Enabled: false
+Capybara/ClickLinkOrButtonStyle:
+  Enabled: true
 Capybara/CurrentPathExpectation:
   Enabled: false
+Capybara/RedundantWithinFind:
+  Enabled: true
+Capybara/RSpec/HaveSelector:
+  Enabled: true
+Capybara/RSpec/PredicateMatcher:
+  Enabled: true
 Capybara/VisibilityMatcher:
   Enabled: false
 Gemspec/DuplicatedAssignment:

@@ -41,6 +41,7 @@ group :test do
   gem "rubocop-performance", '= 1.16.0',         require: false
   gem "rubocop-rspec", '= 2.19.0',               require: false
   gem "puppet_metadata", '~> 3.4',               require: false
+  gem "puppet-strings", '~> 4.0',                require: false
 end
 
 # The system_tests group is used in gha-puppet's beaker workflow.
@@ -53,7 +54,6 @@ end
 # The release group is used in gha-puppet's release workflow
 group :release do
   gem "github_changelog_generator",              require: false
-  gem "puppet-strings", '~> 4.0',                require: false
 end
 
 puppet_version = ENV.fetch('PUPPET_GEM_VERSION', '>= 7.0')
