@@ -24,10 +24,19 @@ class cis_security_hardening::rules::gdm_lock_delay (
 ) {
   $gnome_gdm = fact('cis_security_hardening.gnome_gdm')
   if  $enforce and $gnome_gdm != undef and $gnome_gdm {
-    exec { 'gdm lock delay':
-      command => "gsettings set org.gnome.desktop.screensaver lock-delay ${timeout}", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
-      path    => ['/bin', '/usr/bin'],
-      unless  => "test \"$(gsettings get org.gnome.desktop.screensaver lock-delay)\" = \"${timeout}\"",
+    include dconf
+    dconf::db { 'lock-delay':
+      db_dir         => "${dconf::db_base_dir}/local.d",
+      db_filename    => '02-lock-delay',
+      locks_filename => '02-lock-delay',
+      settings       => {
+        'org/gnome/desktop/screensaver' => {
+          'lock-delay' => "uint32 ${timeout}",
+        },
+      },
+      locks          => [
+        '/org/gnome/desktop/screensaver/lock-delay',
+      ],
     }
   }
 }

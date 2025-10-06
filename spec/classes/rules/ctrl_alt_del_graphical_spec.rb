@@ -26,35 +26,22 @@ describe 'cis_security_hardening::rules::ctrl_alt_del_graphical' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file('/etc/dconf/db/local.d')
+            is_expected.to contain_dconf__db('disable-cad')
               .with(
-                'ensure' => 'directory',
-                'owner'  => 'root',
-                'group'  => 'root',
-                'mode'   => '0755',
+                'db_dir'         => '/etc/dconf/db/local.d',
+                'db_filename'    => '00-disable-CAD',
+                'locks_filename' => '00-disable-CAD',
+                'settings' => {
+                  'org/gnome/settings-daemon/plugins/media-keys' => {
+                    'logout' => '',
+                  },
+                },
+                'locks' => [
+                  '/org/gnome/settings-daemon/plugins/media-keys/logout',
+                ],
               )
-
-            is_expected.to contain_file('/etc/dconf/db/local.d/00-disable-CAD')
-              .with(
-                'ensure' => 'file',
-                'owner'  => 'root',
-                'group'  => 'root',
-                'mode'   => '0644',
-              )
-
-            is_expected.to contain_ini_setting('ctrl-alt-del-graphical')
-              .with(
-                'ensure'  => 'present',
-                'path'    => '/etc/dconf/db/local.d/00-disable-CAD',
-                'section' => 'org/gnome/settings-daemon/plugins/media-keys',
-                'setting' => 'logout',
-                'value'   => '',
-              )
-              .that_requires('File[/etc/dconf/db/local.d/00-disable-CAD]')
           else
-            is_expected.not_to contain_file('/etc/dconf/db/local.d/00-disable-CAD')
-            is_expected.not_to contain_ini_setting('ctrl-alt-del-graphical')
-            is_expected.not_to contain_file('/etc/dconf/db/local.d')
+            is_expected.not_to contain_dconf__db('disable-cad')
           end
         }
       end

@@ -27,14 +27,22 @@ describe 'cis_security_hardening::rules::gdm_lock_delay' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_exec('gdm lock delay')
+            is_expected.to contain_dconf__db('lock-delay')
               .with(
-                'command' => 'gsettings set org.gnome.desktop.screensaver lock-delay 800',
-                'path'    => ['/bin', '/usr/bin'],
-                'unless'  => 'test "$(gsettings get org.gnome.desktop.screensaver lock-delay)" = "800"',
+                'db_dir'         => '/etc/dconf/db/local.d',
+                'db_filename'    => '02-lock-delay',
+                'locks_filename' => '02-lock-delay',
+                'settings' => {
+                  'org/gnome/desktop/screensaver' => {
+                    'lock-delay' => 'uint32 800',
+                  },
+                },
+                'locks' => [
+                  '/org/gnome/desktop/screensaver/lock-delay',
+                ],
               )
           else
-            is_expected.not_to contain_exec('gdm lock delay')
+            is_expected.not_to contain_dconf__db('lock-delay')
           end
         }
       end

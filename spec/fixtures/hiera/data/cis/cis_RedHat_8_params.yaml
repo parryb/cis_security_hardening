@@ -146,7 +146,8 @@ cis_security_hardening::rules::gdm_autologin::enforce: true
 cis_security_hardening::rules::ctrl_alt_del_graphical::enforce: true
 cis_security_hardening::rules::gdm_screensaver::enforce: true
 cis_security_hardening::rules::gdm_screensaver::timeout: 900
-cis_security_hardening::rules::gdm_screensaver::lockdelay: 5
+cis_security_hardening::rules::gdm_lock_delay::enforce: true
+cis_security_hardening::rules::gdm_lock_delay::timeout: 5
 cis_security_hardening::rules::gdm_lock_enabled::enforce: true
 
 cis_security_hardening::rules::xinetd::enforce: true

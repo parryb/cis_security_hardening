@@ -57,6 +57,8 @@ cis_security_hardening::benchmark::ubuntu::22:
       level1:
         - gnome_gdm
         - gdm_auto_mount
+        - gdm_lock_delay
+        - gdm_lock_enabled
         - gdm_screensaver
         - xdmcp_config
       level2:
@@ -276,4 +278,3 @@ cis_security_hardening::benchmark::ubuntu::22:
       level1:
         - shadowed_passwords
 
-        

@@ -26,14 +26,22 @@ describe 'cis_security_hardening::rules::gdm_lock_enabled' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_exec('gdm lock enabled')
+            is_expected.to contain_dconf__db('lock-enabled')
               .with(
-                'command' => 'gsettings set org.gnome.desktop.screensaver lock-enabled true',
-                'path'    => ['/bin', '/usr/bin'],
-                'unless'  => 'test "$(gsettings get org.gnome.desktop.screensaver lock-enabled)" = "true"',
+                'db_dir'         => '/etc/dconf/db/local.d',
+                'db_filename'    => '01-lock-enabled',
+                'locks_filename' => '01-lock-enabled',
+                'settings' => {
+                  'org/gnome/desktop/screensaver' => {
+                    'lock-enabled' => 'true',
+                  },
+                },
+                'locks' => [
+                  '/org/gnome/desktop/screensaver/lock-enabled',
+                ],
               )
           else
-            is_expected.not_to contain_exec('gdm lock enabled')
+            is_expected.not_to contain_dconf__db('lock-enabled')
           end
         }
       end

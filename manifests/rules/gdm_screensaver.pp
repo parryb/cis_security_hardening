@@ -15,7 +15,6 @@
 #    Enforce the rule.
 # @param timeout
 #    The idle time.
-# @param lockdelay
 #    
 #
 # @example
@@ -28,26 +27,22 @@
 class cis_security_hardening::rules::gdm_screensaver (
   Boolean $enforce   = false,
   Integer $timeout   = 900,
-  Integer $lockdelay = 5,
 ) {
   $gnome_gdm = fact('cis_security_hardening.gnome_gdm')
-  if  $enforce and $gnome_gdm != undef and $gnome_gdm {
-    exec { 'gdm screensaver enabled':
-      command => "gsettings set org.gnome.desktop.session idle-delay \"unit32 ${timeout}\"", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
-      path    => ['/bin', '/usr/bin'],
-      unless  => "test \"$(gsettings get org.gnome.desktop.session idle-delay)\" = \"unit32 ${timeout}\"",
-    }
-
-    exec { 'gdm screensaver ilde activates':
-      command => 'gsettings set org.gnome.desktop.screensaver idle-activation-enabled "true"',
-      path    => ['/bin', '/usr/bin'],
-      unless  => 'test "$(gsettings get org.gnome.desktop.session idle-delayidle-activation-enabled)" = "true"',
-    }
-
-    exec { 'gdm screensaver locktime':
-      command => "gsettings set org.gnome.desktop.screensaver lock-delay \"unit32 ${lockdelay}\"", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
-      path    => ['/bin', '/usr/bin'],
-      unless  => "test \"$(gsettings get org.gnome.desktop.screensaver lock-delay)\" = \"unit32 ${lockdelay}\"",
+  if $enforce and $gnome_gdm != undef and $gnome_gdm {
+    include dconf
+    dconf::db { 'screensaver-timeout':
+      db_dir         => "${dconf::db_base_dir}/local.d",
+      db_filename    => '03-screensaver-timeout',
+      locks_filename => '03-screensaver-timeout',
+      settings       => {
+        'org/gnome/desktop/session' => {
+          'idle-delay'              => "uint32 ${timeout}",
+        },
+      },
+      locks          => [
+        '/org/gnome/desktop/session/idle-delay',
+      ],
     }
   }
 }
