@@ -26,42 +26,38 @@ class cis_security_hardening::rules::gdm_auto_mount (
 ) {
   $gnome_gdm = fact('cis_security_hardening.gnome_gdm')
   if  $enforce and $gnome_gdm != undef and $gnome_gdm {
-    stdlib::ensure_packages(['dconf'], {
-        ensure => present,
-    })
-
-    ensure_resource('file', '/etc/dconf/db/local.d', {
-        ensure => directory,
-        owner  => 'root',
-        group  => 'root',
-        mode   => '0755',
-    })
-
+    include dconf
     if ($facts['os']['name'].downcase() == 'debian') and
     ($facts['os']['release']['major'] > '10') {
-      ensure_resource('file', '/etc/dconf/db/local.d/00-media-automount', {
-          ensure  => file,
-          owner   => 'root',
-          group   => 'root',
-          mode    => '0644',
-          content => "[org/gnome/desktop/media-handling]\nautorun-never=true\nautorun-never=true\n",
-          notify  => Exec['dconf update'],
-      })
+      dconf::db { 'media-automount-autorun-never':
+        db_dir         => "${dconf::db_base_dir}/local.d",
+        db_filename    => '00-media-automount',
+        locks_filename => '00-media-automount',
+        settings       => {
+          'org/gnome/desktop/media-handling' => {
+            'autorun-never' => 'true',
+          },
+        },
+        locks          => [
+          '/org/gnome/desktop/media-handling/autorun-never',
+        ],
+      }
     } else {
-      ensure_resource('file', '/etc/dconf/db/local.d/00-media-automount', {
-          ensure  => file,
-          owner   => 'root',
-          group   => 'root',
-          mode    => '0644',
-          content => "[org/gnome/desktop/media-handling]\nautomount=false\nautomount-open=false\n",
-          notify  => Exec['dconf update'],
-      })
-    }
-
-    exec { 'dconf update':
-      command     => 'dconf update',
-      path        => ['/bin', '/usr/bin'],
-      refreshonly => true,
+      dconf::db { 'media-automount-automount':
+        db_dir         => "${dconf::db_base_dir}/local.d",
+        db_filename    => '00-media-automount',
+        locks_filename => '00-media-automount',
+        settings       => {
+          'org/gnome/desktop/media-handling' => {
+            'automount'      => 'false',
+            'automount-open' => 'false',
+          },
+        },
+        locks          => [
+          '/org/gnome/desktop/media-handling/automount',
+          '/org/gnome/desktop/media-handling/automount-open',
+        ],
+      }
     }
   }
 }

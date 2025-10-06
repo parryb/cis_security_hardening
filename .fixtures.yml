@@ -28,3 +28,6 @@ fixtures:
     facts:                      "puppetlabs/facts"
     recursive_file_permissions: "npwalker/recursive_file_permissions"
     systemd:                    "puppet/systemd"
+    dconf:
+      repo: "jmckenzie/dconf"
+      ref: "0.2.3"

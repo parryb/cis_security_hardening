@@ -125,7 +125,6 @@ cis_security_hardening::rules::gdm_lock_enabled::enforce: true
 cis_security_hardening::rules::gdm_mfa::enforce: true
 cis_security_hardening::rules::gdm_screensaver::enforce: true
 cis_security_hardening::rules::gdm_screensaver::timeout: 900
-cis_security_hardening::rules::gdm_screensaver::lockdelay: 5
 cis_security_hardening::rules::gdm_lock_delay::enforce: true
 cis_security_hardening::rules::gdm_lock_delay::timeout: 900
 cis_security_hardening::rules::gdm_autologin::enforce: true

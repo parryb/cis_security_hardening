@@ -20,7 +20,6 @@ describe 'cis_security_hardening::rules::gdm_screensaver' do
           {
             'enforce' => enforce,
             'timeout' => 800,
-            'lockdelay' => 4,
           }
         end
 
@@ -28,30 +27,22 @@ describe 'cis_security_hardening::rules::gdm_screensaver' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_exec('gdm screensaver enabled')
+            is_expected.to contain_dconf__db('screensaver-timeout')
               .with(
-                'command' => 'gsettings set org.gnome.desktop.session idle-delay "unit32 800"',
-                'path'    => ['/bin', '/usr/bin'],
-                'unless'  => 'test "$(gsettings get org.gnome.desktop.session idle-delay)" = "unit32 800"',
-              )
-
-            is_expected.to contain_exec('gdm screensaver ilde activates')
-              .with(
-                'command' => 'gsettings set org.gnome.desktop.screensaver idle-activation-enabled "true"',
-                'path'    => ['/bin', '/usr/bin'],
-                'unless'  => 'test "$(gsettings get org.gnome.desktop.session idle-delayidle-activation-enabled)" = "true"',
-              )
-
-            is_expected.to contain_exec('gdm screensaver locktime')
-              .with(
-                'command' => 'gsettings set org.gnome.desktop.screensaver lock-delay "unit32 4"',
-                'path'    => ['/bin', '/usr/bin'],
-                'unless'  => 'test "$(gsettings get org.gnome.desktop.screensaver lock-delay)" = "unit32 4"',
+                'db_dir'         => '/etc/dconf/db/local.d',
+                'db_filename'    => '03-screensaver-timeout',
+                'locks_filename' => '03-screensaver-timeout',
+                'settings' => {
+                  'org/gnome/desktop/session' => {
+                    'idle-delay' => 'uint32 800',
+                  },
+                },
+                'locks' => [
+                  '/org/gnome/desktop/session/idle-delay',
+                ],
               )
           else
-            is_expected.not_to contain_exec('gdm screensaver enabled')
-            is_expected.not_to contain_exec('gdm screensaver ilde activates')
-            is_expected.not_to contain_exec('gdm screensaver locktime')
+            is_expected.not_to contain_dconf__db('screensaver-timeout')
           end
         }
       end

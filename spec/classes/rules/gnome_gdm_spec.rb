@@ -29,106 +29,117 @@ describe 'cis_security_hardening::rules::gnome_gdm' do
              os_facts[:os]['name'].casecmp('almalinux').zero? || os_facts[:os]['name'].casecmp('rocky').zero?
 
             if enforce
-              is_expected.to contain_file('gdm')
+              is_expected.to contain_dconf__profile('gdm')
                 .with(
-                  'ensure'  => 'file',
-                  'path'    => '/etc/dconf/profile/gdm',
-                  'content' => "user-db:user\nsystem-db:gdm\nfile-db:/usr/share/gdm/greeter-dconf-defaults",
+                  'entries' => {
+                    'user' => {
+                      'type'  => 'user',
+                      'order' => 10,
+                    },
+                    'gdm' => {
+                      'type'  => 'system',
+                      'order' => 20,
+                    },
+                    '/usr/share/gdm/greeter-dconf-defaults' => {
+                      'type'  => 'file',
+                      'order' => 30,
+                    },
+                  },
                 )
 
-              is_expected.to contain_file('banner-login')
+              is_expected.to contain_dconf__db('gdm-banner')
                 .with(
-                  'ensure'  => 'file',
-                  'path'    => '/etc/dconf/db/gdm.d/01-banner-message',
-                  'content' => "[org/gnome/login-screen]\nbanner-message-enable=true\nbanner-message-text=\'Authorized uses only. All activity may be monitored and reported.\'",
-                )
-                .that_requires('File[gdm]')
-                .that_notifies('Exec[dconf-gdm-exec]')
-
-              is_expected.to contain_file('login-screen')
-                .with(
-                  'ensure'  => 'file',
-                  'path'    => '/etc/dconf/db/gdm.d/00-login-screen',
-                  'content' => "[org/gnome/login-screen]\ndisable-user-list=true",
-                  'owner'   => 'root',
-                  'group'   => 'root',
-                  'mode'    => '0644',
-                )
-                .that_requires('File[gdm]')
-                .that_notifies('Exec[dconf-gdm-exec]')
-
-              is_expected.to contain_exec('dconf-gdm-exec')
-                .with(
-                  'path'        => '/bin/',
-                  'command'     => 'dconf update',
-                  'refreshonly' => true,
+                  'db_dir'         => '/etc/dconf/db/gdm.d',
+                  'db_filename'    => '01-banner-message',
+                  'locks_filename' => '01-banner-message',
+                  'settings' => {
+                    'org/gnome/login-screen' => {
+                      'banner-message-enable' => 'true',
+                      'banner-message-text'   => "'Authorized uses only. All activity may be monitored and reported.'",
+                    },
+                  },
+                  'locks' => [
+                    '/org/gnome/login-screen/banner-message-enable',
+                    '/org/gnome/login-screen/banner-message-text',
+                  ],
                 )
 
-              is_expected.to contain_file('/etc/dconf/db/gdm.d')
+              is_expected.to contain_dconf__db('gdm-login-screen')
                 .with(
-                  'ensure' => 'directory',
-                  'owner'  => 'root',
-                  'group'  => 'root',
-                  'mode'   => '0755',
+                  'db_dir'         => '/etc/dconf/db/gdm.d',
+                  'db_filename'    => '00-login-screen',
+                  'locks_filename' => '00-login-screen',
+                  'settings' => {
+                    'org/gnome/login-screen' => {
+                      'disable-user-list' => 'true',
+                    },
+                  },
+                  'locks' => [
+                    '/org/gnome/login-screen/disable-user-list',
+                  ],
                 )
             else
-              is_expected.not_to contain_file('gdm')
-              is_expected.not_to contain_file('banner-login')
-              is_expected.not_to contain_file('login-screen')
-              is_expected.not_to contain_exec('dconf-gdm-exec')
-              is_expected.not_to contain_file('/etc/dconf/db/gdm.d')
+              is_expected.not_to contain_dconf__profile('gdm')
+              is_expected.not_to contain_dconf__db('gdm-banner')
+              is_expected.not_to contain_dconf__db('gdm-login-screen')
             end
 
             is_expected.not_to contain_file('/etc/gdm3/greeter.dconf-defaults')
-            is_expected.not_to contain_exec('dpkg-gdm-reconfigure')
 
           elsif os_facts[:os]['name'].casecmp('debian').zero?
 
             if enforce
               if os_facts[:os]['release']['major'] > '10'
 
-                is_expected.to contain_file('/etc/dconf/profile/cis')
+                is_expected.to contain_dconf__profile('cis')
                   .with(
-                    'ensure'  => 'file',
-                    'content' => "user-db:user\nsystem-db:cis\nfile-db:/usr/share/cis/greeter-dconf-defaults",
-                    'owner'   => 'root',
-                    'group'   => 'root',
-                    'mode'    => '0644',
+                    'entries' => {
+                      'user' => {
+                        'type'  => 'user',
+                        'order' => 10,
+                      },
+                      'cis' => {
+                        'type'  => 'system',
+                        'order' => 20,
+                      },
+                      '/usr/share/cis/greeter-dconf-defaults' => {
+                        'type'  => 'file',
+                        'order' => 30,
+                      },
+                    },
                   )
 
-                is_expected.to contain_file('/etc/dconf/db/cis.d')
+                is_expected.to contain_dconf__db('cis-banner')
                   .with(
-                    'ensure'  => 'directory',
-                    'owner'  => 'root',
-                    'group'  => 'root',
-                    'mode'   => '0755',
-                  )
-
-                is_expected.to contain_file('/etc/dconf/db/cis.d/01-banner-message')
-                  .with(
-                    'ensure'  => 'file',
-                    'content' => "[org/gnome/login-screen]\nbanner-message-enable=true\nbanner-message-text=\'Authorized uses only. \
-All activity may be monitored and reported.\'\ndisable-user-list=true\n",
-                    'owner'   => 'root',
-                    'group'   => 'root',
-                    'mode'    => '0644',
+                    'db_dir'         => '/etc/dconf/db/cis.d',
+                    'db_filename'    => '01-banner-message',
+                    'locks_filename' => '01-banner-message',
+                    'settings' => {
+                      'org/gnome/login-screen' => {
+                        'banner-message-enable' => 'true',
+                        'banner-message-text'   => "'Authorized uses only. All activity may be monitored and reported.'",
+                        'disable-user-list'     => 'true',
+                      },
+                    },
+                    'locks' => [
+                      '/org/gnome/login-screen/banner-message-enable',
+                      '/org/gnome/login-screen/banner-message-text',
+                      '/org/gnome/login-screen/disable-user-list',
+                    ],
                   )
 
               else
                 is_expected.to contain_file('/etc/gdm3/greeter.dconf-defaults')
                   .with(
                     'ensure'  => 'file',
-                    'content' => "[org/gnome/login-screen]\nbanner-message-enable=true\nbanner-message-text=\'Authorized uses only. \
-All activity may be monitored and reported.\'\ndisable-user-list=true\n",
+                    'content' => "[org/gnome/login-screen]\nbanner-message-enable=true\nbanner-message-text='Authorized uses only. All activity may be monitored and reported.'\ndisable-user-list=true\n", # rubocop:disable Layout/LineLength
                     'group'   => 'root',
                     'mode'    => '0644',
                   )
-                  .that_notifies('Exec[dpkg-gdm-reconfigure]')
               end
             else
-              is_expected.not_to contain_file('/etc/dconf/profile/cis')
-              is_expected.not_to contain_file('/etc/dconf/db/cis.d')
-              is_expected.not_to contain_file('/etc/dconf/db/cis.d/01-banner-message')
+              is_expected.not_to contain_dconf__profile('cis')
+              is_expected.not_to contain_dconf__db('cis-banner')
               is_expected.not_to contain_file('/etc/gdm3/greeter.dconf-defaults')
             end
 
@@ -138,72 +149,71 @@ All activity may be monitored and reported.\'\ndisable-user-list=true\n",
               is_expected.to contain_file('/etc/gdm3/greeter.dconf-defaults')
                 .with(
                   'ensure'  => 'file',
+                  'content' => "[org/gnome/login-screen]\nbanner-message-enable=true\nbanner-message-text='Authorized uses only. All activity may be monitored and reported.'\ndisable-user-list=true\n", # rubocop:disable Layout/LineLength
                   'owner'   => 'root',
                   'group'   => 'root',
                   'mode'    => '0644',
                 )
-                .that_notifies('Exec[dpkg-gdm-reconfigure]')
-
-              is_expected.to contain_exec('dpkg-gdm-reconfigure')
-                .with(
-                  'path'        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                  'command'     => 'dpkg-reconfigure gdm3',
-                  'refreshonly' => true,
-                )
             else
               is_expected.not_to contain_file('/etc/gdm3/greeter.dconf-defaults')
-              is_expected.not_to contain_exec('dpkg-gdm-reconfigure')
             end
-
-            is_expected.not_to contain_file('gdm')
-            is_expected.not_to contain_file('banner-login')
-            is_expected.not_to contain_exec('dconf-gdm-exec')
-            is_expected.not_to contain_file('/etc/dconf/db/gdm.d')
 
           elsif os_facts[:os]['name'].casecmp('sles').zero?
 
             if enforce
-              is_expected.to contain_file('/etc/dconf/profile/gdm')
+              is_expected.to contain_dconf__profile('gdm')
                 .with(
-                  'ensure'  => 'file',
-                  'content' => "user-db:user\nsystem-db:gdm\nfile-db:/usr/share/gdm/greeter-dconf-defaults\n",
-                  'owner'   => 'root',
-                  'group'   => 'root',
-                  'mode'    => '0644',
+                  'entries' => {
+                    'user' => {
+                      'type'  => 'user',
+                      'order' => 10,
+                    },
+                    'gdm' => {
+                      'type'  => 'system',
+                      'order' => 20,
+                    },
+                    '/usr/share/gdm/greeter-dconf-defaults' => {
+                      'type'  => 'file',
+                      'order' => 30,
+                    },
+                  },
                 )
-                .that_notifies('Exec[dpkg-gdm-reconfigure]')
 
-              is_expected.to contain_file('/etc/dconf/db/gdm.d/01-banner-message')
+              is_expected.to contain_dconf__db('gdm-banner')
                 .with(
-                  'ensure'  => 'file',
-                  'content' => "[org/gnome/login-screen]\nbanner-message-enable=true\nbanner-message-text=\'Authorized uses only. All activity may be monitored and reported.\'",
-                  'owner'   => 'root',
-                  'group'   => 'root',
-                  'mode'    => '0644',
+                  'db_dir'         => '/etc/dconf/db/gdm.d',
+                  'db_filename'    => '01-banner-message',
+                  'locks_filename' => '01-banner-message',
+                  'settings' => {
+                    'org/gnome/login-screen' => {
+                      'banner-message-enable' => 'true',
+                      'banner-message-text'   => "'Authorized uses only. All activity may be monitored and reported.'",
+                    },
+                  },
+                  'locks' => [
+                    '/org/gnome/login-screen/banner-message-enable',
+                    '/org/gnome/login-screen/banner-message-text',
+                  ],
                 )
-                .that_notifies('Exec[dpkg-gdm-reconfigure]')
 
-              is_expected.to contain_file('/etc/dconf/db/gdm.d/00-login-screen')
+              is_expected.to contain_dconf__db('gdm-login-screen')
                 .with(
-                  'ensure'  => 'file',
-                  'content' => "[org/gnome/login-screen]\ndisable-user-list=true\n",
-                  'owner'   => 'root',
-                  'group'   => 'root',
-                  'mode'    => '0644',
-                )
-                .that_notifies('Exec[dpkg-gdm-reconfigure]')
-
-              is_expected.to contain_exec('dpkg-gdm-reconfigure')
-                .with(
-                  'path'        => ['/bin', '/usr/bin'],
-                  'command'     => 'dconf update',
-                  'refreshonly' => true,
+                  'db_dir'         => '/etc/dconf/db/gdm.d',
+                  'db_filename'    => '00-login-screen',
+                  'locks_filename' => '00-login-screen',
+                  'settings' => {
+                    'org/gnome/login-screen' => {
+                      'disable-user-list' => 'true',
+                    },
+                  },
+                  'locks' => [
+                    '/org/gnome/login-screen/disable-user-list',
+                  ],
                 )
             else
-              is_expected.not_to contain_file('/etc/dconf/profile/gdm')
-              is_expected.not_to contain_file('/etc/dconf/db/gdm.d/01-banner-message')
-              is_expected.not_to contain_file('/etc/dconf/db/gdm.d/00-login-screen')
-              is_expected.not_to contain_exec('dpkg-gdm-reconfigure')
+              is_expected.not_to contain_dconf__profile('gdm')
+              is_expected.not_to contain_dconf__db('gdm-banner')
+              is_expected.not_to contain_dconf__db('gdm-login-screen')
             end
           end
         }

@@ -23,27 +23,19 @@ class cis_security_hardening::rules::ctrl_alt_del_graphical (
 ) {
   $gnome_gdm = fact('cis_security_hardening.gnome_gdm')
   if  $enforce and $gnome_gdm != undef and $gnome_gdm {
-    ensure_resource('file', '/etc/dconf/db/local.d', {
-        ensure => directory,
-        owner  => 'root',
-        group  => 'root',
-        mode   => '0755',
-    })
-
-    ensure_resource('file', '/etc/dconf/db/local.d/00-disable-CAD', {
-        ensure => file,
-        owner  => 'root',
-        group  => 'root',
-        mode   => '0644',
-    })
-
-    ini_setting { 'ctrl-alt-del-graphical':
-      ensure  => present,
-      path    => '/etc/dconf/db/local.d/00-disable-CAD',
-      section => 'org/gnome/settings-daemon/plugins/media-keys',
-      setting => 'logout',
-      value   => '',
-      require => File['/etc/dconf/db/local.d/00-disable-CAD'],
+    include dconf
+    dconf::db { 'disable-cad':
+      db_dir         => "${dconf::db_base_dir}/local.d",
+      db_filename    => '00-disable-CAD',
+      locks_filename => '00-disable-CAD',
+      settings       => {
+        'org/gnome/settings-daemon/plugins/media-keys' => {
+          'logout' => '',
+        },
+      },
+      locks          => [
+        '/org/gnome/settings-daemon/plugins/media-keys/logout',
+      ],
     }
   }
 }
