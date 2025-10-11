@@ -86,11 +86,11 @@ class cis_security_hardening::rules::ntpd (
 
     if $facts['os']['family'].downcase() == 'debian' {
       stdlib::ensure_packages(['chrony'], {
-          ensure => purged,
+        ensure => purged,
       })
       ensure_resource('service', 'systemd-timesyncd', {
-          ensure => stopped,
-          enable => false,
+        ensure => stopped,
+        enable => false,
       })
       $ntp_file = if $facts['os']['name'].downcase() == 'debian' and $facts['os']['release']['major'] >= '12' {
         '/etc/init.d/ntpsec'

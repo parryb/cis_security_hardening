@@ -12,8 +12,8 @@ describe 'cis_security_hardening::rules::gnome_gdm' do
           os_facts.merge(
             cis_security_hardening: {
               gnome_gdm_conf: false,
-              gnome_gdm: true,
-            },
+              gnome_gdm: true
+            }
           )
         end
         let(:params) do
@@ -29,54 +29,53 @@ describe 'cis_security_hardening::rules::gnome_gdm' do
              os_facts[:os]['name'].casecmp('almalinux').zero? || os_facts[:os]['name'].casecmp('rocky').zero?
 
             if enforce
-              is_expected.to contain_dconf__profile('gdm')
-                .with(
-                  'entries' => {
-                    'user' => {
-                      'type'  => 'user',
-                      'order' => 10,
-                    },
-                    'gdm' => {
-                      'type'  => 'system',
-                      'order' => 20,
-                    },
-                    '/usr/share/gdm/greeter-dconf-defaults' => {
-                      'type'  => 'file',
-                      'order' => 30,
-                    },
+              is_expected.to contain_dconf__profile('gdm').with(
+                'entries' => {
+                  'user' => {
+                    'type'  => 'user',
+                    'order' => 10,
                   },
-                )
+                  'gdm' => {
+                    'type'  => 'system',
+                    'order' => 20,
+                  },
+                  '/usr/share/gdm/greeter-dconf-defaults' => {
+                    'type'  => 'file',
+                    'order' => 30,
+                  },
+                }
+              )
 
-              is_expected.to contain_dconf__db('gdm-banner')
-                .with(
+              is_expected.to contain_dconf__db('gdm-banner').
+                with(
                   'db_dir'         => '/etc/dconf/db/gdm.d',
                   'db_filename'    => '01-banner-message',
                   'locks_filename' => '01-banner-message',
-                  'settings' => {
+                  'settings' => { # rubocop:disable Layout/HashAlignment
                     'org/gnome/login-screen' => {
                       'banner-message-enable' => 'true',
                       'banner-message-text'   => "'Authorized uses only. All activity may be monitored and reported.'",
                     },
                   },
-                  'locks' => [
+                  'locks' => [ # rubocop:disable Layout/HashAlignment
                     '/org/gnome/login-screen/banner-message-enable',
                     '/org/gnome/login-screen/banner-message-text',
-                  ],
+                  ]
                 )
 
-              is_expected.to contain_dconf__db('gdm-login-screen')
-                .with(
+              is_expected.to contain_dconf__db('gdm-login-screen').
+                with(
                   'db_dir'         => '/etc/dconf/db/gdm.d',
                   'db_filename'    => '00-login-screen',
                   'locks_filename' => '00-login-screen',
-                  'settings' => {
+                  'settings' => { # rubocop:disable Layout/HashAlignment
                     'org/gnome/login-screen' => {
                       'disable-user-list' => 'true',
                     },
                   },
-                  'locks' => [
+                  'locks' => [ # rubocop:disable Layout/HashAlignment
                     '/org/gnome/login-screen/disable-user-list',
-                  ],
+                  ]
                 )
             else
               is_expected.not_to contain_dconf__profile('gdm')
@@ -91,8 +90,8 @@ describe 'cis_security_hardening::rules::gnome_gdm' do
             if enforce
               if os_facts[:os]['release']['major'] > '10'
 
-                is_expected.to contain_dconf__profile('cis')
-                  .with(
+                is_expected.to contain_dconf__profile('cis').
+                  with(
                     'entries' => {
                       'user' => {
                         'type'  => 'user',
@@ -106,35 +105,35 @@ describe 'cis_security_hardening::rules::gnome_gdm' do
                         'type'  => 'file',
                         'order' => 30,
                       },
-                    },
+                    }
                   )
 
-                is_expected.to contain_dconf__db('cis-banner')
-                  .with(
+                is_expected.to contain_dconf__db('cis-banner').
+                  with(
                     'db_dir'         => '/etc/dconf/db/cis.d',
                     'db_filename'    => '01-banner-message',
                     'locks_filename' => '01-banner-message',
-                    'settings' => {
+                    'settings' => { # rubocop:disable Layout/HashAlignment
                       'org/gnome/login-screen' => {
                         'banner-message-enable' => 'true',
                         'banner-message-text'   => "'Authorized uses only. All activity may be monitored and reported.'",
                         'disable-user-list'     => 'true',
                       },
                     },
-                    'locks' => [
+                    'locks' => [ # rubocop:disable Layout/HashAlignment
                       '/org/gnome/login-screen/banner-message-enable',
                       '/org/gnome/login-screen/banner-message-text',
                       '/org/gnome/login-screen/disable-user-list',
-                    ],
+                    ]
                   )
 
               else
-                is_expected.to contain_file('/etc/gdm3/greeter.dconf-defaults')
-                  .with(
+                is_expected.to contain_file('/etc/gdm3/greeter.dconf-defaults').
+                  with(
                     'ensure'  => 'file',
-                    'content' => "[org/gnome/login-screen]\nbanner-message-enable=true\nbanner-message-text='Authorized uses only. All activity may be monitored and reported.'\ndisable-user-list=true\n", # rubocop:disable Layout/LineLength
+                    'content' => "[org/gnome/login-screen]\nbanner-message-enable=true\nbanner-message-text='Authorized uses only. All activity may be monitored and reported.'\ndisable-user-list=true\n",
                     'group'   => 'root',
-                    'mode'    => '0644',
+                    'mode'    => '0644'
                   )
               end
             else
@@ -146,13 +145,13 @@ describe 'cis_security_hardening::rules::gnome_gdm' do
           elsif os_facts[:os]['name'].casecmp('ubuntu').zero?
 
             if enforce
-              is_expected.to contain_file('/etc/gdm3/greeter.dconf-defaults')
-                .with(
+              is_expected.to contain_file('/etc/gdm3/greeter.dconf-defaults').
+                with(
                   'ensure'  => 'file',
-                  'content' => "[org/gnome/login-screen]\nbanner-message-enable=true\nbanner-message-text='Authorized uses only. All activity may be monitored and reported.'\ndisable-user-list=true\n", # rubocop:disable Layout/LineLength
+                  'content' => "[org/gnome/login-screen]\nbanner-message-enable=true\nbanner-message-text='Authorized uses only. All activity may be monitored and reported.'\ndisable-user-list=true\n",
                   'owner'   => 'root',
                   'group'   => 'root',
-                  'mode'    => '0644',
+                  'mode'    => '0644'
                 )
             else
               is_expected.not_to contain_file('/etc/gdm3/greeter.dconf-defaults')
@@ -161,54 +160,53 @@ describe 'cis_security_hardening::rules::gnome_gdm' do
           elsif os_facts[:os]['name'].casecmp('sles').zero?
 
             if enforce
-              is_expected.to contain_dconf__profile('gdm')
-                .with(
-                  'entries' => {
-                    'user' => {
-                      'type'  => 'user',
-                      'order' => 10,
-                    },
-                    'gdm' => {
-                      'type'  => 'system',
-                      'order' => 20,
-                    },
-                    '/usr/share/gdm/greeter-dconf-defaults' => {
-                      'type'  => 'file',
-                      'order' => 30,
-                    },
+              is_expected.to contain_dconf__profile('gdm').with(
+                'entries' => {
+                  'user' => {
+                    'type'  => 'user',
+                    'order' => 10,
                   },
-                )
+                  'gdm' => {
+                    'type'  => 'system',
+                    'order' => 20,
+                  },
+                  '/usr/share/gdm/greeter-dconf-defaults' => {
+                    'type'  => 'file',
+                    'order' => 30,
+                  },
+                }
+              )
 
-              is_expected.to contain_dconf__db('gdm-banner')
-                .with(
+              is_expected.to contain_dconf__db('gdm-banner').
+                with(
                   'db_dir'         => '/etc/dconf/db/gdm.d',
                   'db_filename'    => '01-banner-message',
                   'locks_filename' => '01-banner-message',
-                  'settings' => {
+                  'settings' => { # rubocop:disable Layout/HashAlignment
                     'org/gnome/login-screen' => {
                       'banner-message-enable' => 'true',
                       'banner-message-text'   => "'Authorized uses only. All activity may be monitored and reported.'",
                     },
                   },
-                  'locks' => [
+                  'locks' => [ # rubocop:disable Layout/HashAlignment
                     '/org/gnome/login-screen/banner-message-enable',
                     '/org/gnome/login-screen/banner-message-text',
-                  ],
+                  ]
                 )
 
-              is_expected.to contain_dconf__db('gdm-login-screen')
-                .with(
+              is_expected.to contain_dconf__db('gdm-login-screen').
+                with(
                   'db_dir'         => '/etc/dconf/db/gdm.d',
                   'db_filename'    => '00-login-screen',
                   'locks_filename' => '00-login-screen',
-                  'settings' => {
+                  'settings' => { # rubocop:disable Layout/HashAlignment
                     'org/gnome/login-screen' => {
                       'disable-user-list' => 'true',
                     },
                   },
-                  'locks' => [
+                  'locks' => [ # rubocop:disable Layout/HashAlignment
                     '/org/gnome/login-screen/disable-user-list',
-                  ],
+                  ]
                 )
             else
               is_expected.not_to contain_dconf__profile('gdm')

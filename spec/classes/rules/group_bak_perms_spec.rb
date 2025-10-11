@@ -20,20 +20,20 @@ describe 'cis_security_hardening::rules::group_bak_perms' do
 
           if enforce
             if os_facts[:os]['name'].casecmp('debian').zero?
-              is_expected.to contain_file('/etc/group-')
-                .with(
+              is_expected.to contain_file('/etc/group-').
+                with(
                   'ensure' => 'file',
                   'owner'  => 'root',
                   'group'  => 'root',
-                  'mode'   => '0600',
+                  'mode'   => '0600'
                 )
             else
-              is_expected.to contain_file('/etc/group-')
-                .with(
+              is_expected.to contain_file('/etc/group-').
+                with(
                   'ensure' => 'file',
                   'owner'  => 'root',
                   'group'  => 'root',
-                  'mode'   => '0644',
+                  'mode'   => '0644'
                 )
             end
           else

@@ -4,13 +4,13 @@ require 'spec_helper'
 
 describe 'Cis_security_hardening::Nftables_address_families' do
   describe 'valid handling' do
-    [
-      'ip',
-      'ip6',
-      'inet',
-      'arp',
-      'bridge',
-      'netdev',
+    %w[
+      ip
+      ip6
+      inet
+      arp
+      bridge
+      netdev
     ].each do |value|
       describe value.inspect do
         it { is_expected.to allow_value(value) }

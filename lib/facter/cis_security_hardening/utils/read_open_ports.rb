@@ -6,9 +6,7 @@ def read_open_ports
   ss_cmd = ''
   cmds = ['/usr/sbin/ss', '/usr/bin/ss', '/bin/ss', '/sbin/ss']
   cmds.each do |cmd|
-    if File.exist?(cmd)
-      ss_cmd = cmd
-    end
+    ss_cmd = cmd if File.exist?(cmd)
   end
 
   unless ss_cmd.empty?
@@ -21,16 +19,14 @@ def read_open_ports
             end
     lines.each do |line|
       next if %r{^Netid}.match?(line)
-      data = line.split("\s")
+
+      data = line.split
       proto = data[0].strip
       local = data[4].split(':')
       port = local[1].strip
-      if local[0] != '127.0.0.1'
-        opports.push("#{proto}:#{port}")
-      end
+      opports.push("#{proto}:#{port}") if local[0] != '127.0.0.1'
     end
   end
 
-  open_ports = opports.uniq
-  open_ports
+  opports.uniq
 end

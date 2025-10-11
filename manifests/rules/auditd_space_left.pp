@@ -24,6 +24,8 @@ class cis_security_hardening::rules::auditd_space_left (
   Integer $space_left = 25,
 ) {
   if $enforce {
+    require cis_security_hardening::rules::auditd_package
+
     file_line { 'auditd_space_left':
       line               => "space_left = ${space_left}%",
       path               => '/etc/audit/auditd.conf',

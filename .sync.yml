@@ -1,0 +1,4 @@
+---
+.github/workflows/ci.yml:
+  with:
+    additional_packages: libaugeas-dev augeas-tools

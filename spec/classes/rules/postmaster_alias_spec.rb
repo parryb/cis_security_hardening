@@ -19,13 +19,13 @@ describe 'cis_security_hardening::rules::postmaster_alias' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file_line('postmaster_alias')
-              .with(
+            is_expected.to contain_file_line('postmaster_alias').
+              with(
                 'ensure'             => 'present',
                 'path'               => '/etc/aliases',
                 'match'              => '^postmaster:',
                 'line'               => 'postmaster: root',
-                'append_on_no_match' => true,
+                'append_on_no_match' => true
               )
           else
             is_expected.not_to contain_file_line('postmaster_alias')

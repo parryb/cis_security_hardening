@@ -78,6 +78,9 @@ class cis_security_hardening::rules::single_user_mode (
           append_on_no_match => true,
         }
       }
+      'debian': {
+        # the defaults are ok; nothing to do
+      }
       default: {
         # Nothing to do yet
       }

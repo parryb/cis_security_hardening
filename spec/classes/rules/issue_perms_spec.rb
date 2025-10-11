@@ -21,13 +21,13 @@ describe 'cis_security_hardening::rules::issue_perms' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file('/etc/issue')
-              .with(
+            is_expected.to contain_file('/etc/issue').
+              with(
                 'ensure' => 'present',
                 'source' => 'puppet:///modules/cis_security_hardening/dod_issue',
                 'owner'  => 'root',
                 'group'  => 'root',
-                'mode'   => '0644',
+                'mode'   => '0644'
               )
           else
             is_expected.not_to contain_file('/etc/issue')
@@ -49,12 +49,12 @@ describe 'cis_security_hardening::rules::issue_perms' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file('/etc/issue')
-              .with(
+            is_expected.to contain_file('/etc/issue').
+              with(
                 'ensure' => 'present',
                 'owner'  => 'root',
                 'group'  => 'root',
-                'mode'   => '0644',
+                'mode'   => '0644'
               )
 
           else

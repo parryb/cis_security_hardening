@@ -36,10 +36,10 @@ describe 'cis_security_hardening::rules::firewalld_interfaces' do
         is_expected.to compile
 
         if enforce
-          is_expected.to contain_exec('firewalld change zone interface')
-            .with(
+          is_expected.to contain_exec('firewalld change zone interface').
+            with(
               'command' => 'firewall-cmd --zone=public --change-interface=eth0',
-              'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+              'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin']
             )
         else
           is_expected.not_to contain_exec('firewalld change zone interface')

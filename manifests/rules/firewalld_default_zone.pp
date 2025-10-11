@@ -40,10 +40,12 @@ class cis_security_hardening::rules::firewalld_default_zone (
 
   if $enforce {
     if $fact_default_zone != undef and $fact_default_zone != $default_zone {
+      # lint:ignore:exec_idempotency Idempotency handled by fact comparison ($fact_default_zone != $default_zone)
       exec { 'set firewalld default zone':
         command => "firewall-cmd --set-default-zone=${default_zone}", #lint:ignore:security_class_or_define_parameter_in_exec
         path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
       }
+      # lint:endignore
     }
   }
 }

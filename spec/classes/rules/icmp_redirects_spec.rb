@@ -20,13 +20,13 @@ describe 'cis_security_hardening::rules::icmp_redirects' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_sysctl('net.ipv4.conf.all.accept_redirects')
-              .with(
-                'value' => 0,
+            is_expected.to contain_sysctl('net.ipv4.conf.all.accept_redirects').
+              with(
+                'value' => 0
               )
-            is_expected.to contain_sysctl('net.ipv4.conf.default.accept_redirects')
-              .with(
-                'value' => 0,
+            is_expected.to contain_sysctl('net.ipv4.conf.default.accept_redirects').
+              with(
+                'value' => 0
               )
           else
             is_expected.not_to contain_sysctl('net.ipv4.conf.all.accept_redirects')
@@ -43,7 +43,7 @@ describe 'cis_security_hardening::rules::icmp_redirects' do
             {
               'network6' => 'fe81::',
               'netmask6' => 'ffff:ffff:ffff:ffff::',
-            },
+            }
           )
         end
         let(:params) do
@@ -56,22 +56,22 @@ describe 'cis_security_hardening::rules::icmp_redirects' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_sysctl('net.ipv4.conf.all.accept_redirects')
-              .with(
-                'value' => 0,
+            is_expected.to contain_sysctl('net.ipv4.conf.all.accept_redirects').
+              with(
+                'value' => 0
               )
-            is_expected.to contain_sysctl('net.ipv4.conf.default.accept_redirects')
-              .with(
-                'value' => 0,
+            is_expected.to contain_sysctl('net.ipv4.conf.default.accept_redirects').
+              with(
+                'value' => 0
               )
 
-            is_expected.to contain_sysctl('net.ipv6.conf.all.accept_redirects')
-              .with(
-                'value' => 0,
+            is_expected.to contain_sysctl('net.ipv6.conf.all.accept_redirects').
+              with(
+                'value' => 0
               )
-            is_expected.to contain_sysctl('net.ipv6.conf.default.accept_redirects')
-              .with(
-                'value' => 0,
+            is_expected.to contain_sysctl('net.ipv6.conf.default.accept_redirects').
+              with(
+                'value' => 0
               )
 
           else

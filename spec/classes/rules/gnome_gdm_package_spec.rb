@@ -20,15 +20,15 @@ describe 'cis_security_hardening::rules::gnome_gdm_package' do
 
           if enforce
             if os_facts[:os]['family'].casecmp('suse').zero?
-              is_expected.to contain_package('gdm')
-                .with(
-                  'ensure' => 'absent',
+              is_expected.to contain_package('gdm').
+                with(
+                  'ensure' => 'absent'
                 )
               is_expected.not_to contain_package('gdm3')
             else
-              is_expected.to contain_package('gdm3')
-                .with(
-                  'ensure' => 'purged',
+              is_expected.to contain_package('gdm3').
+                with(
+                  'ensure' => 'purged'
                 )
               is_expected.not_to contain_package('gdm')
             end

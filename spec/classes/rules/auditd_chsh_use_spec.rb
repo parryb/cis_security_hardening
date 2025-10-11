@@ -27,7 +27,7 @@ describe 'cis_security_hardening::rules::auditd_chsh_use' do
               auditd: {
                 auditing_process: 'none',
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -41,18 +41,18 @@ describe 'cis_security_hardening::rules::auditd_chsh_use' do
 
           if enforce
             if os_facts[:os]['name'].casecmp('redhat').zero? && os_facts[:os]['release']['major'] == '7'
-              is_expected.to contain_concat__fragment('watch chsh command rule 1')
-                .with(
+              is_expected.to contain_concat__fragment('watch chsh command rule 1').
+                with(
                   'order'   => '174',
                   'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-a always,exit -F path=/usr/bin/chsh -F auid>=1000 -F auid!=4294967295 -k priv_cmd',
+                  'content' => '-a always,exit -F path=/usr/bin/chsh -F auid>=1000 -F auid!=4294967295 -k priv_cmd'
                 )
             else
-              is_expected.to contain_concat__fragment('watch chsh command rule 1')
-                .with(
+              is_expected.to contain_concat__fragment('watch chsh command rule 1').
+                with(
                   'order'   => '174',
                   'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-a always,exit -F path=/usr/bin/chsh -F perm=x -F auid>=1000 -F auid!=4294967295 -k priv_cmd',
+                  'content' => '-a always,exit -F path=/usr/bin/chsh -F perm=x -F auid>=1000 -F auid!=4294967295 -k priv_cmd'
                 )
             end
           else

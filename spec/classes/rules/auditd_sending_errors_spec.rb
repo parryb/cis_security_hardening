@@ -25,23 +25,23 @@ describe 'cis_security_hardening::rules::auditd_sending_errors' do
                    else
                      '/etc/audisp/plugins.d/au-remote.conf'
                    end
-            is_expected.to contain_file(file)
-              .with(
+            is_expected.to contain_file(file).
+              with(
                 'ensure' => 'file',
                 'owner'  => 'root',
                 'group'  => 'root',
-                'mode'   => '0644',
+                'mode'   => '0644'
               )
 
-            is_expected.to contain_file_line('network-failure-action')
-              .with(
+            is_expected.to contain_file_line('network-failure-action').
+              with(
                 'ensure'             => 'present',
                 'path'               => file,
                 'match'              => '^network_failure_action =',
                 'line'               => 'network_failure_action = halt',
-                'append_on_no_match' => true,
-              )
-              .that_requires("File[#{file}]")
+                'append_on_no_match' => true
+              ).
+              that_requires("File[#{file}]")
 
           else
             is_expected.not_to contain_file('/etc/audisp/audisp-remote.conf')

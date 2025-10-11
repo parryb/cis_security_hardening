@@ -23,28 +23,28 @@ class cis_security_hardening::rules::dhcp (
     case $facts['os']['name'].downcase() {
       'ubuntu': {
         stdlib::ensure_packages(['isc-dhcp-server'], {
-            ensure => purged,
+          ensure => purged,
         })
       }
       'debian': {
         ensure_resource('service', 'isc-dhcp-server', {
-            ensure => 'stopped',
-            enable => false
+          ensure => 'stopped',
+          enable => false
         })
         ensure_resource('service', 'isc-dhcp-server6', {
-            ensure => 'stopped',
-            enable => false
+          ensure => 'stopped',
+          enable => false
         })
       }
       'sles': {
         stdlib::ensure_packages(['dhcp'], {
-            ensure => absent,
+          ensure => absent,
         })
       }
       default: {
         ensure_resource('service' , ['dhcpd'], {
-            ensure => 'stopped',
-            enable => false
+          ensure => 'stopped',
+          enable => false
         })
       }
     }

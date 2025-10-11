@@ -20,12 +20,12 @@ describe 'cis_security_hardening::rules::sudo_timeout' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file_line('set sudo timeout')
-              .with(
+            is_expected.to contain_file_line('set sudo timeout').
+              with(
                 'path'               => '/etc/sudoers',
                 'match'              => '^Defaults\s+timestamp_timeout=',
                 'line'               => "Defaults\ttimestamp_timeout=10",
-                'append_on_no_match' => true,
+                'append_on_no_match' => true
               )
           else
             is_expected.not_to contain_file_line('set sudo timeout')

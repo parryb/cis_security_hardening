@@ -13,7 +13,7 @@ describe 'cis_security_hardening::rules::ip6tables_deny_policy' do
             {
               'network6' => 'fe81::',
               'netmask6' => 'ffff:ffff:ffff:ffff::',
-            },
+            }
           )
         end
         let(:params) do
@@ -29,22 +29,22 @@ describe 'cis_security_hardening::rules::ip6tables_deny_policy' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_firewallchain('OUTPUT:filter:IPv6')
-              .with(
+            is_expected.to contain_firewallchain('OUTPUT:filter:IPv6').
+              with(
                 'ensure' => 'present',
-                'policy' => 'drop',
+                'policy' => 'drop'
               )
 
-            is_expected.to contain_firewallchain('FORWARD:filter:IPv6')
-              .with(
+            is_expected.to contain_firewallchain('FORWARD:filter:IPv6').
+              with(
                 'ensure' => 'present',
-                'policy' => 'drop',
+                'policy' => 'drop'
               )
 
-            is_expected.to contain_firewallchain('INPUT:filter:IPv6')
-              .with(
+            is_expected.to contain_firewallchain('INPUT:filter:IPv6').
+              with(
                 'ensure' => 'present',
-                'policy' => 'drop',
+                'policy' => 'drop'
               )
           else
             is_expected.not_to contain_firewallchain('OUTPUT:filter:IPv6')

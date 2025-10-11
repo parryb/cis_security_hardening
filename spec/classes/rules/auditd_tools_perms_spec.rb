@@ -15,7 +15,7 @@ describe 'cis_security_hardening::rules::auditd_tools_perms' do
                 uid_min: '1000',
                 auditing_process: 'none',
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -32,55 +32,55 @@ describe 'cis_security_hardening::rules::auditd_tools_perms' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file('/sbin/auditctl')
-              .with(
+            is_expected.to contain_file('/sbin/auditctl').
+              with(
                 'ensure' => 'file',
                 'owner' => 'root',
                 'group' => 'root',
-                'mode' => '0755',
+                'mode' => '0755'
               )
 
-            is_expected.to contain_file('/sbin/aureport')
-              .with(
+            is_expected.to contain_file('/sbin/aureport').
+              with(
                 'ensure' => 'file',
                 'owner' => 'root',
                 'group' => 'root',
-                'mode' => '0755',
+                'mode' => '0755'
               )
-            is_expected.to contain_file('/sbin/auditd')
-              .with(
+            is_expected.to contain_file('/sbin/auditd').
+              with(
                 'ensure' => 'file',
                 'owner' => 'root',
                 'group' => 'root',
-                'mode' => '0755',
+                'mode' => '0755'
               )
-            is_expected.to contain_file('/sbin/augenrules')
-              .with(
+            is_expected.to contain_file('/sbin/augenrules').
+              with(
                 'ensure' => 'file',
                 'owner' => 'root',
                 'group' => 'root',
-                'mode' => '0755',
+                'mode' => '0755'
               )
-            is_expected.to contain_file('/sbin/ausearch')
-              .with(
+            is_expected.to contain_file('/sbin/ausearch').
+              with(
                 'ensure' => 'file',
                 'owner' => 'root',
                 'group' => 'root',
-                'mode' => '0755',
+                'mode' => '0755'
               )
-            is_expected.to contain_file('/sbin/autrace')
-              .with(
+            is_expected.to contain_file('/sbin/autrace').
+              with(
                 'ensure' => 'file',
                 'owner' => 'root',
                 'group' => 'root',
-                'mode' => '0755',
+                'mode' => '0755'
               )
-            is_expected.to contain_file('/sbin/audispd')
-              .with(
+            is_expected.to contain_file('/sbin/audispd').
+              with(
                 'ensure' => 'file',
                 'owner' => 'root',
                 'group' => 'root',
-                'mode' => '0755',
+                'mode' => '0755'
               )
           else
             is_expected.not_to contain_file('/sbin/auditctl')

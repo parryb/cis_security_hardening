@@ -7,8 +7,10 @@ def read_nfs_filesystems
     lines = File.readlines('/etc/fstab')
     lines.each do |line|
       next if %r{^#}.match?(line)
-      data = line.split("\s")
+
+      data = line.split
       next if data.nil? || data.empty? || !data[2].include?('nfs')
+
       nfs_file_systems[data[1]] = {
         'device' => data[0],
         'mountoptions' => data[3]

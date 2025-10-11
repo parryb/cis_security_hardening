@@ -28,7 +28,7 @@ describe 'cis_security_hardening::rules::auditd_kmod_use' do
                 uid_min: '1000',
                 auditing_process: 'none',
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -41,11 +41,11 @@ describe 'cis_security_hardening::rules::auditd_kmod_use' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_concat__fragment('watch kmod command rule 1')
-              .with(
+            is_expected.to contain_concat__fragment('watch kmod command rule 1').
+              with(
                 'order'   => '194',
                 'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                'content' => '-w /bin/kmod -p x -k modules',
+                'content' => '-w /bin/kmod -p x -k modules'
               )
           else
             is_expected.not_to contain_concat__fragment('watch kmod command rule 1')

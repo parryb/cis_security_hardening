@@ -55,8 +55,8 @@ class cis_security_hardening::rules::aide_regular_checks (
         file { '/etc/systemd/system/aidecheck.service':
           ensure  => file,
           content => epp('cis_security_hardening/rules/common/aidecheck.service.epp', {
-              aide_bin => $aide_bin,
-              config   => $config,
+            aide_bin => $aide_bin,
+            config   => $config,
           }),
           owner   => 'root',
           group   => 'root',

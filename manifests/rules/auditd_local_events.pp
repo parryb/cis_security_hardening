@@ -24,6 +24,8 @@ class cis_security_hardening::rules::auditd_local_events (
   Boolean $enforce = false,
 ) {
   if $enforce {
+    require cis_security_hardening::rules::auditd_package
+
     file_line { 'auditd_local_events':
       line               => 'local_events = yes',
       path               => '/etc/audit/auditd.conf',

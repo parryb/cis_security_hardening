@@ -1,5 +1,5 @@
 ---
-cis_security_hardening::benchmark::ubuntu::18:
+cis_security_hardening::benchmark::ubuntu::v18:
   bundles:
     filesystem_config:
       level1:

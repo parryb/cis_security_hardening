@@ -37,12 +37,12 @@ class cis_security_hardening::rules::sshd_install (
       default  => ['ssh']
     }
     stdlib::ensure_packages($pkgs, {
-        ensure => present,
+      ensure => present,
     })
 
     ensure_resource('service', 'sshd', {
-        enable => true,
-        ensure => running,
+      enable => true,
+      ensure => running,
     })
   }
 }

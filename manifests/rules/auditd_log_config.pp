@@ -24,6 +24,8 @@ class cis_security_hardening::rules::auditd_log_config (
   String $log_group = 'root',
 ) {
   if $enforce {
+    require cis_security_hardening::rules::auditd_package
+
     file { '/etc/audit/auditd.conf':
       ensure => file,
       owner  => 'root',

@@ -55,7 +55,7 @@ describe 'cis_security_hardening::rules::sshd_x11_use_localhost' do
                 'clientalivecountmax' => 3,
                 'permituserenvironment' => 'yes',
               },
-            },
+            }
           )
         end
 
@@ -75,14 +75,14 @@ describe 'cis_security_hardening::rules::sshd_x11_use_localhost' do
                      '/etc/ssh/sshd_config'
                    end
 
-            is_expected.to contain_file_line('sshd-x11-use-localhost')
-              .with(
+            is_expected.to contain_file_line('sshd-x11-use-localhost').
+              with(
                 'ensure' => 'present',
                 'path'   => path,
                 'line'   => 'X11UseLocalhost yes',
-                'match'  => '^#?X11UseLocalhost.*',
-              )
-              .that_notifies('Exec[reload-sshd]')
+                'match'  => '^#?X11UseLocalhost.*'
+              ).
+              that_notifies('Exec[reload-sshd]')
           else
             is_expected.not_to contain_file_line('sshd-x11-use-localhost')
           end

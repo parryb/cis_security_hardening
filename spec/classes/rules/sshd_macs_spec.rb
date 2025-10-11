@@ -55,14 +55,14 @@ describe 'cis_security_hardening::rules::sshd_macs' do
                 'clientalivecountmax' => 3,
                 'permituserenvironment' => 'yes',
               },
-            },
+            }
           )
         end
 
         let(:params) do
           {
             'enforce' => enforce,
-            'macs' => ['hmac-sha2-512', 'hmac-sha2-256'],
+            'macs' => %w[hmac-sha2-512 hmac-sha2-256],
           }
         end
 
@@ -75,14 +75,14 @@ describe 'cis_security_hardening::rules::sshd_macs' do
                    else
                      '/etc/ssh/sshd_config'
                    end
-            is_expected.to contain_file_line('sshd-macs')
-              .with(
+            is_expected.to contain_file_line('sshd-macs').
+              with(
                 'ensure' => 'present',
                 'path'   => path,
                 'line'   => 'MACs hmac-sha2-512,hmac-sha2-256',
-                'match'  => '^#?MACs.*',
-              )
-              .that_notifies('Exec[reload-sshd]')
+                'match'  => '^#?MACs.*'
+              ).
+              that_notifies('Exec[reload-sshd]')
           else
             is_expected.not_to contain_file_line('sshd-macs')
           end

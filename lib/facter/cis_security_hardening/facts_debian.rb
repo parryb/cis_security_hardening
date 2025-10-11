@@ -5,7 +5,6 @@ require 'facter/cis_security_hardening/utils/check_value_string'
 require 'facter/cis_security_hardening/utils/read_file_stats'
 require 'facter/cis_security_hardening/utils/read_iptables_rules'
 require 'facter/cis_security_hardening/utils/read_apparmor_data'
-require 'pp'
 
 # gather debian specific facts
 def facts_debian(os, distid, release)
@@ -18,11 +17,7 @@ def facts_debian(os, distid, release)
   cis_security_hardening[:gnome_gdm] = File.exist?('/etc/gdm3/greeter.dconf')
   gnome_keyring = {}
   val = Facter::Core::Execution.exec('dpkg -l | grep libpam-gnome-keyring')
-  gnome_keyring['installed'] = if val.nil? || val.empty?
-                                 false
-                               else
-                                 true
-                               end
+  gnome_keyring['installed'] = !(val.nil? || val.empty?)
 
   # determine apport installation
   apport = {}
@@ -33,11 +28,7 @@ def facts_debian(os, distid, release)
                     false
                   end
   val = Facter::Core::Execution.exec("systemctl is-active apport.service | grep '^active'")
-  apport['service'] = if val.nil? || val.empty?
-                        false
-                      else
-                        true
-                      end
+  apport['service'] = !(val.nil? || val.empty?)
   cis_security_hardening[:apport] = apport
 
   # get iptables config
@@ -47,7 +38,7 @@ def facts_debian(os, distid, release)
   # get account informtion
   accounts = {}
   wrong_shell = []
-  cmd = "egrep -v \"^\/+\" /etc/passwd | awk -F: '($1!=\"root\" && $1!=\"sync\" && $1!=\"shutdown\" && $1!=\"halt\" && $3<1000 && $7!=\"/usr/sbin/nologin\" && $7!=\"/bin/false\") {print}'"
+  cmd = "egrep -v \"^/+\" /etc/passwd | awk -F: '($1!=\"root\" && $1!=\"sync\" && $1!=\"shutdown\" && $1!=\"halt\" && $3<1000 && $7!=\"/usr/sbin/nologin\" && $7!=\"/bin/false\") {print}'"
   val = Facter::Core::Execution.exec(cmd)
   unless val.nil? || val.empty?
     val.split("\n").each do |line|

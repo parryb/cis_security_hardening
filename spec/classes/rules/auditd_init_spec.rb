@@ -33,55 +33,55 @@ describe 'cis_security_hardening::rules::auditd_init' do
 
             if enforce
               if reboot
-                is_expected.to contain_concat('/etc/audit/rules.d/cis_security_hardening.rules')
-                  .with(
+                is_expected.to contain_concat('/etc/audit/rules.d/cis_security_hardening.rules').
+                  with(
                     'ensure' => 'present',
-                    'owner'  => 'root',
-                    'group'  => 'root',
-                    'mode'   => '0640',
-                    'ensure_newline' => true,
-                  )
-                  .that_notifies(['Exec[reload auditd rules]', 'Reboot[after_run]'])
+                    'owner' => 'root',
+                    'group' => 'root',
+                    'mode' => '0640',
+                    'ensure_newline' => true
+                  ).
+                  that_notifies(['Exec[reload auditd rules]', 'Reboot[after_run]'])
               else
-                is_expected.to contain_concat('/etc/audit/rules.d/cis_security_hardening.rules')
-                  .with(
+                is_expected.to contain_concat('/etc/audit/rules.d/cis_security_hardening.rules').
+                  with(
                     'ensure' => 'present',
-                    'owner'  => 'root',
-                    'group'  => 'root',
-                    'mode'   => '0640',
-                    'ensure_newline' => true,
-                  )
-                  .that_notifies(['Exec[reload auditd rules]'])
+                    'owner' => 'root',
+                    'group' => 'root',
+                    'mode' => '0640',
+                    'ensure_newline' => true
+                  ).
+                  that_notifies(['Exec[reload auditd rules]'])
               end
 
-              is_expected.to contain_file('/etc/audisp')
-                .with(
+              is_expected.to contain_file('/etc/audisp').
+                with(
                   'ensure' => 'directory',
                   'owner'  => 'root',
                   'group'  => 'root',
-                  'mode'   => '0755',
+                  'mode'   => '0755'
                 )
 
-              is_expected.to contain_file('/etc/audisp/plugins.d')
-                .with(
+              is_expected.to contain_file('/etc/audisp/plugins.d').
+                with(
                   'ensure' => 'directory',
                   'owner'  => 'root',
                   'group'  => 'root',
-                  'mode'   => '0750',
+                  'mode'   => '0750'
                 )
 
-              is_expected.to contain_concat__fragment('auditd init delete rules')
-                .with(
+              is_expected.to contain_concat__fragment('auditd init delete rules').
+                with(
                   'order' => '01',
                   'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-D',
+                  'content' => '-D'
                 )
 
-              is_expected.to contain_concat__fragment('auditd init set buffer')
-                .with(
+              is_expected.to contain_concat__fragment('auditd init set buffer').
+                with(
                   'order' => '02',
                   'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-b 8192',
+                  'content' => '-b 8192'
                 )
             else
               is_expected.not_to contain_file('/etc/audit/rules.d/cis_security_hardening.rules')
@@ -90,11 +90,11 @@ describe 'cis_security_hardening::rules::auditd_init' do
               is_expected.not_to contain_file('/etc/audisp')
             end
 
-            is_expected.to contain_exec('reload auditd rules')
-              .with(
+            is_expected.to contain_exec('reload auditd rules').
+              with(
                 'refreshonly' => true,
                 'command'     => 'auditctl -R /etc/audit/rules.d/cis_security_hardening.rules',
-                'path'        => ['/sbin', '/usr/sbin', '/bin', '/usr/bin'],
+                'path'        => ['/sbin', '/usr/sbin', '/bin', '/usr/bin']
               )
           }
         end

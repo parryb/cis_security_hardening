@@ -34,10 +34,10 @@ describe 'cis_security_hardening::rules::dev_shm_nodev' do
         it {
           is_expected.to compile
           if enforce
-            is_expected.to contain_cis_security_hardening__set_mount_options('/dev/shm-nodev')
-              .with(
+            is_expected.to contain_cis_security_hardening__set_mount_options('/dev/shm-nodev').
+              with(
                 'mountpoint'   => '/dev/shm',
-                'mountoptions' => 'nodev',
+                'mountoptions' => 'nodev'
               )
           else
             is_expected.not_to contain_cis_security_hardening__set_mount_options('/dev/shm-nodev')

@@ -29,8 +29,8 @@ class cis_security_hardening::rules::timeout_setting (
     file { '/etc/profile.d/shell_timeout.sh':
       ensure  => file,
       content => epp('cis_security_hardening/rules/common/shell_timeout.epp', {
-          default_timeout => $default_timeout,
-          os              => $facts['os']['name'].downcase(),
+        default_timeout => $default_timeout,
+        os              => $facts['os']['name'].downcase(),
       }),
       owner   => 'root',
       group   => 'root',
@@ -41,7 +41,7 @@ class cis_security_hardening::rules::timeout_setting (
       file { '/etc/profile':
         ensure  => file,
         content => epp('cis_security_hardening/rules/common/profile.debian.epp', {
-            default_timeout => $default_timeout,
+          default_timeout => $default_timeout,
         }),
         owner   => 'root',
         group   => 'root',
@@ -51,7 +51,7 @@ class cis_security_hardening::rules::timeout_setting (
       file { '/etc/bash.bashrc':
         ensure  => file,
         content => epp('cis_security_hardening/rules/common/bash.bashrc.debian.epp', {
-            default_timeout => $default_timeout,
+          default_timeout => $default_timeout,
         }),
         owner   => 'root',
         group   => 'root',

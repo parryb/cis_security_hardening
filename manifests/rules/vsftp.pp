@@ -29,12 +29,12 @@ class cis_security_hardening::rules::vsftp (
       }
 
       stdlib::ensure_packages(['vsftpd'], {
-          ensure => $ensure,
+        ensure => $ensure,
       })
     } else {
       ensure_resource('service', ['vsftpd'], {
-          ensure => 'stopped',
-          enable => false,
+        ensure => 'stopped',
+        enable => false,
       })
     }
   }

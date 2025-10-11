@@ -20,9 +20,9 @@ class cis_security_hardening::rules::rsyslog_service (
 ) {
   if $enforce {
     ensure_resource('service', ['rsyslog'], {
-        ensure  => running,
-        enable  => true,
-        require => Package['rsyslog'],
+      ensure  => running,
+      enable  => true,
+      require => Package['rsyslog'],
     })
   }
 }

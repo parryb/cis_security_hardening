@@ -19,13 +19,13 @@ describe 'cis_security_hardening::rules::log_suspicious_packets' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_sysctl('net.ipv4.conf.all.log_martians')
-              .with(
-                'value' => 1,
+            is_expected.to contain_sysctl('net.ipv4.conf.all.log_martians').
+              with(
+                'value' => 1
               )
-            is_expected.to contain_sysctl('net.ipv4.conf.default.log_martians')
-              .with(
-                'value' => 1,
+            is_expected.to contain_sysctl('net.ipv4.conf.default.log_martians').
+              with(
+                'value' => 1
               )
           else
             is_expected.not_to contain_sysctl('net.ipv4.conf.all.log_martians')

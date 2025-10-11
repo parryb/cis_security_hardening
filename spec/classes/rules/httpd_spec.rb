@@ -21,31 +21,31 @@ describe 'cis_security_hardening::rules::httpd' do
           if enforce
 
             if os_facts[:os]['name'].casecmp('ubuntu').zero? || os_facts[:os]['name'].casecmp('debian').zero?
-              is_expected.to contain_package('apache2')
-                .with(
-                  'ensure' => 'purged',
+              is_expected.to contain_package('apache2').
+                with(
+                  'ensure' => 'purged'
                 )
             elsif os_facts[:os]['name'].casecmp('sles').zero?
-              is_expected.to contain_package('httpd')
-                .with(
-                  'ensure' => 'absent',
+              is_expected.to contain_package('httpd').
+                with(
+                  'ensure' => 'absent'
                 )
             elsif os_facts[:os]['name'].casecmp('redhat').zero?
-              is_expected.to contain_package('httpd')
-                .with(
-                  'ensure' => 'purged',
+              is_expected.to contain_package('httpd').
+                with(
+                  'ensure' => 'purged'
                 )
               if os_facts[:os]['release']['major'] >= '9'
-                is_expected.to contain_package('nginx')
-                  .with(
-                    'ensure' => 'purged',
+                is_expected.to contain_package('nginx').
+                  with(
+                    'ensure' => 'purged'
                   )
               end
             else
-              is_expected.to contain_service('httpd')
-                .with(
+              is_expected.to contain_service('httpd').
+                with(
                   'ensure' => 'stopped',
-                  'enable' => false,
+                  'enable' => false
                 )
             end
           else

@@ -13,7 +13,7 @@ describe 'cis_security_hardening::rules::gdm_screensaver' do
             cis_security_hardening: {
               gnome_gdm_conf: false,
               gnome_gdm: true,
-            },
+            }
           )
         end
         let(:params) do
@@ -27,19 +27,21 @@ describe 'cis_security_hardening::rules::gdm_screensaver' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_dconf__db('screensaver-timeout')
-              .with(
+            is_expected.to contain_dconf__db('screensaver-timeout').
+              with(
                 'db_dir'         => '/etc/dconf/db/local.d',
                 'db_filename'    => '03-screensaver-timeout',
                 'locks_filename' => '03-screensaver-timeout',
-                'settings' => {
+                'settings'       => {
                   'org/gnome/desktop/session' => {
                     'idle-delay' => 'uint32 800',
                   },
                 },
+                # rubocop:disable Layout/HashAlignment
                 'locks' => [
-                  '/org/gnome/desktop/session/idle-delay',
-                ],
+                  '/org/gnome/desktop/session/idle-delay'
+                ]
+                # rubocop:enable Layout/HashAlignment
               )
           else
             is_expected.not_to contain_dconf__db('screensaver-timeout')

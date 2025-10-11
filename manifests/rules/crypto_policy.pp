@@ -62,11 +62,14 @@ class cis_security_hardening::rules::crypto_policy (
     }
 
     if  $enforce and $policy != $crypto_policy {
+      stdlib::ensure_packages(['crypto-policies', 'crypto-policies-scripts'])
+
       exec { "set crypto policy to ${crypto_policy} (current: ${policy})":
         command => "update-crypto-policies --set ${crypto_policy}", #lint:ignore:security_class_or_define_parameter_in_exec 
         path    => ['/sbin', '/usr/sbin', '/bin', '/usr/bin'],
         onlyif  => "test -z \"\$(update-crypto-policies --show | grep ${crypto_policy})\"",
         notify  => $notify,
+        require => Package['crypto-policies', 'crypto-policies-scripts'],
       }
 
       if($crypto_policy == 'FUTURE' or $crypto_policy == 'DEFAULT') {
@@ -79,11 +82,15 @@ class cis_security_hardening::rules::crypto_policy (
         (($enable == 'enable') and ($fips_mode == 'disabled')) or
         (($enable == 'disable') and ($fips_mode == 'enabled'))
       ) {
+        # Idempotency handled by the if condition above
+        #lint:ignore:exec_idempotency
         exec { "set FIPS to ${enable}":
           command => "fips-mode-setup --${enable}", #lint:ignore:security_class_or_define_parameter_in_exec
           path    => ['/sbin', '/usr/sbin', '/bin', '/usr/bin'],
           notify  => $notify,
+          require => Package['crypto-policies', 'crypto-policies-scripts'],
         }
+        #lint:endignore
       }
     }
   }

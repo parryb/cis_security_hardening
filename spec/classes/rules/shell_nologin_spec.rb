@@ -14,7 +14,7 @@ describe 'cis_security_hardening::rules::shell_nologin' do
               'accounts' => {
                 'no_shell_nologin' => ['test1'],
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -30,16 +30,16 @@ describe 'cis_security_hardening::rules::shell_nologin' do
             if (os_facts[:os]['name'].casecmp('debian').zero? && os_facts[:os]['release']['major'] == '12') ||
                os_facts[:os]['name'].casecmp('ubuntu').zero? ||
                os_facts[:os]['name'].casecmp('sles').zero?
-              is_expected.to contain_exec('nologin test1')
-                .with(
-                'command' => 'usermod -s /usr/sbin/nologin test1',
-                'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-              )
+              is_expected.to contain_exec('nologin test1').
+                with(
+                  'command' => 'usermod -s /usr/sbin/nologin test1',
+                  'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin']
+                )
             else
-              is_expected.to contain_exec('nologin test1')
-                .with(
+              is_expected.to contain_exec('nologin test1').
+                with(
                   'command' => 'usermod -s /sbin/nologin test1',
-                  'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+                  'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin']
                 )
             end
           else

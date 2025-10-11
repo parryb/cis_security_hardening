@@ -12,7 +12,7 @@ describe 'cis_security_hardening::rules::pam_cached_auth' do
           os_facts.merge(
             'cis_security_hardening' => {
               'systemd-coredump' => 'yes',
-            },
+            }
           )
         end
         let(:params) do
@@ -25,49 +25,49 @@ describe 'cis_security_hardening::rules::pam_cached_auth' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_cis_security_hardening__parent_dirs('ssd conf dir')
-              .with(
+            is_expected.to contain_cis_security_hardening__parent_dirs('ssd conf dir').
+              with(
                 'dir_path' => '/etc/sssd/conf.d',
                 'owner'    => 'root',
                 'group'    => 'root',
-                'mode'     => '0755',
+                'mode'     => '0755'
               )
-            is_expected.to contain_file('/etc/sssd/conf.d')
-              .with(
+            is_expected.to contain_file('/etc/sssd/conf.d').
+              with(
                 'ensure' => 'directory',
                 'owner' => 'root',
                 'group' => 'root',
-                'mode' => '0755',
+                'mode' => '0755'
               )
-            is_expected.to contain_file('/etc/sssd')
-              .with(
+            is_expected.to contain_file('/etc/sssd').
+              with(
                 'ensure' => 'directory',
                 'owner' => 'root',
                 'group' => 'root',
-                'mode' => '0755',
+                'mode' => '0755'
               )
-            is_expected.to contain_file('/etc')
-              .with(
+            is_expected.to contain_file('/etc').
+              with(
                 'ensure' => 'directory',
                 'owner' => 'root',
                 'group' => 'root',
-                'mode' => '0755',
+                'mode' => '0755'
               )
-            is_expected.to contain_file('/etc/sssd/conf.d/cis.conf')
-              .with(
+            is_expected.to contain_file('/etc/sssd/conf.d/cis.conf').
+              with(
                 'ensure' => 'file',
                 'owner' => 'root',
                 'group' => 'root',
-                'mode' => '0644',
+                'mode' => '0644'
               )
-            is_expected.to contain_file_line('pam cached auth')
-              .with(
+            is_expected.to contain_file_line('pam cached auth').
+              with(
                 'ensure' => 'present',
                 'path'   => '/etc/sssd/conf.d/cis.conf',
                 'line'   => 'offline_credentials_expiration = 1',
-                'match'  => '^#?offline_credentials_expiration',
-              )
-              .that_requires('File[/etc/sssd/conf.d/cis.conf]')
+                'match'  => '^#?offline_credentials_expiration'
+              ).
+              that_requires('File[/etc/sssd/conf.d/cis.conf]')
           else
             is_expected.not_to contain_file_line('pam cached auth')
             is_expected.not_to contain_file('/etc/sssd/conf.d/cis.conf')

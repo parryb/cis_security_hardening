@@ -54,7 +54,7 @@ class cis_security_hardening::rules::chrony (
     case $facts['os']['name'].downcase() {
       'ubuntu': {
         stdlib::ensure_packages(['ntp'], {
-            ensure => purged,
+          ensure => purged,
         })
       }
       'rocky', 'almalinux','centos','redhat': {

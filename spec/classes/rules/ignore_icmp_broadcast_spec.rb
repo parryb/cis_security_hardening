@@ -19,9 +19,9 @@ describe 'cis_security_hardening::rules::ignore_icmp_broadcast' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_sysctl('net.ipv4.icmp_echo_ignore_broadcasts')
-              .with(
-                'value' => 1,
+            is_expected.to contain_sysctl('net.ipv4.icmp_echo_ignore_broadcasts').
+              with(
+                'value' => 1
               )
           else
             is_expected.not_to contain_sysctl('net.ipv4.icmp_echo_ignore_broadcasts')

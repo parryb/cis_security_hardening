@@ -29,24 +29,24 @@ describe 'cis_security_hardening::rules::crtl_alt_del' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_exec('mask ctrl-alt-del.target')
-              .with(
+            is_expected.to contain_exec('mask ctrl-alt-del.target').
+              with(
                 'command' => 'systemctl mask ctrl-alt-del.target',
                 'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                'onlyif'  => 'test -z "$(systemctl status ctrl-alt-del.target | grep -i "Loaded: masked")"',
-              )
-              .that_notifies('Exec[systemd-daemon-reload]')
+                'onlyif'  => 'test -z "$(systemctl status ctrl-alt-del.target | grep -i "Loaded: masked")"'
+              ).
+              that_notifies('Exec[systemd-daemon-reload]')
 
             if os_facts[:os]['name'].casecmp('redhat').zero? && (os_facts[:os]['release']['major'] >= '8')
-              is_expected.to contain_file_line('ctrl-alt-del-burst')
-                .with(
+              is_expected.to contain_file_line('ctrl-alt-del-burst').
+                with(
                   'ensure'             => 'present',
                   'path'               => '/etc/systemd/system.conf',
                   'match'              => '^CtrlAltDelBurstAction=',
                   'line'               => 'CtrlAltDelBurstAction=none',
-                  'append_on_no_match' => true,
-                )
-                .that_notifies('Exec[systemd-daemon-reload]')
+                  'append_on_no_match' => true
+                ).
+                that_notifies('Exec[systemd-daemon-reload]')
             end
           else
             is_expected.not_to contain_exec('mask ctrl-alt-del.target')

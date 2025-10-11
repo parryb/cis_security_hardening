@@ -19,31 +19,31 @@ describe 'cis_security_hardening::rules::sudo_passwd_required' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file_line('targetpw')
-              .with(
+            is_expected.to contain_file_line('targetpw').
+              with(
                 'ensure'             => 'present',
                 'path'               => '/etc/sudoers',
                 'match'              => '^Defaults !targetpw',
                 'line'               => 'Defaults !targetpw',
-                'append_on_no_match' => true,
+                'append_on_no_match' => true
               )
 
-            is_expected.to contain_file_line('rootpw')
-              .with(
+            is_expected.to contain_file_line('rootpw').
+              with(
                 'ensure'             => 'present',
                 'path'               => '/etc/sudoers',
                 'match'              => '^Defaults !rootpw',
                 'line'               => 'Defaults !rootpw',
-                'append_on_no_match' => true,
+                'append_on_no_match' => true
               )
 
-            is_expected.to contain_file_line('runaspw')
-              .with(
+            is_expected.to contain_file_line('runaspw').
+              with(
                 'ensure'             => 'present',
                 'path'               => '/etc/sudoers',
                 'match'              => '^Defaults !runaspw',
                 'line'               => 'Defaults !runaspw',
-                'append_on_no_match' => true,
+                'append_on_no_match' => true
               )
           else
             is_expected.not_to contain_file_line('targetpw')

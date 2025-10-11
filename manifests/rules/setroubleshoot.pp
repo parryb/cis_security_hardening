@@ -26,7 +26,7 @@ class cis_security_hardening::rules::setroubleshoot (
       default => 'purged',
     }
     stdlib::ensure_packages(['setroubleshoot'], {
-        ensure => $ensure,
+      ensure => $ensure,
     })
   }
 }

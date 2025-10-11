@@ -36,7 +36,7 @@ describe 'cis_security_hardening::rules::passwd_expiration' do
               'pw_data' => {
                 'pass_max_days_status' => true,
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -54,21 +54,21 @@ describe 'cis_security_hardening::rules::passwd_expiration' do
                    else
                      '/etc/login.defs'
                    end
-            is_expected.to contain_file_line('password expiration policy')
-              .with(
+            is_expected.to contain_file_line('password expiration policy').
+              with(
                 'ensure' => 'present',
                 'path'   => path,
                 'line'   => 'PASS_MAX_DAYS 90',
-                'match'  => '^#?PASS_MAX_DAYS',
+                'match'  => '^#?PASS_MAX_DAYS'
               )
-            is_expected.to contain_exec('chage --maxdays 90 test1')
-              .with(
-                'path' => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+            is_expected.to contain_exec('chage --maxdays 90 test1').
+              with(
+                'path' => ['/bin', '/usr/bin', '/sbin', '/usr/sbin']
               )
 
-            is_expected.to contain_exec('chage --maxdays 90 root')
-              .with(
-                'path' => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+            is_expected.to contain_exec('chage --maxdays 90 root').
+              with(
+                'path' => ['/bin', '/usr/bin', '/sbin', '/usr/sbin']
               )
           else
             is_expected.not_to contain_file_line('password expiration policy')

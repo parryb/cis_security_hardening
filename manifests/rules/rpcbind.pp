@@ -43,46 +43,46 @@ class cis_security_hardening::rules::rpcbind (
       case $facts['os']['name'].downcase() {
         'ubuntu': {
           stdlib::ensure_packages(['rpcbind'], {
-              ensure => purged,
+            ensure => purged,
           })
         }
         'sles': {
           ensure_resource('service', 'rpcbind', {
-              ensure => stopped,
-              enable => false,
+            ensure => stopped,
+            enable => false,
           })
           ensure_resource('service', 'rpcbind.socket', {
-              ensure => stopped,
-              enable => false,
+            ensure => stopped,
+            enable => false,
           })
           stdlib::ensure_packages(['rpcbind'], {
-              ensure => absent,
+            ensure => absent,
           })
         }
         'rocky', 'almalinux': {
           stdlib::ensure_packages(['rpcbind'], {
-              ensure => absent,
+            ensure => absent,
           })
 
           ensure_resource('service', ['rpcbind.socket'], {
-              ensure => 'stopped',
-              enable => false,
+            ensure => 'stopped',
+            enable => false,
           })
         }
         default: {
           ensure_resource('service', ['rpcbind.socket', 'rpcbind'], {
-              ensure => 'stopped',
-              enable => false,
+            ensure => 'stopped',
+            enable => false,
           })
           stdlib::ensure_packages(['rpcbind'], {
-              ensure => absent,
+            ensure => absent,
           })
         }
       }
     } else {
       ensure_resource('service', ['rpcbind.socket', 'rpcbind'], {
-          ensure => 'stopped',
-          enable => false,
+        ensure => 'stopped',
+        enable => false,
       })
 
       exec { 'mask rpcbind service':

@@ -28,7 +28,7 @@ describe 'cis_security_hardening::rules::passwd_inactive_days' do
                 'inactive_status' => true,
                 'inactive' => 25,
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -41,13 +41,13 @@ describe 'cis_security_hardening::rules::passwd_inactive_days' do
         it {
           is_expected.to compile
           if enforce
-            is_expected.to contain_exec('chage --inactive 30 test1')
-              .with(
-                'path' => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+            is_expected.to contain_exec('chage --inactive 30 test1').
+              with(
+                'path' => ['/bin', '/usr/bin', '/sbin', '/usr/sbin']
               )
-            is_expected.to contain_exec('useradd -D -f 30')
-              .with(
-                'path' => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+            is_expected.to contain_exec('useradd -D -f 30').
+              with(
+                'path' => ['/bin', '/usr/bin', '/sbin', '/usr/sbin']
               )
           else
             is_expected.not_to contain_exec('chage --inactive 30 test1')

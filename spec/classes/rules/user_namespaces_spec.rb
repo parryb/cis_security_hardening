@@ -19,9 +19,9 @@ describe 'cis_security_hardening::rules::user_namespaces' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_sysctl('user.max_user_namespaces')
-              .with(
-                'value' => 0,
+            is_expected.to contain_sysctl('user.max_user_namespaces').
+              with(
+                'value' => 0
               )
           else
             is_expected.not_to contain_sysctl('user.max_user_namespaces')

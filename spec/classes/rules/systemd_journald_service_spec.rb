@@ -29,10 +29,10 @@ describe 'cis_security_hardening::rules::systemd_journald_service' do
         is_expected.to compile.with_all_deps
 
         if enforce
-          is_expected.to contain_service('systemd-journald.service')
-            .with(
+          is_expected.to contain_service('systemd-journald.service').
+            with(
               'ensure' => 'running',
-              'enable' => true,
+              'enable' => true
             )
         else
           is_expected.not_to contain_service('systemd-journald.service')

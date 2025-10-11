@@ -24,13 +24,13 @@ describe 'cis_security_hardening::rules::shadow_encrypt_sha512' do
                    else
                      '/etc/login.defs'
                    end
-            is_expected.to contain_file_line('login.defs')
-              .with(
-                'path'  => path,
-                'line'  => 'ENCRYPT_METHOD sha512',
+            is_expected.to contain_file_line('login.defs').
+              with(
+                'path' => path,
+                'line' => 'ENCRYPT_METHOD sha512',
                 'match' => '^\s*ENCRYPT_METHOD',
                 'append_on_no_match' => true,
-                'multiple' => true,
+                'multiple' => true
               )
           end
         }

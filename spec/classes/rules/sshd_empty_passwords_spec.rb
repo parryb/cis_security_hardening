@@ -55,7 +55,7 @@ describe 'cis_security_hardening::rules::sshd_empty_passwords' do
                 'clientalivecountmax' => 3,
                 'permituserenvironment' => 'yes',
               },
-            },
+            }
           )
         end
 
@@ -74,14 +74,14 @@ describe 'cis_security_hardening::rules::sshd_empty_passwords' do
                    else
                      '/etc/ssh/sshd_config'
                    end
-            is_expected.to contain_file_line('sshd-empty-passwords')
-              .with(
+            is_expected.to contain_file_line('sshd-empty-passwords').
+              with(
                 'ensure' => 'present',
                 'path'   => path,
                 'line'   => 'PermitEmptyPasswords no',
-                'match'  => '^#?PermitEmptyPasswords.*',
-              )
-              .that_notifies('Exec[reload-sshd]')
+                'match'  => '^#?PermitEmptyPasswords.*'
+              ).
+              that_notifies('Exec[reload-sshd]')
           else
             is_expected.not_to contain_file_line('sshd-empty-passwords')
           end

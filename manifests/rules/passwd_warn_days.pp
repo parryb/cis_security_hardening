@@ -43,9 +43,11 @@ class cis_security_hardening::rules::passwd_warn_days (
     if  $local_users != undef {
       $local_users.each |String $user, Hash $attributes| {
         if $attributes['warn_days_between_password_change'] != $warn_pass_days {
+          # lint:ignore:exec_idempotency Idempotency handled by fact comparison above
           exec { "chage --warndays ${warn_pass_days} ${user}":
             path => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
           }
+          # lint:endignore
         }
       }
     }

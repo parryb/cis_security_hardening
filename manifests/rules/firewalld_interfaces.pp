@@ -34,10 +34,12 @@ class cis_security_hardening::rules::firewalld_interfaces (
       $zone_iface = fact("cis_security_hardening.firewalld.zone_iface.${zone}")
 
       if $zone_iface != undef and $zone_iface != $iface {
+        # lint:ignore:exec_idempotency Idempotency handled by fact comparison ($zone_iface != $iface)
         exec { 'firewalld change zone interface':
           command => "firewall-cmd --zone=${zone} --change-interface=${iface}",
           path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
         }
+        # lint:endignore
       }
     }
   }

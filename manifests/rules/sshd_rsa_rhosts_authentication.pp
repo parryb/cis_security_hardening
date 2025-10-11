@@ -20,7 +20,7 @@
 class cis_security_hardening::rules::sshd_rsa_rhosts_authentication (
   Boolean $enforce = false,
 ) {
-  if $enforce and $facts['os']['release']['full'] < '7.4' {
+  if $enforce and versioncmp($facts['os']['release']['full'], '7.4') < 0 {
     $path = ($facts['os']['name'] == 'SLES' and $facts['os']['release']['major'] == '12') ? {
       true    => '/usr/etc/ssh/sshd_config',
       default => '/etc/ssh/sshd_config',

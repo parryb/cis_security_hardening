@@ -55,7 +55,7 @@ describe 'cis_security_hardening::rules::sshd_x11_forward' do
                 'clientalivecountmax' => 3,
                 'permituserenvironment' => 'yes',
               },
-            },
+            }
           )
         end
 
@@ -74,14 +74,14 @@ describe 'cis_security_hardening::rules::sshd_x11_forward' do
                    else
                      '/etc/ssh/sshd_config'
                    end
-            is_expected.to contain_file_line('sshd-x11-forward')
-              .with(
+            is_expected.to contain_file_line('sshd-x11-forward').
+              with(
                 'ensure' => 'present',
                 'path'   => path,
                 'line'   => 'X11Forwarding no',
-                'match'  => '^#?X11Forwarding.*',
-              )
-              .that_notifies('Exec[reload-sshd]')
+                'match'  => '^#?X11Forwarding.*'
+              ).
+              that_notifies('Exec[reload-sshd]')
           else
             is_expected.not_to contain_file_line('sshd-x11-forward')
           end

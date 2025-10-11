@@ -19,12 +19,12 @@ describe 'cis_security_hardening::rules::passwd_perms' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file('/etc/passwd')
-              .with(
+            is_expected.to contain_file('/etc/passwd').
+              with(
                 'ensure' => 'file',
                 'owner'  => 'root',
                 'group'  => 'root',
-                'mode'   => '0644',
+                'mode'   => '0644'
               )
           else
             is_expected.not_to contain_file('/etc/passwd')

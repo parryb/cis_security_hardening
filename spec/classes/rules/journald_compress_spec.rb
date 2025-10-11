@@ -27,15 +27,15 @@ describe 'cis_security_hardening::rules::journald_compress' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file_line('journald compress')
-              .with(
+            is_expected.to contain_file_line('journald compress').
+              with(
                 'ensure'             => 'present',
                 'path'               => '/etc/systemd/journald.conf',
                 'line'               => 'Compress=yes',
                 'match'              => '^Compress=',
-                'append_on_no_match' => true,
-              )
-              .that_requires('Package[rsyslog]')
+                'append_on_no_match' => true
+              ).
+              that_requires('Package[rsyslog]')
           else
             is_expected.not_to contain_file_line('journald compress')
           end

@@ -20,20 +20,20 @@ describe 'cis_security_hardening::rules::pam_pkcs11' do
 
           if enforce
             if os_facts[:os]['family'].casecmp('redhat').zero?
-              is_expected.to contain_package('esc')
-                .with(
-                  'ensure' => 'installed',
+              is_expected.to contain_package('esc').
+                with(
+                  'ensure' => 'installed'
 
                 )
-              is_expected.to contain_package('pam_pkcs11')
-                .with(
-                  'ensure' => 'installed',
+              is_expected.to contain_package('pam_pkcs11').
+                with(
+                  'ensure' => 'installed'
                 )
             else
-              is_expected.to contain_package('libpam-pkcs11')
-                .with(
-                'ensure' => 'installed',
-              )
+              is_expected.to contain_package('libpam-pkcs11').
+                with(
+                  'ensure' => 'installed'
+                )
             end
           else
             is_expected.not_to contain_package('libpam-pkcs11')

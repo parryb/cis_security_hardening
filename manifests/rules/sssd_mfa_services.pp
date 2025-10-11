@@ -39,10 +39,10 @@ class cis_security_hardening::rules::sssd_mfa_services (
 ) {
   if $enforce {
     ensure_resource('file', '/etc/sssd/sssd.conf', {
-        ensure => file,
-        owner  => 'root',
-        group  => 'root',
-        mode   => '0644',
+      ensure => file,
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0644',
     })
 
     file_line { 'sssd mfa':

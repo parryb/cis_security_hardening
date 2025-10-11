@@ -6,7 +6,7 @@ enforce_options = [true, false]
 
 describe 'cis_security_hardening::rules::auditd_finit_module_use' do
   test_on = {
-    hardwaremodels: ['x86_64', 'i686'],
+    hardwaremodels: %w[x86_64 i686],
   }
 
   let(:pre_condition) do
@@ -37,34 +37,34 @@ describe 'cis_security_hardening::rules::auditd_finit_module_use' do
 
           if enforce
             if os_facts[:os]['name'].casecmp('redhat').zero? && os_facts[:os]['release']['major'] == '7'
-              if ['x86_64', 'amd64'].include?(os_facts[:os]['architecture'])
-                is_expected.to contain_concat__fragment('watch finit_module command rule 2')
-                  .with(
+              if %w[x86_64 amd64].include?(os_facts[:os]['architecture'])
+                is_expected.to contain_concat__fragment('watch finit_module command rule 2').
+                  with(
                     'order'   => '188',
                     'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                    'content' => '-a always,exit -F arch=b64 -S finit_module -k module-change',
+                    'content' => '-a always,exit -F arch=b64 -S finit_module -k module-change'
                   )
               else
-                is_expected.to contain_concat__fragment('watch finit_module command rule 1')
-                  .with(
+                is_expected.to contain_concat__fragment('watch finit_module command rule 1').
+                  with(
                     'order'   => '187',
                     'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                    'content' => '-a always,exit -F arch=b32 -S finit_module -k module-change',
+                    'content' => '-a always,exit -F arch=b32 -S finit_module -k module-change'
                   )
               end
-            elsif ['x86_64', 'amd64'].include?(os_facts[:os]['architecture'])
-              is_expected.to contain_concat__fragment('watch finit_module command rule 2')
-                .with(
-                    'order'   => '188',
-                    'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                    'content' => '-a always,exit -F arch=b64 -S finit_module -F auid>=1000 -F auid!=4294967295 -k module_chng',
-                  )
+            elsif %w[x86_64 amd64].include?(os_facts[:os]['architecture'])
+              is_expected.to contain_concat__fragment('watch finit_module command rule 2').
+                with(
+                  'order'   => '188',
+                  'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
+                  'content' => '-a always,exit -F arch=b64 -S finit_module -F auid>=1000 -F auid!=4294967295 -k module_chng'
+                )
             else
-              is_expected.to contain_concat__fragment('watch finit_module command rule 1')
-                .with(
+              is_expected.to contain_concat__fragment('watch finit_module command rule 1').
+                with(
                   'order'   => '187',
                   'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-a always,exit -F arch=b32 -S finit_module -F auid>=1000 -F auid!=4294967295 -k module_chng',
+                  'content' => '-a always,exit -F arch=b32 -S finit_module -F auid>=1000 -F auid!=4294967295 -k module_chng'
                 )
             end
           else

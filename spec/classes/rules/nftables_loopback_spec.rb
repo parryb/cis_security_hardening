@@ -55,32 +55,32 @@ describe 'cis_security_hardening::rules::nftables_loopback' do
         is_expected.to compile
 
         if enforce
-          is_expected.to contain_exec('nftables add local interface')
-            .with(
+          is_expected.to contain_exec('nftables add local interface').
+            with(
               'command' => 'nft add rule inet filter input iif lo accept',
               'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-              'onlyif'  => 'test -z "$(nft list ruleset inet | grep \'iif "lo" accept\')"',
-            )
-            .that_notifies('Exec[dump nftables ruleset]')
-            .that_requires('Package[nftables]')
+              'onlyif'  => 'test -z "$(nft list ruleset inet | grep \'iif "lo" accept\')"'
+            ).
+            that_notifies('Exec[dump nftables ruleset]').
+            that_requires('Package[nftables]')
 
-          is_expected.to contain_exec('nftables add local network')
-            .with(
+          is_expected.to contain_exec('nftables add local network').
+            with(
               'command' => 'nft add rule inet filter input ip saddr 127.0.0.0/8 counter drop',
               'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-              'onlyif'  => "test -z \"$(nft list ruleset inet | grep -E 'ip\\s*saddr\\s*127.0.0.0/8\\s*counter\\s*packets.*drop')\"",
-            )
-            .that_notifies('Exec[dump nftables ruleset]')
-            .that_requires('Package[nftables]')
+              'onlyif'  => "test -z \"$(nft list ruleset inet | grep -E 'ip\\s*saddr\\s*127.0.0.0/8\\s*counter\\s*packets.*drop')\""
+            ).
+            that_notifies('Exec[dump nftables ruleset]').
+            that_requires('Package[nftables]')
 
-          is_expected.to contain_exec('nftables ip6 traffic')
-            .with(
+          is_expected.to contain_exec('nftables ip6 traffic').
+            with(
               'command' => 'nft add rule inet filter input ip6 saddr ::1 counter drop',
               'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-              'onlyif'  => "test -z \"$(nft list ruleset inet | grep 'ip6 saddr ::1 counter packets')\"",
-            )
-            .that_notifies('Exec[dump nftables ruleset]')
-            .that_requires('Package[nftables]')
+              'onlyif'  => "test -z \"$(nft list ruleset inet | grep 'ip6 saddr ::1 counter packets')\""
+            ).
+            that_notifies('Exec[dump nftables ruleset]').
+            that_requires('Package[nftables]')
         else
           is_expected.not_to contain_exec('nftables add local interface')
           is_expected.not_to contain_exec('nftables add local network')

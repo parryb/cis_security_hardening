@@ -16,7 +16,7 @@ describe 'cis_security_hardening::rules::pki_certs_validation' do
                 'module' => 'opensc',
                 'policy' => 'ca,signature',
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -30,13 +30,13 @@ describe 'cis_security_hardening::rules::pki_certs_validation' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file_line('pki certs validation')
-              . with(
+            is_expected.to contain_file_line('pki certs validation').
+              with(
                 'ensure' => 'present',
-                'path'   => '/etc/pam_pkcs11/pam_pkcs11.conf',
-                'line'   => '    cert_policy = ca,signature,ocsp_on;',
-                'match'  => '\\s*cert_policy =',
-                'multiple' => true,
+                'path' => '/etc/pam_pkcs11/pam_pkcs11.conf',
+                'line' => '    cert_policy = ca,signature,ocsp_on;',
+                'match' => '\\s*cert_policy =',
+                'multiple' => true
               )
           else
             is_expected.not_to contain_file_line('pki certs validation')

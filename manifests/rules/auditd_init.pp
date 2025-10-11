@@ -44,10 +44,10 @@ class cis_security_hardening::rules::auditd_init (
     }
 
     ensure_resource('file', '/etc/audisp/plugins.d', {
-        ensure => directory,
-        owner  => 'root',
-        group  => 'root',
-        mode   => '0750',
+      ensure => directory,
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0750',
     })
 
     concat { $rules_file:

@@ -32,12 +32,12 @@ describe 'cis_security_hardening::rules::nftables_service' do
         is_expected.to compile
 
         if enforce
-          is_expected.to contain_service('nftables')
-            .with(
+          is_expected.to contain_service('nftables').
+            with(
               'ensure' => 'running',
-              'enable' => true,
-            )
-            .that_requires('Package[nftables]')
+              'enable' => true
+            ).
+            that_requires('Package[nftables]')
         else
           is_expected.not_to contain_service('nftables')
         end

@@ -27,9 +27,9 @@ class cis_security_hardening::rules::sshd_private_keys (
     $priv_key_files.each |$file, $data| {
       if(!defined(File[$file])) {
         ensure_resource('file', $file, {
-            owner => 'root',
-            group => 'root',
-            mode  => '0600',
+          owner => 'root',
+          group => 'root',
+          mode  => '0600',
         })
       }
     }

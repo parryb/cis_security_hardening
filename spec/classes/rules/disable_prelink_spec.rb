@@ -8,7 +8,7 @@ describe 'cis_security_hardening::rules::disable_prelink' do
   test_on = {
     supported_os: [{
       'operatingsystem'        => 'RedHat',
-      'operatingsystemrelease' => ['7', '8'],
+      'operatingsystemrelease' => %w[7 8],
     }]
   }
 
@@ -27,18 +27,18 @@ describe 'cis_security_hardening::rules::disable_prelink' do
 
           if enforce
 
-            is_expected.to contain_package('prelink')
-              .with(
-                'ensure' => 'purged',
+            is_expected.to contain_package('prelink').
+              with(
+                'ensure' => 'purged'
               )
 
-            is_expected.to contain_exec('reset prelink')
-              .with(
+            is_expected.to contain_exec('reset prelink').
+              with(
                 'command' => 'prelink -ua',
                 'path'    => ['/bin', '/sbin', '/usr/bin', '/usr/sbin'],
-                'onlyif'  => 'test -f /sbin/prelink',
-              )
-              .that_comes_before('Package[prelink]')
+                'onlyif'  => 'test -f /sbin/prelink'
+              ).
+              that_comes_before('Package[prelink]')
           else
             is_expected.not_to contain_package('prelink')
           end

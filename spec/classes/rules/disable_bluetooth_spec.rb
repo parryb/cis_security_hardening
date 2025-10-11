@@ -21,44 +21,44 @@ describe 'cis_security_hardening::rules::disable_bluetooth' do
           if enforce
             if os_facts[:os]['name'].casecmp('ubuntu').zero?
               if os_facts[:os]['release']['major'] >= '20'
-                is_expected.to contain_service('bluetooth.service')
-                  .with(
+                is_expected.to contain_service('bluetooth.service').
+                  with(
                     'ensure' => 'stopped',
-                    'enable' => false,
+                    'enable' => false
                   )
               else
-                is_expected.to contain_kmod__install('bluetooth')
-                  .with(
-                  command: '/bin/true',
-                )
+                is_expected.to contain_kmod__install('bluetooth').
+                  with(
+                    command: '/bin/true'
+                  )
               end
             elsif os_facts[:os]['name'].casecmp('debian').zero?
               if os_facts[:os]['release']['major'] >= '12'
-                is_expected.to contain_service('bluetooth.service')
-                  .with(
+                is_expected.to contain_service('bluetooth.service').
+                  with(
                     'ensure' => 'stopped',
-                    'enable' => false,
+                    'enable' => false
                   )
               else
-                is_expected.to contain_kmod__install('bluetooth')
-                  .with(
-                  command: '/bin/true',
-                )
+                is_expected.to contain_kmod__install('bluetooth').
+                  with(
+                    command: '/bin/true'
+                  )
               end
             elsif os_facts[:os]['name'].casecmp('centos').zero?
-              is_expected.to contain_service('bluetooth.service')
-                .with(
+              is_expected.to contain_service('bluetooth.service').
+                with(
                   'ensure' => 'stopped',
-                  'enable' => false,
+                  'enable' => false
                 )
-              is_expected.to contain_package('bluez')
-                .with(
-                  'ensure' => 'absent',
+              is_expected.to contain_package('bluez').
+                with(
+                  'ensure' => 'absent'
                 )
             else
-              is_expected.to contain_kmod__install('bluetooth')
-                .with(
-                  command: '/bin/true',
+              is_expected.to contain_kmod__install('bluetooth').
+                with(
+                  command: '/bin/true'
                 )
             end
           else

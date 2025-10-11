@@ -32,28 +32,28 @@ class cis_security_hardening::rules::nfs_utils (
       case $facts['os']['name'].downcase() {
         'sles': {
           stdlib::ensure_packages(['nfs-utils', 'nfs-kernel-server'], {
-              ensure => absent,
+            ensure => absent,
           })
         }
         'rocky', 'almalinux': {
           stdlib::ensure_packages(['nfs-utils'], {
-              ensure => absent,
+            ensure => absent,
           })
         }
         default: {
           ensure_resource('service', 'nfs-server', {
-              ensure => stopped,
-              enable => false,
+            ensure => stopped,
+            enable => false,
           })
           stdlib::ensure_packages(['nfs-utils'], {
-              ensure => absent,
+            ensure => absent,
           })
         }
       }
     } else {
       ensure_resource('service', 'nfs-server', {
-          ensure => stopped,
-          enable => false,
+        ensure => stopped,
+        enable => false,
       })
       exec { 'mask nfs-server service':
         command => 'systemctl --now mask nfs-server',

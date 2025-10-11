@@ -32,14 +32,10 @@ def read_local_users
     unless ['never', 'password must be changed'].include?(password_expires)
       password_expires_days = (Date.parse(password_expires) - Date.today).to_i
 
-      unless ['never', 'password must be changed'].include?(password_inactive)
-        password_inactive_days = (Date.parse(password_inactive) - Date.parse(password_expires)).to_i
-      end
+      password_inactive_days = (Date.parse(password_inactive) - Date.parse(password_expires)).to_i unless ['never', 'password must be changed'].include?(password_inactive)
     end
 
-    unless account_expires == 'never'
-      account_expires_days = (Date.parse(account_expires) - Date.today).to_i
-    end
+    account_expires_days = (Date.parse(account_expires) - Date.today).to_i unless account_expires == 'never'
 
     # create nested fact
     local_users[user] = {

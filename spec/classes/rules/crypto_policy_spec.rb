@@ -27,7 +27,7 @@ describe 'cis_security_hardening::rules::crypto_policy' do
                   'policy' => 'DEFAULT',
                   'fips_mode' => 'enabled',
                 },
-              },
+              }
             )
           end
           let(:params) do
@@ -46,33 +46,35 @@ describe 'cis_security_hardening::rules::crypto_policy' do
                os_facts[:os]['name'].casecmp('almalinux').zero? || os_facts[:os]['name'].casecmp('rocky').zero?) &&
                (os_facts[:os]['release']['major'] >= '8')
 
+              is_expected.to contain_package('crypto-policies').with_ensure('installed')
+
               if reboot
-                is_expected.to contain_exec('set crypto policy to FUTURE (current: DEFAULT)')
-                  .with(
+                is_expected.to contain_exec('set crypto policy to FUTURE (current: DEFAULT)').
+                  with(
                     'command' => 'update-crypto-policies --set FUTURE',
                     'path'    => ['/sbin', '/usr/sbin', '/bin', '/usr/bin'],
-                    'onlyif'  => "test -z \"\$(update-crypto-policies --show | grep FUTURE)\"",
-                  )
-                  .that_notifies('Reboot[after_run]')
+                    'onlyif'  => 'test -z "$(update-crypto-policies --show | grep FUTURE)"'
+                  ).
+                  that_notifies('Reboot[after_run]')
 
-                is_expected.to contain_exec('set FIPS to disable')
-                  .with(
+                is_expected.to contain_exec('set FIPS to disable').
+                  with(
                     'command' => 'fips-mode-setup --disable',
-                    'path'    => ['/sbin', '/usr/sbin', '/bin', '/usr/bin'],
-                  )
-                  .that_notifies('Reboot[after_run]')
+                    'path'    => ['/sbin', '/usr/sbin', '/bin', '/usr/bin']
+                  ).
+                  that_notifies('Reboot[after_run]')
               else
-                is_expected.to contain_exec('set crypto policy to FUTURE (current: DEFAULT)')
-                  .with(
+                is_expected.to contain_exec('set crypto policy to FUTURE (current: DEFAULT)').
+                  with(
                     'command' => 'update-crypto-policies --set FUTURE',
                     'path'    => ['/sbin', '/usr/sbin', '/bin', '/usr/bin'],
-                    'onlyif'  => "test -z \"\$(update-crypto-policies --show | grep FUTURE)\"",
+                    'onlyif'  => 'test -z "$(update-crypto-policies --show | grep FUTURE)"'
                   )
 
-                is_expected.to contain_exec('set FIPS to disable')
-                  .with(
+                is_expected.to contain_exec('set FIPS to disable').
+                  with(
                     'command' => 'fips-mode-setup --disable',
-                    'path'    => ['/sbin', '/usr/sbin', '/bin', '/usr/bin'],
+                    'path'    => ['/sbin', '/usr/sbin', '/bin', '/usr/bin']
                   )
               end
 
@@ -92,7 +94,7 @@ describe 'cis_security_hardening::rules::crypto_policy' do
                   'policy' => 'DEFAULT',
                   'fips_mode' => 'disabled',
                 },
-              },
+              }
             )
           end
           let(:params) do
@@ -112,31 +114,33 @@ describe 'cis_security_hardening::rules::crypto_policy' do
                os_facts[:os]['name'].casecmp('rocky').zero?) &&
                (os_facts[:os]['release']['major'] >= '8')
 
+              is_expected.to contain_package('crypto-policies').with_ensure('installed')
+
               if reboot
-                is_expected.to contain_exec('set crypto policy to FIPS (current: DEFAULT)')
-                  .with(
+                is_expected.to contain_exec('set crypto policy to FIPS (current: DEFAULT)').
+                  with(
                     'command' => 'update-crypto-policies --set FIPS',
-                    'path'    => ['/sbin', '/usr/sbin', '/bin', '/usr/bin'],
-                  )
-                  .that_notifies('Reboot[after_run]')
+                    'path'    => ['/sbin', '/usr/sbin', '/bin', '/usr/bin']
+                  ).
+                  that_notifies('Reboot[after_run]')
 
-                is_expected.to contain_exec('set FIPS to enable')
-                  .with(
+                is_expected.to contain_exec('set FIPS to enable').
+                  with(
                     'command' => 'fips-mode-setup --enable',
-                    'path'    => ['/sbin', '/usr/sbin', '/bin', '/usr/bin'],
-                  )
-                  .that_notifies('Reboot[after_run]')
+                    'path'    => ['/sbin', '/usr/sbin', '/bin', '/usr/bin']
+                  ).
+                  that_notifies('Reboot[after_run]')
               else
-                is_expected.to contain_exec('set crypto policy to FIPS (current: DEFAULT)')
-                  .with(
+                is_expected.to contain_exec('set crypto policy to FIPS (current: DEFAULT)').
+                  with(
                     'command' => 'update-crypto-policies --set FIPS',
-                    'path'    => ['/sbin', '/usr/sbin', '/bin', '/usr/bin'],
+                    'path'    => ['/sbin', '/usr/sbin', '/bin', '/usr/bin']
                   )
 
-                is_expected.to contain_exec('set FIPS to enable')
-                  .with(
+                is_expected.to contain_exec('set FIPS to enable').
+                  with(
                     'command' => 'fips-mode-setup --enable',
-                    'path'    => ['/sbin', '/usr/sbin', '/bin', '/usr/bin'],
+                    'path'    => ['/sbin', '/usr/sbin', '/bin', '/usr/bin']
                   )
               end
 

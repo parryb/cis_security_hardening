@@ -32,44 +32,44 @@ class cis_security_hardening::rules::avahi (
       'redhat', 'centos': {
         if $facts['os']['release']['major'] >= '8' {
           ensure_resource('service', ['avahi-daemon.socket'], {
-              ensure => 'stopped',
-              enable => false,
+            ensure => 'stopped',
+            enable => false,
           })
           ensure_resource('service', ['avahi-daemon.service'], {
-              ensure => 'stopped',
-              enable => false,
+            ensure => 'stopped',
+            enable => false,
           })
         } else {
           ensure_resource('service', ['avahi-daemon'], {
-              ensure => 'stopped',
-              enable => false,
+            ensure => 'stopped',
+            enable => false,
           })
         }
       }
       'almalinux', 'rocky': {
         ensure_resource('service', ['avahi-daemon.socket'], {
-            ensure => 'stopped',
-            enable => false,
+          ensure => 'stopped',
+          enable => false,
         })
         ensure_resource('service', ['avahi-daemon.service'], {
-            ensure => 'stopped',
-            enable => false,
+          ensure => 'stopped',
+          enable => false,
         })
         stdlib::ensure_packages(['avahi-autoipd', 'avahi'], {
-            ensure => $ensure,
+          ensure => $ensure,
         })
       }
       'ubuntu': {
         ensure_resource('service', ['avahi-daemon.socket'], {
-            ensure => 'stopped',
-            enable => false,
+          ensure => 'stopped',
+          enable => false,
         })
         ensure_resource('service', ['avahi-daemon.service'], {
-            ensure => 'stopped',
-            enable => false,
+          ensure => 'stopped',
+          enable => false,
         })
         stdlib::ensure_packages(['avahi-daemon'], {
-            ensure => $ensure,
+          ensure => $ensure,
         })
       }
       'debian': {
@@ -90,27 +90,27 @@ class cis_security_hardening::rules::avahi (
           }
 
           stdlib::ensure_packages(['avahi-daemon'], {
-              ensure => $ensure,
-              require => [Exec['stop avahi service'], Exec['stop avahi socket']]
+            ensure => $ensure,
+            require => [Exec['stop avahi service'], Exec['stop avahi socket']]
           })
         } else {
           ensure_resource('service', ['avahi-daemon'], {
-              ensure => 'stopped',
-              enable => false,
+            ensure => 'stopped',
+            enable => false,
           })
         }
       }
       'sles': {
         ensure_resource('service', ['avahi-daemon.socket'], {
-            ensure => 'stopped',
-            enable => false,
+          ensure => 'stopped',
+          enable => false,
         })
         ensure_resource('service', ['avahi-daemon.service'], {
-            ensure => 'stopped',
-            enable => false,
+          ensure => 'stopped',
+          enable => false,
         })
         stdlib::ensure_packages(['avahi-autoipd', 'avahi'], {
-            ensure => $ensure,
+          ensure => $ensure,
         })
       }
       default: {

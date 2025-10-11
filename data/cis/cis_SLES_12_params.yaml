@@ -46,7 +46,7 @@ cis_security_hardening::rules::sudo_log::enforce: true
 cis_security_hardening::rules::aide_installed::enforce: true
 cis_security_hardening::rules::aide_regular_checks::enforce: true
 
-cis_security_hardening::rules::grub_password::enforce: true
+cis_security_hardening::rules::grub_password::enforce: false
 cis_security_hardening::rules::grub_bootloader_config::enforce: true
 cis_security_hardening::rules::single_user_mode::enforce: true
 
@@ -88,7 +88,7 @@ cis_security_hardening::rules::gnome_gdm_package::enforce: true
 
 cis_security_hardening::rules::xinetd::enforce: true
 
-cis_security_hardening::rules::systemd_timesyncd::enforce: true
+cis_security_hardening::rules::systemd_timesyncd::enforce: false
 cis_security_hardening::rules::systemd_timesyncd::fix_file_perms: true
 cis_security_hardening::rules::systemd_timesyncd::ntp_servers:
   - 0.de.pool.ntp.org
@@ -96,7 +96,7 @@ cis_security_hardening::rules::systemd_timesyncd::ntp_servers:
   - 3.de.pool.ntp.org
 cis_security_hardening::rules::systemd_timesyncd::ntp_fallback_server:
   - 3.de.pool.ntp.org
-cis_security_hardening::rules::chrony::enforce: true
+cis_security_hardening::rules::chrony::enforce: false
 cis_security_hardening::rules::chrony::ntp_servers: ~
 cis_security_hardening::rules::ntpd::enforce: true
 cis_security_hardening::rules::ntpd::ntp_servers: ~

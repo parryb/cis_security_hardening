@@ -25,9 +25,9 @@ describe 'cis_security_hardening::rules::tuned' do
                           'purged'
                         end
 
-            is_expected.to contain_package('tuned')
-              .with(
-                'ensure' => ensureval,
+            is_expected.to contain_package('tuned').
+              with(
+                'ensure' => ensureval
               )
           else
             is_expected.not_to contain_package('tuned')

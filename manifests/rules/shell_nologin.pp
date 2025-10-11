@@ -46,10 +46,12 @@ class cis_security_hardening::rules::shell_nologin (
     if  $no_shell_nologin != undef and !empty($no_shell_nologin) {
       $no_shell_nologin.each | String $user | {
         unless $user in $exclude {
+          # lint:ignore:exec_idempotency Idempotency handled by fact check above
           exec { "nologin ${user}":
             command => "usermod -s ${nologin} ${user}",
             path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
           }
+          # lint:endignore
         }
       }
     }

@@ -14,7 +14,7 @@ describe 'cis_security_hardening::rules::root_gid' do
               'accounts' => {
                 'root_gid' => 1,
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -25,13 +25,14 @@ describe 'cis_security_hardening::rules::root_gid' do
         end
 
         it { is_expected.to compile }
+
         it do
           if enforce
-            is_expected.to contain_user('root')
-              .with(
+            is_expected.to contain_user('root').
+              with(
                 'ensure' => 'present',
-                'gid'    => '0',
-                'password' => '$6$g456vnhfgh',
+                'gid' => '0',
+                'password' => '$6$g456vnhfgh'
               )
           else
             is_expected.not_to contain_user('root')
@@ -46,7 +47,7 @@ describe 'cis_security_hardening::rules::root_gid' do
               'accounts' => {
                 'root_gid' => 1,
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -56,12 +57,13 @@ describe 'cis_security_hardening::rules::root_gid' do
         end
 
         it { is_expected.to compile }
+
         it do
           if enforce
-            is_expected.to contain_user('root')
-              .with(
+            is_expected.to contain_user('root').
+              with(
                 'ensure' => 'present',
-                'gid'    => '0',
+                'gid'    => '0'
               )
           else
             is_expected.not_to contain_user('root')

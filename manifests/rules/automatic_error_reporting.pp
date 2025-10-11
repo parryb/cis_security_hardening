@@ -25,8 +25,8 @@ class cis_security_hardening::rules::automatic_error_reporting (
   $apport = fact('cis_security_hardening.apport.installed')
   if $enforce and $apport {
     ensure_resource('service', ['apport'], {
-        ensure => 'stopped',
-        enable => false,
+      ensure => 'stopped',
+      enable => false,
     })
 
     exec { 'mask apport daemon':
@@ -42,7 +42,7 @@ class cis_security_hardening::rules::automatic_error_reporting (
       }
 
       stdlib::ensure_packages(['apport'], {
-          ensure => $ensure,
+        ensure => $ensure,
       })
     }
   }

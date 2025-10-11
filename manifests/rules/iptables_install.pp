@@ -43,7 +43,7 @@ class cis_security_hardening::rules::iptables_install (
 
     if $facts['os']['name'].downcase() == 'ubuntu' and $facts['os']['release']['major'] >= '20' {
       stdlib::ensure_packages(['iptables-persistent'], {
-          ensure => installed,
+        ensure => installed,
       })
     }
 
@@ -58,7 +58,7 @@ class cis_security_hardening::rules::iptables_install (
       $params_rh = {}
     }
 
-    $params = merge($params_ip6, $params_rh)
+    $params = stdlib::merge($params_ip6, $params_rh)
 
     if (!defined(Class['firewall'])) {
       class { 'firewall':
@@ -74,35 +74,35 @@ class cis_security_hardening::rules::iptables_install (
       'redhat', 'centos', 'almalinux', 'rocky': {
         if !defined(Package['nftables']) {
           stdlib::ensure_packages(['nftables'], {
-              ensure => purged,
+            ensure => purged,
           })
         }
         if ! defined(Service['nftables']) {
           ensure_resource('service', 'nftables', {
-              enable => false,
-              ensure => stopped,
+            enable => false,
+            ensure => stopped,
           })
         }
         if !defined(Package['firewalld']) {
           stdlib::ensure_packages(['firewalld'], {
-              ensure => purged,
+            ensure => purged,
           })
         }
         if !defined(Service['firewalld']) {
           ensure_resource('service', 'firewalld', {
-              enable => false,
-              ensure => stopped,
+            enable => false,
+            ensure => stopped,
           })
         }
       }
       'ubuntu', 'debian': {
         stdlib::ensure_packages(['ufw', 'nftables'], {
-            ensure => purged,
+          ensure => purged,
         })
       }
       'sles': {
         stdlib::ensure_packages(['firewalld', 'nftables'], {
-            ensure => absent,
+          ensure => absent,
         })
       }
       default: {

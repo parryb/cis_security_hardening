@@ -62,7 +62,7 @@ class cis_security_hardening::rules::tmp_filesystem (
       file { $file:
         ensure  => file,
         content => epp("cis_security_hardening/rules/common/${epp}", {
-            size => $size,
+          size => $size,
         }),
         owner   => 'root',
         group   => 'root',
@@ -72,8 +72,8 @@ class cis_security_hardening::rules::tmp_filesystem (
     }
 
     ensure_resource('service', 'tmp.mount', {
-        ensure => running,
-        enable => $enable,
+      ensure => running,
+      enable => $enable,
     })
   }
 }

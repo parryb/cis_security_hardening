@@ -28,7 +28,7 @@ class cis_security_hardening::rules::pam_mfa_redhat (
 ) {
   if $enforce {
     stdlib::ensure_packages(['dconf'], {
-        ensure => installed,
+      ensure => installed,
     })
 
     file_line { 'authconfig-config-smartcard':

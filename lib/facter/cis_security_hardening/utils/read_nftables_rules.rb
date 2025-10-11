@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'pp'
-
 # read nftables rules data
 def read_nftables_rules(table = '')
   nft = {}
@@ -23,6 +21,7 @@ def read_nftables_rules(table = '')
     chain = ''
     rules.each do |rule|
       next if rule =~ %r{^$} || rule =~ %r{^#}
+
       m = rule.match(%r{^table\s*(?<table>\w*)\s*filter\s*\{})
       unless m.nil?
         table = m[:table]

@@ -19,12 +19,12 @@ describe 'cis_security_hardening::rules::cron_monthly' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file('/etc/cron.monthly')
-              .with(
+            is_expected.to contain_file('/etc/cron.monthly').
+              with(
                 'ensure' => 'directory',
                 'owner'  => 'root',
                 'group'  => 'root',
-                'mode'   => '0700',
+                'mode'   => '0700'
               )
           else
             is_expected.not_to contain_file('/etc/cron.monthly')

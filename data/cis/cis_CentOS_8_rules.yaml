@@ -1,5 +1,5 @@
 ---
-cis_security_hardening::benchmark::centos::8:
+cis_security_hardening::benchmark::centos::v8:
   bundles:
     filesystem_config:
       level1:

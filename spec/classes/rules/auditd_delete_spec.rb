@@ -6,7 +6,7 @@ enforce_options = [true, false]
 
 describe 'cis_security_hardening::rules::auditd_delete' do
   test_on = {
-    hardwaremodels: ['x86_64', 'i686'],
+    hardwaremodels: %w[x86_64 i686],
   }
 
   let(:pre_condition) do
@@ -32,7 +32,7 @@ describe 'cis_security_hardening::rules::auditd_delete' do
                 uid_min: '1000',
                 delete: false,
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -56,25 +56,25 @@ describe 'cis_security_hardening::rules::auditd_delete' do
                               "-a always,exit -F arch=b32 -S unlink -S unlinkat -S rename -S renameat -F auid>=1000 -F auid!=#{auid} -k delete"
                             end
 
-            is_expected.to contain_concat__fragment('watch deletes rule 1')
-              .with(
+            is_expected.to contain_concat__fragment('watch deletes rule 1').
+              with(
                 'order' => '31',
                 'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                'content' => content_rule1,
+                'content' => content_rule1
               )
 
-            if ['x86_64', 'amd64'].include?(os_facts[:os]['architecture'])
+            if %w[x86_64 amd64].include?(os_facts[:os]['architecture'])
               content_rule2 = if os_facts[:os]['name'].casecmp('rocky').zero? || os_facts[:os]['name'].casecmp('almalinux').zero?
                                 "-a always,exit -F arch=b64 -S unlink,unlinkat,rename,renameat -F auid>=1000 -F auid!=#{auid} -k delete"
                               else
                                 "-a always,exit -F arch=b64 -S unlink -S unlinkat -S rename -S renameat -F auid>=1000 -F auid!=#{auid} -k delete"
                               end
 
-              is_expected.to contain_concat__fragment('watch deletes rule 2')
-                .with(
+              is_expected.to contain_concat__fragment('watch deletes rule 2').
+                with(
                   'order' => '32',
                   'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => content_rule2,
+                  'content' => content_rule2
                 )
 
             else

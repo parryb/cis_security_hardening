@@ -32,20 +32,20 @@ describe 'cis_security_hardening::rules::rsyslog_default_file_perms' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file_line('rsyslog-filepermissions')
-              .with(
+            is_expected.to contain_file_line('rsyslog-filepermissions').
+              with(
                 'ensure' => 'present',
                 'path'   => '/etc/rsyslog.conf',
                 'line'   => '$FileCreateMode 0640',
-                'match'  => '^\$FileCreateMode.*',
-              )
-              .that_notifies('Exec[reload-rsyslog]')
+                'match'  => '^\$FileCreateMode.*'
+              ).
+              that_notifies('Exec[reload-rsyslog]')
 
-            is_expected.to contain_file('/etc/rsyslog.d/')
-              .with(
+            is_expected.to contain_file('/etc/rsyslog.d/').
+              with(
                 'ensure'  => 'directory',
                 'recurse' => true,
-                'mode'    => '0640',
+                'mode'    => '0640'
               )
           else
             is_expected.not_to contain_file_line('rsyslog-filepermissions')

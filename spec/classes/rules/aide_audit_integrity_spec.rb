@@ -10,12 +10,12 @@ describe 'cis_security_hardening::rules::aide_audit_integrity' do
       context "on #{os}" do
         let(:facts) do
           os_facts.merge(
-          'cis_security_hardening' => {
-            'aide' => {
-              'installed' => true,
+            'cis_security_hardening' => {
+              'aide' => {
+                'installed' => true,
+              }
             }
-          },
-        )
+          )
         end
         let(:params) do
           {
@@ -35,65 +35,59 @@ describe 'cis_security_hardening::rules::aide_audit_integrity' do
           is_expected.to compile.with_all_deps
 
           if enforce
-            conffile = if os_facts[:os]['name'].casecmp('rocky').zero?
-                         '/etc/aide.conf'
-                       elsif os_facts[:os]['name'].casecmp('ubuntu').zero?
-                         if os_facts[:os]['release']['major'] >= '20'
-                           '/etc/aide/aide.conf'
-                         else
-                           '/etc/aide.conf'
-                         end
+            conffile = if os_facts[:os]['name'].casecmp('ubuntu').zero? && os_facts[:os]['release']['major'] >= '20'
+                         '/etc/aide/aide.conf'
                        else
                          '/etc/aide.conf'
                        end
 
-            is_expected.to contain_file_line('aide tool /sbin/auditctl')
-              .with(
+            is_expected.to contain_file_line('aide tool /sbin/auditctl').
+              with(
                 'ensure'             => 'present',
                 'append_on_no_match' => true,
                 'path'               => conffile,
                 'line'               => '/sbin/auditctl p+i+n+u+g+s+b+acl+xattrs+sha512',
-                'match'              => '^/sbin/auditctl',
+                'match'              => '^/sbin/auditctl'
               )
-            is_expected.to contain_file_line('aide tool /sbin/auditd')
-              .with(
+            is_expected.to contain_file_line('aide tool /sbin/auditd').
+              with(
                 'ensure'             => 'present',
                 'append_on_no_match' => true,
                 'path'               => conffile,
                 'line'               => '/sbin/auditd p+i+n+u+g+s+b+acl+xattrs+sha512',
-                'match'              => '^/sbin/auditd',
+                'match'              => '^/sbin/auditd'
               )
-            is_expected.to contain_file_line('aide tool /sbin/ausearch')
-              .with(
+            is_expected.to contain_file_line('aide tool /sbin/ausearch').
+              with(
                 'ensure'             => 'present',
                 'append_on_no_match' => true,
                 'path'               => conffile,
                 'line'               => '/sbin/ausearch p+i+n+u+g+s+b+acl+xattrs+sha512',
-                'match'              => '^/sbin/ausearch',
+                'match'              => '^/sbin/ausearch'
               )
-            is_expected.to contain_file_line('aide tool /sbin/aureport')
-              .with(
+            is_expected.to contain_file_line('aide tool /sbin/aureport').
+              with(
                 'ensure'             => 'present',
                 'append_on_no_match' => true,
                 'path'               => conffile,
                 'line'               => '/sbin/aureport p+i+n+u+g+s+b+acl+xattrs+sha512',
-                'match'              => '^/sbin/aureport',
+                'match'              => '^/sbin/aureport'
               )
-            is_expected.to contain_file_line('aide tool /sbin/autrace')
-              .with(
+            is_expected.to contain_file_line('aide tool /sbin/autrace').
+              with(
                 'ensure'             => 'present',
                 'append_on_no_match' => true,
                 'path'               => conffile,
                 'line'               => '/sbin/autrace p+i+n+u+g+s+b+acl+xattrs+sha512',
-                'match'              => '^/sbin/autrace',
+                'match'              => '^/sbin/autrace'
               )
-            is_expected.to contain_file_line('aide tool /sbin/augenrules')
-              .with(
+            is_expected.to contain_file_line('aide tool /sbin/augenrules').
+              with(
                 'ensure'             => 'present',
                 'append_on_no_match' => true,
                 'path'               => conffile,
                 'line'               => '/sbin/augenrules p+i+n+u+g+s+b+acl+xattrs+sha512',
-                'match'              => '^/sbin/augenrules',
+                'match'              => '^/sbin/augenrules'
               )
           else
             is_expected.not_to contain_file_line('aide tool /sbin/auditctl')

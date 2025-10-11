@@ -9,7 +9,7 @@ def read_firewalld_zone_iface(val, firewalld)
       zone = line
     # elsif line.match?(%r{interfaces:})
     elsif line.include?('interfaces:')
-      m = line.match(%r{interfaces:\s*(?<ifaces>[a-zA-Z0-9_\-]*)})
+      m = line.match(%r{interfaces:\s*(?<ifaces>[a-zA-Z0-9_-]*)})
       unless m.nil?
         ifaces = m[:ifaces]
         firewalld['zone_iface'] = {}

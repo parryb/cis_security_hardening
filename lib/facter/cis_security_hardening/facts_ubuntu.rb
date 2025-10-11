@@ -7,7 +7,6 @@ require 'facter/cis_security_hardening/utils/read_iptables_rules'
 require 'facter/cis_security_hardening/utils/read_apparmor_data'
 require 'facter/cis_security_hardening/utils/read_system_command_files'
 require 'facter/cis_security_hardening/utils/read_pam_pkcs11'
-require 'pp'
 
 # gather Ubuntu specific facts
 def facts_ubuntu(os, distid, release)
@@ -26,7 +25,7 @@ def facts_ubuntu(os, distid, release)
   # get account informtion
   accounts = {}
   wrong_shell = []
-  cmd = "egrep -v \"^\/+\" /etc/passwd | awk -F: '($1!=\"root\" && $1!=\"sync\" && $1!=\"shutdown\" && $1!=\"halt\" && $3<1000 && $7!=\"/usr/sbin/nologin\" && $7!=\"/bin/false\") {print}'"
+  cmd = "egrep -v \"^/+\" /etc/passwd | awk -F: '($1!=\"root\" && $1!=\"sync\" && $1!=\"shutdown\" && $1!=\"halt\" && $3<1000 && $7!=\"/usr/sbin/nologin\" && $7!=\"/bin/false\") {print}'"
   val = Facter::Core::Execution.exec(cmd)
   unless val.nil? || val.empty?
     val.split("\n").each do |line|
@@ -43,30 +42,18 @@ def facts_ubuntu(os, distid, release)
   # check for x11 packages
   x11 = {}
   pkgs = Facter::Core::Execution.exec('dpkg -l | grep xorg-x1 | awk \'{print $2;}\'')
-  x11['installed'] = if pkgs.nil? || pkgs.empty?
-                       false
-                     else
-                       true
-                     end
+  x11['installed'] = !(pkgs.nil? || pkgs.empty?)
   cis_security_hardening[:x11] = x11
 
   # check for apport
   apport = {}
   pkgs = Facter::Core::Execution.exec('dpkg -l | grep apport| awk \'{print $2;}\'')
-  apport['installed'] = if pkgs.nil? || pkgs.empty?
-                          false
-                        else
-                          true
-                        end
+  apport['installed'] = !(pkgs.nil? || pkgs.empty?)
   cis_security_hardening['apport'] = apport
 
   aide = {}
   pkgs = Facter::Core::Execution.exec('dpkg -l | grep aide | awk \'{print $2;}\'')
-  aide['installed'] = if pkgs.nil? || pkgs.empty?
-                        false
-                      else
-                        true
-                      end
+  aide['installed'] = !(pkgs.nil? || pkgs.empty?)
   cis_security_hardening['aide'] = aide
 
   # check for xdmcp

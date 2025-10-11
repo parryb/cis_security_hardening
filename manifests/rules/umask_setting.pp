@@ -140,7 +140,7 @@ class cis_security_hardening::rules::umask_setting (
     file { '/etc/profile.d/set_umask.sh':
       ensure  => file,
       content => epp('cis_security_hardening/rules/common/set_umask.epp', {
-          umask => $default_umask,
+        umask => $default_umask,
       }),
       owner   => 'root',
       group   => 'root',

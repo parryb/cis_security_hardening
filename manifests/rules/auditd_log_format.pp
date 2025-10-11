@@ -27,6 +27,8 @@ class cis_security_hardening::rules::auditd_log_format (
   Boolean $enforce = false,
 ) {
   if $enforce {
+    require cis_security_hardening::rules::auditd_package
+
     file_line { 'auditd_log_format':
       line               => 'log_format = ENRICHED',
       path               => '/etc/audit/auditd.conf',

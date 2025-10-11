@@ -34,40 +34,40 @@ describe 'cis_security_hardening::rules::systemd_journal_remote_config' do
         is_expected.to compile.with_all_deps
 
         if enforce
-          is_expected.to contain_file_line('systemd_journal_remote_config_url')
-            .with(
+          is_expected.to contain_file_line('systemd_journal_remote_config_url').
+            with(
               'ensure'             => 'present',
               'path'               => '/etc/systemd/journal-upload.conf',
               'line'               => 'URL=1.2.3.4',
               'match'              => '^#? URL=',
-              'append_on_no_match' => true,
+              'append_on_no_match' => true
             )
 
-          is_expected.to contain_file_line('systemd_journal_remote_config_server_key')
-            .with(
+          is_expected.to contain_file_line('systemd_journal_remote_config_server_key').
+            with(
               'ensure'             => 'present',
               'path'               => '/etc/systemd/journal-upload.conf',
               'line'               => 'ServerKeyFile=/etc/ssl/private/journal-upload.pem',
               'match'              => '^#? ServerKeyFile=',
-              'append_on_no_match' => true,
+              'append_on_no_match' => true
             )
 
-          is_expected.to contain_file_line('systemd_journal_remote_config_server_cert')
-            .with(
+          is_expected.to contain_file_line('systemd_journal_remote_config_server_cert').
+            with(
               'ensure'             => 'present',
               'path'               => '/etc/systemd/journal-upload.conf',
               'line'               => 'ServerCertificateFile=/etc/ssl/certs/journal-upload.pem',
               'match'              => '^#? ServerCertificateFile=',
-              'append_on_no_match' => true,
+              'append_on_no_match' => true
             )
 
-          is_expected.to contain_file_line('systemd_journal_remote_config_trusted_cert')
-            .with(
+          is_expected.to contain_file_line('systemd_journal_remote_config_trusted_cert').
+            with(
               'ensure'             => 'present',
               'path'               => '/etc/systemd/journal-upload.conf',
               'line'               => 'TrustedCertificateFile=/etc/ssl/ca/trusted.pem',
               'match'              => '^#? TrustedCertificateFile=',
-              'append_on_no_match' => true,
+              'append_on_no_match' => true
             )
         else
           is_expected.not_to contain_file_line('systemd_journal_remote_config_url')

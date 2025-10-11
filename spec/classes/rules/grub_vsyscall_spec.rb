@@ -29,11 +29,11 @@ describe 'cis_security_hardening::rules::grub_vsyscall' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_kernel_parameter('vsyscall')
-              .with(
-                'value' => 'none',
-              )
-              .that_notifies('Exec[grub2-mkconfig]')
+            is_expected.to contain_kernel_parameter('vsyscall').
+              with(
+                'value' => 'none'
+              ).
+              that_notifies('Exec[grub2-mkconfig]')
           else
             is_expected.not_to contain_kernel_parameter('vsyscall')
           end

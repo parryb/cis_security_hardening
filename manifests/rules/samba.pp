@@ -31,12 +31,12 @@ class cis_security_hardening::rules::samba (
       }
 
       stdlib::ensure_packages(['samba'], {
-          ensure => $ensure,
+        ensure => $ensure,
       })
     } else {
       ensure_resource('service', ['smb'], {
-          ensure => 'stopped',
-          enable => false
+        ensure => 'stopped',
+        enable => false
       })
     }
   }

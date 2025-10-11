@@ -16,7 +16,7 @@ describe 'cis_security_hardening::rules::systemd_timesyncd' do
                 services_enabled: {
                   'systemd-timesyncd' => 'disabled',
                 },
-              },
+              }
             )
           end
           let(:params) do
@@ -32,73 +32,73 @@ describe 'cis_security_hardening::rules::systemd_timesyncd' do
             is_expected.to compile
 
             if enforce
-              is_expected.to contain_file_line('ntp-timesyncd.conf')
-                .with(
+              is_expected.to contain_file_line('ntp-timesyncd.conf').
+                with(
                   'path'               => '/etc/systemd/timesyncd.conf',
                   'line'               => 'NTP=0.de.pool.ntp.org 1.de.pool.ntp.org 2.de.pool.ntp.org',
                   'match'              => '^NTP=',
-                  'append_on_no_match' => true,
+                  'append_on_no_match' => true
                 )
 
-              is_expected.to contain_file_line('ntp-fallback-timesyncd.conf')
-                .with(
+              is_expected.to contain_file_line('ntp-fallback-timesyncd.conf').
+                with(
                   'path'               => '/etc/systemd/timesyncd.conf',
                   'line'               => 'FallbackNTP=3.de.pool.ntp.org',
                   'match'              => '^FallbackNTP=',
-                  'append_on_no_match' => true,
+                  'append_on_no_match' => true
                 )
 
               if os_facts[:os]['family'].casecmp('suse').zero?
-                is_expected.to contain_package('ntp')
-                  .with(
-                    'ensure' => 'absent',
+                is_expected.to contain_package('ntp').
+                  with(
+                    'ensure' => 'absent'
                   )
 
-                is_expected.to contain_package('chrony')
-                  .with(
-                    'ensure' => 'absent',
+                is_expected.to contain_package('chrony').
+                  with(
+                    'ensure' => 'absent'
                   )
               else
-                is_expected.to contain_package('ntp')
-                  .with(
-                    'ensure' => 'purged',
+                is_expected.to contain_package('ntp').
+                  with(
+                    'ensure' => 'purged'
                   )
 
-                is_expected.to contain_package('chrony')
-                  .with(
-                    'ensure' => 'purged',
+                is_expected.to contain_package('chrony').
+                  with(
+                    'ensure' => 'purged'
                   )
               end
 
-              is_expected.to contain_package('systemd-timesyncd')
-                .with(
-                  'ensure' => 'installed',
+              is_expected.to contain_package('systemd-timesyncd').
+                with(
+                  'ensure' => 'installed'
                 )
 
-              is_expected.to contain_service('systemd-timesyncd.service')
-                .with(
+              is_expected.to contain_service('systemd-timesyncd.service').
+                with(
                   'enable' => true,
-                  'ensure' => 'running',
+                  'ensure' => 'running'
                 )
 
               if os_facts[:os]['name'].casecmp('sles').zero?
-                is_expected.to contain_exec('timedatectl')
-                  .with(
-                    'command'   => 'timefdatectl set-ntp true',
-                    'path'      => ['/bin', '/usr/bin'],
+                is_expected.to contain_exec('timedatectl').
+                  with(
+                    'command' => 'timedatectl set-ntp true',
+                    'path' => ['/bin', '/usr/bin']
                   )
               end
 
               if os_facts[:os]['family'].casecmp('debian').zero? && fix_perms == true
-                is_expected.to contain_file('/var/lib/private/systemd/timesync')
-                  .with(
+                is_expected.to contain_file('/var/lib/private/systemd/timesync').
+                  with(
                     'owner' => 'root',
-                    'group' => 'root',
+                    'group' => 'root'
                   )
-                is_expected.to contain_file('/var/lib/private/systemd/timesync/clock')
-                  .with(
+                is_expected.to contain_file('/var/lib/private/systemd/timesync/clock').
+                  with(
                     'owner' => 'root',
-                    'group' => 'root',
+                    'group' => 'root'
                   )
               else
                 is_expected.not_to contain_file('/var/lib/private/systemd/timesync')

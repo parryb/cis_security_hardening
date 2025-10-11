@@ -24,13 +24,13 @@ describe 'cis_security_hardening::rules::auditd_remote_encrypt' do
                    else
                      '/etc/audisp/plugins.d/au-remote.conf'
                    end
-            is_expected.to contain_file_line('auditd remote encrypt')
-              .with(
+            is_expected.to contain_file_line('auditd remote encrypt').
+              with(
                 'ensure'             => 'present',
                 'path'               => file,
                 'line'               => 'enable_krb5 = yes',
                 'match'              => '^enable_krb5 =',
-                'append_on_no_match' => true,
+                'append_on_no_match' => true
               )
           else
             is_expected.not_to contain_file_line('auditd remote encrypt')

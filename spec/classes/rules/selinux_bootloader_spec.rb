@@ -8,7 +8,7 @@ describe 'cis_security_hardening::rules::selinux_bootloader' do
   test_on = {
     supported_os: [{
       'operatingsystem'        => 'RedHat',
-      'operatingsystemrelease' => ['7', '8', '9'],
+      'operatingsystemrelease' => %w[7 8 9],
     }]
   }
 
@@ -26,26 +26,26 @@ describe 'cis_security_hardening::rules::selinux_bootloader' do
           is_expected.to compile
 
           if enforce
-            if facts[:operatingsystemmajrelease] >= '7' && facts[:operatingsystemmajrelease] < '9'
-              is_expected.to contain_file_line('cmdline_definition')
-                .with(
+            if os_facts[:os]['release']['major'] >= '7' && os_facts[:os]['release']['major'] < '9'
+              is_expected.to contain_file_line('cmdline_definition').
+                with(
                   'line'  => 'GRUB_CMDLINE_LINUX_DEFAULT="quiet"',
                   'path'  => '/etc/default/grub',
-                  'match' => '^GRUB_CMDLINE_LINUX_DEFAULT',
-                )
-                .that_notifies('Exec[selinux-grub-config]')
-              is_expected.to contain_exec('selinux-grub-config')
-                .with(
+                  'match' => '^GRUB_CMDLINE_LINUX_DEFAULT'
+                ).
+                that_notifies('Exec[selinux-grub-config]')
+              is_expected.to contain_exec('selinux-grub-config').
+                with(
                   'command'     => 'grub2-mkconfig -o /boot/grub2/grub.cfg',
                   'path'        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                  'refreshonly' => true,
+                  'refreshonly' => true
                 )
-            elsif facts[:operatingsystemmajrelease] >= '9'
-              is_expected.to contain_exec('enable selinux with grubby')
-                .with(
+            elsif os_facts[:os]['release']['major'] >= '9'
+              is_expected.to contain_exec('enable selinux with grubby').
+                with(
                   'command' => 'grubby --update-kernel ALL --remove-args "selinux=0 enforcing=0"',
                   'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                  'unless'  => 'test -z "$(grubby --info=ALL | grep -Po \'(selinux|enforcing)=0\\b\')"',
+                  'unless'  => 'test -z "$(grubby --info=ALL | grep -Po \'(selinux|enforcing)=0\\b\')"'
                 )
             else
               is_expected.not_to contain_file_line('cmdline_definition')

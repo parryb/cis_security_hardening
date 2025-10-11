@@ -29,10 +29,10 @@ class cis_security_hardening::rules::auditd_remote_labeled (
 ) {
   if $enforce {
     ensure_resource('file', '/etc/audisp/audispd.conf', {
-        ensure => file,
-        owner => 'root',
-        group => 'root',
-        mode => '0644',
+      ensure => file,
+      owner => 'root',
+      group => 'root',
+      mode => '0644',
     })
     file_line { 'name-format':
       ensure  => present,

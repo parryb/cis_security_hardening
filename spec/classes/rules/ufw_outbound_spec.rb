@@ -17,7 +17,7 @@ describe 'cis_security_hardening::rules::ufw_outbound' do
               ufw: {
                 loopback_status: false,
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -46,17 +46,17 @@ describe 'cis_security_hardening::rules::ufw_outbound' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_exec('allow DNS outbound')
-              .with(
+            is_expected.to contain_exec('allow DNS outbound').
+              with(
                 'command' => 'ufw allow out to any port 53',
                 'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                'onlyif'  => 'test -z "$(ufw status verbose | grep -E -i \'^53.*ALLOW out\')"',
+                'onlyif'  => 'test -z "$(ufw status verbose | grep -E -i \'^53.*ALLOW out\')"'
               )
-            is_expected.to contain_exec('allow http outbound')
-              .with(
+            is_expected.to contain_exec('allow http outbound').
+              with(
                 'command' => 'ufw allow out to any port 80',
                 'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                'onlyif'  => 'test -z "$(ufw status verbose | grep -E -i \'^80.*ALLOW out\')"',
+                'onlyif'  => 'test -z "$(ufw status verbose | grep -E -i \'^80.*ALLOW out\')"'
               )
           else
             is_expected.not_to contain_exec('allow DNS outbound')

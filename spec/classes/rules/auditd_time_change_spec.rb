@@ -6,7 +6,7 @@ enforce_options = [true, false]
 
 describe 'cis_security_hardening::rules::auditd_time_change' do
   test_on = {
-    hardwaremodels: ['x86_64', 'i686'],
+    hardwaremodels: %w[x86_64 i686],
   }
 
   let(:pre_condition) do
@@ -31,7 +31,7 @@ describe 'cis_security_hardening::rules::auditd_time_change' do
               auditd: {
                 'time-change' => false,
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -53,63 +53,63 @@ describe 'cis_security_hardening::rules::auditd_time_change' do
                    end
 
             if myos.casecmp('rocky').zero? || myos.casecmp('almalinux').zero? || myos.casecmp('redhat8').zero? || myos.casecmp('redhat9').zero?
-              is_expected.to contain_concat__fragment('watch for date-time-change rule 1')
-                .with(
+              is_expected.to contain_concat__fragment('watch for date-time-change rule 1').
+                with(
                   'order' => '121',
                   'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-a always,exit -F arch=b32 -S adjtimex,settimeofday,clock_settime,stime -k time-change',
+                  'content' => '-a always,exit -F arch=b32 -S adjtimex,settimeofday,clock_settime,stime -k time-change'
                 )
-              is_expected.to contain_concat__fragment('watch for date-time-change rule 3')
-                .with(
+              is_expected.to contain_concat__fragment('watch for date-time-change rule 3').
+                with(
                   'order' => '123',
                   'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-w /etc/localtime -p wa -k time-change',
+                  'content' => '-w /etc/localtime -p wa -k time-change'
                 )
-              if ['x86_64', 'amd64'].include?(os_facts[:os]['architecture'])
-                is_expected.to contain_concat__fragment('watch for date-time-change rule 2')
-                  .with(
+              if %w[x86_64 amd64].include?(os_facts[:os]['architecture'])
+                is_expected.to contain_concat__fragment('watch for date-time-change rule 2').
+                  with(
                     'order' => '122',
                     'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                    'content' => '-a always,exit -F arch=b64 -S adjtimex,settimeofday,clock_settime -k time-change',
+                    'content' => '-a always,exit -F arch=b64 -S adjtimex,settimeofday,clock_settime -k time-change'
                   )
               else
                 is_expected.not_to contain_concat__fragment('watch for date-time-change rule 2')
               end
             else
-              is_expected.to contain_concat__fragment('watch for date-time-change rule 1')
-                .with(
+              is_expected.to contain_concat__fragment('watch for date-time-change rule 1').
+                with(
                   'order' => '121',
                   'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-a always,exit -F arch=b32 -S adjtimex -S settimeofday -S stime -k time-change',
+                  'content' => '-a always,exit -F arch=b32 -S adjtimex -S settimeofday -S stime -k time-change'
                 )
 
-              is_expected.to contain_concat__fragment('watch for date-time-change rule 2')
-                .with(
+              is_expected.to contain_concat__fragment('watch for date-time-change rule 2').
+                with(
                   'order' => '122',
                   'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-a always,exit -F arch=b32 -S clock_settime -k time-change',
+                  'content' => '-a always,exit -F arch=b32 -S clock_settime -k time-change'
                 )
 
-              is_expected.to contain_concat__fragment('watch for date-time-change rule 3')
-                .with(
+              is_expected.to contain_concat__fragment('watch for date-time-change rule 3').
+                with(
                   'order' => '123',
                   'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-w /etc/localtime -p wa -k time-change',
+                  'content' => '-w /etc/localtime -p wa -k time-change'
                 )
 
-              if ['x86_64', 'amd64'].include?(os_facts[:os]['architecture'])
-                is_expected.to contain_concat__fragment('watch for date-time-change rule 4')
-                  .with(
+              if %w[x86_64 amd64].include?(os_facts[:os]['architecture'])
+                is_expected.to contain_concat__fragment('watch for date-time-change rule 4').
+                  with(
                     'order' => '124',
                     'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                    'content' => '-a always,exit -F arch=b64 -S adjtimex -S settimeofday -k time-change',
+                    'content' => '-a always,exit -F arch=b64 -S adjtimex -S settimeofday -k time-change'
                   )
 
-                is_expected.to contain_concat__fragment('watch for date-time-change rule 5')
-                  .with(
+                is_expected.to contain_concat__fragment('watch for date-time-change rule 5').
+                  with(
                     'order' => '125',
                     'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                    'content' => '-a always,exit -F arch=b64 -S clock_settime -k time-change',
+                    'content' => '-a always,exit -F arch=b64 -S clock_settime -k time-change'
                   )
 
               else

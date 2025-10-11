@@ -32,36 +32,36 @@ describe 'cis_security_hardening::rules::selinux_policy' do
 
             if enforce
               if reboot
-                is_expected.to contain_file('/etc/selinux/config')
-                  .with(
+                is_expected.to contain_file('/etc/selinux/config').
+                  with(
                     'ensure' => 'present',
                     'owner'  => 'root',
                     'group'  => 'root',
-                    'mode'   => '0644',
-                  )
-                  .that_notifies('Reboot[after_run]')
+                    'mode'   => '0644'
+                  ).
+                  that_notifies('Reboot[after_run]')
 
-                is_expected.to contain_file_line('selinux_targeted')
-                  .with(
+                is_expected.to contain_file_line('selinux_targeted').
+                  with(
                     'path'  => '/etc/selinux/config',
                     'line'  => 'SELINUXTYPE=targeted',
-                    'match' => '^SELINUXTYPE=',
-                  )
-                  .that_notifies('Reboot[after_run]')
+                    'match' => '^SELINUXTYPE='
+                  ).
+                  that_notifies('Reboot[after_run]')
               else
-                is_expected.to contain_file('/etc/selinux/config')
-                  .with(
+                is_expected.to contain_file('/etc/selinux/config').
+                  with(
                     'ensure' => 'present',
                     'owner'  => 'root',
                     'group'  => 'root',
-                    'mode'   => '0644',
+                    'mode'   => '0644'
                   )
 
-                is_expected.to contain_file_line('selinux_targeted')
-                  .with(
+                is_expected.to contain_file_line('selinux_targeted').
+                  with(
                     'path'  => '/etc/selinux/config',
                     'line'  => 'SELINUXTYPE=targeted',
-                    'match' => '^SELINUXTYPE=',
+                    'match' => '^SELINUXTYPE='
                   )
               end
             else

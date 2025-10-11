@@ -2,12 +2,6 @@
 # See https://github.com/puppetlabs/puppetlabs_spec_helper#using-fixtures for details
 ---
 fixtures:
-  symlinks:
-    cis_security_hardening: "#{source_dir}"
-  repositories:
-    provision: 
-      repo: 'https://github.com/puppetlabs/provision.git'
-      branch: 'main'
   forge_modules:
     stdlib:                     "puppetlabs/stdlib"
     concat:                     "puppetlabs/concat"

@@ -19,17 +19,17 @@ describe 'cis_security_hardening::rules::dracut_fips' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_package('dracut-fips')
-              .with(
-                'ensure' => 'installed',
-              )
-              .that_notifies('Exec[recreate initramfs]')
+            is_expected.to contain_package('dracut-fips').
+              with(
+                'ensure' => 'installed'
+              ).
+              that_notifies('Exec[recreate initramfs]')
 
-            is_expected.to contain_exec('recreate initramfs')
-              .with(
+            is_expected.to contain_exec('recreate initramfs').
+              with(
                 'command'     => 'dracut -f',
                 'path'        => ['/sin', '/usr/sbin', '/bin', '/usr/bin'],
-                'refreshonly' => true,
+                'refreshonly' => true
               )
           else
             is_expected.not_to contain_package('dracut-fips')

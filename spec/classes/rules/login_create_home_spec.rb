@@ -19,13 +19,13 @@ describe 'cis_security_hardening::rules::login_create_home' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file_line('create_home')
-              .with(
+            is_expected.to contain_file_line('create_home').
+              with(
                 'ensure'             => 'present',
                 'path'               => '/etc/login.defs',
                 'match'              => '^CREATE_HOME',
                 'line'               => 'CREATE_HOME yes',
-                'append_on_no_match' => true,
+                'append_on_no_match' => true
               )
           else
             is_expected.not_to contain_file_line('create_home')

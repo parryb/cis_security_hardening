@@ -1,5 +1,5 @@
 ---
-cis_security_hardening::benchmark::almalinux::8:
+cis_security_hardening::benchmark::almalinux::v8:
   bundles:
     filesystem_config:
       level1:

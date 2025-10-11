@@ -42,7 +42,7 @@ class cis_security_hardening::rules::pam_pkcs11 (
       default  => ['libpam-pkcs11'],
     }
     stdlib::ensure_packages($pkgs, {
-        ensure => present,
+      ensure => present,
     })
   }
 }

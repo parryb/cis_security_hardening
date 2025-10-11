@@ -23,12 +23,12 @@ class cis_security_hardening::rules::nfs (
   if $enforce {
     if $facts['os']['name'].downcase() == 'ubuntu' {
       stdlib::ensure_packages(['nfs-kernel-server'], {
-          ensure => purged,
+        ensure => purged,
       })
     } else {
       ensure_resource('service', 'nfs', {
-          enable => false,
-          ensure => stopped,
+        enable => false,
+        ensure => stopped,
       })
     }
   }

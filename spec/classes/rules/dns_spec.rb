@@ -23,28 +23,28 @@ describe 'cis_security_hardening::rules::dns' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file_line('nsswitch dns')
-              .with(
+            is_expected.to contain_file_line('nsswitch dns').
+              with(
                 'ensure' => 'present',
                 'path'   => '/etc/nsswitch.conf',
                 'match'  => '^hosts:',
-                'line'   => 'hosts:      files dns',
+                'line'   => 'hosts:      files dns'
               )
 
-            is_expected.to contain_file('/etc/resolv.conf')
-              .with(
-                'ensure'  => 'file',
-                'owner'   => 'root',
-                'group'   => 'root',
-                'mode'    => '0644',
-              )
-              .that_notifies('Exec[resolv.conf immutable]')
+            is_expected.to contain_file('/etc/resolv.conf').
+              with(
+                'ensure' => 'file',
+                'owner' => 'root',
+                'group' => 'root',
+                'mode' => '0644'
+              ).
+              that_notifies('Exec[resolv.conf immutable]')
 
-            is_expected.to contain_exec('resolv.conf immutable')
-              .with(
-                'command'     => 'chattr +i /etc/resolv.conf',
-                'path'        => ['/sbin', '/usr/sbin', '/bin', '/usr/bin'],
-                'onlyif' => 'test -z "$(lsattr /etc/resolv.conf | cut -d \'-\' -f 5)"',
+            is_expected.to contain_exec('resolv.conf immutable').
+              with(
+                'command' => 'chattr +i /etc/resolv.conf',
+                'path' => ['/sbin', '/usr/sbin', '/bin', '/usr/bin'],
+                'onlyif' => 'test -z "$(lsattr /etc/resolv.conf | cut -d \'-\' -f 5)"'
               )
           else
             is_expected.not_to contain_file_line('nsswitch dns')

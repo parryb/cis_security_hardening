@@ -46,9 +46,9 @@ describe 'cis_security_hardening::rules::disable_usb_storage' do
             else
               cmd = '/bin/true'
             end
-            is_expected.to contain_kmod__install('usb-storage')
-              .with(
-                command: cmd,
+            is_expected.to contain_kmod__install('usb-storage').
+              with(
+                command: cmd
               )
           else
             is_expected.not_to contain_kmod__install('usb-storage')

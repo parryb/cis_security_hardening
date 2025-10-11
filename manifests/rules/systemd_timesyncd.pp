@@ -57,11 +57,11 @@ class cis_security_hardening::rules::systemd_timesyncd (
       }
 
       stdlib::ensure_packages(['ntp', 'chrony'], {
-          ensure => $ensure,
+        ensure => $ensure,
       })
 
       stdlib::ensure_packages(['systemd-timesyncd'], {
-          ensure => installed,
+        ensure => installed,
       })
 
       $servers = join($ntp_servers, ' ')
@@ -87,25 +87,26 @@ class cis_security_hardening::rules::systemd_timesyncd (
 
     if $facts['os']['family'].downcase() == 'debian' and $fix_file_perms {
       ensure_resource('file', '/var/lib/private/systemd/timesync', {
-          owner => 'root',
-          group => 'root',
+        owner => 'root',
+        group => 'root',
       })
 
       ensure_resource('file', '/var/lib/private/systemd/timesync/clock', {
-          owner => 'root',
-          group => 'root',
+        owner => 'root',
+        group => 'root',
       })
     }
 
     ensure_resource('service', 'systemd-timesyncd.service', {
-        ensure => running,
-        enable => true,
+      ensure => running,
+      enable => true,
     })
 
     if $facts['os']['name'].downcase() == 'sles' {
       exec { 'timedatectl':
-        command   => 'timefdatectl set-ntp true',
+        command   => 'timedatectl set-ntp true',
         path      => ['/bin', '/usr/bin'],
+        onlyif    => 'timedatectl status | grep "NTP service: n/a"',
         subscribe => File_line['ntp-timesyncd.conf'],
       }
     }

@@ -197,7 +197,7 @@ describe 'cis_security_hardening::rules::ip6tables_open_ports' do
                 },
                 'policy_status' => false,
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -220,14 +220,14 @@ describe 'cis_security_hardening::rules::ip6tables_open_ports' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_firewall('010-6 open ssh port inbound')
-              .with(
-                'chain'  => 'INPUT',
-                'proto'  => 'tcp',
-                'dport'  => 22,
-                'state'  => 'NEW',
+            is_expected.to contain_firewall('010-6 open ssh port inbound').
+              with(
+                'chain' => 'INPUT',
+                'proto' => 'tcp',
+                'dport' => 22,
+                'state' => 'NEW',
                 'jump' => 'ACCEPT',
-                'protocol' => 'ip6tables',
+                'protocol' => 'ip6tables'
               )
           else
             is_expected.not_to contain_firewall('010-6 open ssh port inbound')

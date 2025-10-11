@@ -22,30 +22,30 @@ describe 'cis_security_hardening::auditd_cron' do
         it do
           is_expected.to compile.with_all_deps
 
-          is_expected.to contain_file('/etc/cron.d/auditd_priv_commands.cron')
-            .with(
-              'ensure' => 'absent',
+          is_expected.to contain_file('/etc/cron.d/auditd_priv_commands.cron').
+            with(
+              'ensure' => 'absent'
             )
 
-          is_expected.to contain_file('/etc/cron.d/auditd_priv_commands')
-            .with(
-              'ensure'  => 'file',
-              'owner'   => 'root',
-              'group'   => 'root',
-              'mode'    => '0644',
-            )
-
-          is_expected.to contain_file('/usr/share/cis_security_hardening/bin/auditd_priv_cmds.sh')
-            .with(
-              'ensure'  => 'file',
-              'owner'   => 'root',
-              'group'   => 'root',
-              'mode'    => '0700',
-            )
-
-          is_expected.to contain_file('/usr/share/cis_security_hardening/data/auditd_priv_cmds.txt')
-            .with(
+          is_expected.to contain_file('/etc/cron.d/auditd_priv_commands').
+            with(
               'ensure' => 'file',
+              'owner' => 'root',
+              'group' => 'root',
+              'mode' => '0644'
+            )
+
+          is_expected.to contain_file('/usr/share/cis_security_hardening/bin/auditd_priv_cmds.sh').
+            with(
+              'ensure' => 'file',
+              'owner' => 'root',
+              'group' => 'root',
+              'mode' => '0700'
+            )
+
+          is_expected.to contain_file('/usr/share/cis_security_hardening/data/auditd_priv_cmds.txt').
+            with(
+              'ensure' => 'file'
             )
         end
       end
@@ -66,30 +66,30 @@ describe 'cis_security_hardening::auditd_cron' do
         it do
           is_expected.to compile.with_all_deps
 
-          is_expected.to contain_file('/etc/cron.d/auditd_priv_commands.cron')
-            .with(
+          is_expected.to contain_file('/etc/cron.d/auditd_priv_commands.cron').
+            with(
+              'ensure' => 'absent'
+            )
+
+          is_expected.to contain_file('/etc/cron.d/auditd_priv_commands').
+            with(
               'ensure' => 'absent',
+              'owner' => 'root',
+              'group' => 'root',
+              'mode' => '0644'
             )
 
-          is_expected.to contain_file('/etc/cron.d/auditd_priv_commands')
-            .with(
-              'ensure'  => 'absent',
-              'owner'   => 'root',
-              'group'   => 'root',
-              'mode'    => '0644',
-            )
-
-          is_expected.to contain_file('/usr/share/cis_security_hardening/bin/auditd_priv_cmds.sh')
-            .with(
-              'ensure'  => 'absent',
-              'owner'   => 'root',
-              'group'   => 'root',
-              'mode'    => '0700',
-            )
-
-          is_expected.to contain_file('/usr/share/cis_security_hardening/data/auditd_priv_cmds.txt')
-            .with(
+          is_expected.to contain_file('/usr/share/cis_security_hardening/bin/auditd_priv_cmds.sh').
+            with(
               'ensure' => 'absent',
+              'owner' => 'root',
+              'group' => 'root',
+              'mode' => '0700'
+            )
+
+          is_expected.to contain_file('/usr/share/cis_security_hardening/data/auditd_priv_cmds.txt').
+            with(
+              'ensure' => 'absent'
             )
         end
       end

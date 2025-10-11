@@ -36,7 +36,7 @@ describe 'cis_security_hardening::rules::pam_passwd_sha512' do
                     status: false,
                   },
                 },
-              },
+              }
             )
           end
           let(:params) do
@@ -55,21 +55,21 @@ describe 'cis_security_hardening::rules::pam_passwd_sha512' do
                   is_expected.not_to contain_exec('update authselect config for sha512 system-auth')
                   is_expected.not_to contain_exec('update authselect config for sha512 password-auth')
 
-                  is_expected.to contain_file_line('password algorithm sha512')
-                    .with(
+                  is_expected.to contain_file_line('password algorithm sha512').
+                    with(
                       'ensure'             => 'present',
                       'path'               => '/etc/sysconfig/authconfig',
                       'match'              => '^PASSWDALGORITHM=',
                       'line'               => 'PASSWDALGORITHM=sha512',
-                      'append_on_no_match' => true,
-                    )
-                    .that_notifies('Exec[authconfig-passalgo-sha512]')
+                      'append_on_no_match' => true
+                    ).
+                    that_notifies('Exec[authconfig-passalgo-sha512]')
 
-                  is_expected.to contain_exec('authconfig-passalgo-sha512')
-                    .with(
+                  is_expected.to contain_exec('authconfig-passalgo-sha512').
+                    with(
                       'command'     => 'authconfig --passalgo=sha512 --updateall',
                       'path'        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                      'refreshonly' => true,
+                      'refreshonly' => true
                     )
 
                 else
@@ -78,21 +78,21 @@ describe 'cis_security_hardening::rules::pam_passwd_sha512' do
                   is_expected.not_to contain_pam('sha512-password-auth')
                   is_expected.not_to contain_exec('authconfig-passalgo-sha512')
 
-                  is_expected.to contain_exec('update authselect config for sha512 system-auth')
-                    .with(
+                  is_expected.to contain_exec('update authselect config for sha512 system-auth').
+                    with(
                       'command' => "sed -ri 's/^\\s*(password\\s+sufficient\\s+pam_unix.so\\s+)(.*)$/\\1\\2 sha512/' /etc/authselect/custom/testprofile/system-auth",
                       'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                      'onlyif'  => "test -z \"\$(grep -E '^\\s*password\\s+sufficient\\s+pam_unix.so\\s+.*sha512\\s*.*\$' /etc/authselect/custom/testprofile/system-auth)\"",
-                    )
-                    .that_notifies('Exec[authselect-apply-changes]')
+                      'onlyif'  => "test -z \"$(grep -E '^\\s*password\\s+sufficient\\s+pam_unix.so\\s+.*sha512\\s*.*$' /etc/authselect/custom/testprofile/system-auth)\""
+                    ).
+                    that_notifies('Exec[authselect-apply-changes]')
 
-                  is_expected.to contain_exec('update authselect config for sha512 password-auth')
-                    .with(
+                  is_expected.to contain_exec('update authselect config for sha512 password-auth').
+                    with(
                       'command' => "sed -ri 's/^\\s*(password\\s+sufficient\\s+pam_unix.so\\s+)(.*)$/\\1\\2 sha512/' /etc/authselect/custom/testprofile/password-auth",
                       'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                      'onlyif'  => "test -z \"\$(grep -E '^\\s*password\\s+sufficient\\s+pam_unix.so\\s+.*sha512\\s*.*\$' /etc/authselect/custom/testprofile/password-auth)\"",
-                    )
-                    .that_notifies('Exec[authselect-apply-changes]')
+                      'onlyif'  => "test -z \"$(grep -E '^\\s*password\\s+sufficient\\s+pam_unix.so\\s+.*sha512\\s*.*$' /etc/authselect/custom/testprofile/password-auth)\""
+                    ).
+                    that_notifies('Exec[authselect-apply-changes]')
                 end
 
                 is_expected.not_to contain_file_line('set crypt method')
@@ -104,47 +104,47 @@ describe 'cis_security_hardening::rules::pam_passwd_sha512' do
                 is_expected.not_to contain_exec('switch sha512 on')
 
                 if os_facts[:os]['name'].casecmp('debian').zero? && os_facts[:os]['release']['major'] > '10'
-                  is_expected.to contain_ile('/etc/pam.d/common-password')
-                    .with(
-                      'ensure'  => 'file',
-                      'source'  => 'puppet:///modules/cis_security_hardening/pam_lockout/debian/common-password',
-                      'owner'   => 'root',
-                      'group'   => 'root',
-                      'mode'    => '0644',
-                    )
-                    .that_requires('Class[cis_security_hardening::rules::pam_pw_requirements],')
+                  is_expected.to contain_ile('/etc/pam.d/common-password').
+                    with(
+                      'ensure' => 'file',
+                      'source' => 'puppet:///modules/cis_security_hardening/pam_lockout/debian/common-password',
+                      'owner' => 'root',
+                      'group' => 'root',
+                      'mode' => '0644'
+                    ).
+                    that_requires('Class[cis_security_hardening::rules::pam_pw_requirements],')
 
-                  is_expected.to contain_file_line('set crypt method')
-                    .with(
+                  is_expected.to contain_file_line('set crypt method').
+                    with(
                       'ensure'             => 'present',
                       'path'               => '/etc/login.defs',
                       'match'              => '^ENCRYPT_METHOD',
                       'line'               => 'ENCRYPT_METHOD yescrypt',
-                      'append_on_no_match' => true,
-                    )
-                    .that_requires('Class[cis_security_hardening::rules::pam_pw_requirements]')
+                      'append_on_no_match' => true
+                    ).
+                    that_requires('Class[cis_security_hardening::rules::pam_pw_requirements]')
 
                 elsif os_facts[:os]['name'].casecmp('ubuntu').zero? && os_facts[:os]['release']['major'] >= '22'
-                  is_expected.to contain_file_line('set crypt method')
-                    .with(
-                    'ensure'             => 'present',
-                    'path'               => '/etc/login.defs',
-                    'match'              => '^ENCRYPT_METHOD',
-                    'line'               => 'ENCRYPT_METHOD yescrypt',
-                    'append_on_no_match' => true,
-                  )
-                    .that_requires('Class[cis_security_hardening::rules::pam_pw_requirements]')
+                  is_expected.to contain_file_line('set crypt method').
+                    with(
+                      'ensure'             => 'present',
+                      'path'               => '/etc/login.defs',
+                      'match'              => '^ENCRYPT_METHOD',
+                      'line'               => 'ENCRYPT_METHOD yescrypt',
+                      'append_on_no_match' => true
+                    ).
+                    that_requires('Class[cis_security_hardening::rules::pam_pw_requirements]')
                   is_expected.not_to contain_ile('/etc/pam.d/common-password')
                 else
-                  is_expected.to contain_pam('pam-common-password-unix')
-                    .with(
+                  is_expected.to contain_pam('pam-common-password-unix').
+                    with(
                       'ensure'           => 'present',
                       'service'          => 'common-password',
                       'type'             => 'password',
                       'control'          => '[success=1 default=ignore]',
                       'control_is_param' => true,
                       'module'           => 'pam_unix.so',
-                      'arguments'        => ['sha512'],
+                      'arguments'        => ['sha512']
                     )
                 end
 
@@ -166,6 +166,7 @@ describe 'cis_security_hardening::rules::pam_passwd_sha512' do
       end
 
       next unless os_facts[:os]['release']['major'] == '8'
+
       context "on RedHat 8 with enforce #{enforce}" do
         let(:pre_condition) do
           <<-EOF
@@ -187,7 +188,7 @@ describe 'cis_security_hardening::rules::pam_passwd_sha512' do
                   status: false,
                 },
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -197,23 +198,24 @@ describe 'cis_security_hardening::rules::pam_passwd_sha512' do
         end
 
         it { is_expected.to compile }
+
         it {
           if enforce
-            is_expected.to contain_exec('update authselect config for sha512 system-auth')
-              .with(
+            is_expected.to contain_exec('update authselect config for sha512 system-auth').
+              with(
                 'command' => "sed -ri 's/^\\s*(password\\s+sufficient\\s+pam_unix.so\\s+)(.*)$/\\1\\2 sha512/' /etc/authselect/custom/testprofile/system-auth",
                 'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                'onlyif'  => "test -z \"\$(grep -E '^\\s*password\\s+sufficient\\s+pam_unix.so\\s+.*sha512\\s*.*\$' /etc/authselect/custom/testprofile/system-auth)\"",
-              )
-              .that_notifies('Exec[authselect-apply-changes]')
+                'onlyif'  => "test -z \"$(grep -E '^\\s*password\\s+sufficient\\s+pam_unix.so\\s+.*sha512\\s*.*$' /etc/authselect/custom/testprofile/system-auth)\""
+              ).
+              that_notifies('Exec[authselect-apply-changes]')
 
-            is_expected.to contain_exec('update authselect config for sha512 password-auth')
-              .with(
+            is_expected.to contain_exec('update authselect config for sha512 password-auth').
+              with(
                 'command' => "sed -ri 's/^\\s*(password\\s+sufficient\\s+pam_unix.so\\s+)(.*)$/\\1\\2 sha512/' /etc/authselect/custom/testprofile/password-auth",
                 'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                'onlyif'  => "test -z \"\$(grep -E '^\\s*password\\s+sufficient\\s+pam_unix.so\\s+.*sha512\\s*.*\$' /etc/authselect/custom/testprofile/password-auth)\"",
-              )
-              .that_notifies('Exec[authselect-apply-changes]')
+                'onlyif'  => "test -z \"$(grep -E '^\\s*password\\s+sufficient\\s+pam_unix.so\\s+.*sha512\\s*.*$' /etc/authselect/custom/testprofile/password-auth)\""
+              ).
+              that_notifies('Exec[authselect-apply-changes]')
           else
             is_expected.not_to contain_exec('update authselect config for sha512 system-auth')
             is_expected.not_to contain_exec('update authselect config for sha512 password-auth')

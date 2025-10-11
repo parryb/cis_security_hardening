@@ -30,28 +30,32 @@ describe 'cis_security_hardening::rules::iptables_loopback' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_firewall('001 accept all incoming traffic to local interface')
-              .with(
+            is_expected.to contain_firewall('001 accept all incoming traffic to local interface').
+              with(
                 'chain'   => 'INPUT',
                 'proto'   => 'all',
                 'iniface' => 'lo',
-                'jump' => 'ACCEPT',
+                # rubocop:disable Layout/HashAlignment
+                'jump' => 'ACCEPT'
+                # rubocop:enable Layout/HashAlignment
               )
 
-            is_expected.to contain_firewall('002 accept all outgoing traffic to local interface')
-              .with(
+            is_expected.to contain_firewall('002 accept all outgoing traffic to local interface').
+              with(
                 'chain'    => 'OUTPUT',
                 'proto'    => 'all',
                 'outiface' => 'lo',
-                'jump' => 'ACCEPT',
+                # rubocop:disable Layout/HashAlignment
+                'jump' => 'ACCEPT'
+                # rubocop:enable Layout/HashAlignment
               )
 
-            is_expected.to contain_firewall('003 drop all traffic to lo 127.0.0.1/8')
-              .with(
-                'chain'   => 'INPUT',
-                'proto'   => 'all',
-                'source'  => '127.0.0.1/8',
-                'jump' => 'DROP',
+            is_expected.to contain_firewall('003 drop all traffic to lo 127.0.0.1/8').
+              with(
+                'chain' => 'INPUT',
+                'proto' => 'all',
+                'source' => '127.0.0.1/8',
+                'jump' => 'DROP'
               )
           else
             is_expected.not_to contain_firewall('001 accept all incoming traffic to local interface')

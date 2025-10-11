@@ -28,7 +28,7 @@ class cis_security_hardening::rules::auditd_package (
   if $enforce {
     $packages.each |$pkg| {
       stdlib::ensure_packages([$pkg], {
-          ensure => installed,
+        ensure => installed,
       })
     }
   }

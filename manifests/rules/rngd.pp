@@ -26,8 +26,8 @@ class cis_security_hardening::rules::rngd (
 ) {
   if $enforce {
     ensure_resource('service', 'rngd', {
-        ensure => running,
-        enable => true,
+      ensure => running,
+      enable => true,
     })
   }
 }

@@ -19,13 +19,13 @@ describe 'cis_security_hardening::rules::adm_crypt_style' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file_line('crypt_style')
-              .with(
+            is_expected.to contain_file_line('crypt_style').
+              with(
                 'ensure'             => 'present',
                 'path'               => '/etc/libuser.conf',
                 'match'              => '^#?crypt_style =',
                 'line'               => 'crypt_style = sha512',
-                'append_on_no_match' => true,
+                'append_on_no_match' => true
               )
           else
             is_expected.not_to contain_file_line('crypt_style')

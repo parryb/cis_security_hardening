@@ -18,7 +18,7 @@ describe 'cis_security_hardening::rules::passwd_sha512' do
                 'pw_change_in_future' => true,
                 'pass_min_days_status' => true,
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -35,12 +35,12 @@ describe 'cis_security_hardening::rules::passwd_sha512' do
                    else
                      '/etc/login.defs'
                    end
-            is_expected.to contain_file_line('password sha512')
-              .with(
+            is_expected.to contain_file_line('password sha512').
+              with(
                 'ensure' => 'present',
                 'path'   => path,
                 'line'   => 'ENCRYPT_METHOD SHA512',
-                'match'  => '^#?ENCRYPT_METHOD',
+                'match'  => '^#?ENCRYPT_METHOD'
               )
           else
             is_expected.not_to contain_file_line('password sha512')

@@ -27,15 +27,15 @@ describe 'cis_security_hardening::rules::journald_rsyslog' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file_line('journald to rsyslog')
-              .with(
+            is_expected.to contain_file_line('journald to rsyslog').
+              with(
                 'ensure'             => 'present',
                 'path'               => '/etc/systemd/journald.conf',
                 'line'               => 'ForwardToSyslog=yes',
                 'match'              => '^ForwardToSyslog=',
-                'append_on_no_match' => true,
-              )
-              .that_requires('Package[rsyslog]')
+                'append_on_no_match' => true
+              ).
+              that_requires('Package[rsyslog]')
           else
             is_expected.not_to contain_file_line('journald to rsyslog')
           end

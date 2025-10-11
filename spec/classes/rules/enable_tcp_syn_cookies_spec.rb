@@ -19,9 +19,9 @@ describe 'cis_security_hardening::rules::enable_tcp_syn_cookies' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_sysctl('net.ipv4.tcp_syncookies')
-              .with(
-                'value' => 1,
+            is_expected.to contain_sysctl('net.ipv4.tcp_syncookies').
+              with(
+                'value' => 1
               )
           else
             is_expected.not_to contain_sysctl('net.ipv4.tcp_syncookies')

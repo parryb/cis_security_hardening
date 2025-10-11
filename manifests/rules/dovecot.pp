@@ -23,27 +23,27 @@ class cis_security_hardening::rules::dovecot (
     case $facts['os']['name'].downcase() {
       'ubuntu': {
         stdlib::ensure_packages(['dovecot-imapd', 'dovecot-pop3d'], {
-            ensure => purged,
+          ensure => purged,
         })
       }
       'sles': {
         stdlib::ensure_packages(['dovecot'], {
-            ensure => absent,
+          ensure => absent,
         })
       }
       'redhat': {
         stdlib::ensure_packages(['dovecot'], {
-            ensure => purged,
+          ensure => purged,
         })
 
         stdlib::ensure_packages(['cyrus-imapd'], {
-            ensure => purged,
+          ensure => purged,
         })
       }
       default: {
         ensure_resource('service', ['dovecot'], {
-            ensure => 'stopped',
-            enable => false
+          ensure => 'stopped',
+          enable => false
         })
       }
     }

@@ -55,7 +55,7 @@ describe 'cis_security_hardening::rules::sshd_banner' do
                 'clientalivecountmax' => 3,
                 'permituserenvironment' => 'yes',
               },
-            },
+            }
           )
         end
 
@@ -74,14 +74,19 @@ describe 'cis_security_hardening::rules::sshd_banner' do
                    else
                      '/etc/ssh/sshd_config'
                    end
-            is_expected.to contain_file_line('sshd-banner')
-              .with(
+            banner_line = if %w[RedHat CentOS AlmaLinux Rocky].include?(os_facts[:os]['name']) && os_facts[:os]['release']['major'].to_i >= 9
+                            'Banner /etc/issue'
+                          else
+                            'Banner /etc/issue.net'
+                          end
+            is_expected.to contain_file_line('sshd-banner').
+              with(
                 'ensure' => 'present',
                 'path'   => path,
-                'line'   => 'Banner /etc/issue.net',
-                'match'  => '^#?Banner.*',
-              )
-              .that_notifies('Exec[reload-sshd]')
+                'line'   => banner_line,
+                'match'  => '^#?Banner.*'
+              ).
+              that_notifies('Exec[reload-sshd]')
           else
             is_expected.not_to contain_file_line('sshd-banner')
           end

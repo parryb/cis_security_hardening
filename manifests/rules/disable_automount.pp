@@ -21,8 +21,8 @@ class cis_security_hardening::rules::disable_automount (
 ) {
   if $enforce {
     ensure_resource('service', 'autofs', {
-        ensure => stopped,
-        enable => false,
+      ensure => stopped,
+      enable => false,
     })
   }
 }

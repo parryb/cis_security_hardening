@@ -16,64 +16,67 @@ describe 'cis_security_hardening::rules::apparmor_bootloader' do
           }
         end
 
-        it { is_expected.to compile }
-        it do
+        it {
+          is_expected.to compile
+
           if enforce
             if os_facts[:os]['family'].casecmp('debian').zero?
-              is_expected.to contain_exec('apparmor-grub-config')
-                .with(
+
+              is_expected.to contain_exec('apparmor-grub-config').
+                with(
                   'command'     => 'update-grub',
                   'path'        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                  'refreshonly' => true,
+                  'refreshonly' => true
                 )
 
-              is_expected.to contain_file_line('cmdline_definition')
-                .with(
+              is_expected.to contain_file_line('cmdline_definition').
+                with(
                   'line'  => 'GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"',
                   'path'  => '/etc/default/grub',
-                  'match' => '^GRUB_CMDLINE_LINUX_DEFAULT',
-                )
-                .that_notifies('Exec[apparmor-grub-config]')
+                  'match' => '^GRUB_CMDLINE_LINUX_DEFAULT'
+                ).
+                that_notifies('Exec[apparmor-grub-config]')
 
-              is_expected.to contain_kernel_parameter('apparmor')
-                .with(
-                  'value'  => '1',
-                )
-                .that_notifies('Exec[apparmor-grub-config]')
+              is_expected.to contain_kernel_parameter('apparmor').
+                with(
+                  'value'  => '1'
+                ).
+                that_notifies('Exec[apparmor-grub-config]')
 
-              is_expected.to contain_kernel_parameter('security')
-                .with(
-                  'value'  => 'apparmor',
-                )
-                .that_notifies('Exec[apparmor-grub-config]')
+              is_expected.to contain_kernel_parameter('security').
+                with(
+                  'value'  => 'apparmor'
+                ).
+                that_notifies('Exec[apparmor-grub-config]')
 
             elsif os_facts[:os]['family'].casecmp('suse').zero?
-              is_expected.to contain_exec('apparmor-grub-config')
-                .with(
+
+              is_expected.to contain_exec('apparmor-grub-config').
+                with(
                   'command'     => 'grub2-mkconfig -o /boot/grub2/grub.cfg',
                   'path'        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                  'refreshonly' => true,
+                  'refreshonly' => true
                 )
 
-              is_expected.to contain_file_line('cmdline_definition')
-                .with(
+              is_expected.to contain_file_line('cmdline_definition').
+                with(
                   'line'  => 'GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"',
                   'path'  => '/etc/default/grub',
-                  'match' => '^GRUB_CMDLINE_LINUX_DEFAULT',
-                )
-                .that_notifies('Exec[apparmor-grub-config]')
+                  'match' => '^GRUB_CMDLINE_LINUX_DEFAULT'
+                ).
+                that_notifies('Exec[apparmor-grub-config]')
 
-              is_expected.to contain_kernel_parameter('apparmor')
-                .with(
-                  'value'  => '1',
-                )
-                .that_notifies('Exec[apparmor-grub-config]')
+              is_expected.to contain_kernel_parameter('apparmor').
+                with(
+                  'value'  => '1'
+                ).
+                that_notifies('Exec[apparmor-grub-config]')
 
-              is_expected.to contain_kernel_parameter('security')
-                .with(
-                  'value'  => 'apparmor',
-                )
-                .that_notifies('Exec[apparmor-grub-config]')
+              is_expected.to contain_kernel_parameter('security').
+                with(
+                  'value'  => 'apparmor'
+                ).
+                that_notifies('Exec[apparmor-grub-config]')
             end
           else
             is_expected.not_to contain_file_line('cmdline_definition')
@@ -81,7 +84,7 @@ describe 'cis_security_hardening::rules::apparmor_bootloader' do
             is_expected.not_to contain_kernel_parameter('apparmor')
             is_expected.not_to contain_kernel_parameter('security')
           end
-        end
+        }
       end
     end
   end

@@ -25,9 +25,9 @@ describe 'cis_security_hardening::rules::krb5_server' do
                           'purged'
                         end
 
-            is_expected.to contain_package('krb5-server')
-              .with(
-                'ensure' => ensureval,
+            is_expected.to contain_package('krb5-server').
+              with(
+                'ensure' => ensureval
               )
           else
             is_expected.not_to contain_package('krb5-server')

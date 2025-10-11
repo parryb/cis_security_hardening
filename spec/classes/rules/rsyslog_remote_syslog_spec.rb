@@ -33,7 +33,7 @@ describe 'cis_security_hardening::rules::rsyslog_remote_syslog' do
                     'loghost' => loghost_param,
                   },
                 },
-              },
+              }
             )
           end
           let(:params) do
@@ -48,42 +48,42 @@ describe 'cis_security_hardening::rules::rsyslog_remote_syslog' do
 
             if enforce
               if is_loghost
-                is_expected.to contain_file_line('rsyslog.conf add ModLoad')
-                  .with(
+                is_expected.to contain_file_line('rsyslog.conf add ModLoad').
+                  with(
                     'ensure' => 'present',
-                    'path'   => '/etc/rsyslog.conf',
-                    'line'   => '$ModLoad imtcp',
-                    'match'  => '^#.*\$ModLoad.*imtcp',
-                    'append_on_no_match' => true,
-                  )
-                  .that_notifies('Exec[reload-rsyslog]')
+                    'path' => '/etc/rsyslog.conf',
+                    'line' => '$ModLoad imtcp',
+                    'match' => '^#.*\$ModLoad.*imtcp',
+                    'append_on_no_match' => true
+                  ).
+                  that_notifies('Exec[reload-rsyslog]')
 
-                is_expected.to contain_file_line('rsyslog.conf add InputTCPServerRun')
-                  .with(
+                is_expected.to contain_file_line('rsyslog.conf add InputTCPServerRun').
+                  with(
                     'ensure' => 'present',
                     'path'   => '/etc/rsyslog.conf',
                     'line'   => '$InputTCPServerRun 514',
-                    'match'  => '\$InputTCPServerRun',
-                  )
-                  .that_notifies('Exec[reload-rsyslog]')
+                    'match'  => '\$InputTCPServerRun'
+                  ).
+                  that_notifies('Exec[reload-rsyslog]')
               else
-                is_expected.to contain_file_line('rsyslog.conf remove ModLoad')
-                  .with(
+                is_expected.to contain_file_line('rsyslog.conf remove ModLoad').
+                  with(
                     'ensure' => 'present',
                     'path'   => '/etc/rsyslog.conf',
                     'line'   => '# $ModLoad imtcp',
-                    'match'  => '^\$ModLoad.*imtcp',
-                  )
-                  .that_notifies('Exec[reload-rsyslog]')
+                    'match'  => '^\$ModLoad.*imtcp'
+                  ).
+                  that_notifies('Exec[reload-rsyslog]')
 
-                is_expected.to contain_file_line('rsyslog.conf remove InputTCPServerRun')
-                  .with(
+                is_expected.to contain_file_line('rsyslog.conf remove InputTCPServerRun').
+                  with(
                     'ensure' => 'present',
                     'path'   => '/etc/rsyslog.conf',
                     'line'   => '#$InputTCPServerRun 514',
-                    'match'  => '\$InputTCPServerRun',
-                  )
-                  .that_notifies('Exec[reload-rsyslog]')
+                    'match'  => '\$InputTCPServerRun'
+                  ).
+                  that_notifies('Exec[reload-rsyslog]')
               end
             elsif is_loghost
               is_expected.not_to contain_file_line('rsyslog.conf add ModLoad')

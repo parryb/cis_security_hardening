@@ -28,9 +28,11 @@ class cis_security_hardening::rules::apparmor_profiles_enforcing (
   fact('cis_security_hardening.apparmor.profiles_status') == false {
     $cmd = "aa-${mode} /etc/apparmor.d/*"
 
+    # lint:ignore:exec_idempotency Idempotency handled by fact check in class condition
     exec { "apparmor ${mode}":
       command => $cmd,
       path    => ['/bin', '/sbin', '/usr/bin', '/usr/sbin'],
     }
+    # lint:endignore
   }
 }

@@ -28,8 +28,8 @@ describe 'cis_security_hardening::rules::logrotate' do
 
           if enforce
 
-            is_expected.to create_class('logrotate')
-              .with(
+            is_expected.to create_class('logrotate').
+              with(
                 'config' => {
                   'dateext'       => true,
                   'compress'      => true,
@@ -40,7 +40,7 @@ describe 'cis_security_hardening::rules::logrotate' do
                   'su'            => false,
                   'su_user'       => 'root',
                   'su_group'      => 'syslog',
-                },
+                }
               )
 
           else

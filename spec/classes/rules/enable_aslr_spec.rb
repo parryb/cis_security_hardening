@@ -19,9 +19,9 @@ describe 'cis_security_hardening::rules::enable_aslr' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_sysctl('kernel.randomize_va_space')
-              .with(
-                'value' => 2,
+            is_expected.to contain_sysctl('kernel.randomize_va_space').
+              with(
+                'value' => 2
               )
           else
             is_expected.not_to contain_sysctl('kernel.randomize_va_space')

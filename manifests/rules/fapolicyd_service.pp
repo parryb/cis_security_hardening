@@ -36,8 +36,8 @@ class cis_security_hardening::rules::fapolicyd_service (
 ) {
   if $enforce {
     ensure_resource('service', 'fapolicyd', {
-        ensure => running,
-        enable => true,
+      ensure => running,
+      enable => true,
     })
   }
 }

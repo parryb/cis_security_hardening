@@ -20,60 +20,60 @@ describe 'cis_security_hardening::config' do
         it {
           is_expected.to compile
 
-          is_expected.to contain_file('/usr/share/cis_security_hardening')
-            .with(
+          is_expected.to contain_file('/usr/share/cis_security_hardening').
+            with(
               'ensure' => 'directory',
               'owner'  => 'root',
               'group'  => 'root',
-              'mode'   => '0700',
+              'mode'   => '0700'
             )
-          is_expected.to contain_file('/usr/share/cis_security_hardening/logs')
-            .with(
+          is_expected.to contain_file('/usr/share/cis_security_hardening/logs').
+            with(
               'ensure' => 'directory',
               'owner'  => 'root',
               'group'  => 'root',
-              'mode'   => '0700',
+              'mode'   => '0700'
             )
-          is_expected.to contain_file('/usr/share/cis_security_hardening/data')
-            .with(
+          is_expected.to contain_file('/usr/share/cis_security_hardening/data').
+            with(
               'ensure' => 'directory',
               'owner'  => 'root',
               'group'  => 'root',
-              'mode'   => '0700',
+              'mode'   => '0700'
             )
-          is_expected.to contain_file('/usr/share/cis_security_hardening/bin')
-            .with(
+          is_expected.to contain_file('/usr/share/cis_security_hardening/bin').
+            with(
               'ensure' => 'directory',
               'owner'  => 'root',
               'group'  => 'root',
-              'mode'   => '0700',
+              'mode'   => '0700'
             )
 
-          is_expected.to contain_file('/usr/share/cis_security_hardening/bin/fact_upload.sh')
-            .with(
-            'ensure'  => 'file',
-            'owner'   => 'root',
-            'group'   => 'root',
-            'mode'    => '0700',
-          )
+          is_expected.to contain_file('/usr/share/cis_security_hardening/bin/fact_upload.sh').
+            with(
+              'ensure' => 'file',
+              'owner' => 'root',
+              'group' => 'root',
+              'mode' => '0700'
+            )
 
           if postrun
-            is_expected.to contain_file_line('append postrun command agent')
-              .with(
+            is_expected.to contain_file_line('append postrun command agent').
+              with(
                 'path'               => '/etc/puppetlabs/puppet/puppet.conf',
                 'after'              => '[agent]',
                 'match'              => 'postrun_command\s*=',
                 'line'               => 'postrun_command = /usr/share/cis_security_hardening/bin/fact_upload.sh',
-                'append_on_no_match' => true,
+                'append_on_no_match' => true
               )
 
-            is_expected.to contain_file_line('append postrun command main')
-              .with(
+            is_expected.to contain_file_line('append postrun command main').
+              with(
                 'path'               => '/etc/puppetlabs/puppet/puppet.conf',
                 'after'              => 'certname\s*=.*',
                 'match'              => 'postrun_command\s*=',
                 'line'               => 'postrun_command = /usr/share/cis_security_hardening/bin/fact_upload.sh',
-                'append_on_no_match' => true,
+                'append_on_no_match' => true
               )
           else
             is_expected.not_to contain_file_line('append postrun command main')

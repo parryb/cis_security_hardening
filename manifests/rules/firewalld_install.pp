@@ -47,7 +47,7 @@ class cis_security_hardening::rules::firewalld_install (
     }
 
     stdlib::ensure_packages($pkgs, {
-        ensure => installed,
+      ensure => installed,
     })
 
     $ensure = $facts['os']['family'].downcase() ? {
@@ -56,22 +56,22 @@ class cis_security_hardening::rules::firewalld_install (
     }
 
     stdlib::ensure_packages($pkgs_remove, {
-        ensure => $ensure,
+      ensure => $ensure,
     })
 
     ensure_resource('service', 'iptables', {
-        enable => false,
-        ensure => stopped,
+      enable => false,
+      ensure => stopped,
     })
 
     ensure_resource('service', 'ip6tables', {
-        enable => false,
-        ensure => stopped,
+      enable => false,
+      ensure => stopped,
     })
 
     ensure_resource('service', 'nftables', {
-        enable => false,
-        ensure => stopped,
+      enable => false,
+      ensure => stopped,
     })
   }
 }

@@ -17,7 +17,7 @@ describe 'cis_security_hardening::rules::ufw_open_ports' do
               ufw: {
                 loopback_status: false,
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -55,17 +55,17 @@ describe 'cis_security_hardening::rules::ufw_open_ports' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_exec('allow ssh')
-              .with(
+            is_expected.to contain_exec('allow ssh').
+              with(
                 'command' => 'ufw allow proto tcp from any to any port 22',
                 'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                'onlyif'  => 'test -z "$(ufw status verbose | grep -E -i \'^22/tcp.*ALLOW in\')"',
+                'onlyif'  => 'test -z "$(ufw status verbose | grep -E -i \'^22/tcp.*ALLOW in\')"'
               )
-            is_expected.to contain_exec('allow DNS inbound')
-              .with(
+            is_expected.to contain_exec('allow DNS inbound').
+              with(
                 'command' => 'ufw allow proto udp from any to any port 53',
                 'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                'onlyif'  => 'test -z "$(ufw status verbose | grep -E -i \'^53/udp.*ALLOW in\')"',
+                'onlyif'  => 'test -z "$(ufw status verbose | grep -E -i \'^53/udp.*ALLOW in\')"'
               )
           else
             is_expected.not_to contain_exec('allow ssh')

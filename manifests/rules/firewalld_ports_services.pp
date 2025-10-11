@@ -51,19 +51,23 @@ class cis_security_hardening::rules::firewalld_ports_services (
 
     $ports.each |$port| {
       unless ($port in $expected_ports) {
+        # lint:ignore:exec_idempotency Idempotency handled by fact comparison (port not in expected_ports)
         exec { "firewalld remove port ${port}":
           command => "firewall-cmd --remove-port=${port}",
           path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
         }
+        # lint:endignore
       }
     }
 
     $services.each |$service| {
       unless ($service in $expected_services) {
+        # lint:ignore:exec_idempotency Idempotency handled by fact comparison (service not in expected_services)
         exec { "firewalld remove service ${service}":
           command => "firewall-cmd --remove-service=${service}",
           path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
         }
+        # lint:endignore
       }
     }
   }

@@ -34,6 +34,8 @@ class cis_security_hardening::rules::authselect (
   Array $profile_options                                  = ['with-faillock'],
 ) {
   if $enforce {
+    stdlib::ensure_packages(['authselect'])
+
     exec { 'create custom profile':
       command => "authselect create-profile ${custom_profile} -b ${base_profile} --symlink-meta", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
       path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
@@ -54,11 +56,13 @@ class cis_security_hardening::rules::authselect (
     }
 
     if $check == 3 {
+      # lint:ignore:exec_idempotency Idempotency handled by fact check ($check == 3)
       exec { 'fix authselect profile':
         command => "authselect select custom/${custom_profile} -f",   #lint:ignore:security_class_or_define_parameter_in_exec
         path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
         require => Exec['create custom profile'],
       }
+      # lint:endignore
     }
 
     $available_features = fact('cis_security_hardening.authselect.available_features') ? {

@@ -24,7 +24,7 @@ class cis_security_hardening::rules::apparmor_bootloader (
   Boolean $enforce = false,
   String $grub_default_cmdline = 'quiet',
 ) {
-  if  $enforce and ($facts['os']['family'].downcase() == 'debian' or $facts['os']['family'].downcase() == 'suse') {
+  if $enforce and ($facts['os']['family'].downcase() == 'debian' or $facts['os']['family'].downcase() == 'suse') {
     kernel_parameter { 'apparmor':
       value  => '1',
       notify => Exec['apparmor-grub-config'],

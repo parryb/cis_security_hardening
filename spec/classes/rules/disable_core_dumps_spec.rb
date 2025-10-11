@@ -19,9 +19,9 @@ describe 'cis_security_hardening::rules::disable_core_dumps' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_sysctl('kernel.core_pattern')
-              .with(
-                'value' => '|/bin/false',
+            is_expected.to contain_sysctl('kernel.core_pattern').
+              with(
+                'value' => '|/bin/false'
               )
           else
             is_expected.not_to contain_sysctl('kernel.core_pattern')

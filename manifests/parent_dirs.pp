@@ -78,7 +78,7 @@ define cis_security_hardening::parent_dirs (
   }
 
   $attrs = merge({
-      ensure => directory,
+    ensure => directory,
   }, $_owner, $_group, $_mode)
 
   ensure_resource('file', $dirs, $attrs)

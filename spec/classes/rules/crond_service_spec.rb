@@ -26,31 +26,31 @@ describe 'cis_security_hardening::rules::crond_service' do
                 is_expected.not_to contain_service('crond')
 
                 if os_facts[:os]['family'].casecmp('suse').zero?
-                  is_expected.to contain_package('cronie')
-                    .with(
-                      'ensure' => 'absent',
+                  is_expected.to contain_package('cronie').
+                    with(
+                      'ensure' => 'absent'
                     )
 
                 else
-                  is_expected.to contain_package('cronie')
-                    .with(
-                      'ensure' => 'purged',
+                  is_expected.to contain_package('cronie').
+                    with(
+                      'ensure' => 'purged'
                     )
                 end
 
               else
 
                 if os_facts[:os]['family'].casecmp('debian').zero? || os_facts[:os]['family'].casecmp('suse').zero?
-                  is_expected.to contain_service('cron')
-                    .with(
+                  is_expected.to contain_service('cron').
+                    with(
                       'ensure' => 'running',
-                      'enable' => true,
+                      'enable' => true
                     )
                 else
-                  is_expected.to contain_service('crond')
-                    .with(
+                  is_expected.to contain_service('crond').
+                    with(
                       'ensure' => 'running',
-                      'enable' => true,
+                      'enable' => true
                     )
                 end
 

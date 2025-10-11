@@ -55,7 +55,7 @@ describe 'cis_security_hardening::rules::sshd_limit_access' do
                 'clientalivecountmax' => 3,
                 'permituserenvironment' => 'yes',
               },
-            },
+            }
           )
         end
 
@@ -78,41 +78,41 @@ describe 'cis_security_hardening::rules::sshd_limit_access' do
                    else
                      '/etc/ssh/sshd_config'
                    end
-            is_expected.to contain_file_line('ssh-allow-users')
-              .with(
+            is_expected.to contain_file_line('ssh-allow-users').
+              with(
                 'ensure' => 'present',
                 'path'   => path,
                 'line'   => 'AllowUsers test1',
-                'match'  => '^#?AllowUsers',
-              )
-              .that_notifies('Exec[reload-sshd]')
+                'match'  => '^#?AllowUsers'
+              ).
+              that_notifies('Exec[reload-sshd]')
 
-            is_expected.to contain_file_line('ssh-allow-groups')
-              .with(
+            is_expected.to contain_file_line('ssh-allow-groups').
+              with(
                 'ensure' => 'present',
                 'path'   => path,
                 'line'   => 'AllowGroups test1',
-                'match'  => '^#?AllowGroups',
-              )
-              .that_notifies('Exec[reload-sshd]')
+                'match'  => '^#?AllowGroups'
+              ).
+              that_notifies('Exec[reload-sshd]')
 
-            is_expected.to contain_file_line('ssh-deny-users')
-              .with(
+            is_expected.to contain_file_line('ssh-deny-users').
+              with(
                 'ensure' => 'present',
                 'path'   => path,
                 'line'   => 'DenyUsers test2',
-                'match'  => '^#?DenyUsers',
-              )
-              .that_notifies('Exec[reload-sshd]')
+                'match'  => '^#?DenyUsers'
+              ).
+              that_notifies('Exec[reload-sshd]')
 
-            is_expected.to contain_file_line('ssh-deny-groups')
-              .with(
+            is_expected.to contain_file_line('ssh-deny-groups').
+              with(
                 'ensure' => 'present',
                 'path'   => path,
                 'line'   => 'DenyGroups test2',
-                'match'  => '^#?DenyGroups',
-              )
-              .that_notifies('Exec[reload-sshd]')
+                'match'  => '^#?DenyGroups'
+              ).
+              that_notifies('Exec[reload-sshd]')
           else
             is_expected.not_to contain_file_line('ssh-allow-users')
             is_expected.not_to contain_file_line('ssh-allow-groups')

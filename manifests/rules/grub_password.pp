@@ -77,7 +77,7 @@ class cis_security_hardening::rules::grub_password (
           file { '/etc/grub.d/50_custom':
             ensure  => file,
             content => epp('cis_security_hardening/rules/common/ubuntu_grub_user.cfg.epp', {
-                password => $grub_password_pbkdf2,
+              password => $grub_password_pbkdf2,
             }),
             owner   => 'root',
             group   => 'root',
@@ -98,7 +98,7 @@ class cis_security_hardening::rules::grub_password (
           file { '/etc/grub.d/40_custom':
             ensure  => file,
             content => epp('cis_security_hardening/rules/common/ubuntu_grub_user.cfg.epp', {
-                password => $grub_password_pbkdf2,
+              password => $grub_password_pbkdf2,
             }),
             owner   => 'root',
             group   => 'root',

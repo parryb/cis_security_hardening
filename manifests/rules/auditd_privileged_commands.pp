@@ -42,9 +42,9 @@ class cis_security_hardening::rules::auditd_privileged_commands (
       concat::fragment { 'priv. commands rules':
         target  => $cis_security_hardening::rules::auditd_init::rules_file,
         content => epp('cis_security_hardening/rules/common/auditd_priv_commands.epp', {
-            data => $privlist,
-            uid  => $uid,
-            auid => $auid
+          data => $privlist,
+          uid  => $uid,
+          auid => $auid
         }),
         order   => '350',
       }

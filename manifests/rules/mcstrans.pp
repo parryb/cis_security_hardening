@@ -26,7 +26,7 @@ class cis_security_hardening::rules::mcstrans (
       default => 'purged',
     }
     stdlib::ensure_packages(['mcstrans'], {
-        ensure => $ensure,
+      ensure => $ensure,
     })
   }
 }

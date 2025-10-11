@@ -27,7 +27,7 @@ describe 'cis_security_hardening::rules::auditd_fdisk_use' do
               auditd: {
                 auditing_process: 'none',
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -40,11 +40,11 @@ describe 'cis_security_hardening::rules::auditd_fdisk_use' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_concat__fragment('watch fdisk command rule 1')
-              .with(
+            is_expected.to contain_concat__fragment('watch fdisk command rule 1').
+              with(
                 'order'   => '195',
                 'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                'content' => '-w /bin/fdisk -p x -k fdisk',
+                'content' => '-w /bin/fdisk -p x -k fdisk'
               )
           else
             is_expected.not_to contain_concat__fragment('watch fdisk command rule 1')

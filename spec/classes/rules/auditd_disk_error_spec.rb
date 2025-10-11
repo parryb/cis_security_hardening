@@ -17,7 +17,7 @@ describe 'cis_security_hardening::rules::auditd_disk_error' do
                 space_left_action: 'none',
                 disk_full_action: 'none'
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -31,12 +31,12 @@ describe 'cis_security_hardening::rules::auditd_disk_error' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file_line('auditd_disk_error_action')
-              .with(
-                'line'  => 'disk_error_action = HALT',
-                'path'  => '/etc/audit/auditd.conf',
+            is_expected.to contain_file_line('auditd_disk_error_action').
+              with(
+                'line' => 'disk_error_action = HALT',
+                'path' => '/etc/audit/auditd.conf',
                 'match' => '^disk_error_action',
-                'append_on_no_match' => true,
+                'append_on_no_match' => true
               )
           else
             is_expected.not_to contain_file_line('auditd_disk_error_action')

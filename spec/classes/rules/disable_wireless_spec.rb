@@ -13,7 +13,7 @@ describe 'cis_security_hardening::rules::disable_wireless' do
             'cis_security_hardening' => {
               'wlan_interfaces_count' => 1,
               'wlan_interfaces' => ['wlan1'],
-            },
+            }
           )
         end
         let(:params) do
@@ -26,22 +26,22 @@ describe 'cis_security_hardening::rules::disable_wireless' do
           is_expected.to compile
           if enforce
             if os_facts[:os]['family'].casecmp('redhat').zero?
-              is_expected.to contain_package('NetworkManager')
-                .with(
-                  'ensure' => 'installed',
+              is_expected.to contain_package('NetworkManager').
+                with(
+                  'ensure' => 'installed'
                 )
             elsif os_facts[:os]['family'].casecmp('debian').zero?
-              is_expected.to contain_package('network-manager')
-                .with(
-                  'ensure' => 'installed',
+              is_expected.to contain_package('network-manager').
+                with(
+                  'ensure' => 'installed'
                 )
             end
 
-            is_expected.to contain_exec('shutdown wlan interface wlan1')
-              .with(
+            is_expected.to contain_exec('shutdown wlan interface wlan1').
+              with(
                 'command' => 'ip link set wlan1 down',
                 'path'    => ['/bin', '/sbin', '/usr/bin', '/usr/sbin'],
-                'onlyif'  => "ip link show wlan1 | grep 'state UP'",
+                'onlyif'  => "ip link show wlan1 | grep 'state UP'"
               )
           else
             is_expected.not_to contain_service('shutdown wlan interface wlan1')
@@ -54,7 +54,7 @@ describe 'cis_security_hardening::rules::disable_wireless' do
           os_facts.merge(
             'cis_security_hardening' => {
               'wlan_status' => 'enabled',
-            },
+            }
           )
         end
         let(:params) do
@@ -66,10 +66,10 @@ describe 'cis_security_hardening::rules::disable_wireless' do
         it {
           is_expected.to compile
           if enforce
-            is_expected.to contain_exec('switch radio off')
-              .with(
+            is_expected.to contain_exec('switch radio off').
+              with(
                 'command' => 'nmcli radio all off',
-                'path'    => ['/bin', '/sbin', '/usr/bin', '/usr/sbin'],
+                'path'    => ['/bin', '/sbin', '/usr/bin', '/usr/sbin']
               )
           else
             is_expected.not_to contain_service('switch radio off')

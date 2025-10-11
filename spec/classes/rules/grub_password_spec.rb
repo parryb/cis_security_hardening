@@ -60,20 +60,20 @@ describe 'cis_security_hardening::rules::grub_password' do
               is_expected.not_to contain_exec('bootpw-grub-config-ubuntu-efi')
 
               if enforce
-                is_expected.to contain_file("#{grub_path}/user.cfg")
-                  .with(
+                is_expected.to contain_file("#{grub_path}/user.cfg").
+                  with(
                     'ensure' => 'file',
                     'owner'  => 'root',
                     'group'  => 'root',
-                    'mode'   => mode,
-                  )
-                  .that_notifies('Exec[bootpw-grub-config]')
+                    'mode'   => mode
+                  ).
+                  that_notifies('Exec[bootpw-grub-config]')
 
-                is_expected.to contain_exec('bootpw-grub-config')
-                  .with(
+                is_expected.to contain_exec('bootpw-grub-config').
+                  with(
                     'command'     => "grub2-mkconfig -o #{grub_path}/grub.cfg",
                     'path'        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                    'refreshonly' => true,
+                    'refreshonly' => true
                   )
 
               end
@@ -90,30 +90,30 @@ describe 'cis_security_hardening::rules::grub_password' do
               is_expected.not_to contain_exec('bootpw-grub-config')
 
               if enforce
-                is_expected.to contain_file('/etc/grub.d/50_custom')
-                  .with(
+                is_expected.to contain_file('/etc/grub.d/50_custom').
+                  with(
                     'ensure' => 'file',
                     'owner'  => 'root',
                     'group'  => 'root',
-                    'mode'   => '0755',
-                  )
-                  .that_notifies('Exec[bootpw-grub-config-ubuntu]')
+                    'mode'   => '0755'
+                  ).
+                  that_notifies('Exec[bootpw-grub-config-ubuntu]')
 
-                is_expected.to contain_file_line('grub-unrestricted')
-                  .with(
+                is_expected.to contain_file_line('grub-unrestricted').
+                  with(
                     'ensure' => 'present',
-                    'path'   => '/etc/grub.d/10_linux',
-                    'line'   => 'CLASS="--class gnu-linux --class gnu --class os --unrestricted"',
-                    'match'  => '^CLASS="--class gnu-linux --class gnu --class os"',
-                    'append_on_no_match' => false,
-                  )
-                  .that_notifies('Exec[bootpw-grub-config-ubuntu]')
+                    'path' => '/etc/grub.d/10_linux',
+                    'line' => 'CLASS="--class gnu-linux --class gnu --class os --unrestricted"',
+                    'match' => '^CLASS="--class gnu-linux --class gnu --class os"',
+                    'append_on_no_match' => false
+                  ).
+                  that_notifies('Exec[bootpw-grub-config-ubuntu]')
 
-                is_expected.to contain_exec('bootpw-grub-config-ubuntu')
-                  .with(
+                is_expected.to contain_exec('bootpw-grub-config-ubuntu').
+                  with(
                     'command'     => command,
                     'path'        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                    'refreshonly' => true,
+                    'refreshonly' => true
                   )
               else
                 is_expected.not_to contain_file('/etc/grub.d/50_custom')
@@ -131,20 +131,20 @@ describe 'cis_security_hardening::rules::grub_password' do
               is_expected.not_to contain_file_line('grub-unrestricted')
 
               if enforce
-                is_expected.to contain_file('/etc/grub.d/40_custom')
-                  .with(
-                    'ensure'  => 'file',
-                    'owner'   => 'root',
-                    'group'   => 'root',
-                    'mode'    => '0755',
-                  )
-                  .that_notifies('Exec[bootpw-grub-config-sles]')
+                is_expected.to contain_file('/etc/grub.d/40_custom').
+                  with(
+                    'ensure' => 'file',
+                    'owner' => 'root',
+                    'group' => 'root',
+                    'mode' => '0755'
+                  ).
+                  that_notifies('Exec[bootpw-grub-config-sles]')
 
-                is_expected.to contain_exec('bootpw-grub-config-sles')
-                  .with(
+                is_expected.to contain_exec('bootpw-grub-config-sles').
+                  with(
                     'command'     => "grub2-mkconfig -o #{grub_path}/grub.cfg",
                     'path'        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                    'refreshonly' => true,
+                    'refreshonly' => true
                   )
 
               end

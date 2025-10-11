@@ -17,7 +17,7 @@ describe 'cis_security_hardening::rules::auditd_usbguard' do
                 space_left_action: 'none',
                 disk_full_action: 'none'
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -30,11 +30,11 @@ describe 'cis_security_hardening::rules::auditd_usbguard' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file_line('auditd_usbguard')
-              .with(
+            is_expected.to contain_file_line('auditd_usbguard').
+              with(
                 'line'  => 'AuditBackend=LinuxAudit',
                 'path'  => '/etc/usbguard/usbguard-daemon.conf',
-                'match' => '^AuditBackend=',
+                'match' => '^AuditBackend='
               )
           else
             is_expected.not_to contain_file_line('auditd_usbguard')

@@ -13,7 +13,7 @@ describe 'cis_security_hardening::rules::gdm_auto_mount' do
             cis_security_hardening: {
               gnome_gdm_conf: false,
               gnome_gdm: true,
-            },
+            }
           )
         end
         let(:params) do
@@ -27,36 +27,40 @@ describe 'cis_security_hardening::rules::gdm_auto_mount' do
 
           if enforce
             if os_facts[:os]['name'].casecmp('debian').zero? && os_facts[:os]['release']['major'] > '10'
-              is_expected.to contain_dconf__db('media-automount-autorun-never')
-                .with(
+              is_expected.to contain_dconf__db('media-automount-autorun-never').
+                with(
                   'db_dir'         => '/etc/dconf/db/local.d',
                   'db_filename'    => '00-media-automount',
                   'locks_filename' => '00-media-automount',
-                  'settings' => {
+                  'settings'       => {
                     'org/gnome/desktop/media-handling' => {
                       'autorun-never' => 'true',
                     },
                   },
+                  # rubocop:disable Layout/HashAlignment
                   'locks' => [
-                    '/org/gnome/desktop/media-handling/autorun-never',
-                  ],
+                    '/org/gnome/desktop/media-handling/autorun-never'
+                  ]
+                  # rubocop:enable Layout/HashAlignment
                 )
             else
-              is_expected.to contain_dconf__db('media-automount-automount')
-                .with(
+              is_expected.to contain_dconf__db('media-automount-automount').
+                with(
                   'db_dir'         => '/etc/dconf/db/local.d',
                   'db_filename'    => '00-media-automount',
                   'locks_filename' => '00-media-automount',
-                  'settings' => {
+                  'settings'       => {
                     'org/gnome/desktop/media-handling' => {
                       'automount' => 'false',
                       'automount-open' => 'false',
                     },
                   },
+                  # rubocop:disable Layout/HashAlignment
                   'locks' => [
                     '/org/gnome/desktop/media-handling/automount',
-                    '/org/gnome/desktop/media-handling/automount-open',
-                  ],
+                    '/org/gnome/desktop/media-handling/automount-open'
+                  ]
+                  # rubocop:enable Layout/HashAlignment
                 )
             end
           else

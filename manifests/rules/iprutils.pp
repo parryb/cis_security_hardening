@@ -33,7 +33,7 @@ class cis_security_hardening::rules::iprutils (
     }
 
     stdlib::ensure_packages(['iprutils'], {
-        ensure => $ensure,
+      ensure => $ensure,
     })
   }
 }

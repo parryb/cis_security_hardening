@@ -20,13 +20,13 @@ describe 'cis_security_hardening::rules::yum_clean_requirements' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file_line('yum_clean_requirements_on_remove')
-              .with(
+            is_expected.to contain_file_line('yum_clean_requirements_on_remove').
+              with(
                 'ensure'             => 'present',
                 'path'               => '/etc/yum.conf',
                 'line'               => 'clean_requirements_on_remove=1',
                 'match'              => '^clean_requirements_on_remove',
-                'append_on_no_match' => true,
+                'append_on_no_match' => true
               )
           else
             is_expected.not_to contain_file_line('yum_clean_requirements_on_remove')

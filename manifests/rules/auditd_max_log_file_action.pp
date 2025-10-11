@@ -26,6 +26,8 @@ class cis_security_hardening::rules::auditd_max_log_file_action (
   String $max_log_file_action = 'keep_logs',
 ) {
   if $enforce {
+    require cis_security_hardening::rules::auditd_package
+
     file_line { 'auditd_max_log_file_action':
       line               => "max_log_file_action = ${$max_log_file_action}",
       path               => '/etc/audit/auditd.conf',

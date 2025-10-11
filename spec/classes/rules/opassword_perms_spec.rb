@@ -19,20 +19,20 @@ describe 'cis_security_hardening::rules::opassword_perms' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file('/etc/security/opasswd')
-              .with(
+            is_expected.to contain_file('/etc/security/opasswd').
+              with(
                 'ensure' => 'file',
                 'owner'  => 'root',
                 'group'  => 'root',
-                'mode'   => '0600',
+                'mode'   => '0600'
               )
 
-            is_expected.to contain_file('/etc/security/opasswd.old')
-              .with(
+            is_expected.to contain_file('/etc/security/opasswd.old').
+              with(
                 'ensure' => 'file',
                 'owner'  => 'root',
                 'group'  => 'root',
-                'mode'   => '0600',
+                'mode'   => '0600'
               )
           else
             is_expected.not_to contain_file('/etc/security/opasswd')

@@ -25,9 +25,9 @@ describe 'cis_security_hardening::rules::krb5_workstation' do
                           'purged'
                         end
 
-            is_expected.to contain_package('krb5-workstation')
-              .with(
-                'ensure' => ensureval,
+            is_expected.to contain_package('krb5-workstation').
+              with(
+                'ensure' => ensureval
               )
           else
             is_expected.not_to contain_package('krb5-workstation')

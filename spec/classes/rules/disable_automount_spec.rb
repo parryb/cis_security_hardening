@@ -19,10 +19,10 @@ describe 'cis_security_hardening::rules::disable_automount' do
         it {
           is_expected.to compile
           if enforce
-            is_expected.to contain_service('autofs')
-              .with(
+            is_expected.to contain_service('autofs').
+              with(
                 'ensure' => 'stopped',
-                'enable' => false,
+                'enable' => false
               )
           else
             is_expected.not_to contain_service('autofs')

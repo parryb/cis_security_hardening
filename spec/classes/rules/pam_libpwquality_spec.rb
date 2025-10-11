@@ -20,9 +20,9 @@ describe 'cis_security_hardening::rules::pam_libpwquality' do
 
           if enforce
             # if os_facts[:os]['name'].casecmp('centos').zero?
-            is_expected.to contain_package('libpwquality')
-              .with(
-                'ensure' => 'installed',
+            is_expected.to contain_package('libpwquality').
+              with(
+                'ensure' => 'installed'
               )
             # else
             #   is_expected.not_to contain_package('libpwquality')

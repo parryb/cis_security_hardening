@@ -37,7 +37,7 @@ class cis_security_hardening::rules::abrt (
       }
 
       stdlib::ensure_packages($pkgs, {
-          ensure => $ensure,
+        ensure => $ensure,
       })
     }
   }

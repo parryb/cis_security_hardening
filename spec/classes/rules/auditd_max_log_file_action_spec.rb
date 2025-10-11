@@ -15,7 +15,7 @@ describe 'cis_security_hardening::rules::auditd_max_log_file_action' do
                 uid_min: '1000',
                 'max_log_file' => 'none',
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -29,12 +29,12 @@ describe 'cis_security_hardening::rules::auditd_max_log_file_action' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file_line('auditd_max_log_file_action')
-              .with(
-                'path'  => '/etc/audit/auditd.conf',
-                'line'  => 'max_log_file_action = keep_logs',
+            is_expected.to contain_file_line('auditd_max_log_file_action').
+              with(
+                'path' => '/etc/audit/auditd.conf',
+                'line' => 'max_log_file_action = keep_logs',
                 'match' => '^max_log_file_action',
-                'append_on_no_match' => true,
+                'append_on_no_match' => true
               )
           else
             is_expected.not_to contain_file_line('auditd_max_log_file_action')
