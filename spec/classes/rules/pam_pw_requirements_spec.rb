@@ -47,6 +47,9 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
             'maxrepeat' => 3,
             'maxclassrepeat' => 4,
             'maxsequence' => 3,
+            'usercheck' => true,
+            'gecoscheck' => true,
+            'enforce_for_root' => true,
           }
         end
 
@@ -169,6 +172,33 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
                     'append_on_no_match' => true
                   )
 
+                is_expected.to contain_file_line('pam usercheck').
+                  with(
+                    'ensure'             => 'present',
+                    'path'               => '/etc/security/pwquality.conf',
+                    'line'               => 'usercheck = 1',
+                    'match'              => '^#? ?usercheck',
+                    'append_on_no_match' => true
+                  )
+
+                is_expected.to contain_file_line('pam gecoscheck').
+                  with(
+                    'ensure'             => 'present',
+                    'path'               => '/etc/security/pwquality.conf',
+                    'line'               => 'gecoscheck = 1',
+                    'match'              => '^#? ?gecoscheck',
+                    'append_on_no_match' => true
+                  )
+
+                is_expected.to contain_file_line('pam enforce_for_root').
+                  with(
+                    'ensure'             => 'present',
+                    'path'               => '/etc/security/pwquality.conf',
+                    'line'               => 'enforce_for_root',
+                    'match'              => '^#? ?enforce_for_root',
+                    'append_on_no_match' => true
+                  )
+
               end
 
               if os_facts[:os]['release']['major'] > '7'
@@ -278,6 +308,33 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
                   'path' => '/etc/security/pwquality.conf',
                   'line' => 'difok = 8',
                   'match' => '^#? ?difok',
+                  'append_on_no_match' => true
+                )
+
+              is_expected.to contain_file_line('pam usercheck debian').
+                with(
+                  'ensure' => 'present',
+                  'path' => '/etc/security/pwquality.conf',
+                  'line' => 'usercheck = 1',
+                  'match' => '^#? ?usercheck',
+                  'append_on_no_match' => true
+                )
+
+              is_expected.to contain_file_line('pam gecoscheck debian').
+                with(
+                  'ensure' => 'present',
+                  'path' => '/etc/security/pwquality.conf',
+                  'line' => 'gecoscheck = 1',
+                  'match' => '^#? ?gecoscheck',
+                  'append_on_no_match' => true
+                )
+
+              is_expected.to contain_file_line('pam enforce_for_root debian').
+                with(
+                  'ensure' => 'present',
+                  'path' => '/etc/security/pwquality.conf',
+                  'line' => 'enforce_for_root',
+                  'match' => '^#? ?enforce_for_root',
                   'append_on_no_match' => true
                 )
 

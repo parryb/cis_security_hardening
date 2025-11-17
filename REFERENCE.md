@@ -277,6 +277,7 @@ audited
 * `cis_security_hardening::rules::opassword_perms`: Ensure permissions on /etc/security/opasswd are configured
 * `cis_security_hardening::rules::opensc_pkcs11`: Ensure the opensc-pcks11 is installed
 * `cis_security_hardening::rules::openssl_pkcs11`: Ensure the operating system has the packages required for multifactor authentication
+* `cis_security_hardening::rules::overlayfs`: Ensure overlayfs kernel module is not available
 * `cis_security_hardening::rules::pam_cached_auth`: Ensure PAM prohibits the use of cached authentications after one day
 * `cis_security_hardening::rules::pam_fail_delay`: Ensure logging delay after failed logon attempt
 * `cis_security_hardening::rules::pam_last_logon`: Ensure last successful account logon is displayed upon logon

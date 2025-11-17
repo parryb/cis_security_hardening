@@ -12,7 +12,7 @@
 #    Enforce the rule
 #
 # @param encrypted_root_password
-#    The nre root password o be set (has to be encrypted as the OS needs it)
+#    The new root password to be set (has to be encrypted as the OS needs it)
 #
 # @example
 #   class { 'cis_security_hardening::rules::root_gid':

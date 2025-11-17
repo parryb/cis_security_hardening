@@ -20,7 +20,12 @@ class cis_security_hardening::rules::pam_libpwquality (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    stdlib::ensure_packages(['libpwquality'], {
+    $pkg = $facts['os']['family'].downcase() ? {
+      'debian' => 'libpam-pwquality',
+      default  => 'libpwquality',
+    }
+
+    stdlib::ensure_packages([$pkg], {
       ensure => installed,
     })
   }
