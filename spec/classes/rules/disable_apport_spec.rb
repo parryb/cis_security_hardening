@@ -7,17 +7,8 @@ enforce_options = [true, false]
 describe 'cis_security_hardening::rules::disable_apport' do
   on_supported_os.each do |os, os_facts|
     enforce_options.each do |enforce|
-      context "on #{os} with enforce = #{enforce} nothing to do" do
-        let(:facts) do
-          os_facts.merge(
-            cis_security_hardening: {
-              apport: {
-                pkg: false,
-                service: false,
-              },
-            },
-          )
-        end
+      context "on #{os} with enforce = #{enforce} and apport not installed" do
+        let(:facts) { os_facts.merge(cis_security_hardening: { 'apport' => { 'pkg' => false, 'service' => false } }) }
         let(:params) do
           {
             'enforce' => enforce,
@@ -34,7 +25,7 @@ describe 'cis_security_hardening::rules::disable_apport' do
         }
       end
 
-      context "on #{os} with enforce = #{enforce} nothing to do" do
+      context "on #{os} with enforce = #{enforce} and apport installed" do
         let(:facts) do
           os_facts.merge(
             cis_security_hardening: {
@@ -42,7 +33,7 @@ describe 'cis_security_hardening::rules::disable_apport' do
                 pkg: true,
                 service: true,
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -55,19 +46,19 @@ describe 'cis_security_hardening::rules::disable_apport' do
           is_expected.to compile.with_all_deps
 
           if enforce
-            is_expected.to contain_service('apport.service')
-              .with(
+            is_expected.to contain_service('apport.service').
+              with(
                 'ensure' => 'stopped',
-                'enable' => false,
+                'enable' => false
               )
             ens = if os_facts[:os]['family'].casecmp('suse').zero?
                     'absent'
                   else
                     'purged'
                   end
-            is_expected.to contain_package('apport')
-              .with(
-                'ensure' => ens,
+            is_expected.to contain_package('apport').
+              with(
+                'ensure' => ens
               )
           end
         }

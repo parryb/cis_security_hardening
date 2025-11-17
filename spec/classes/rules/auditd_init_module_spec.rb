@@ -6,7 +6,7 @@ enforce_options = [true, false]
 
 describe 'cis_security_hardening::rules::auditd_init_module' do
   test_on = {
-    hardwaremodels: ['x86_64', 'i686'],
+    hardwaremodels: %w[x86_64 i686],
   }
 
   let(:pre_condition) do
@@ -31,7 +31,7 @@ describe 'cis_security_hardening::rules::auditd_init_module' do
               auditd: {
                 auditing_process: 'none',
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -44,19 +44,19 @@ describe 'cis_security_hardening::rules::auditd_init_module' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_concat__fragment('watch init_module command rule 1')
-              .with(
+            is_expected.to contain_concat__fragment('watch init_module command rule 1').
+              with(
                 'order'   => '219',
                 'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                'content' => '-a always,exit -F arch=b32 -S init_module -F auid>=1000 -F auid!=4294967295 -k module_chng',
+                'content' => '-a always,exit -F arch=b32 -S init_module -F auid>=1000 -F auid!=4294967295 -k module_chng'
               )
 
-            if ['x86_64', 'amd64'].include?(os_facts[:os]['architecture'])
-              is_expected.to contain_concat__fragment('watch init_module command rule 2')
-                .with(
+            if %w[x86_64 amd64].include?(os_facts[:os]['architecture'])
+              is_expected.to contain_concat__fragment('watch init_module command rule 2').
+                with(
                   'order'   => '220',
                   'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-a always,exit -F arch=b64 -S init_module -F auid>=1000 -F auid!=4294967295 -k module_chng',
+                  'content' => '-a always,exit -F arch=b64 -S init_module -F auid>=1000 -F auid!=4294967295 -k module_chng'
                 )
             end
           else

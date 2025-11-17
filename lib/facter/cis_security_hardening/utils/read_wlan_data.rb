@@ -7,12 +7,10 @@ def read_wlan_data
 
   if File.exist?('/usr/bin/nmcli')
     val = Facter::Core::Execution.exec('/usr/bin/nmcli radio all 2>&1 | grep -v WIFI')
-    if val.nil? || val.empty?
-      status = 'disabled'
-    elsif val == 'Error: NetworkManager is not running.'
+    if val.nil? || val.empty? || val == 'Error: NetworkManager is not running.'
       status = 'disabled'
     else
-      m = val.match(%r{^(enabled|disabled)\s*(?<wifi>\w*)\s*(enabled|disabled)})
+      m = val.match(%r{^(?<state1>enabled|disabled)\s*(?<wifi>\w*)\s*(?<state2>enabled|disabled)})
       status = if m.nil?
                  'disabled'
                else

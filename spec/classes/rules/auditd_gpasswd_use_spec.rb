@@ -28,7 +28,7 @@ describe 'cis_security_hardening::rules::auditd_gpasswd_use' do
                 uid_min: '1000',
                 auditing_process: 'none',
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -47,11 +47,11 @@ describe 'cis_security_hardening::rules::auditd_gpasswd_use' do
                       '-a always,exit -F path=/usr/bin/gpasswd -F perm=x -F auid>=1000 -F auid!=4294967295 -k privileged-gpasswd'
                     end
 
-            is_expected.to contain_concat__fragment('watch gpasswd command rule 1')
-              .with(
+            is_expected.to contain_concat__fragment('watch gpasswd command rule 1').
+              with(
                 'order'   => '182',
                 'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                'content' => rule1,
+                'content' => rule1
               )
           else
             is_expected.not_to contain_concat__fragment('watch gpasswd command rule 1')

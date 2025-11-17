@@ -29,7 +29,7 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
                   status: false,
                 },
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -58,270 +58,270 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
 
               is_expected.not_to contain_package('libpam-pwquality')
 
-              is_expected.to contain_file_line('pam minlen')
-                .with(
+              is_expected.to contain_file_line('pam minlen').
+                with(
                   'ensure'             => 'present',
                   'path'               => '/etc/security/pwquality.conf',
                   'line'               => 'minlen = 14',
                   'match'              => '^#? ?minlen',
-                  'append_on_no_match' => true,
+                  'append_on_no_match' => true
                 )
 
-              is_expected.to contain_file_line('pam dcredit')
-                .with(
+              is_expected.to contain_file_line('pam dcredit').
+                with(
                   'ensure' => 'present',
-                  'path'   => '/etc/security/pwquality.conf',
-                  'line'   => 'dcredit = -1',
-                  'match'  => '^#? ?dcredit',
-                  'append_on_no_match' => true,
+                  'path' => '/etc/security/pwquality.conf',
+                  'line' => 'dcredit = -1',
+                  'match' => '^#? ?dcredit',
+                  'append_on_no_match' => true
                 )
 
-              is_expected.to contain_file_line('pam ucredit')
-                .with(
+              is_expected.to contain_file_line('pam ucredit').
+                with(
                   'ensure' => 'present',
-                  'path'   => '/etc/security/pwquality.conf',
-                  'line'   => 'ucredit = -1',
-                  'match'  => '^#? ?ucredit',
-                  'append_on_no_match' => true,
+                  'path' => '/etc/security/pwquality.conf',
+                  'line' => 'ucredit = -1',
+                  'match' => '^#? ?ucredit',
+                  'append_on_no_match' => true
                 )
 
-              is_expected.to contain_file_line('pam ocredit')
-                .with(
+              is_expected.to contain_file_line('pam ocredit').
+                with(
                   'ensure' => 'present',
-                  'path'   => '/etc/security/pwquality.conf',
-                  'line'   => 'ocredit = -1',
-                  'match'  => '^#? ?ocredit',
-                  'append_on_no_match' => true,
+                  'path' => '/etc/security/pwquality.conf',
+                  'line' => 'ocredit = -1',
+                  'match' => '^#? ?ocredit',
+                  'append_on_no_match' => true
                 )
 
-              is_expected.to contain_file_line('pam lcredit')
-                .with(
+              is_expected.to contain_file_line('pam lcredit').
+                with(
                   'ensure' => 'present',
-                  'path'   => '/etc/security/pwquality.conf',
-                  'line'   => 'lcredit = -1',
-                  'match'  => '^#? ?lcredit',
-                  'append_on_no_match' => true,
+                  'path' => '/etc/security/pwquality.conf',
+                  'line' => 'lcredit = -1',
+                  'match' => '^#? ?lcredit',
+                  'append_on_no_match' => true
                 )
 
-              is_expected.to contain_file_line('pam dictcheck')
-                .with(
+              is_expected.to contain_file_line('pam dictcheck').
+                with(
                   'ensure' => 'present',
-                  'path'   => '/etc/security/pwquality.conf',
-                  'line'   => 'dictcheck = 1',
-                  'match'  => '^#? ?dictcheck',
-                  'append_on_no_match' => true,
+                  'path' => '/etc/security/pwquality.conf',
+                  'line' => 'dictcheck = 1',
+                  'match' => '^#? ?dictcheck',
+                  'append_on_no_match' => true
                 )
 
-              is_expected.to contain_file_line('pam difok')
-                .with(
+              is_expected.to contain_file_line('pam difok').
+                with(
                   'ensure' => 'present',
-                  'path'   => '/etc/security/pwquality.conf',
-                  'line'   => 'difok = 8',
-                  'match'  => '^#? ?difok',
-                  'append_on_no_match' => true,
+                  'path' => '/etc/security/pwquality.conf',
+                  'line' => 'difok = 8',
+                  'match' => '^#? ?difok',
+                  'append_on_no_match' => true
                 )
 
-              is_expected.to contain_file_line('pam maxrepeat')
-                .with(
+              is_expected.to contain_file_line('pam maxrepeat').
+                with(
                   'ensure' => 'present',
-                  'path'   => '/etc/security/pwquality.conf',
-                  'line'   => 'maxrepeat = 3',
-                  'match'  => '^#? ?maxrepeat',
-                  'append_on_no_match' => true,
+                  'path' => '/etc/security/pwquality.conf',
+                  'line' => 'maxrepeat = 3',
+                  'match' => '^#? ?maxrepeat',
+                  'append_on_no_match' => true
                 )
 
-              is_expected.to contain_file_line('pam maxclassrepeat')
-                .with(
+              is_expected.to contain_file_line('pam maxclassrepeat').
+                with(
                   'ensure' => 'present',
-                  'path'   => '/etc/security/pwquality.conf',
-                  'line'   => 'maxclassrepeat = 4',
-                  'match'  => '^#? ?maxclassrepeat',
-                  'append_on_no_match' => true,
+                  'path' => '/etc/security/pwquality.conf',
+                  'line' => 'maxclassrepeat = 4',
+                  'match' => '^#? ?maxclassrepeat',
+                  'append_on_no_match' => true
                 )
 
               if os_facts[:os]['release']['major'] == '7'
-                is_expected.to contain_pam('pam-system-auth-requisite')
-                  .with(
+                is_expected.to contain_pam('pam-system-auth-requisite').
+                  with(
                     'ensure'    => 'present',
                     'service'   => 'system-auth',
                     'type'      => 'password',
                     'control'   => 'requisite',
                     'module'    => 'pam_pwquality.so',
-                    'arguments' => ['try_first_pass', 'local_users_only', 'retry=3'],
+                    'arguments' => ['try_first_pass', 'local_users_only', 'retry=3']
                   )
 
-                is_expected.to contain_pam('pam-password-auth-requisite')
-                  .with(
+                is_expected.to contain_pam('pam-password-auth-requisite').
+                  with(
                     'ensure'    => 'present',
                     'service'   => 'password-auth',
                     'type'      => 'password',
                     'control'   => 'requisite',
                     'module'    => 'pam_pwquality.so',
-                    'arguments' => ['try_first_pass', 'local_users_only', 'retry=3'],
+                    'arguments' => ['try_first_pass', 'local_users_only', 'retry=3']
                   )
 
-                is_expected.to contain_file_line('pam maxsequence')
-                  .with(
+                is_expected.to contain_file_line('pam maxsequence').
+                  with(
                     'ensure'             => 'present',
                     'path'               => '/etc/security/pwquality.conf',
                     'line'               => 'maxsequence = 3',
                     'match'              => '^#? ?maxsequence',
-                    'append_on_no_match' => true,
+                    'append_on_no_match' => true
                   )
 
               end
 
               if os_facts[:os]['release']['major'] > '7'
 
-                is_expected.to contain_pam('authselect configure pw requirements in system-auth')
-                  .with(
+                is_expected.to contain_pam('authselect configure pw requirements in system-auth').
+                  with(
                     'ensure'    => 'present',
                     'service'   => 'system-auth',
                     'type'      => 'password',
                     'control'   => 'requisite',
                     'module'    => 'pam_pwquality.so',
                     'arguments' => ['try_first_pass', 'retry=3', 'enforce-for-root', 'local_users_only', 'remember=5'],
-                    'target'    => '/etc/authselect/custom/testprofile/system-auth',
-                  )
-                  .that_notifies('Exec[authselect-apply-changes]')
+                    'target'    => '/etc/authselect/custom/testprofile/system-auth'
+                  ).
+                  that_notifies('Exec[authselect-apply-changes]')
 
-                is_expected.to contain_pam('authselect configure pw requirements in password-auth')
-                  .with(
+                is_expected.to contain_pam('authselect configure pw requirements in password-auth').
+                  with(
                     'ensure'    => 'present',
                     'service'   => 'password-auth',
                     'type'      => 'password',
                     'control'   => 'requisite',
                     'module'    => 'pam_pwquality.so',
                     'arguments' => ['try_first_pass', 'retry=3', 'enforce-for-root', 'local_users_only', 'remember=5'],
-                    'target'    => '/etc/authselect/custom/testprofile/password-auth',
-                  )
-                  .that_notifies('Exec[authselect-apply-changes]')
+                    'target'    => '/etc/authselect/custom/testprofile/password-auth'
+                  ).
+                  that_notifies('Exec[authselect-apply-changes]')
 
               end
 
             elsif os_facts[:os]['family'].casecmp('debian').zero?
 
-              is_expected.to contain_file_line('pam dcredit')
-                .with(
-                    'ensure' => 'present',
-                    'path'   => '/etc/security/pwquality.conf',
-                    'line'   => 'dcredit = -1',
-                    'match'  => '^#? ?dcredit',
-                    'append_on_no_match' => true,
-                  )
-
-              is_expected.to contain_file_line('pam ucredit')
-                .with(
+              is_expected.to contain_file_line('pam dcredit').
+                with(
                   'ensure' => 'present',
-                  'path'   => '/etc/security/pwquality.conf',
-                  'line'   => 'ucredit = -1',
-                  'match'  => '^#? ?ucredit',
-                  'append_on_no_match' => true,
+                  'path' => '/etc/security/pwquality.conf',
+                  'line' => 'dcredit = -1',
+                  'match' => '^#? ?dcredit',
+                  'append_on_no_match' => true
                 )
 
-              is_expected.to contain_file_line('pam ocredit')
-                .with(
+              is_expected.to contain_file_line('pam ucredit').
+                with(
                   'ensure' => 'present',
-                  'path'   => '/etc/security/pwquality.conf',
-                  'line'   => 'ocredit = -1',
-                  'match'  => '^#? ?ocredit',
-                  'append_on_no_match' => true,
+                  'path' => '/etc/security/pwquality.conf',
+                  'line' => 'ucredit = -1',
+                  'match' => '^#? ?ucredit',
+                  'append_on_no_match' => true
                 )
 
-              is_expected.to contain_file_line('pam lcredit')
-                .with(
+              is_expected.to contain_file_line('pam ocredit').
+                with(
                   'ensure' => 'present',
-                  'path'   => '/etc/security/pwquality.conf',
-                  'line'   => 'lcredit = -1',
-                  'match'  => '^#? ?lcredit',
-                  'append_on_no_match' => true,
+                  'path' => '/etc/security/pwquality.conf',
+                  'line' => 'ocredit = -1',
+                  'match' => '^#? ?ocredit',
+                  'append_on_no_match' => true
                 )
 
-              is_expected.to contain_file_line('pam minlen')
-                .with(
+              is_expected.to contain_file_line('pam lcredit').
+                with(
                   'ensure' => 'present',
-                  'path'   => '/etc/security/pwquality.conf',
-                  'line'   => 'minlen = 14',
-                  'match'  => '^#? ?minlen',
-                  'append_on_no_match' => true,
-                )
-              is_expected.to contain_file_line('pam minclass')
-                .with(
-                  'ensure' => 'present',
-                  'path'   => '/etc/security/pwquality.conf',
-                  'line'   => 'minclass = 4',
-                  'match'  => '^#? ?minclass',
-                  'append_on_no_match' => true,
+                  'path' => '/etc/security/pwquality.conf',
+                  'line' => 'lcredit = -1',
+                  'match' => '^#? ?lcredit',
+                  'append_on_no_match' => true
                 )
 
-              is_expected.to contain_file_line('pam enforcing')
-                .with(
+              is_expected.to contain_file_line('pam minlen').
+                with(
                   'ensure' => 'present',
-                  'path'   => '/etc/security/pwquality.conf',
-                  'line'   => 'enforcing = 1',
-                  'match'  => '^#? ?enforcing',
-                  'append_on_no_match' => true,
+                  'path' => '/etc/security/pwquality.conf',
+                  'line' => 'minlen = 14',
+                  'match' => '^#? ?minlen',
+                  'append_on_no_match' => true
+                )
+              is_expected.to contain_file_line('pam minclass').
+                with(
+                  'ensure' => 'present',
+                  'path' => '/etc/security/pwquality.conf',
+                  'line' => 'minclass = 4',
+                  'match' => '^#? ?minclass',
+                  'append_on_no_match' => true
                 )
 
-              is_expected.to contain_file_line('pam dictcheck')
-                .with(
-                'ensure' => 'present',
-                'path'   => '/etc/security/pwquality.conf',
-                'line'   => 'dictcheck = 1',
-                'match'  => '^#? ?dictcheck',
-                'append_on_no_match' => true,
-              )
-
-              is_expected.to contain_file_line('pam difok')
-                .with(
+              is_expected.to contain_file_line('pam enforcing').
+                with(
                   'ensure' => 'present',
-                  'path'   => '/etc/security/pwquality.conf',
-                  'line'   => 'difok = 8',
-                  'match'  => '^#? ?difok',
-                  'append_on_no_match' => true,
+                  'path' => '/etc/security/pwquality.conf',
+                  'line' => 'enforcing = 1',
+                  'match' => '^#? ?enforcing',
+                  'append_on_no_match' => true
                 )
 
-              is_expected.to contain_pam('pam-common-password-requisite')
-                .with(
+              is_expected.to contain_file_line('pam dictcheck').
+                with(
+                  'ensure' => 'present',
+                  'path' => '/etc/security/pwquality.conf',
+                  'line' => 'dictcheck = 1',
+                  'match' => '^#? ?dictcheck',
+                  'append_on_no_match' => true
+                )
+
+              is_expected.to contain_file_line('pam difok').
+                with(
+                  'ensure' => 'present',
+                  'path' => '/etc/security/pwquality.conf',
+                  'line' => 'difok = 8',
+                  'match' => '^#? ?difok',
+                  'append_on_no_match' => true
+                )
+
+              is_expected.to contain_pam('pam-common-password-requisite').
+                with(
                   'ensure'    => 'present',
                   'service'   => 'common-password',
                   'type'      => 'password',
                   'control'   => 'requisite',
                   'module'    => 'pam_pwquality.so',
-                  'arguments' => ['retry=3'],
+                  'arguments' => ['retry=3']
                 )
 
               if os_facts[:os]['name'].casecmp('debian').zero? && os_facts[:os]['release']['major'] > '10'
-                is_expected.to contain_package('libpam-pwquality')
-                  .with(
-                    'ensure' => 'installed',
-                  )
-                  .that_notifies('Exec[update-pam-config]')
+                is_expected.to contain_package('libpam-pwquality').
+                  with(
+                    'ensure' => 'installed'
+                  ).
+                  that_notifies('Exec[update-pam-config]')
 
-                is_expected.to contain_exec('update-pam-config')
-                  .with(
+                is_expected.to contain_exec('update-pam-config').
+                  with(
                     'command'     => 'pam-auth-update --package pwquality',
                     'path'        => ['/sbin', '/usr/sbin'],
                     'refreshonly' => true,
-                    'logoutput'   => true,
+                    'logoutput'   => true
                   )
               else
-                is_expected.to contain_package('libpam-pwquality')
-                  .with(
-                    'ensure' => 'installed',
+                is_expected.to contain_package('libpam-pwquality').
+                  with(
+                    'ensure' => 'installed'
                   )
               end
 
             elsif os_facts[:os]['family'].casecmp('suse').zero?
 
-              is_expected.to contain_pam('pam-common-password-requisite')
-                .with(
+              is_expected.to contain_pam('pam-common-password-requisite').
+                with(
                   'ensure'    => 'present',
                   'service'   => 'common-password',
                   'type'      => 'password',
                   'control'   => 'requisite',
                   'module'    => 'pam_cracklib.so',
-                  'arguments' => ['retry=3', 'minlen=14', 'dcredit=-1', 'ucredit=-1', 'ocredit=-1', 'lcredit=-1'],
+                  'arguments' => ['retry=3', 'minlen=14', 'dcredit=-1', 'ucredit=-1', 'ocredit=-1', 'lcredit=-1']
                 )
 
             end

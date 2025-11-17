@@ -16,5 +16,6 @@ define cis_security_hardening::unmask_systemd_service (
   exec { "unmask server ${service}-${title}":
     command => "systemctl unmask ${service}", #lint:ignore:security_class_or_define_parameter_in_exec
     path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+    onlyif  => "systemctl is-enabled ${service} | grep -q masked",
   }
 }

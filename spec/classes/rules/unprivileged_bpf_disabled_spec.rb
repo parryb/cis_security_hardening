@@ -19,9 +19,9 @@ describe 'cis_security_hardening::rules::unprivileged_bpf_disabled' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_sysctl('kernel.unprivileged_bpf_disabled')
-              .with(
-                'value' => 1,
+            is_expected.to contain_sysctl('kernel.unprivileged_bpf_disabled').
+              with(
+                'value' => 1
               )
           else
             is_expected.not_to contain_sysctl('kernel.unprivileged_bpf_disabled')

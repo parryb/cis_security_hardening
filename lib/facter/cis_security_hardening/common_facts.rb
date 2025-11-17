@@ -30,11 +30,7 @@ def common_facts(os, _distid, _release)
   pw_data = {}
   val = Facter::Core::Execution.exec("grep ^PASS_MAX_DAYS /etc/login.defs | awk '{print $2;}'")
   pw_data['pass_max_days'] = check_value_integer(val, 99_999)
-  pw_data['pass_max_days_status'] = if pw_data['pass_max_days'] > 365
-                                      true
-                                    else
-                                      false
-                                    end
+  pw_data['pass_max_days_status'] = pw_data['pass_max_days'] > 365
   val = Facter::Core::Execution.exec("grep ^PASS_MIN_DAYS /etc/login.defs | awk '{print $2;}'")
   pw_data['pass_min_days'] = check_value_string(val, '0')
   pw_data['pass_min_days_status'] = pw_data['pass_min_days'] < '7'
@@ -46,19 +42,13 @@ def common_facts(os, _distid, _release)
   pw_data['inactive_status'] = pw_data['inactive'] < 30
   ret = false
   facts['local_users'].each do |_user, data|
-    unless data['password_date_valid']
-      ret = true
-    end
+    ret = true unless data['password_date_valid']
   end
   pw_data['pw_change_in_future'] = ret
   pw_data = {}
   val = Facter::Core::Execution.exec("grep ^PASS_MAX_DAYS /etc/login.defs | awk '{print $2;}'")
   pw_data['pass_max_days'] = check_value_integer(val, 99_999)
-  pw_data['pass_max_days_status'] = if pw_data['pass_max_days'] > 365
-                                      true
-                                    else
-                                      false
-                                    end
+  pw_data['pass_max_days_status'] = pw_data['pass_max_days'] > 365
   val = Facter::Core::Execution.exec("grep ^PASS_MIN_DAYS /etc/login.defs | awk '{print $2;}'")
   pw_data['pass_min_days'] = check_value_string(val, '0')
   pw_data['pass_min_days_status'] = pw_data['pass_min_days'] < '7'
@@ -70,9 +60,7 @@ def common_facts(os, _distid, _release)
   pw_data['inactive_status'] = pw_data['inactive'] < 30
   ret = false
   facts['local_users'].each do |_user, data|
-    unless data['password_date_valid']
-      ret = true
-    end
+    ret = true unless data['password_date_valid']
   end
   pw_data['pw_change_in_future'] = ret
   facts['pw_data'] = pw_data
@@ -83,7 +71,7 @@ def common_facts(os, _distid, _release)
   # read result from cronjob and create fact
   files = []
   if File.exist?('/usr/share/cis_security_hardening/data/world-writable-files.txt')
-    text = File.open('/usr/share/cis_security_hardening/data/world-writable-files.txt').read
+    text = File.read('/usr/share/cis_security_hardening/data/world-writable-files.txt')
     text.gsub!(%r{\r\n?}, "\n")
     files = text.split("\n")
   end
@@ -95,8 +83,6 @@ def common_facts(os, _distid, _release)
            Facter::Core::Execution.exec('rpm -q postfix 2>/dev/null')
          elsif os.casecmp('debian').zero?
            Facter::Core::Execution.exec('dpkg -l | grep postfix | awk \'{print $2;}\'')
-         else
-           nil
          end
   facts['postfix'] = if pkgs.nil? || pkgs.empty? || pkgs.include?('not installed')
                        'no'

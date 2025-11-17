@@ -17,9 +17,9 @@ describe 'cis_security_hardening::rules::firewire_core' do
         it {
           is_expected.to compile
           if enforce
-            is_expected.to contain_kmod__install('firewire-core')
-              .with(
-                command: '/bin/true',
+            is_expected.to contain_kmod__install('firewire-core').
+              with(
+                command: '/bin/true'
               )
           else
             is_expected.not_to contain_kmod__install('firewire-core')

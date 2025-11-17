@@ -19,9 +19,9 @@ describe 'cis_security_hardening::rules::disable_can' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_kmod__install('CAN')
-              .with(
-                command: '/bin/true',
+            is_expected.to contain_kmod__install('CAN').
+              with(
+                command: '/bin/true'
               )
             is_expected.to contain_kmod__blacklist('CAN')
           else

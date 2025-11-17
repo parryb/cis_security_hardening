@@ -39,7 +39,7 @@ class cis_security_hardening::rules::fapolicyd (
 ) {
   if $enforce {
     stdlib::ensure_packages(['fapolicyd'], {
-        ensure => 'installed',
+      ensure => 'installed',
     })
 
     file { '/run/fapolicyd':

@@ -43,9 +43,11 @@ class cis_security_hardening::rules::passwd_expiration (
     if $pw_data != undef {
       fact('cis_security_hardening.local_users').each |String $user, Hash $attributes| {
         if $attributes['max_days_between_password_change'] != $max_pass_days {
+          # lint:ignore:exec_idempotency Idempotency handled by fact comparison above
           exec { "chage --maxdays ${max_pass_days} ${user}":
             path => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
           }
+          # lint:endignore
         }
       }
     }

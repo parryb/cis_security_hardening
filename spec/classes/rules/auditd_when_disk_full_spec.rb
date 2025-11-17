@@ -17,7 +17,7 @@ describe 'cis_security_hardening::rules::auditd_when_disk_full' do
                 space_left_action: 'none',
                 disk_full_action: 'none'
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -39,35 +39,35 @@ describe 'cis_security_hardening::rules::auditd_when_disk_full' do
                    else
                      '/etc/audisp/plugins.d/au-remote.conf'
                    end
-            is_expected.to contain_file_line('auditd_space_left_action')
-              .with(
-                'line'  => 'space_left_action = email',
-                'path'  => '/etc/audit/auditd.conf',
+            is_expected.to contain_file_line('auditd_space_left_action').
+              with(
+                'line' => 'space_left_action = email',
+                'path' => '/etc/audit/auditd.conf',
                 'match' => '^space_left_action',
-                'append_on_no_match' => true,
+                'append_on_no_match' => true
               )
 
-            is_expected.to contain_file_line('auditd_action_mail_acct')
-              .with(
-                'line'  => 'action_mail_acct = root',
-                'path'  => '/etc/audit/auditd.conf',
+            is_expected.to contain_file_line('auditd_action_mail_acct').
+              with(
+                'line' => 'action_mail_acct = root',
+                'path' => '/etc/audit/auditd.conf',
                 'match' => '^action_mail_acct',
-                'append_on_no_match' => true,
+                'append_on_no_match' => true
               )
 
-            is_expected.to contain_file_line('auditd_admin_space_left_action')
-              .with(
-                'line'  => 'admin_space_left_action = halt',
-                'path'  => '/etc/audit/auditd.conf',
+            is_expected.to contain_file_line('auditd_admin_space_left_action').
+              with(
+                'line' => 'admin_space_left_action = halt',
+                'path' => '/etc/audit/auditd.conf',
                 'match' => '^admin_space_left_action',
-                'append_on_no_match' => true,
+                'append_on_no_match' => true
               )
-            is_expected.to contain_file_line('disk_full_action')
-              .with(
-                'line'  => 'disk_full_action = halt',
-                'path'  => file,
+            is_expected.to contain_file_line('disk_full_action').
+              with(
+                'line' => 'disk_full_action = halt',
+                'path' => file,
                 'match' => '^disk_full_action',
-                'append_on_no_match' => true,
+                'append_on_no_match' => true
               )
           else
             is_expected.not_to contain_file_line('auditd_space_left_action')

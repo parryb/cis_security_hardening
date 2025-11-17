@@ -27,7 +27,7 @@ describe 'cis_security_hardening::rules::auditd_chcon_use' do
               auditd: {
                 auditing_process: 'none',
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -48,18 +48,18 @@ describe 'cis_security_hardening::rules::auditd_chcon_use' do
                      '4294967295'
                    end
             if os_facts[:os]['name'].casecmp('redhat').zero? && os_facts[:os]['release']['major'] == '7'
-              is_expected.to contain_concat__fragment('watch chcon command rule 1')
-                .with(
+              is_expected.to contain_concat__fragment('watch chcon command rule 1').
+                with(
                   'order'   => '176',
                   'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => "-a always,exit -F path=/usr/bin/chcon -F auid>=1000 -F auid!=#{auid} -k privileged-priv_change",
+                  'content' => "-a always,exit -F path=/usr/bin/chcon -F auid>=1000 -F auid!=#{auid} -k privileged-priv_change"
                 )
             else
-              is_expected.to contain_concat__fragment('watch chcon command rule 1')
-                .with(
+              is_expected.to contain_concat__fragment('watch chcon command rule 1').
+                with(
                   'order'   => '176',
                   'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => "-a always,exit -F path=/usr/bin/chcon -F perm=x -F auid>=1000 -F auid!=#{auid} -k perm_chng",
+                  'content' => "-a always,exit -F path=/usr/bin/chcon -F perm=x -F auid>=1000 -F auid!=#{auid} -k perm_chng"
                 )
             end
           else

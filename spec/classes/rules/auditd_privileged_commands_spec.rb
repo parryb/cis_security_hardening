@@ -28,7 +28,7 @@ describe 'cis_security_hardening::rules::auditd_privileged_commands' do
                 'priv-cmds' => false,
                 'priv-cmds-list' => ['/usr/bin/fusermount', '/usr/bin/passwd'],
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -41,15 +41,15 @@ describe 'cis_security_hardening::rules::auditd_privileged_commands' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_concat__fragment('priv. commands rules')
-              .with(
-                'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                'order'   => '350',
+            is_expected.to contain_concat__fragment('priv. commands rules').
+              with(
+                'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
+                'order' => '350'
               )
 
-            is_expected.to contain_file('/etc/audit/rules.d/cis_security_hardening_priv_cmds.rules')
-              .with(
-                'ensure'  => 'absent',
+            is_expected.to contain_file('/etc/audit/rules.d/cis_security_hardening_priv_cmds.rules').
+              with(
+                'ensure' => 'absent'
               )
           else
             is_expected.not_to contain_concat__fragment('priv. commands rules')

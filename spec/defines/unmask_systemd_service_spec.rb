@@ -16,10 +16,10 @@ describe 'cis_security_hardening::unmask_systemd_service' do
 
       it {
         is_expected.to compile
-        is_expected.to contain_exec('unmask server tmp.mount-test')
-          .with(
+        is_expected.to contain_exec('unmask server tmp.mount-test').
+          with(
             'command' => 'systemctl unmask tmp.mount',
-            'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+            'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin']
           )
       }
     end

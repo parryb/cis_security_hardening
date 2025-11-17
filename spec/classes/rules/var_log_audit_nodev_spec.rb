@@ -26,10 +26,10 @@ describe 'cis_security_hardening::rules::var_log_audit_nodev' do
         it {
           is_expected.to compile
           if enforce
-            is_expected.to contain_cis_security_hardening__set_mount_options('/var/log/audit-nodev')
-              .with(
+            is_expected.to contain_cis_security_hardening__set_mount_options('/var/log/audit-nodev').
+              with(
                 'mountpoint'   => '/var/log/audit',
-                'mountoptions' => 'nodev',
+                'mountoptions' => 'nodev'
               )
           else
             is_expected.not_to contain_cis_security_hardening__set_mount_options('/var/log/audit-nodev')

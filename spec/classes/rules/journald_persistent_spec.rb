@@ -27,15 +27,15 @@ describe 'cis_security_hardening::rules::journald_persistent' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file_line('journald write persistent')
-              .with(
+            is_expected.to contain_file_line('journald write persistent').
+              with(
                 'ensure'             => 'present',
                 'path'               => '/etc/systemd/journald.conf',
                 'line'               => 'Storage=persistent',
                 'match'              => '^Storage=',
-                'append_on_no_match' => true,
-              )
-              .that_requires('Package[rsyslog]')
+                'append_on_no_match' => true
+              ).
+              that_requires('Package[rsyslog]')
           else
             is_expected.not_to contain_file_line('journald write persistent')
           end

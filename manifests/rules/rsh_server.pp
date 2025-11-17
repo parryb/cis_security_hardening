@@ -41,7 +41,7 @@ class cis_security_hardening::rules::rsh_server (
 
     unless empty($pkgs) {
       stdlib::ensure_packages($pkgs, {
-          ensure => $ensure,
+        ensure => $ensure,
       })
     }
   }

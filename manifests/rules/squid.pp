@@ -27,12 +27,12 @@ class cis_security_hardening::rules::squid (
         default => 'purged',
       }
       stdlib::ensure_packages(['squid'], {
-          ensure => $ensure,
+        ensure => $ensure,
       })
     } else {
       ensure_resource('service', ['squid'], {
-          ensure => 'stopped',
-          enable => false
+        ensure => 'stopped',
+        enable => false
       })
     }
   }

@@ -14,7 +14,7 @@ describe 'cis_security_hardening::rules::gdm_autologin' do
               gnome_gdm_conf: false,
               gnome_gdm: true,
               xdcmp: true,
-            },
+            }
           )
         end
         let(:params) do
@@ -34,22 +34,22 @@ describe 'cis_security_hardening::rules::gdm_autologin' do
                          '/etc/gdm3/custom.conf'
                        end
 
-            is_expected.to contain_ini_setting('gdm-autologin')
-              .with(
+            is_expected.to contain_ini_setting('gdm-autologin').
+              with(
                 'ensure'  => 'present',
                 'path'    => filename,
                 'section' => 'daemon',
                 'setting' => 'AutomaticLoginEnable',
-                'value'   => 'false',
+                'value'   => 'false'
               )
 
-            is_expected.to contain_ini_setting('gdm-unrestricted')
-              .with(
+            is_expected.to contain_ini_setting('gdm-unrestricted').
+              with(
                 'ensure'  => 'present',
                 'path'    => filename,
                 'section' => 'daemon',
                 'setting' => 'TimedLoginEnable',
-                'value'   => 'false',
+                'value'   => 'false'
               )
 
           else

@@ -26,10 +26,10 @@ describe 'cis_security_hardening::rules::home_grpquota' do
         it {
           is_expected.to compile
           if enforce
-            is_expected.to contain_cis_security_hardening__set_mount_options('/home-grpquota')
-              .with(
+            is_expected.to contain_cis_security_hardening__set_mount_options('/home-grpquota').
+              with(
                 'mountpoint'   => '/home',
-                'mountoptions' => 'grpquota',
+                'mountoptions' => 'grpquota'
               )
           else
             is_expected.not_to contain_cis_security_hardening__set_mount_options('/home-grpquota')

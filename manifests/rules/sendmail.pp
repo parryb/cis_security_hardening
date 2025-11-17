@@ -36,7 +36,7 @@ class cis_security_hardening::rules::sendmail (
       default => 'purged',
     }
     stdlib::ensure_packages(['sendmail'], {
-        ensure => $ensure,
+      ensure => $ensure,
     })
   }
 }

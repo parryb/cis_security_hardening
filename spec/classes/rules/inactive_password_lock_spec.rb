@@ -20,13 +20,13 @@ describe 'cis_security_hardening::rules::inactive_password_lock' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file_line('inactive password lock')
-              .with(
+            is_expected.to contain_file_line('inactive password lock').
+              with(
                 'ensure'             => 'present',
                 'path'               => '/etc/default/useradd',
                 'match'              => '^INACTIVE=',
                 'line'               => 'INACTIVE=20',
-                'append_on_no_match' => true,
+                'append_on_no_match' => true
               )
           else
             is_expected.not_to contain_file_line('inactive password lock')

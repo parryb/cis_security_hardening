@@ -28,7 +28,7 @@ describe 'cis_security_hardening::rules::auditd_identity' do
                 uid_min: '1000',
                 identity: false,
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -41,41 +41,41 @@ describe 'cis_security_hardening::rules::auditd_identity' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_concat__fragment('watch identity rule 1')
-              .with(
+            is_expected.to contain_concat__fragment('watch identity rule 1').
+              with(
                 'order' => '41',
                 'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                'content' => '-w /etc/group -p wa -k identity',
+                'content' => '-w /etc/group -p wa -k identity'
               )
 
-            is_expected.to contain_concat__fragment('watch identity rule 2')
-              .with(
+            is_expected.to contain_concat__fragment('watch identity rule 2').
+              with(
                 'order' => '42',
                 'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                'content' => '-w /etc/passwd -p wa -k identity',
+                'content' => '-w /etc/passwd -p wa -k identity'
               )
 
             unless os_facts[:os]['name'].casecmp('sles').zero?
-              is_expected.to contain_concat__fragment('watch identity rule 3')
-                .with(
+              is_expected.to contain_concat__fragment('watch identity rule 3').
+                with(
                   'order' => '43',
                   'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-w /etc/gshadow -p wa -k identity',
+                  'content' => '-w /etc/gshadow -p wa -k identity'
                 )
             end
 
-            is_expected.to contain_concat__fragment('watch identity rule 4')
-              .with(
+            is_expected.to contain_concat__fragment('watch identity rule 4').
+              with(
                 'order' => '44',
                 'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                'content' => '-w /etc/shadow -p wa -k identity',
+                'content' => '-w /etc/shadow -p wa -k identity'
               )
 
-            is_expected.to contain_concat__fragment('watch identity rule 5')
-              .with(
+            is_expected.to contain_concat__fragment('watch identity rule 5').
+              with(
                 'order' => '45',
                 'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                'content' => '-w /etc/security/opasswd -p wa -k identity',
+                'content' => '-w /etc/security/opasswd -p wa -k identity'
               )
           else
             is_expected.not_to contain_concat__fragment('watch identity rule 1')

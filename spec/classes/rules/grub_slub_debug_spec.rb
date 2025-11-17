@@ -29,11 +29,11 @@ describe 'cis_security_hardening::rules::grub_slub_debug' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_kernel_parameter('slub_debug')
-              .with(
-                'value' => 'P',
-              )
-              .that_notifies('Exec[grub2-mkconfig]')
+            is_expected.to contain_kernel_parameter('slub_debug').
+              with(
+                'value' => 'P'
+              ).
+              that_notifies('Exec[grub2-mkconfig]')
           else
             is_expected.not_to contain_kernel_parameter('slub_debug')
           end

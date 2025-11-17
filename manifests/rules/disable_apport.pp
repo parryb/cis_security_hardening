@@ -37,7 +37,7 @@ class cis_security_hardening::rules::disable_apport (
         default => 'purged',
       }
       stdlib::ensure_packages('apport', {
-          ensure => $ensure,
+        ensure => $ensure,
       })
     }
   }

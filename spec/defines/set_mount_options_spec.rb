@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-require 'pp'
 
 mpts = ['/dev/shm', '/home', '/tmp', '/var/tmp', '/var', '/var/log', '/var/log/audit', '/export/store', '/boot', '/boot/efi']
 opts = ['nodev', 'noexec', 'nosuid', 'usrquota', 'grpquota', 'quota', 'sec=krb5:krb5i:krb5p', 'size=2G']
@@ -24,22 +23,22 @@ mpts.each do |mpt|
             is_expected.to compile
             aug = "/etc/fstab - work on #{mpt} with #{opt}"
             exc = "Exec[remount #{mpt} with #{opt}]"
-            is_expected.to contain_augeas(aug)
-              .with(
+            is_expected.to contain_augeas(aug).
+              with(
                 'context' => '/files/etc/fstab',
                 'changes' => [
                   "ins opt after /files/etc/fstab/*[file = '#{mpt}']/opt[last()]",
                   "set *[file = '#{mpt}']/opt[last()] #{opt}",
                 ],
-                'onlyif' => "match *[file = '#{mpt}']/opt[. = '#{opt}'] size == 0",
-              )
-              .that_notifies(exc)
+                'onlyif' => "match *[file = '#{mpt}']/opt[. = '#{opt}'] size == 0"
+              ).
+              that_notifies(exc)
 
-            is_expected.to contain_exec("remount #{mpt} with #{opt}")
-              .with(
+            is_expected.to contain_exec("remount #{mpt} with #{opt}").
+              with(
                 'command'     => "mount -o remount #{mpt}",
                 'path'        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                'refreshonly' => true,
+                'refreshonly' => true
               )
           }
         end

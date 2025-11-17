@@ -35,7 +35,7 @@ class cis_security_hardening::rules::crond_service (
 
     if $uninstall_cron {
       stdlib::ensure_packages(['cronie'], {
-          ensure => $ensure,
+        ensure => $ensure,
       })
     } else {
       $srv = $facts['os']['family'].downcase() ? {
@@ -45,8 +45,8 @@ class cis_security_hardening::rules::crond_service (
       }
 
       ensure_resource('service', $srv, {
-          ensure => running,
-          enable => true,
+        ensure => running,
+        enable => true,
       })
     }
   }

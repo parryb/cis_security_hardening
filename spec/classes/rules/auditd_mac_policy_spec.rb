@@ -27,7 +27,7 @@ describe 'cis_security_hardening::rules::auditd_mac_policy' do
                 uid_min: '1000',
                 'mac-policy' => false,
               },
-            },
+            }
           )
         end
 
@@ -42,32 +42,32 @@ describe 'cis_security_hardening::rules::auditd_mac_policy' do
 
           if enforce
             if os_facts[:os]['family'].casecmp('redhat').zero? || os_facts[:os]['family'].casecmp('suse').zero?
-              is_expected.to contain_concat__fragment('mac policy rule 1')
-                .with(
+              is_expected.to contain_concat__fragment('mac policy rule 1').
+                with(
                   'order' => '61',
                   'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-w /etc/selinux/ -p wa -k MAC-policy',
+                  'content' => '-w /etc/selinux/ -p wa -k MAC-policy'
                 )
 
-              is_expected.to contain_concat__fragment('mac policy rule 2')
-                .with(
+              is_expected.to contain_concat__fragment('mac policy rule 2').
+                with(
                   'order' => '62',
                   'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-w /usr/share/selinux/ -p wa -k MAC-policy',
+                  'content' => '-w /usr/share/selinux/ -p wa -k MAC-policy'
                 )
             elsif os_facts[:os]['family'].casecmp('debian').zero?
-              is_expected.to contain_concat__fragment('mac policy rule 1')
-                .with(
+              is_expected.to contain_concat__fragment('mac policy rule 1').
+                with(
                   'order' => '61',
                   'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-w /etc/apparmor/ -p wa -k MAC-policy',
+                  'content' => '-w /etc/apparmor/ -p wa -k MAC-policy'
                 )
 
-              is_expected.to contain_concat__fragment('mac policy rule 2')
-                .with(
+              is_expected.to contain_concat__fragment('mac policy rule 2').
+                with(
                   'order' => '62',
                   'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-w /etc/apparmor.d/ -p wa -k MAC-policy',
+                  'content' => '-w /etc/apparmor.d/ -p wa -k MAC-policy'
                 )
             end
           else

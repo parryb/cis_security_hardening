@@ -23,13 +23,13 @@ class cis_security_hardening::rules::dnsmasq (
     case $facts['os']['name'].downcase() {
       'redhat', 'centos': {
         stdlib::ensure_packages(['dnsmasq'], {
-            ensure => purged,
+          ensure => purged,
         })
       }
       'debian': {
         if $facts['os']['release']['major'] >= '12' {
           stdlib::ensure_packages(['dnsmasq'], {
-              ensure => purged,
+            ensure => purged,
           })
         }
       }

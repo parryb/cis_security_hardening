@@ -50,9 +50,9 @@ class cis_security_hardening::rules::dns (
       $file_data = {
         ensure  => file,
         content => epp('cis_security_hardening/rules/common/resolv.conf.epp', {
-            dnsservers => $dns_servers,
-            search     => $real_dnssearch,
-            dnsdomain  => $dns_domain,
+          dnsservers => $dns_servers,
+          search     => $real_dnssearch,
+          dnsdomain  => $dns_domain,
         }),
         owner   => 'root',
         group   => 'root',
@@ -64,9 +64,9 @@ class cis_security_hardening::rules::dns (
       $file_data = {
         ensure  => file,
         content => epp('cis_security_hardening/rules/common/resolv.conf.epp', {
-            dnsservers => $dns_servers,
-            search     => $real_dnssearch,
-            dnsdomain  => $dns_domain,
+          dnsservers => $dns_servers,
+          search     => $real_dnssearch,
+          dnsdomain  => $dns_domain,
         }),
         owner   => 'root',
         group   => 'root',

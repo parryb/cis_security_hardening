@@ -34,7 +34,7 @@ class cis_security_hardening::rules::tuned (
     }
 
     stdlib::ensure_packages(['tuned'], {
-        ensure => $ensure,
+      ensure => $ensure,
     })
   }
 }

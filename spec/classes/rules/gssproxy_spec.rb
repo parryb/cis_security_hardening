@@ -25,9 +25,9 @@ describe 'cis_security_hardening::rules::gssproxy' do
                           'purged'
                         end
 
-            is_expected.to contain_package('gssproxy')
-              .with(
-                'ensure' => ensureval,
+            is_expected.to contain_package('gssproxy').
+              with(
+                'ensure' => ensureval
               )
           else
             is_expected.not_to contain_package('gssproxy')

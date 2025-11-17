@@ -19,10 +19,10 @@ describe 'cis_security_hardening::rules::auditd_service' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_service('auditd')
-              .with(
-                'ensure'  => 'running',
-                'enable'  => true,
+            is_expected.to contain_service('auditd').
+              with(
+                'ensure' => 'running',
+                'enable' => true
               )
           else
             is_expected.not_to contain_service('auditd')

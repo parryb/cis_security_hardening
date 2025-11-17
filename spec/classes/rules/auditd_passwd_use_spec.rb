@@ -27,7 +27,7 @@ describe 'cis_security_hardening::rules::auditd_passwd_use' do
               auditd: {
                 auditing_process: 'none',
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -41,18 +41,18 @@ describe 'cis_security_hardening::rules::auditd_passwd_use' do
 
           if enforce
             if os_facts[:os]['name'].casecmp('redhat').zero? && os_facts[:os]['release']['major'] == '7'
-              is_expected.to contain_concat__fragment('watch passwd command rule 1')
-                .with(
+              is_expected.to contain_concat__fragment('watch passwd command rule 1').
+                with(
                   'order'   => '180',
                   'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-a always,exit -F path=/usr/bin/passwd -F auid>=1000 -F auid!=4294967295 -k privileged-passwd',
+                  'content' => '-a always,exit -F path=/usr/bin/passwd -F auid>=1000 -F auid!=4294967295 -k privileged-passwd'
                 )
             else
-              is_expected.to contain_concat__fragment('watch passwd command rule 1')
-                .with(
+              is_expected.to contain_concat__fragment('watch passwd command rule 1').
+                with(
                   'order'   => '180',
                   'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-a always,exit -F path=/usr/bin/passwd -F perm=x -F auid>=1000 -F auid!=4294967295 -k privileged-passwd',
+                  'content' => '-a always,exit -F path=/usr/bin/passwd -F perm=x -F auid>=1000 -F auid!=4294967295 -k privileged-passwd'
                 )
             end
           else

@@ -55,14 +55,14 @@ describe 'cis_security_hardening::rules::sshd_ciphers' do
                 'clientalivecountmax' => 3,
                 'permituserenvironment' => 'yes',
               },
-            },
+            }
           )
         end
 
         let(:params) do
           {
             'enforce' => enforce,
-            'ciphers' => ['aes128-cbc', 'aes192-cbc'],
+            'ciphers' => %w[aes128-cbc aes192-cbc],
           }
         end
 
@@ -75,14 +75,14 @@ describe 'cis_security_hardening::rules::sshd_ciphers' do
                    else
                      '/etc/ssh/sshd_config'
                    end
-            is_expected.to contain_file_line('sshd-ciphers')
-              .with(
+            is_expected.to contain_file_line('sshd-ciphers').
+              with(
                 'ensure' => 'present',
                 'path'   => path,
                 'line'   => 'Ciphers aes128-cbc,aes192-cbc',
-                'match'  => '^#?Ciphers.*',
-              )
-              .that_notifies('Exec[reload-sshd]')
+                'match'  => '^#?Ciphers.*'
+              ).
+              that_notifies('Exec[reload-sshd]')
           else
             is_expected.not_to contain_file_line('sshd-ciphers')
           end

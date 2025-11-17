@@ -22,8 +22,8 @@ class cis_security_hardening::rules::kdump_service (
 ) {
   if $enforce {
     ensure_resource('service', 'kdump.service', {
-        enable => false,
-        ensure => stopped,
+      enable => false,
+      ensure => stopped,
     })
   }
 }

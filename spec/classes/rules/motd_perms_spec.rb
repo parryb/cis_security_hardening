@@ -49,12 +49,12 @@ describe 'cis_security_hardening::rules::motd_perms' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file('/etc/motd')
-              .with(
+            is_expected.to contain_file('/etc/motd').
+              with(
                 'ensure' => 'present',
                 'owner'  => 'root',
                 'group'  => 'root',
-                'mode'   => '0644',
+                'mode'   => '0644'
               )
           else
             is_expected.not_to contain_file('/etc/motd')
@@ -74,13 +74,13 @@ describe 'cis_security_hardening::rules::motd_perms' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file('/etc/motd')
-              .with(
+            is_expected.to contain_file('/etc/motd').
+              with(
                 'ensure'  => 'present',
                 'content' => 'testtest',
                 'owner'   => 'root',
                 'group'   => 'root',
-                'mode'    => '0644',
+                'mode'    => '0644'
               )
           else
             is_expected.not_to contain_file('/etc/motd')

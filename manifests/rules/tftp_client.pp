@@ -22,7 +22,7 @@ class cis_security_hardening::rules::tftp_client (
 ) {
   if $enforce {
     stdlib::ensure_packages(['tftp'], {
-        ensure => absent,
+      ensure => absent,
     })
   }
 }

@@ -7,7 +7,6 @@ require 'facter/cis_security_hardening/utils/read_file_stats'
 require 'facter/cis_security_hardening/utils/read_iptables_rules'
 require 'facter/cis_security_hardening/utils/read_firewalld_zone_iface'
 require 'facter/cis_security_hardening/utils/read_grub_data'
-require 'pp'
 
 # gather Redhat specific facts
 def facts_redhat(os, distid, release)
@@ -26,12 +25,10 @@ def facts_redhat(os, distid, release)
                             check_value_integer(val, 0)
                           end
     val = Facter::Core::Execution.exec('/usr/bin/authselect current | grep "Profile ID: custom/"')
-    authselect['profile'] = if val.nil? || val.empty?
-                              'none'
-                            elsif val.include?('No existing configuration detected')
+    authselect['profile'] = if val.nil? || val.empty? || val.include?('No existing configuration detected')
                               'none'
                             else
-                              m = val.match(%r{Profile ID: custom\/(?<profile>\w*)})
+                              m = val.match(%r{Profile ID: custom/(?<profile>\w*)})
                               if m.nil?
                                 'none'
                               else
@@ -43,12 +40,10 @@ def facts_redhat(os, distid, release)
     options = []
     unless val.nil? || val.empty?
       val.split("\n").each do |line|
-        next unless line.match?(%r{^\-})
+        next unless line.match?(%r{^-})
 
-        m = line.match(%r{^\-\s*(?<option>[a-zA-Z0-9\-_]*)})
-        unless m.nil?
-          options.push(m[:option])
-        end
+        m = line.match(%r{^-\s*(?<option>[a-zA-Z0-9\-_]*)})
+        options.push(m[:option]) unless m.nil?
       end
     end
 
@@ -96,11 +91,7 @@ def facts_redhat(os, distid, release)
     firewalld = {}
     val = Facter::Core::Execution.exec('firewall-cmd --get-default-zone')
     firewalld['default_zone'] = check_value_string(val, 'none')
-    firewalld['default_zone_status'] = if check_value_string(val, 'none') == 'none'
-                                         false
-                                       else
-                                         true
-                                       end
+    firewalld['default_zone_status'] = check_value_string(val, 'none') != 'none'
 
     if File.exist?('/usr/bin/nmcli')
       val = Facter::Core::Execution.exec("nmcli -t connection show | awk -F: '{if($4){print $4}}' | while read INT; do firewall-cmd --get-active-zones | grep -B1 $INT; done")
@@ -122,7 +113,7 @@ def facts_redhat(os, distid, release)
         if line.include?('services:')
           m = line.match(%r{services:\s*(?<srvs>.*)})
           unless m.nil?
-            firewalld['services'] = m[:srvs].gsub(%r{\s+}m, ' ').strip.split(' ')
+            firewalld['services'] = m[:srvs].gsub(%r{\s+}m, ' ').strip.split
             firewalld['services_count'] = firewalld['services'].count
           end
         # elsif line.match?(%r{ports:})
@@ -152,9 +143,7 @@ def facts_redhat(os, distid, release)
 
   # get iptables config
   cis_security_hardening['iptables'] = read_iptables_rules('4')
-  if release > '6'
-    cis_security_hardening['ip6tables'] = read_iptables_rules('6')
-  end
+  cis_security_hardening['ip6tables'] = read_iptables_rules('6') if release > '6'
 
   # collect accounts data
   accounts = {}
@@ -165,7 +154,7 @@ def facts_redhat(os, distid, release)
               500
             end
 
-  cmd = "egrep -v \"^\/+\" /etc/passwd | awk -F: '($1!=\"root\" && $1!=\"sync\" && $1!=\"shutdown\" && $1!=\"halt\" && $3<#{min_uid} && $7!=\"/sbin/nologin\" && $7!=\"/bin/false\") {print}'"
+  cmd = "egrep -v \"^/+\" /etc/passwd | awk -F: '($1!=\"root\" && $1!=\"sync\" && $1!=\"shutdown\" && $1!=\"halt\" && $3<#{min_uid} && $7!=\"/sbin/nologin\" && $7!=\"/bin/false\") {print}'"
   val = Facter::Core::Execution.exec(cmd)
   unless val.nil? || val.empty?
     val.split("\n").each do |line|
@@ -185,11 +174,7 @@ def facts_redhat(os, distid, release)
   val = Facter::Core::Execution.exec('rpm -qa xorg-x11* | grep -v xorg-x11-fonts')
   pkgs = val.split("\n")
   x11['packages'] = pkgs
-  x11['installed'] = if pkgs.nil? || pkgs.empty?
-                       false
-                     else
-                       true
-                     end
+  x11['installed'] = !(pkgs.nil? || pkgs.empty?)
 
   cis_security_hardening[:x11] = x11
 

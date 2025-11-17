@@ -28,7 +28,7 @@ describe 'cis_security_hardening::rules::auditd_scope' do
                 uid_min: '1000',
                 scope: false,
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -41,18 +41,18 @@ describe 'cis_security_hardening::rules::auditd_scope' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_concat__fragment('watch scope rule 1')
-              .with(
+            is_expected.to contain_concat__fragment('watch scope rule 1').
+              with(
                 'order' => '101',
                 'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                'content' => '-w /etc/sudoers -p wa -k scope',
+                'content' => '-w /etc/sudoers -p wa -k scope'
               )
 
-            is_expected.to contain_concat__fragment('watch scope rule 2')
-              .with(
+            is_expected.to contain_concat__fragment('watch scope rule 2').
+              with(
                 'order' => '102',
                 'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                'content' => '-w /etc/sudoers.d/ -p wa -k scope',
+                'content' => '-w /etc/sudoers.d/ -p wa -k scope'
               )
 
           else

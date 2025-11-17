@@ -25,12 +25,12 @@ class cis_security_hardening::rules::telnet_client (
     case $facts['os']['family'].downcase() {
       'suse': {
         stdlib::ensure_packages(['telnet'], {
-            ensure => 'absent',
+          ensure => 'absent',
         })
       }
       default: {
         stdlib::ensure_packages(['telnet'], {
-            ensure => 'purged',
+          ensure => 'purged',
         })
       }
     }

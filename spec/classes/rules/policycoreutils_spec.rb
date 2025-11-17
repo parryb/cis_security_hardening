@@ -19,9 +19,9 @@ describe 'cis_security_hardening::rules::policycoreutils' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_package('policycoreutils')
-              .with(
-                'ensure' => 'installed',
+            is_expected.to contain_package('policycoreutils').
+              with(
+                'ensure' => 'installed'
               )
           else
             is_expected.not_to contain_package('policycoreutils')

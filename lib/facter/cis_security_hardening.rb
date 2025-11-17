@@ -5,7 +5,6 @@ require 'facter/cis_security_hardening/facts_debian'
 require 'facter/cis_security_hardening/facts_ubuntu'
 require 'facter/cis_security_hardening/facts_sles'
 require 'facter/cis_security_hardening/common_facts'
-require 'pp'
 
 # CIS security hardening facts
 Facter.add(:cis_security_hardening) do

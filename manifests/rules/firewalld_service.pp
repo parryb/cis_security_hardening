@@ -25,8 +25,8 @@ class cis_security_hardening::rules::firewalld_service (
     if  (!defined(Service['firewalld'])) and
     (!defined(Class['firewall'])) {
       ensure_resource('service', ['firewalld'], {
-          ensure => running,
-          enable => true,
+        ensure => running,
+        enable => true,
       })
     }
   }

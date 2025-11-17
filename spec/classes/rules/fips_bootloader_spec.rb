@@ -14,7 +14,7 @@ describe 'cis_security_hardening::rules::fips_bootloader' do
               grub: {
                 boot_part_uuid: 'UUID="80ee5fdc-04ff-48c2-93ec-186903ced35f"',
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -27,34 +27,35 @@ describe 'cis_security_hardening::rules::fips_bootloader' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_kernel_parameter('fips')
-              .with(
-                'value' => '1',
-              )
-              .that_notifies('Exec[fips-grub-config]')
+
+            is_expected.to contain_kernel_parameter('fips').
+              with(
+                'value' => '1'
+              ).
+              that_notifies('Exec[fips-grub-config]')
 
             if os_facts[:os]['name'].casecmp('redhat').zero?
-              is_expected.to contain_kernel_parameter('boot')
-                .with(
-                  'value' => 'UUID="80ee5fdc-04ff-48c2-93ec-186903ced35f"',
-                )
-                .that_notifies('Exec[fips-grub-config]')
+              is_expected.to contain_kernel_parameter('boot').
+                with(
+                  'value' => 'UUID="80ee5fdc-04ff-48c2-93ec-186903ced35f"'
+                ).
+                that_notifies('Exec[fips-grub-config]')
             end
 
             if os_facts[:os]['family'].casecmp('debian').zero?
-              is_expected.to contain_exec('fips-grub-config')
-                .with(
+              is_expected.to contain_exec('fips-grub-config').
+                with(
                   'command'     => 'update-grub',
                   'path'        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                  'refreshonly' => true,
+                  'refreshonly' => true
                 )
 
             elsif os_facts[:os]['family'].casecmp('suse').zero?
-              is_expected.to contain_exec('fips-grub-config')
-                .with(
+              is_expected.to contain_exec('fips-grub-config').
+                with(
                   'command'     => 'grub2-mkconfig -o /boot/grub2/grub.cfg',
                   'path'        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                  'refreshonly' => true,
+                  'refreshonly' => true
                 )
             end
           else

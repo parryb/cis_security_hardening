@@ -58,14 +58,24 @@ class cis_security_hardening::rules::restrict_core_dumps (
         }
       }
       'redhat': {
-        file_line { 'systemd-coredump-storage':
-          path => '/etc/systemd/coredump.conf',
-          line => 'Storage=none',
-        }
+        if $installed {
+          file { '/etc/systemd/coredump.conf':
+            ensure => file,
+            owner  => 'root',
+            group  => 'root',
+            mode   => '0644',
+          }
+          file_line { 'systemd-coredump-storage':
+            path    => '/etc/systemd/coredump.conf',
+            line    => 'Storage=none',
+            require => File['/etc/systemd/coredump.conf'],
+          }
 
-        file_line { 'systemd-coredump-process-max':
-          path => '/etc/systemd/coredump.conf',
-          line => 'ProcessSizeMax=0',
+          file_line { 'systemd-coredump-process-max':
+            path    => '/etc/systemd/coredump.conf',
+            line    => 'ProcessSizeMax=0',
+            require => File['/etc/systemd/coredump.conf'],
+          }
         }
       }
       'debian': {

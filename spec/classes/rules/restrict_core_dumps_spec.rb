@@ -12,7 +12,7 @@ describe 'cis_security_hardening::rules::restrict_core_dumps' do
           os_facts.merge(
             'cis_security_hardening' => {
               'systemd-coredump' => 'yes',
-            },
+            }
           )
         end
         let(:params) do
@@ -25,27 +25,27 @@ describe 'cis_security_hardening::rules::restrict_core_dumps' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file('/etc/security/limits.d/50-restrict-coredumps.conf')
-              .with(
+            is_expected.to contain_file('/etc/security/limits.d/50-restrict-coredumps.conf').
+              with(
                 'ensure'  => 'file',
                 'content' => '*          hard    core     0',
                 'owner'   => 'root',
                 'group'   => 'root',
-                'mode'    => '0644',
+                'mode'    => '0644'
               )
 
             is_expected.to contain_sysctl('fs.suid_dumpable').with('value' => 0)
 
             if os_facts[:os]['family'].casecmp('redhat').zero? || os_facts[:os]['family'].casecmp('suse').zero? || os_facts[:os]['family'].casecmp('debian').zero?
-              is_expected.to contain_file_line('systemd-coredump-storage')
-                .with(
+              is_expected.to contain_file_line('systemd-coredump-storage').
+                with(
                   'path' => '/etc/systemd/coredump.conf',
-                  'line' => 'Storage=none',
+                  'line' => 'Storage=none'
                 )
-              is_expected.to contain_file_line('systemd-coredump-process-max')
-                .with(
+              is_expected.to contain_file_line('systemd-coredump-process-max').
+                with(
                   'path' => '/etc/systemd/coredump.conf',
-                  'line' => 'ProcessSizeMax=0',
+                  'line' => 'ProcessSizeMax=0'
                 )
             end
           else
@@ -55,9 +55,9 @@ describe 'cis_security_hardening::rules::restrict_core_dumps' do
             is_expected.not_to contain_file_line('systemd-coredump-process-max')
 
             if os_facts[:os]['name'].casecmp('ubuntu').zero? && os_facts[:os]['release']['major'] >= '22'
-              is_expected.to contain_package('apport')
-                .with(
-                  'ensure' => 'purged',
+              is_expected.to contain_package('apport').
+                with(
+                  'ensure' => 'purged'
                 )
             end
           end

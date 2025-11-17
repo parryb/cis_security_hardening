@@ -19,9 +19,7 @@ describe 'cis_security_hardening::rules::chrony' do
             }
           end
 
-          if enforce && !os_facts[:os]['name'].casecmp('sles').zero?
-            it { is_expected.to create_echo('no ntp servers warning').with_message(%r{You have not defined any ntp servers, time updating may not work unless provided by your network DHCP}) }
-          end
+          it { is_expected.to create_echo('no ntp servers warning').with_message(%r{You have not defined any ntp servers, time updating may not work unless provided by your network DHCP}) } if enforce && !os_facts[:os]['name'].casecmp('sles').zero?
         end
 
         describe "with ntp servers defined, enforce = #{enforce}" do
@@ -42,30 +40,30 @@ describe 'cis_security_hardening::rules::chrony' do
             is_expected.to compile
 
             if enforce
-              is_expected.to contain_class('chrony')
-                .with(
+              is_expected.to contain_class('chrony').
+                with(
                   'servers' => {
                     '10.10.10.1' => ['iburst', 'maxpoll 17'],
                     '10.10.10.2' => ['iburst', 'maxpoll 17'],
                   },
                   'makestep_seconds' => 1,
-                  'makestep_updates' => -1,
+                  'makestep_updates' => -1
                 )
 
               if os_facts[:os]['name'].casecmp('ubuntu').zero?
-                is_expected.to contain_package('ntp')
-                  .with(
-                    'ensure' => 'purged',
+                is_expected.to contain_package('ntp').
+                  with(
+                    'ensure' => 'purged'
                   )
               elsif os_facts[:os]['name'].casecmp('rocky').zero? || os_facts[:os]['name'].casecmp('almalinux').zero? ||
                     os_facts[:os]['name'].casecmp('redhst').zero? || os_facts[:os]['name'].casecmp('centos').zero?
-                is_expected.to contain_file('/etc/sysconfig/chronyd')
-                  .with(
+                is_expected.to contain_file('/etc/sysconfig/chronyd').
+                  with(
                     'ensure'  => 'file',
                     'owner'   => 'root',
                     'group'   => 'root',
                     'mode'    => '0644',
-                    'content' => 'OPTIONS="-u chrony"',
+                    'content' => 'OPTIONS="-u chrony"'
                   )
 
               end

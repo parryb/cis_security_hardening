@@ -55,7 +55,7 @@ describe 'cis_security_hardening::rules::sshd_ignore_user_known_hosts' do
                 'clientalivecountmax' => 3,
                 'permituserenvironment' => 'yes',
               },
-            },
+            }
           )
         end
 
@@ -74,15 +74,15 @@ describe 'cis_security_hardening::rules::sshd_ignore_user_known_hosts' do
                    else
                      '/etc/ssh/sshd_config'
                    end
-            is_expected.to contain_file_line('sshd-ignore_user_known_hosts')
-              .with(
+            is_expected.to contain_file_line('sshd-ignore_user_known_hosts').
+              with(
                 'ensure' => 'present',
-                'path'   => path,
-                'line'               => 'IgnoreUserKnownHosts yes',
-                'match'              => '^#?IgnoreUserKnownHosts.*',
-                'append_on_no_match' => true,
-              )
-              .that_notifies('Exec[reload-sshd]')
+                'path' => path,
+                'line' => 'IgnoreUserKnownHosts yes',
+                'match' => '^#?IgnoreUserKnownHosts.*',
+                'append_on_no_match' => true
+              ).
+              that_notifies('Exec[reload-sshd]')
           else
             is_expected.not_to contain_file_line('sshd-ignore_user_known_hosts')
           end

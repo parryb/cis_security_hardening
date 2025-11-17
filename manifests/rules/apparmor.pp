@@ -23,7 +23,7 @@ class cis_security_hardening::rules::apparmor (
     case $facts['os']['family'].downcase() {
       'debian': {
         stdlib::ensure_packages(['apparmor-utils', 'apparmor'], {
-            ensure => present,
+          ensure => present,
         })
       }
       'suse': {

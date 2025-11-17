@@ -20,20 +20,20 @@ describe 'cis_security_hardening::rules::gshadow_bak_perms' do
 
           if enforce
             if os_facts[:os]['name'].casecmp('debian').zero?
-              is_expected.to contain_file('/etc/gshadow-')
-                .with(
+              is_expected.to contain_file('/etc/gshadow-').
+                with(
                   'ensure' => 'file',
                   'owner'  => 'root',
                   'group'  => 'root',
-                  'mode'   => '0640',
+                  'mode'   => '0640'
                 )
             else
-              is_expected.to contain_file('/etc/gshadow-')
-                .with(
+              is_expected.to contain_file('/etc/gshadow-').
+                with(
                   'ensure' => 'file',
                   'owner'  => 'root',
                   'group'  => 'root',
-                  'mode'   => '0000',
+                  'mode'   => '0000'
                 )
             end
           else

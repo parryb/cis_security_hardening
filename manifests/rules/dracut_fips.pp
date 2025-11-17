@@ -26,8 +26,8 @@ class cis_security_hardening::rules::dracut_fips (
 ) {
   if $enforce {
     stdlib::ensure_packages(['dracut-fips'], {
-        ensure => installed,
-        notify => Exec['recreate initramfs'],
+      ensure => installed,
+      notify => Exec['recreate initramfs'],
     })
 
     exec { 'recreate initramfs':

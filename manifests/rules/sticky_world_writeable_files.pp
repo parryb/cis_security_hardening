@@ -25,7 +25,7 @@ class cis_security_hardening::rules::sticky_world_writeable_files (
   if  $enforce and $world_writable != undef {
     $world_writable.each | $file | {
       ensure_resource('file', $file, {
-          mode => 'a+t',
+        mode => 'a+t',
       })
     }
   }

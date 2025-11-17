@@ -35,14 +35,14 @@ describe 'cis_security_hardening::rules::sshd_crypto_policy' do
                    else
                      '/etc/ssh/sshd_config'
                    end
-            is_expected.to contain_file_line('sshd-crypto-policy')
-              .with(
+            is_expected.to contain_file_line('sshd-crypto-policy').
+              with(
                 'ensure' => 'absent',
-                'path'   => path,
-                'match'             => '^\s*CRYPTO_POLICY\s*=.*',
-                'match_for_absence' => true,
-              )
-              .that_notifies('Exec[reload-sshd]')
+                'path' => path,
+                'match' => '^\s*CRYPTO_POLICY\s*=.*',
+                'match_for_absence' => true
+              ).
+              that_notifies('Exec[reload-sshd]')
           else
             is_expected.not_to contain_file_line('sshd-crypto-policy')
           end

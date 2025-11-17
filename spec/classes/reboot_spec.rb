@@ -20,11 +20,11 @@ describe 'cis_security_hardening::reboot' do
           is_expected.to compile
 
           if auto_reboot
-            is_expected.to contain_reboot('after_run')
-              .with(
+            is_expected.to contain_reboot('after_run').
+              with(
                 'timeout' => 120,
                 'message' => 'forced reboot by Puppet',
-                'apply'   => 'finished',
+                'apply'   => 'finished'
               )
           else
             is_expected.not_to contain_reboot('after_run')

@@ -22,12 +22,12 @@ class cis_security_hardening::rules::rsyncd (
     case $facts['os']['family'].downcase() {
       'debian': {
         stdlib::ensure_packages(['rsync'], {
-            ensure => purged,
+          ensure => purged,
         })
 
         ensure_resource('service', ['rsync'], {
-            ensure => 'stopped',
-            enable => false,
+          ensure => 'stopped',
+          enable => false,
         })
 
         exec { 'mask rsync daemon':
@@ -38,7 +38,7 @@ class cis_security_hardening::rules::rsyncd (
       }
       'suse': {
         stdlib::ensure_packages(['rsync'], {
-            ensure => absent,
+          ensure => absent,
         })
       }
       'redhat': {
@@ -48,8 +48,8 @@ class cis_security_hardening::rules::rsyncd (
           $rsyncd_srv = 'rsync'
         }
         ensure_resource('service', [$rsyncd_srv], {
-            ensure => 'stopped',
-            enable => false,
+          ensure => 'stopped',
+          enable => false,
         })
       }
       default: {

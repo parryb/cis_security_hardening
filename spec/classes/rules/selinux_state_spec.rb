@@ -32,38 +32,38 @@ describe 'cis_security_hardening::rules::selinux_state' do
 
             if enforce
               if reboot
-                is_expected.to contain_file('/etc/selinux/config')
-                  .with(
+                is_expected.to contain_file('/etc/selinux/config').
+                  with(
                     'ensure' => 'present',
                     'owner'  => 'root',
                     'group'  => 'root',
-                    'mode'   => '0644',
-                  )
-                  .that_notifies('Class[cis_security_hardening::reboot]')
+                    'mode'   => '0644'
+                  ).
+                  that_notifies('Class[cis_security_hardening::reboot]')
 
-                is_expected.to contain_file_line('selinux_enforce')
-                  .with(
+                is_expected.to contain_file_line('selinux_enforce').
+                  with(
                     'path'     => '/etc/selinux/config',
                     'line'     => 'SELINUX=enforcing',
                     'match'    => '^SELINUX=',
-                    'multiple' => true,
-                  )
-                  .that_notifies('Class[cis_security_hardening::reboot]')
+                    'multiple' => true
+                  ).
+                  that_notifies('Class[cis_security_hardening::reboot]')
               else
-                is_expected.to contain_file('/etc/selinux/config')
-                  .with(
+                is_expected.to contain_file('/etc/selinux/config').
+                  with(
                     'ensure' => 'present',
                     'owner'  => 'root',
                     'group'  => 'root',
-                    'mode'   => '0644',
+                    'mode'   => '0644'
                   )
 
-                is_expected.to contain_file_line('selinux_enforce')
-                  .with(
+                is_expected.to contain_file_line('selinux_enforce').
+                  with(
                     'path'     => '/etc/selinux/config',
                     'line'     => 'SELINUX=enforcing',
                     'match'    => '^SELINUX=',
-                    'multiple' => true,
+                    'multiple' => true
                   )
               end
 

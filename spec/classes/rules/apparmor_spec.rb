@@ -20,20 +20,20 @@ describe 'cis_security_hardening::rules::apparmor' do
 
           if enforce
             if os_facts[:os]['family'].casecmp('debian').zero?
-              is_expected.to contain_package('apparmor')
-                .with(
-                  'ensure' => 'installed',
+              is_expected.to contain_package('apparmor').
+                with(
+                  'ensure' => 'installed'
                 )
-              is_expected.to contain_package('apparmor-utils')
-                .with(
-                  'ensure' => 'installed',
+              is_expected.to contain_package('apparmor-utils').
+                with(
+                  'ensure' => 'installed'
                 )
             elsif os_facts[:os]['family'].casecmp('suse').zero?
-              is_expected.to contain_exec('install apparmor')
-                .with(
+              is_expected.to contain_exec('install apparmor').
+                with(
                   'command' => 'zypper install -t pattern apparmor',
                   'path'    => ['/usr/bin', '/bin'],
-                  'unless'  => 'rpm -q apparmor-docs apparmor-parser apparmor-profiles apparmor-utils libapparmor1',
+                  'unless'  => 'rpm -q apparmor-docs apparmor-parser apparmor-profiles apparmor-utils libapparmor1'
                 )
             end
 

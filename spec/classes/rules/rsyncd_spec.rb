@@ -22,44 +22,44 @@ describe 'cis_security_hardening::rules::rsyncd' do
 
             if os_facts[:os]['family'].casecmp('debian').zero?
 
-              is_expected.to contain_package('rsync')
-                .with(
-                  'ensure' => 'purged',
+              is_expected.to contain_package('rsync').
+                with(
+                  'ensure' => 'purged'
                 )
 
-              is_expected.to contain_service('rsync')
-                .with(
+              is_expected.to contain_service('rsync').
+                with(
                   'ensure' => 'stopped',
-                  'enable' => false,
+                  'enable' => false
                 )
 
-              is_expected.to contain_exec('mask rsync daemon')
-                .with(
+              is_expected.to contain_exec('mask rsync daemon').
+                with(
                   'command' => 'systemctl mask rsync',
                   'path'    => ['/bin', '/usr/bin'],
-                  'onlyif'  => 'test $(systemctl is-enabled rsync) = "enabled"',
+                  'onlyif'  => 'test $(systemctl is-enabled rsync) = "enabled"'
                 )
 
             elsif os_facts[:os]['family'].casecmp('suse').zero?
 
-              is_expected.to contain_package('rsync')
-                .with(
-                  'ensure' => 'absent',
+              is_expected.to contain_package('rsync').
+                with(
+                  'ensure' => 'absent'
                 )
 
             elsif os_facts[:os]['family'].casecmp('redhat').zero?
 
               if os_facts[:os]['release']['major'] > '6'
-                is_expected.to contain_service('rsyncd')
-                  .with(
-                      'ensure' => 'stopped',
-                      'enable' => false,
-                    )
-              else
-                is_expected.to contain_service('rsync')
-                  .with(
+                is_expected.to contain_service('rsyncd').
+                  with(
                     'ensure' => 'stopped',
-                    'enable' => false,
+                    'enable' => false
+                  )
+              else
+                is_expected.to contain_service('rsync').
+                  with(
+                    'ensure' => 'stopped',
+                    'enable' => false
                   )
               end
 

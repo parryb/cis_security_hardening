@@ -20,14 +20,14 @@ describe 'cis_security_hardening::rules::opensc_pkcs11' do
 
           if enforce
             if os_facts[:os]['name'].casecmp('redhat').zero?
-              is_expected.to contain_package('opensc')
-                .with(
-                  'ensure' => 'installed',
+              is_expected.to contain_package('opensc').
+                with(
+                  'ensure' => 'installed'
                 )
             else
-              is_expected.to contain_package('opensc-pkcs11')
-                .with(
-                  'ensure' => 'installed',
+              is_expected.to contain_package('opensc-pkcs11').
+                with(
+                  'ensure' => 'installed'
                 )
             end
           else

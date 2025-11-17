@@ -32,21 +32,21 @@ describe 'cis_security_hardening::rules::nftables_flush_iptables' do
         is_expected.to compile
 
         if enforce
-          is_expected.to contain_exec('flush iptables rules')
-            .with(
+          is_expected.to contain_exec('flush iptables rules').
+            with(
               'command' => 'iptables -F',
               'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-              'onlyif'  => 'test $(iptables -L | grep -c -e \'^ACCEPT\' -e \'^REJECT\' -e \'^DROP\') -gt 0',
-            )
-            .that_requires('Package[nftables]')
+              'onlyif'  => 'test $(iptables -L | grep -c -e \'^ACCEPT\' -e \'^REJECT\' -e \'^DROP\') -gt 0'
+            ).
+            that_requires('Package[nftables]')
 
-          is_expected.to contain_exec('flush ip6tables rules')
-            .with(
+          is_expected.to contain_exec('flush ip6tables rules').
+            with(
               'command' => 'ip6tables -F',
               'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-              'onlyif'  => 'test $(ip6tables -L | grep -c -e \'^ACCEPT\' -e \'^REJECT\' -e \'^DROP\') -gt 0',
-            )
-            .that_requires('Package[nftables]')
+              'onlyif'  => 'test $(ip6tables -L | grep -c -e \'^ACCEPT\' -e \'^REJECT\' -e \'^DROP\') -gt 0'
+            ).
+            that_requires('Package[nftables]')
         end
       }
     end

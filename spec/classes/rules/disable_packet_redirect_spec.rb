@@ -19,13 +19,13 @@ describe 'cis_security_hardening::rules::disable_packet_redirect' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_sysctl('net.ipv4.conf.all.send_redirects')
-              .with(
-                'value' => 0,
+            is_expected.to contain_sysctl('net.ipv4.conf.all.send_redirects').
+              with(
+                'value' => 0
               )
-            is_expected.to contain_sysctl('net.ipv4.conf.default.send_redirects')
-              .with(
-                'value' => 0,
+            is_expected.to contain_sysctl('net.ipv4.conf.default.send_redirects').
+              with(
+                'value' => 0
               )
           else
             is_expected.not_to contain_sysctl('net.ipv4.conf.all.send_redirects')

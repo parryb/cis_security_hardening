@@ -29,7 +29,7 @@ class cis_security_hardening::rules::disable_prelink (
     }
 
     stdlib::ensure_packages(['prelink'], {
-        ensure => $ensure,
+      ensure => $ensure,
     })
 
     exec { 'reset prelink':

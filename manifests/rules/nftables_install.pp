@@ -64,21 +64,21 @@ class cis_security_hardening::rules::nftables_install (
     }
 
     stdlib::ensure_packages($pkgs_remove, {
-        ensure => $ensure,
+      ensure => $ensure,
     })
 
     unless $facts['os']['name'].downcase() == 'centos' and $facts['os']['release']['major'] > '7' {
       if !defined(Service['iptables']) {
         ensure_resource('service', 'iptables', {
-            enable => false,
-            ensure => stopped,
+          enable => false,
+          ensure => stopped,
         })
       }
 
       if !defined(Service['ip6tables']) {
         ensure_resource('service', 'ip6tables', {
-            enable => false,
-            ensure => stopped,
+          enable => false,
+          ensure => stopped,
         })
       }
     }
@@ -93,7 +93,7 @@ class cis_security_hardening::rules::nftables_install (
 
     if $facts['os']['name'].downcase() == 'ubuntu' {
       stdlib::ensure_packages(['ufw'], {
-          ensure => $ensure,
+        ensure => $ensure,
       })
     }
   }

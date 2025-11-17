@@ -19,9 +19,9 @@ describe 'cis_security_hardening::rules::dac_on_symlinks' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_sysctl('fs.protected_symlinks')
-              .with(
-                'value' => 1,
+            is_expected.to contain_sysctl('fs.protected_symlinks').
+              with(
+                'value' => 1
               )
           else
             is_expected.not_to contain_sysctl('fs.protected_symlinks')

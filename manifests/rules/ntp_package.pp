@@ -21,7 +21,7 @@ class cis_security_hardening::rules::ntp_package (
 ) {
   if $enforce {
     stdlib::ensure_packages($pkg, {
-        ensure => installed,
+      ensure => installed,
     })
   }
 }

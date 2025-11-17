@@ -7,9 +7,9 @@ All notable changes to this project will be documented in this file.
 * CentOS 7 4.0.0 benchmark
 
 * Redhat 7 4.0.0 benchmark
-  
+
 > **Please note that with 4.0.0 the Redhat 7 benchmark and CentOS 7 benchmark removes ntp and uses chrony**
-  
+
 ## Release 0.9.6
 
 * fix dependencies in metadata, removed systemd as it is an indirect dependency (thanks to `canihavethisone` for figuring this out and testing the fix)
@@ -47,7 +47,7 @@ All notable changes to this project will be documented in this file.
 * PR #71: Replace legacy facts with modern facts
 * PR #72: Allow for disabling of the sticky world writable and auditd cron jobs. If you have
   bigger systems where cronjobs collecting file information like for world writable files or
-  auditd privileged commands might be too time consuming you can disable the cronjobs completely. 
+  auditd privileged commands might be too time consuming you can disable the cronjobs completely.
   The default value for both jobs in `present`.
 
   > Please note that not running the auditd privileged commands cronjob might result in not monitoring newly installed prvileged commands.

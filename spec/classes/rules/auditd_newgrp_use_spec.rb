@@ -28,7 +28,7 @@ describe 'cis_security_hardening::rules::auditd_newgrp_use' do
                 uid_min: '1000',
                 auditing_process: 'none',
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -42,18 +42,18 @@ describe 'cis_security_hardening::rules::auditd_newgrp_use' do
 
           if enforce
             if os_facts[:os]['name'].casecmp('redhat').zero? && os_facts[:os]['release']['major'] == '7'
-              is_expected.to contain_concat__fragment('watch newgrp command rule 1')
-                .with(
+              is_expected.to contain_concat__fragment('watch newgrp command rule 1').
+                with(
                   'order'   => '175',
                   'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-a always,exit -F path=/usr/bin/newgrp -F auid>=1000 -F auid!=4294967295 -k privileged-priv_change',
+                  'content' => '-a always,exit -F path=/usr/bin/newgrp -F auid>=1000 -F auid!=4294967295 -k privileged-priv_change'
                 )
             else
-              is_expected.to contain_concat__fragment('watch newgrp command rule 1')
-                .with(
+              is_expected.to contain_concat__fragment('watch newgrp command rule 1').
+                with(
                   'order'   => '175',
                   'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-a always,exit -F path=/usr/bin/newgrp -F perm=x -F auid>=1000 -F auid!=4294967295 -k priv_cmd',
+                  'content' => '-a always,exit -F path=/usr/bin/newgrp -F perm=x -F auid>=1000 -F auid!=4294967295 -k priv_cmd'
                 )
             end
           else

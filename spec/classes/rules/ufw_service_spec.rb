@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 enforce_options = [true, false]
@@ -12,7 +14,7 @@ describe 'cis_security_hardening::rules::ufw_service' do
               services_enabled: {
                 srv_ufw: 'disabled',
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -22,18 +24,19 @@ describe 'cis_security_hardening::rules::ufw_service' do
         end
 
         it { is_expected.to compile }
+
         it do
           if enforce
-            is_expected.to contain_service('ufw')
-              .with(
+            is_expected.to contain_service('ufw').
+              with(
                 'ensure' => 'running',
-                'enable' => true,
+                'enable' => true
               )
-            is_expected.to contain_exec('enable-ufw')
-              .with(
+            is_expected.to contain_exec('enable-ufw').
+              with(
                 'command' => 'ufw --force enable',
                 'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                'unless'  => 'ufw status | grep -wq active',
+                'unless'  => 'ufw status | grep -wq active'
               )
 
           else

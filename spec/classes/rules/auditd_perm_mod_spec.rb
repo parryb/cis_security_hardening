@@ -6,7 +6,7 @@ enforce_options = [true, false]
 
 describe 'cis_security_hardening::rules::auditd_perm_mod' do
   test_on = {
-    hardwaremodels: ['x86_64', 'i686'],
+    hardwaremodels: %w[x86_64 i686],
   }
 
   let(:pre_condition) do
@@ -32,7 +32,7 @@ describe 'cis_security_hardening::rules::auditd_perm_mod' do
                 uid_min: '1000',
                 'perm-mod' => false,
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -63,47 +63,47 @@ describe 'cis_security_hardening::rules::auditd_perm_mod' do
               content_rule6 = "-a always,exit -F arch=b64 -S setxattr -S lsetxattr -S fsetxattr -S removexattr -S lremovexattr -S fremovexattr -F auid>=1000 -F auid!=#{auid} -k perm_mod"
             end
 
-            is_expected.to contain_concat__fragment('watch perm mod rule 1')
-              .with(
+            is_expected.to contain_concat__fragment('watch perm mod rule 1').
+              with(
                 'order' => '91',
                 'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                'content' => content_rule1,
+                'content' => content_rule1
               )
 
-            is_expected.to contain_concat__fragment('watch perm mod rule 2')
-              .with(
+            is_expected.to contain_concat__fragment('watch perm mod rule 2').
+              with(
                 'order' => '92',
                 'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                'content' => content_rule2,
+                'content' => content_rule2
               )
 
-            is_expected.to contain_concat__fragment('watch perm mod rule 3')
-              .with(
+            is_expected.to contain_concat__fragment('watch perm mod rule 3').
+              with(
                 'order' => '93',
                 'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                'content' => content_rule3,
+                'content' => content_rule3
               )
 
-            if ['x86_64', 'amd64'].include?(os_facts[:os]['architecture'])
-              is_expected.to contain_concat__fragment('watch perm mod rule 4')
-                .with(
+            if %w[x86_64 amd64].include?(os_facts[:os]['architecture'])
+              is_expected.to contain_concat__fragment('watch perm mod rule 4').
+                with(
                   'order' => '94',
                   'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => content_rule4,
+                  'content' => content_rule4
                 )
 
-              is_expected.to contain_concat__fragment('watch perm mod rule 5')
-                .with(
+              is_expected.to contain_concat__fragment('watch perm mod rule 5').
+                with(
                   'order' => '95',
                   'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => content_rule5,
+                  'content' => content_rule5
                 )
 
-              is_expected.to contain_concat__fragment('watch perm mod rule 6')
-                .with(
+              is_expected.to contain_concat__fragment('watch perm mod rule 6').
+                with(
                   'order' => '96',
                   'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => content_rule6,
+                  'content' => content_rule6
                 )
 
             else

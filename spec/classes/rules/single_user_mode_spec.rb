@@ -5,9 +5,9 @@ require 'spec_helper'
 enforce_options = [true, false]
 
 describe 'cis_security_hardening::rules::single_user_mode' do
-  on_supported_os.each do |_os, os_facts|
+  on_supported_os.each do |os, os_facts|
     enforce_options.each do |enforce|
-      context "on Redhat with enforce #{enforce}" do
+      context "on #{os} with enforce #{enforce}" do
         let(:facts) { os_facts }
         let(:params) do
           {
@@ -20,73 +20,68 @@ describe 'cis_security_hardening::rules::single_user_mode' do
 
           if enforce
             if os_facts[:os]['family'].casecmp('redhat').zero?
-
-              if os_facts[:os]['release']['major'].to_s == '6'
-
-                is_expected.to contain_file_line('sulogin')
-                  .with(
-                    'path'  => '/etc/sysconfig/init',
-                    'line'  => 'SINGLE=/sbin/sulogin',
+              case os_facts[:os]['release']['major'].to_s
+              when '6'
+                is_expected.to contain_file_line('sulogin').
+                  with(
+                    'path' => '/etc/sysconfig/init',
+                    'line' => 'SINGLE=/sbin/sulogin',
                     'match' => '^SINGLE=',
-                    'append_on_no_match' => true,
+                    'append_on_no_match' => true
                   )
-
-              elsif os_facts[:os]['release']['major'].to_s == '7'
-
-                is_expected.to contain_file_line('su-rescue')
-                  .with(
+              when '7'
+                is_expected.to contain_file_line('su-rescue').
+                  with(
                     'path'  => '/usr/lib/systemd/system/rescue.service',
                     'line'  => 'ExecStart=-/bin/sh -c "/sbin/sulogin; /usr/bin/systemctl --fail --no-block default"',
-                    'match' => '^ExecStart=',
+                    'match' => '^ExecStart='
                   )
 
-                is_expected.to contain_file_line('su-emergency')
-                  .with(
+                is_expected.to contain_file_line('su-emergency').
+                  with(
                     'path'  => '/usr/lib/systemd/system/emergency.service',
                     'line'  => 'ExecStart=-/bin/sh -c "/sbin/sulogin; /usr/bin/systemctl --fail --no-block default"',
-                    'match' => '^ExecStart=',
+                    'match' => '^ExecStart='
                   )
-
-              elsif os_facts[:os]['release']['major'].to_s == '8'
-
-                is_expected.to contain_file_line('su-rescue')
-                  .with(
+              when '8'
+                is_expected.to contain_file_line('su-rescue').
+                  with(
                     'path'  => '/usr/lib/systemd/system/rescue.service',
                     'line'  => 'ExecStart=-/usr/lib/systemd/systemd-sulogin-shell rescue',
-                    'match' => '^ExecStart=',
+                    'match' => '^ExecStart='
                   )
 
-                is_expected.to contain_file_line('su-emergency')
-                  .with(
+                is_expected.to contain_file_line('su-emergency').
+                  with(
                     'path'  => '/usr/lib/systemd/system/emergency.service',
                     'line'  => 'ExecStart=-/usr/lib/systemd/systemd-sulogin-shell emergency',
-                    'match' => '^ExecStart=',
+                    'match' => '^ExecStart='
                   )
               end
-
             elsif os_facts[:os]['family'].casecmp('suse').zero?
 
-              is_expected.to contain_file_line('modify resuce')
-                .with(
+              is_expected.to contain_file_line('modify resuce').
+                with(
                   'ensure'             => 'present',
                   'path'               => '/usr/lib/systemd/system/rescue.service',
                   'match'              => '^ExecStart=-/usr/lib/systemd/systemd-sulogin-shell',
                   'line'               => 'ExecStart=-/usr/lib/systemd/systemd-sulogin-shell rescure',
-                  'append_on_no_match' => true,
+                  'append_on_no_match' => true
                 )
 
-              is_expected.to contain_file_line('modify emergency')
-                .with(
+              is_expected.to contain_file_line('modify emergency').
+                with(
                   'ensure'             => 'present',
                   'path'               => '/usr/lib/systemd/system/emergency.service',
                   'match'              => '^ExecStart=-/usr/lib/systemd/systemd-sulogin-shell',
                   'line'               => 'ExecStart=-/usr/lib/systemd/systemd-sulogin-shell emergency',
-                  'append_on_no_match' => true,
+                  'append_on_no_match' => true
                 )
             end
-
+            # Debian family and other OSes don't create resources
+            is_expected.not_to contain_file_line('rescue.service') unless os_facts[:os]['family'].casecmp('redhat').zero? || os_facts[:os]['family'].casecmp('suse').zero?
           else
-            is_expected.not_to contain_file_line('su-rescue')
+            is_expected.not_to contain_file_line('rescue.service')
             is_expected.not_to contain_file_line('su-emergency')
             is_expected.not_to contain_file_line('sulogin')
             is_expected.not_to contain_file_line('modify resuce')

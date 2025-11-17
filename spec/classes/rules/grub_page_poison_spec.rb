@@ -29,11 +29,11 @@ describe 'cis_security_hardening::rules::grub_page_poison' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_kernel_parameter('page_poison')
-              .with(
-                'value' => '1',
-              )
-              .that_notifies('Exec[grub2-mkconfig]')
+            is_expected.to contain_kernel_parameter('page_poison').
+              with(
+                'value' => '1'
+              ).
+              that_notifies('Exec[grub2-mkconfig]')
           else
             is_expected.not_to contain_kernel_parameter('page_poison')
           end

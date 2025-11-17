@@ -35,23 +35,23 @@ describe 'cis_security_hardening::rules::pam_mfa' do
                      '/etc/ssh/sshd_config'
                    end
 
-            is_expected.to contain_file_line('sshd-mfa-login')
-              .with(
+            is_expected.to contain_file_line('sshd-mfa-login').
+              with(
                 'ensure' => 'present',
                 'path'   => path,
                 'line'   => 'PubkeyAuthentication yes',
-                'match'  => '^PubkeyAuthentication.*',
-              )
-              .that_notifies('Exec[reload-sshd]')
+                'match'  => '^PubkeyAuthentication.*'
+              ).
+              that_notifies('Exec[reload-sshd]')
 
-            is_expected.to contain_pam('pam-common-mfa')
-              .with(
+            is_expected.to contain_pam('pam-common-mfa').
+              with(
                 'ensure'           => 'present',
                 'service'          => 'common-auth',
                 'type'             => 'auth',
                 'control'          => '[success=2 default=ignore]',
                 'control_is_param' => true,
-                'module'           => 'pam_pkcs11.so',
+                'module'           => 'pam_pkcs11.so'
               )
           else
             is_expected.not_to contain_pam('pam-common-mfa')

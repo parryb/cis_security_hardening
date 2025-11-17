@@ -20,15 +20,15 @@ describe 'cis_security_hardening::rules::iptables_install' do
 
           if enforce
 
-            is_expected.to contain_resources('firewall')
-              .with(
-                'purge' => true,
+            is_expected.to contain_resources('firewall').
+              with(
+                'purge' => true
               )
 
             if os_facts[:os]['name'].casecmp('ubuntu').zero? && os_facts[:os]['release']['major'] >= '20'
-              is_expected.to contain_package('iptables-persistent')
-                .with(
-                  'ensure' => 'installed',
+              is_expected.to contain_package('iptables-persistent').
+                with(
+                  'ensure' => 'installed'
                 )
             end
 
@@ -36,47 +36,47 @@ describe 'cis_security_hardening::rules::iptables_install' do
                os_facts[:os]['name'].casecmp('almalinux').zero? || os_facts[:os]['name'].casecmp('rocky').zero?
 
               if os_facts[:os]['name'].casecmp('almalinux').zero? || os_facts[:os]['name'].casecmp('rocky').zero?
-                is_expected.to contain_package('nftables')
-                  .with(
-                    'ensure' => 'installed',
+                is_expected.to contain_package('nftables').
+                  with(
+                    'ensure' => 'installed'
                   )
 
-                is_expected.to contain_service('nftables')
-                  .with(
+                is_expected.to contain_service('nftables').
+                  with(
                     'ensure' => 'running',
-                    'enable' => true,
+                    'enable' => true
                   )
               else
-                is_expected.to contain_package('nftables')
-                  .with(
-                    'ensure' => 'purged',
+                is_expected.to contain_package('nftables').
+                  with(
+                    'ensure' => 'purged'
                   )
 
-                is_expected.to contain_service('nftables')
-                  .with(
+                is_expected.to contain_service('nftables').
+                  with(
                     'ensure' => 'stopped',
-                    'enable' => false,
+                    'enable' => false
                   )
               end
 
-              is_expected.to contain_package('firewalld')
-                .with(
-                  'ensure' => 'purged',
+              is_expected.to contain_package('firewalld').
+                with(
+                  'ensure' => 'purged'
                 )
 
-              is_expected.to contain_service('firewalld')
-                .with(
+              is_expected.to contain_service('firewalld').
+                with(
                   'ensure' => 'stopped',
-                  'enable' => false,
+                  'enable' => false
                 )
 
               if os_facts[:os]['name'].casecmp('redhat').zero? && os_facts[:os]['release']['major'] > '7'
-                is_expected.to contain_class('firewall')
-                  .with(
+                is_expected.to contain_class('firewall').
+                  with(
                     'service_name' => ['iptables'],
                     'service_name_v6' => 'ip6tables',
                     'package_name' => ['iptables-services'],
-                    'ensure_v6' => 'stopped',
+                    'ensure_v6' => 'stopped'
                   )
               else
                 is_expected.to contain_class('firewall')
@@ -84,23 +84,23 @@ describe 'cis_security_hardening::rules::iptables_install' do
 
             elsif os_facts[:os]['name'].casecmp('ubuntu').zero?
 
-              is_expected.to contain_package('ufw')
-                .with(
-                  'ensure' => 'purged',
+              is_expected.to contain_package('ufw').
+                with(
+                  'ensure' => 'purged'
                 )
-              is_expected.to contain_package('nftables')
-                .with(
-                  'ensure' => 'purged',
+              is_expected.to contain_package('nftables').
+                with(
+                  'ensure' => 'purged'
                 )
             elsif os_facts[:os]['name'].casecmp('sles').zero?
 
-              is_expected.to contain_package('firewalld')
-                .with(
-                  'ensure' => 'absent',
+              is_expected.to contain_package('firewalld').
+                with(
+                  'ensure' => 'absent'
                 )
-              is_expected.to contain_package('nftables')
-                .with(
-                  'ensure' => 'absent',
+              is_expected.to contain_package('nftables').
+                with(
+                  'ensure' => 'absent'
                 )
             end
 

@@ -44,14 +44,14 @@ describe 'cis_security_hardening::rules::nftables_table' do
         is_expected.to compile
 
         if enforce
-          is_expected.to contain_exec('create nft table inet')
-            .with(
+          is_expected.to contain_exec('create nft table inet').
+            with(
               'command' => 'nft create table inet filter',
               'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-              'onlyif'  => 'test -z "$(nft list ruleset | grep -E \'^table inet\')"',
-            )
-            .that_notifies('Exec[dump nftables ruleset]')
-            .that_requires('Package[nftables]')
+              'onlyif'  => 'test -z "$(nft list ruleset | grep -E \'^table inet\')"'
+            ).
+            that_notifies('Exec[dump nftables ruleset]').
+            that_requires('Package[nftables]')
 
         else
           is_expected.not_to contain_exec('create nft table inet')

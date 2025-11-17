@@ -12,7 +12,7 @@ describe 'cis_security_hardening::rules::pam_fail_delay' do
           os_facts.merge(
             'cis_security_hardening' => {
               'systemd-coredump' => 'yes',
-            },
+            }
           )
         end
         let(:params) do
@@ -26,14 +26,14 @@ describe 'cis_security_hardening::rules::pam_fail_delay' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_pam('pam-common-auth-fail-delay')
-              .with(
+            is_expected.to contain_pam('pam-common-auth-fail-delay').
+              with(
                 'ensure'    => 'present',
                 'service'   => 'common-auth',
                 'type'      => 'auth',
                 'control'   => 'required',
                 'module'    => 'pam_faildelay.so',
-                'arguments' => ['delay=4000000'],
+                'arguments' => ['delay=4000000']
               )
           else
             is_expected.not_to contain_pam('pam-common-auth-fail-delay')

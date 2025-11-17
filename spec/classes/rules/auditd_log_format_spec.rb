@@ -14,7 +14,7 @@ describe 'cis_security_hardening::rules::auditd_log_format' do
               auditd: {
                 auditing_process: 'none',
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -27,12 +27,12 @@ describe 'cis_security_hardening::rules::auditd_log_format' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file_line('auditd_log_format')
-              .with(
-                'line'  => 'log_format = ENRICHED',
-                'path'  => '/etc/audit/auditd.conf',
+            is_expected.to contain_file_line('auditd_log_format').
+              with(
+                'line' => 'log_format = ENRICHED',
+                'path' => '/etc/audit/auditd.conf',
                 'match' => '^log_format',
-                'append_on_no_match' => true,
+                'append_on_no_match' => true
               )
           else
             is_expected.not_to contain_file_line('auditd_log_format')

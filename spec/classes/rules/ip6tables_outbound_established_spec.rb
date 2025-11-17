@@ -197,7 +197,7 @@ describe 'cis_security_hardening::rules::ip6tables_outbound_established' do
                 'policy_status' => false,
               },
             },
-            'network6' => '1.2.3.4',
+            'network6' => '1.2.3.4'
           )
         end
         let(:params) do
@@ -210,58 +210,58 @@ describe 'cis_security_hardening::rules::ip6tables_outbound_established' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_firewall('004-6 accept outbound tcp state new, established')
-              .with(
-                'chain'  => 'OUTPUT',
-                'proto'  => 'tcp',
-                'state'  => ['NEW', 'ESTABLISHED'],
+            is_expected.to contain_firewall('004-6 accept outbound tcp state new, established').
+              with(
+                'chain' => 'OUTPUT',
+                'proto' => 'tcp',
+                'state' => %w[NEW ESTABLISHED],
                 'jump' => 'ACCEPT',
-                'protocol' => 'ip6tables',
+                'protocol' => 'ip6tables'
               )
 
-            is_expected.to contain_firewall('005-6 accept outbound udp state new, established')
-              .with(
-                'chain'  => 'OUTPUT',
-                'proto'  => 'udp',
-                'state'  => ['NEW', 'ESTABLISHED'],
+            is_expected.to contain_firewall('005-6 accept outbound udp state new, established').
+              with(
+                'chain' => 'OUTPUT',
+                'proto' => 'udp',
+                'state' => %w[NEW ESTABLISHED],
                 'jump' => 'ACCEPT',
-                'protocol' => 'ip6tables',
+                'protocol' => 'ip6tables'
               )
 
-            is_expected.to contain_firewall('006-6 accept outbound icmp state new, established')
-              .with(
-                'chain'  => 'OUTPUT',
-                'proto'  => 'icmp',
-                'state'  => ['NEW', 'ESTABLISHED'],
+            is_expected.to contain_firewall('006-6 accept outbound icmp state new, established').
+              with(
+                'chain' => 'OUTPUT',
+                'proto' => 'icmp',
+                'state' => %w[NEW ESTABLISHED],
                 'jump' => 'ACCEPT',
-                'protocol' => 'ip6tables',
+                'protocol' => 'ip6tables'
               )
 
-            is_expected.to contain_firewall('007-6 accept inbound tcp state established')
-              .with(
-                'chain'  => 'INPUT',
-                'proto'  => 'tcp',
-                'state'  => 'ESTABLISHED',
+            is_expected.to contain_firewall('007-6 accept inbound tcp state established').
+              with(
+                'chain' => 'INPUT',
+                'proto' => 'tcp',
+                'state' => 'ESTABLISHED',
                 'jump' => 'ACCEPT',
-                'protocol' => 'ip6tables',
+                'protocol' => 'ip6tables'
               )
 
-            is_expected.to contain_firewall('008-6 accept inbound udp state established')
-              .with(
-                'chain'  => 'INPUT',
-                'proto'  => 'udp',
-                'state'  => 'ESTABLISHED',
+            is_expected.to contain_firewall('008-6 accept inbound udp state established').
+              with(
+                'chain' => 'INPUT',
+                'proto' => 'udp',
+                'state' => 'ESTABLISHED',
                 'jump' => 'ACCEPT',
-                'protocol' => 'ip6tables',
+                'protocol' => 'ip6tables'
               )
 
-            is_expected.to contain_firewall('009-6 accept inbound icmp state established')
-              .with(
-                'chain'  => 'INPUT',
-                'proto'  => 'icmp',
-                'state'  => 'ESTABLISHED',
+            is_expected.to contain_firewall('009-6 accept inbound icmp state established').
+              with(
+                'chain' => 'INPUT',
+                'proto' => 'icmp',
+                'state' => 'ESTABLISHED',
                 'jump' => 'ACCEPT',
-                'protocol' => 'ip6tables',
+                'protocol' => 'ip6tables'
               )
           else
             is_expected.not_to contain_firewall('004-6 accept outbound tcp state new, established')

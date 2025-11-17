@@ -19,13 +19,13 @@ describe 'cis_security_hardening::rules::sudo_log' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file_line('sudo logfile')
-              .with(
+            is_expected.to contain_file_line('sudo logfile').
+              with(
                 'path'               => '/etc/sudoers',
                 'match'              => 'Defaults.*logfile\s*=',
                 'append_on_no_match' => true,
                 'line'               => "Defaults\tlogfile=\"/var/log/sudo.log\"",
-                'after'              => '# Defaults specification',
+                'after'              => '# Defaults specification'
               )
           else
             is_expected.not_to contain_file_line('sudo logfile')

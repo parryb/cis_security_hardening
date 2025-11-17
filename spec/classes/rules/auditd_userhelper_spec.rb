@@ -28,7 +28,7 @@ describe 'cis_security_hardening::rules::auditd_userhelper' do
                 uid_min: '1000',
                 auditing_process: 'none',
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -41,11 +41,11 @@ describe 'cis_security_hardening::rules::auditd_userhelper' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_concat__fragment('watch userhelper rule 1')
-              .with(
+            is_expected.to contain_concat__fragment('watch userhelper rule 1').
+              with(
                 'order'   => '214',
                 'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                'content' => '-a always,exit -F path=/usr/sbin/userhelper -F auid>=1000 -F auid!=4294967295 -k privileged-passwd',
+                'content' => '-a always,exit -F path=/usr/sbin/userhelper -F auid>=1000 -F auid!=4294967295 -k privileged-passwd'
               )
           else
             is_expected.not_to contain_concat__fragment('watch userhelper rule 1')

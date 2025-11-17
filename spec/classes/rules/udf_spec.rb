@@ -21,54 +21,54 @@ describe 'cis_security_hardening::rules::udf' do
             if os_facts[:os]['name'].casecmp('rocky').zero? ||
                os_facts[:os]['name'].casecmp('almalinux').zero? ||
                os_facts[:os]['name'].casecmp('centos').zero?
-              is_expected.to contain_kmod__install('udf')
-                .with(
-                  command: '/bin/false',
+              is_expected.to contain_kmod__install('udf').
+                with(
+                  command: '/bin/false'
                 )
               is_expected.to contain_kmod__blacklist('udf')
             elsif os_facts[:os]['name'].casecmp('redhat').zero? || os_facts[:os]['name'].casecmp('centos').zero?
               if os_facts[:os]['release']['major'] > '7'
-                is_expected.to contain_kmod__install('udf')
-                  .with(
-                  command: '/bin/false',
-                )
+                is_expected.to contain_kmod__install('udf').
+                  with(
+                    command: '/bin/false'
+                  )
                 is_expected.to contain_kmod__blacklist('udf')
               else
-                is_expected.to contain_kmod__install('udf')
-                  .with(
-                  command: '/bin/true',
-                )
+                is_expected.to contain_kmod__install('udf').
+                  with(
+                    command: '/bin/true'
+                  )
               end
             elsif os_facts[:os]['name'].casecmp('debian').zero?
               if os_facts[:os]['release']['major'] > '10'
-                is_expected.to contain_kmod__install('udf')
-                  .with(
-                  command: '/bin/false',
-                )
+                is_expected.to contain_kmod__install('udf').
+                  with(
+                    command: '/bin/false'
+                  )
                 is_expected.to contain_kmod__blacklist('udf')
               else
-                is_expected.to contain_kmod__install('udf')
-                  .with(
-                  command: '/bin/true',
-                )
+                is_expected.to contain_kmod__install('udf').
+                  with(
+                    command: '/bin/true'
+                  )
               end
             elsif os_facts[:os]['name'].casecmp('ubuntu').zero?
               if os_facts[:os]['release']['major'] >= '20'
-                is_expected.to contain_kmod__install('udf')
-                  .with(
-                  command: '/bin/false',
-                )
+                is_expected.to contain_kmod__install('udf').
+                  with(
+                    command: '/bin/false'
+                  )
                 is_expected.to contain_kmod__blacklist('udf')
               else
-                is_expected.to contain_kmod__install('udf')
-                  .with(
-                  command: '/bin/true',
-                )
+                is_expected.to contain_kmod__install('udf').
+                  with(
+                    command: '/bin/true'
+                  )
               end
             else
-              is_expected.to contain_kmod__install('udf')
-                .with(
-                  command: '/bin/true',
+              is_expected.to contain_kmod__install('udf').
+                with(
+                  command: '/bin/true'
                 )
             end
           else

@@ -13,7 +13,7 @@ describe 'cis_security_hardening::rules::ip6tables_loopback' do
             {
               'network6' => 'fe81::',
               'netmask6' => 'ffff:ffff:ffff:ffff::',
-            },
+            }
           )
         end
         let(:params) do
@@ -26,28 +26,32 @@ describe 'cis_security_hardening::rules::ip6tables_loopback' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_firewall('001-6 accept all incoming traffic to local interface')
-              .with(
+            is_expected.to contain_firewall('001-6 accept all incoming traffic to local interface').
+              with(
                 'chain'   => 'INPUT',
                 'proto'   => 'all',
                 'iniface' => 'lo',
-                'jump' => 'ACCEPT',
+                # rubocop:disable Layout/HashAlignment
+                'jump' => 'ACCEPT'
+                # rubocop:enable Layout/HashAlignment
               )
 
-            is_expected.to contain_firewall('002-6 accept all outgoing traffic to local interface')
-              .with(
+            is_expected.to contain_firewall('002-6 accept all outgoing traffic to local interface').
+              with(
                 'chain'    => 'OUTPUT',
                 'proto'    => 'all',
                 'outiface' => 'lo',
-                'jump' => 'ACCEPT',
+                # rubocop:disable Layout/HashAlignment
+                'jump' => 'ACCEPT'
+                # rubocop:enable Layout/HashAlignment
               )
 
-            is_expected.to contain_firewall('003-6 drop all traffic to lo ::1')
-              .with(
-                'chain'   => 'INPUT',
-                'proto'   => 'all',
-                'source'  => '::1',
-                'jump' => 'DROP',
+            is_expected.to contain_firewall('003-6 drop all traffic to lo ::1').
+              with(
+                'chain' => 'INPUT',
+                'proto' => 'all',
+                'source' => '::1',
+                'jump' => 'DROP'
               )
           else
             is_expected.not_to contain_firewall('001-6 accept all incoming traffic to local interface')

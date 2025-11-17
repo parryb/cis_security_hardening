@@ -29,9 +29,9 @@ describe 'cis_security_hardening::rules::systemd_journal_remote' do
         is_expected.to compile.with_all_deps
 
         if enforce
-          is_expected.to contain_package('systemd-journal-remote')
-            .with(
-              'ensure' => 'installed',
+          is_expected.to contain_package('systemd-journal-remote').
+            with(
+              'ensure' => 'installed'
             )
         else
           is_expected.not_to contain_package('systemd-journal-remote')

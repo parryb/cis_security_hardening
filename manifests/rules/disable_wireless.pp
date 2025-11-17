@@ -34,17 +34,19 @@ class cis_security_hardening::rules::disable_wireless (
 
     if !empty($pkg) {
       stdlib::ensure_packages($pkg, {
-          ensure => present,
+        ensure => present,
       })
     }
     $wlan_status = fact('cis_security_hardening.wlan_status')
     $wlan_iface_count = fact('cis_security_hardening.wlan_interfaces_count')
 
     if $wlan_status  == 'enabled' {
+      # lint:ignore:exec_idempotency Idempotency handled by fact check ($wlan_status == 'enabled')
       exec { 'switch radio off':
         command => 'nmcli radio all off',
         path    => ['/bin', '/sbin', '/usr/bin', '/usr/sbin'],
       }
+      # lint:endignore
     } elsif $wlan_iface_count != undef and $wlan_iface_count != 0 {
       $wlan_ifaces = fact('cis_security_hardening.wlan_interfaces')
       if $wlan_ifaces != undef {

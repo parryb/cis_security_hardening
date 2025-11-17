@@ -33,7 +33,7 @@ class cis_security_hardening::rules::rsh_client (
         default => 'purged',
       }
       stdlib::ensure_packages($pkg, {
-          ensure => $ensure,
+        ensure => $ensure,
       })
     }
   }

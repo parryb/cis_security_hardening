@@ -1,5 +1,5 @@
 ---
-cis_security_hardening::benchmark::rocky::9:
+cis_security_hardening::benchmark::rocky::v9:
   bundles:
     filesystem_config:
       level1:

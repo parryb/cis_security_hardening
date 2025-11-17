@@ -4,11 +4,11 @@ require 'spec_helper'
 
 describe 'Cis_security_hardening::Servicename' do
   describe 'valid handling' do
-    [
-      'httpd',
-      'sshd',
-      'systemd-journal',
-      'networking',
+    %w[
+      httpd
+      sshd
+      systemd-journal
+      networking
     ].each do |value|
       describe value.inspect do
         it { is_expected.to allow_value(value) }

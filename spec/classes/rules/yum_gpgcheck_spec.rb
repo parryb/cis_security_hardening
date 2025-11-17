@@ -20,21 +20,21 @@ describe 'cis_security_hardening::rules::yum_gpgcheck' do
           is_expected.to compile
 
           if enforce && os_facts[:os]['family'].casecmp('redhat').zero?
-            is_expected.to contain_file_line('yum_gpgcheck')
-              .with(
+            is_expected.to contain_file_line('yum_gpgcheck').
+              with(
                 'ensure' => 'present',
                 'path'   => '/etc/yum.conf',
                 'line'   => 'gpgcheck=1',
-                'match'  => '^gpgcheck',
+                'match'  => '^gpgcheck'
               )
 
             if os_facts[:os]['release']['major'].to_s > '7'
-              is_expected.to contain_file_line('yum_gpgcheck dnf')
-                .with(
+              is_expected.to contain_file_line('yum_gpgcheck dnf').
+                with(
                   'ensure' => 'present',
                   'path'   => '/etc/dnf/dnf.conf',
                   'line'   => 'gpgcheck=1',
-                  'match'  => '^gpgcheck',
+                  'match'  => '^gpgcheck'
                 )
             end
           else

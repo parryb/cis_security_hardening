@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 enforce_options = [true, false]
-rootlogin_options = ['yes', 'prohibit-password', 'without-password', 'forced-commands-only', 'no']
+rootlogin_options = %w[yes prohibit-password without-password forced-commands-only no]
 
 describe 'cis_security_hardening::rules::sshd_root_login' do
   let(:pre_condition) do
@@ -57,7 +57,7 @@ describe 'cis_security_hardening::rules::sshd_root_login' do
                   'clientalivecountmax' => 3,
                   'permituserenvironment' => 'yes',
                 },
-              },
+              }
             )
           end
 
@@ -77,14 +77,14 @@ describe 'cis_security_hardening::rules::sshd_root_login' do
                      else
                        '/etc/ssh/sshd_config'
                      end
-              is_expected.to contain_file_line('sshd-root-login')
-                .with(
+              is_expected.to contain_file_line('sshd-root-login').
+                with(
                   'ensure' => 'present',
                   'path'   => path,
                   'line'   => "PermitRootLogin #{rootlogin}",
-                  'match'  => '^#?PermitRootLogin.*',
-                )
-                .that_notifies('Exec[reload-sshd]')
+                  'match'  => '^#?PermitRootLogin.*'
+                ).
+                that_notifies('Exec[reload-sshd]')
             else
               is_expected.not_to contain_file_line('sshd-root-login')
             end

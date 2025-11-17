@@ -28,9 +28,9 @@ describe 'cis_security_hardening::rules::xinetd' do
         is_expected.to compile
 
         if enforce
-          is_expected.to contain_package('xinetd')
-            .with(
-              'ensure' => 'purged',
+          is_expected.to contain_package('xinetd').
+            with(
+              'ensure' => 'purged'
             )
         else
           is_expected.not_to contain_package('xinetd')

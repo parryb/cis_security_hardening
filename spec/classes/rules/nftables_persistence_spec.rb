@@ -37,29 +37,29 @@ describe 'cis_security_hardening::rules::nftables_persistence' do
         is_expected.to compile
 
         if enforce
-          is_expected.to contain_file('/etc/sysconfig/nftables.conf')
-            .with(
+          is_expected.to contain_file('/etc/sysconfig/nftables.conf').
+            with(
               'ensure' => 'file',
               'owner'  => 'root',
               'group'  => 'root',
-              'mode'   => '0644',
+              'mode'   => '0644'
             )
 
-          is_expected.to contain_file_line('add persistence file include')
-            .with(
+          is_expected.to contain_file_line('add persistence file include').
+            with(
               'path'               => '/etc/sysconfig/nftables.conf',
               'line'               => 'include "/etc/nftables/nftables.rules"',
               'match'              => 'include "/etc/nftables/nftables.rules"',
-              'append_on_no_match' => true,
-            )
-            .that_requires('Package[nftables]')
+              'append_on_no_match' => true
+            ).
+            that_requires('Package[nftables]')
 
-          is_expected.to contain_exec('dump nftables ruleset')
-            .with(
+          is_expected.to contain_exec('dump nftables ruleset').
+            with(
               'command' => 'nft list ruleset > /etc/nftables/nftables.rules',
-              'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-            )
-            .that_requires('Package[nftables]')
+              'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin']
+            ).
+            that_requires('Package[nftables]')
         else
           is_expected.not_to contain_file('/etc/sysconfig/nftables.conf')
           is_expected.not_to contain_file_line('add persistence file include')

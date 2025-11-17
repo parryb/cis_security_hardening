@@ -39,7 +39,7 @@ class cis_security_hardening::rules::nis_client (
     }
 
     stdlib::ensure_packages($pkg, {
-        ensure => $ensure,
+      ensure => $ensure,
     })
   }
 }

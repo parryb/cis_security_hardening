@@ -23,8 +23,8 @@ class cis_security_hardening::rules::rhnsd (
 ) {
   if $enforce {
     ensure_resource('service', 'rhnsd', {
-        enable => false,
-        ensure => stopped,
+      enable => false,
+      ensure => stopped,
     })
   }
 }

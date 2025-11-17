@@ -19,17 +19,17 @@ describe 'cis_security_hardening::rules::at_restrict' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file('/etc/at.allow')
-              .with(
+            is_expected.to contain_file('/etc/at.allow').
+              with(
                 'ensure' => 'file',
                 'owner'  => 'root',
                 'group'  => 'root',
-                'mode'   => '0600',
+                'mode'   => '0600'
               )
 
-            is_expected.to contain_file('/etc/at.deny')
-              .with(
-                'ensure' => 'absent',
+            is_expected.to contain_file('/etc/at.deny').
+              with(
+                'ensure' => 'absent'
               )
           else
             is_expected.not_to contain_file('/etc/at.allow')

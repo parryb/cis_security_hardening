@@ -67,7 +67,7 @@ describe 'cis_security_hardening::rules::sshd_private_keys' do
                 'clientalivecountmax' => 3,
                 'permituserenvironment' => 'yes',
               },
-            },
+            }
           )
         end
 
@@ -81,23 +81,23 @@ describe 'cis_security_hardening::rules::sshd_private_keys' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file('/etc/ssh/ssh_host_ecdsa_key')
-              .with(
+            is_expected.to contain_file('/etc/ssh/ssh_host_ecdsa_key').
+              with(
                 'owner' => 'root',
                 'group' => 'root',
-                'mode'  => '0600',
+                'mode'  => '0600'
               )
-            is_expected.to contain_file('/etc/ssh/ssh_host_ed25519_key')
-              .with(
+            is_expected.to contain_file('/etc/ssh/ssh_host_ed25519_key').
+              with(
                 'owner' => 'root',
                 'group' => 'root',
-                'mode'  => '0600',
+                'mode'  => '0600'
               )
-            is_expected.to contain_file('/etc/ssh/ssh_host_rsa_key')
-              .with(
+            is_expected.to contain_file('/etc/ssh/ssh_host_rsa_key').
+              with(
                 'owner' => 'root',
                 'group' => 'root',
-                'mode'  => '0600',
+                'mode'  => '0600'
               )
           else
             is_expected.not_to contain_file('/etc/ssh/ssh_host_ecdsa_key')

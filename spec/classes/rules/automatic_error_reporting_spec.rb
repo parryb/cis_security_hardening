@@ -14,7 +14,7 @@ describe 'cis_security_hardening::rules::automatic_error_reporting' do
               apport: {
                 installed: true,
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -28,17 +28,17 @@ describe 'cis_security_hardening::rules::automatic_error_reporting' do
           is_expected.to compile.with_all_deps
 
           if enforce
-            is_expected.to contain_service('apport')
-              .with(
+            is_expected.to contain_service('apport').
+              with(
                 'ensure' => 'stopped',
-                'enable' => false,
+                'enable' => false
               )
 
-            is_expected.to contain_exec('mask apport daemon')
-              .with(
+            is_expected.to contain_exec('mask apport daemon').
+              with(
                 'command' => 'systemctl mask apport',
                 'path'    => ['/bin', '/usr/bin'],
-                'onlyif'  => 'test $(systemctl is-enabled apport) = "enabled"',
+                'onlyif'  => 'test $(systemctl is-enabled apport) = "enabled"'
               )
 
             ensre = if os_facts[:os]['name'].casecmp('sles').zero?
@@ -46,9 +46,9 @@ describe 'cis_security_hardening::rules::automatic_error_reporting' do
                     else
                       'purged'
                     end
-            is_expected.to contain_package('apport')
-              .with(
-                'ensure' => ensre,
+            is_expected.to contain_package('apport').
+              with(
+                'ensure' => ensre
               )
           else
             is_expected.not_to contain_package('apport')

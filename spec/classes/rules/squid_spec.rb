@@ -21,20 +21,20 @@ describe 'cis_security_hardening::rules::squid' do
           if enforce
 
             if os_facts[:os]['name'].casecmp('ubuntu').zero?
-              is_expected.to contain_package('squid')
-                .with(
-                  'ensure' => 'purged',
+              is_expected.to contain_package('squid').
+                with(
+                  'ensure' => 'purged'
                 )
             elsif os_facts[:os]['name'].casecmp('sles').zero?
-              is_expected.to contain_package('squid')
-                .with(
-                  'ensure' => 'absent',
+              is_expected.to contain_package('squid').
+                with(
+                  'ensure' => 'absent'
                 )
             else
-              is_expected.to contain_service('squid')
-                .with(
+              is_expected.to contain_service('squid').
+                with(
                   'ensure' => 'stopped',
-                  'enable' => false,
+                  'enable' => false
                 )
             end
           else

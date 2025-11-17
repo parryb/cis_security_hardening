@@ -31,8 +31,8 @@ class cis_security_hardening::rules::usbguard_service (
 ) {
   if $enforce {
     ensure_resource('service', 'usbguard', {
-        ensure => running,
-        enable => true,
+      ensure => running,
+      enable => true,
     })
   }
 }

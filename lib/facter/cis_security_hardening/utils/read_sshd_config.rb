@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'pp'
-
 # read sshd configuration data
 def read_sshd_config(long = true)
   sshd = {}
@@ -16,21 +14,19 @@ def read_sshd_config(long = true)
     sshd['package'] = check_package_installed('openssh-server')
     sshd['/etc/ssh/sshd_config'] = read_file_stats('/etc/ssh/sshd_config')
 
-    sshd_values = ['loglevel', 'x11forwarding', 'maxauthtries', 'maxstartups', 'maxsessions',
-                   'ignorerhosts', 'hostbasedauthentication', 'permitrootlogin', 'permitemptypasswords', 'permituserenvironment',
-                   'clientaliveinterval', 'clientalivecountmax', 'logingracetime', 'banner', 'usepam', 'allowtcpforwarding']
+    sshd_values = %w[loglevel x11forwarding maxauthtries maxstartups maxsessions
+                     ignorerhosts hostbasedauthentication permitrootlogin permitemptypasswords permituserenvironment
+                     clientaliveinterval clientalivecountmax logingracetime banner usepam allowtcpforwarding]
 
     sshd_values.each do |sshd_value|
       val = Facter::Core::Execution.exec("#{sshdcmd} -T | grep -i #{sshd_value} | awk '{print $2;}'")
-      unless val.nil? || val.empty?
-        val.strip!
-      end
+      val.strip! unless val.nil? || val.empty?
       sshd[sshd_value] = check_value_string(val, 'none')
     end
 
-    sshd['macs'] = Facter::Core::Execution.exec("#{sshdcmd} -T | grep -i \"^MACs\" | awk '{print $2;}'").strip.split(%r{\,})
-    sshd['ciphers'] = Facter::Core::Execution.exec("#{sshdcmd} -T | grep -i \"^ciphers\" | awk '{print $2;}'").strip.split(%r{\,})
-    sshd['kexalgorithms'] = Facter::Core::Execution.exec("#{sshdcmd} -T | grep -i \"^kexalgorithms\" | awk '{print $2;}'").strip.split(%r{\,})
+    sshd['macs'] = Facter::Core::Execution.exec("#{sshdcmd} -T | grep -i \"^MACs\" | awk '{print $2;}'").strip.split(%r{,})
+    sshd['ciphers'] = Facter::Core::Execution.exec("#{sshdcmd} -T | grep -i \"^ciphers\" | awk '{print $2;}'").strip.split(%r{,})
+    sshd['kexalgorithms'] = Facter::Core::Execution.exec("#{sshdcmd} -T | grep -i \"^kexalgorithms\" | awk '{print $2;}'").strip.split(%r{,})
     sshd['allowusers'] = Facter::Core::Execution.exec("#{sshdcmd} -T | grep -i \"^AllowUsers\" | awk '{print $2;}'").strip.split("\n")
     sshd['allowgroups'] = Facter::Core::Execution.exec("#{sshdcmd} -T | grep -i \"^AllowGroups\" | awk '{print $2;}'").strip.split("\n")
     sshd['denyusers'] = Facter::Core::Execution.exec("#{sshdcmd} -T | grep -i \"^DenyUsers\" | awk '{print $2;}'").strip.split("\n")
@@ -50,9 +46,7 @@ def read_sshd_config(long = true)
                            end
   status = true
   sshd['priv_key_files'].each do |_ssh_key_file, data|
-    if data['combined'] != '0-0-384'
-      status = false
-    end
+    status = false if data['combined'] != '0-0-384'
   end
   sshd['priv_key_files_status'] = status
 
@@ -68,9 +62,7 @@ def read_sshd_config(long = true)
                           end
   status = true
   sshd['pub_key_files'].each do |_ssk_key_file, data|
-    if data['combined'] != '0-0-420'
-      status = false
-    end
+    status = false if data['combined'] != '0-0-420'
   end
   sshd['pub_key_files_status'] = status
 

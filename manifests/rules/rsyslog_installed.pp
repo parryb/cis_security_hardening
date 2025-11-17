@@ -24,7 +24,7 @@ class cis_security_hardening::rules::rsyslog_installed (
 ) {
   if $enforce {
     stdlib::ensure_packages(['rsyslog'], {
-        ensure => installed,
+      ensure => installed,
     })
   }
 }

@@ -19,13 +19,13 @@ describe 'cis_security_hardening::rules::sudo_use_pty' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file_line('sudo use pty')
-              .with(
+            is_expected.to contain_file_line('sudo use pty').
+              with(
                 'path'               => '/etc/sudoers',
                 'match'              => 'Defaults.*use_pty',
                 'append_on_no_match' => true,
                 'line'               => "Defaults\tuse_pty",
-                'after'              => '# Defaults specification',
+                'after'              => '# Defaults specification'
               )
           else
             is_expected.not_to contain_file_line('sudo use pty')

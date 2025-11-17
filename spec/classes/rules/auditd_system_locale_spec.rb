@@ -6,7 +6,7 @@ enforce_options = [true, false]
 
 describe 'cis_security_hardening::rules::auditd_system_locale' do
   test_on = {
-    hardwaremodels: ['x86_64', 'i686'],
+    hardwaremodels: %w[x86_64 i686],
   }
 
   let(:pre_condition) do
@@ -32,7 +32,7 @@ describe 'cis_security_hardening::rules::auditd_system_locale' do
                 uid_min: '1000',
                 'system-locale' => false,
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -45,99 +45,100 @@ describe 'cis_security_hardening::rules::auditd_system_locale' do
           is_expected.to compile
 
           if enforce
-            content_rule1 = if os_facts[:os]['name'].casecmp('almalinux').zero? || os_facts[:os]['name'].casecmp('rocky').zero? || os_facts[:os]['name'].casecmp('debian').zero?
-                              '-a always,exit -F arch=b32 -S sethostname,setdomainname -k system-locale'
-                            elsif os_facts[:os]['name'].casecmp('redhat').zero? && os_facts[:os]['release']['major'] >= '9'
+            use_comma_format = os_facts[:os]['name'].casecmp('almalinux').zero? ||
+                               os_facts[:os]['name'].casecmp('rocky').zero? ||
+                               os_facts[:os]['name'].casecmp('debian').zero? ||
+                               (os_facts[:os]['name'].casecmp('redhat').zero? && os_facts[:os]['release']['major'] >= '9')
+
+            content_rule1 = if use_comma_format
                               '-a always,exit -F arch=b32 -S sethostname,setdomainname -k system-locale'
                             else
                               '-a always,exit -F arch=b32 -S sethostname -S setdomainname -k system-locale'
                             end
-            is_expected.to contain_concat__fragment('watch network environment rule 1')
-              .with(
+            is_expected.to contain_concat__fragment('watch network environment rule 1').
+              with(
                 'order' => '131',
                 'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                'content' => content_rule1,
+                'content' => content_rule1
               )
 
-            is_expected.to contain_concat__fragment('watch network environment rule 2')
-              .with(
+            is_expected.to contain_concat__fragment('watch network environment rule 2').
+              with(
                 'order' => '132',
                 'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                'content' => '-w /etc/issue -p wa -k system-locale',
+                'content' => '-w /etc/issue -p wa -k system-locale'
               )
 
-            is_expected.to contain_concat__fragment('watch network environment rule 3')
-              .with(
+            is_expected.to contain_concat__fragment('watch network environment rule 3').
+              with(
                 'order' => '133',
                 'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                'content' => '-w /etc/issue.net -p wa -k system-locale',
+                'content' => '-w /etc/issue.net -p wa -k system-locale'
               )
 
-            is_expected.to contain_concat__fragment('watch network environment rule 4')
-              .with(
+            is_expected.to contain_concat__fragment('watch network environment rule 4').
+              with(
                 'order' => '134',
                 'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                'content' => '-w /etc/hosts -p wa -k system-locale',
+                'content' => '-w /etc/hosts -p wa -k system-locale'
               )
 
             if os_facts[:os]['family'].casecmp('debian').zero?
               if os_facts[:os]['release']['major'] > '10'
-                is_expected.to contain_concat__fragment('watch network environment rule 8')
-                  .with(
+                is_expected.to contain_concat__fragment('watch network environment rule 8').
+                  with(
                     'order' => '136',
                     'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                    'content' => '-w /etc/networks -p wa -k system-locale',
+                    'content' => '-w /etc/networks -p wa -k system-locale'
                   )
               end
-              is_expected.to contain_concat__fragment('watch network environment rule 5')
-                .with(
+              is_expected.to contain_concat__fragment('watch network environment rule 5').
+                with(
                   'order' => '135',
                   'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-w /etc/network/ -p wa -k system-locale',
+                  'content' => '-w /etc/network/ -p wa -k system-locale'
                 )
             elsif os_facts[:os]['name'].casecmp('redhat').zero? && os_facts[:os]['release']['major'] >= '9'
-              is_expected.to contain_concat__fragment('watch network environment rule 8')
-                .with(
+              is_expected.to contain_concat__fragment('watch network environment rule 8').
+                with(
                   'order' => '136',
                   'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-w /etc/sysconfig/network -p wa -k system-locale',
+                  'content' => '-w /etc/sysconfig/network -p wa -k system-locale'
                 )
-              is_expected.to contain_concat__fragment('watch network environment rule 5')
-                .with(
+              is_expected.to contain_concat__fragment('watch network environment rule 5').
+                with(
                   'order' => '135',
                   'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-w /etc/sysconfig/network-scripts/ -p wa -k system-locale',
+                  'content' => '-w /etc/sysconfig/network-scripts/ -p wa -k system-locale'
                 )
             else
-              is_expected.to contain_concat__fragment('watch network environment rule 5')
-                .with(
+              is_expected.to contain_concat__fragment('watch network environment rule 5').
+                with(
                   'order' => '135',
                   'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-w /etc/sysconfig/network -p wa -k system-locale',
+                  'content' => '-w /etc/sysconfig/network -p wa -k system-locale'
                 )
             end
 
             if os_facts[:os]['name'].casecmp('rocky').zero? || os_facts[:os]['name'].casecmp('almalinux').zero?
-              is_expected.to contain_concat__fragment('watch network environment rule 6')
-                .with(
+              is_expected.to contain_concat__fragment('watch network environment rule 6').
+                with(
                   'order' => '135',
                   'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-w /etc/sysconfig/network-scripts -p wa -k system-locale',
+                  'content' => '-w /etc/sysconfig/network-scripts -p wa -k system-locale'
                 )
             end
 
-            if ['x86_64', 'amd64'].include?(os_facts[:os]['architecture'])
-              content_rule7 = if os_facts[:os]['name'].casecmp('almalinux').zero? || os_facts[:os]['name'].casecmp('rocky').zero? || os_facts[:os]['name'].casecmp('debian').zero?
-                                '-a always,exit -F arch=b64 -S sethostname,setdomainname -k system-locale'
-                              elsif os_facts[:os]['name'].casecmp('redhat').zero? && os_facts[:os]['release']['major'] >= '9'
+            if %w[x86_64 amd64].include?(os_facts[:os]['architecture'])
+              content_rule7 = if use_comma_format
                                 '-a always,exit -F arch=b64 -S sethostname,setdomainname -k system-locale'
                               else
                                 '-a always,exit -F arch=b64 -S sethostname -S setdomainname -k system-locale'
                               end
-              is_expected.to contain_concat__fragment('watch network environment rule 7')
-                .with(
+              is_expected.to contain_concat__fragment('watch network environment rule 7').
+                with(
                   'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => content_rule7,
+                  'content' => content_rule7
                 )
             else
               is_expected.not_to contain_concat__fragment('watch network environment rule 7')

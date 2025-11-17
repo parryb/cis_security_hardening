@@ -35,12 +35,12 @@ class cis_security_hardening::rules::telnet_server (
 
     unless $facts['os']['name'].downcase() == 'sles' {
       ensure_resource('service', ['telnet'], {
-          ensure => stopped,
-          enable => false,
+        ensure => stopped,
+        enable => false,
       })
     }
     stdlib::ensure_packages($pkgs, {
-        ensure => $ensure,
+      ensure => $ensure,
     })
   }
 }

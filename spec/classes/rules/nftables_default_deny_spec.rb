@@ -80,118 +80,118 @@ describe 'cis_security_hardening::rules::nftables_default_deny' do
         is_expected.to compile
 
         if enforce
-          is_expected.to contain_exec('set input default policy')
-            .with(
+          is_expected.to contain_exec('set input default policy').
+            with(
               'command' => 'nft chain inet filter input { policy drop \; }',
-              'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-            )
-            .that_notifies('Exec[dump nftables ruleset]')
-            .that_requires('Package[nftables]')
+              'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin']
+            ).
+            that_notifies('Exec[dump nftables ruleset]').
+            that_requires('Package[nftables]')
 
-          is_expected.to contain_exec('set forward default policy')
-            .with(
+          is_expected.to contain_exec('set forward default policy').
+            with(
               'command' => 'nft chain inet filter forward { policy drop \; }',
-              'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-            )
-            .that_notifies('Exec[dump nftables ruleset]')
-            .that_requires('Package[nftables]')
+              'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin']
+            ).
+            that_notifies('Exec[dump nftables ruleset]').
+            that_requires('Package[nftables]')
 
-          is_expected.to contain_exec('set output default policy')
-            .with(
+          is_expected.to contain_exec('set output default policy').
+            with(
               'command' => 'nft chain inet filter output { policy drop \; }',
-              'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-            )
-            .that_notifies('Exec[dump nftables ruleset]')
-            .that_requires('Package[nftables]')
+              'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin']
+            ).
+            that_notifies('Exec[dump nftables ruleset]').
+            that_requires('Package[nftables]')
 
-          is_expected.to contain_exec('adding rule input-tcp dport ssh accept')
-            .with(
+          is_expected.to contain_exec('adding rule input-tcp dport ssh accept').
+            with(
               'command' => 'nft add rule inet filter input tcp dport ssh accept',
               'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-              'onlyif'  => 'test -z "$(nft list chain inet filter input | grep \'tcp dport ssh accept\')"',
-            )
-            .that_notifies('Exec[dump nftables ruleset]')
-            .that_requires('Package[nftables]')
-          is_expected.to contain_exec('adding rule input-tcp dport 22 accept')
-            .with(
+              'onlyif'  => 'test -z "$(nft list chain inet filter input | grep \'tcp dport ssh accept\')"'
+            ).
+            that_notifies('Exec[dump nftables ruleset]').
+            that_requires('Package[nftables]')
+          is_expected.to contain_exec('adding rule input-tcp dport 22 accept').
+            with(
               'command' => 'nft add rule inet filter input tcp dport 22 accept',
               'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-              'onlyif'  => 'test -z "$(nft list chain inet filter input | grep \'tcp dport 22 accept\')"',
-            )
-            .that_notifies('Exec[dump nftables ruleset]')
-            .that_requires('Package[nftables]')
-          is_expected.to contain_exec('adding rule input-udp dport 123 accept')
-            .with(
+              'onlyif'  => 'test -z "$(nft list chain inet filter input | grep \'tcp dport 22 accept\')"'
+            ).
+            that_notifies('Exec[dump nftables ruleset]').
+            that_requires('Package[nftables]')
+          is_expected.to contain_exec('adding rule input-udp dport 123 accept').
+            with(
               'command' => 'nft add rule inet filter input udp dport 123 accept',
               'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-              'onlyif'  => 'test -z "$(nft list chain inet filter input | grep \'udp dport 123 accept\')"',
-            )
-            .that_notifies('Exec[dump nftables ruleset]')
-            .that_requires('Package[nftables]')
-          is_expected.to contain_exec('adding rule input-udp dport 53 accept')
-            .with(
+              'onlyif'  => 'test -z "$(nft list chain inet filter input | grep \'udp dport 123 accept\')"'
+            ).
+            that_notifies('Exec[dump nftables ruleset]').
+            that_requires('Package[nftables]')
+          is_expected.to contain_exec('adding rule input-udp dport 53 accept').
+            with(
               'command' => 'nft add rule inet filter input udp dport 53 accept',
               'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-              'onlyif'  => 'test -z "$(nft list chain inet filter input | grep \'udp dport 53 accept\')"',
-            )
-            .that_notifies('Exec[dump nftables ruleset]')
-            .that_requires('Package[nftables]')
-          is_expected.to contain_exec('adding rule output-tcp dport 21 accept')
-            .with(
+              'onlyif'  => 'test -z "$(nft list chain inet filter input | grep \'udp dport 53 accept\')"'
+            ).
+            that_notifies('Exec[dump nftables ruleset]').
+            that_requires('Package[nftables]')
+          is_expected.to contain_exec('adding rule output-tcp dport 21 accept').
+            with(
               'command' => 'nft add rule inet filter output tcp dport 21 accept',
               'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-              'onlyif'  => 'test -z "$(nft list chain inet filter output | grep \'tcp dport 21 accept\')"',
-            )
-            .that_notifies('Exec[dump nftables ruleset]')
-            .that_requires('Package[nftables]')
-          is_expected.to contain_exec('adding rule output-tcp dport 20 accept')
-            .with(
+              'onlyif'  => 'test -z "$(nft list chain inet filter output | grep \'tcp dport 21 accept\')"'
+            ).
+            that_notifies('Exec[dump nftables ruleset]').
+            that_requires('Package[nftables]')
+          is_expected.to contain_exec('adding rule output-tcp dport 20 accept').
+            with(
               'command' => 'nft add rule inet filter output tcp dport 20 accept',
               'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-              'onlyif'  => 'test -z "$(nft list chain inet filter output | grep \'tcp dport 20 accept\')"',
-            )
-            .that_notifies('Exec[dump nftables ruleset]')
-            .that_requires('Package[nftables]')
-          is_expected.to contain_exec('adding rule output-tcp dport 443 accept')
-            .with(
+              'onlyif'  => 'test -z "$(nft list chain inet filter output | grep \'tcp dport 20 accept\')"'
+            ).
+            that_notifies('Exec[dump nftables ruleset]').
+            that_requires('Package[nftables]')
+          is_expected.to contain_exec('adding rule output-tcp dport 443 accept').
+            with(
               'command' => 'nft add rule inet filter output tcp dport 443 accept',
               'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-              'onlyif'  => 'test -z "$(nft list chain inet filter output | grep \'tcp dport 443 accept\')"',
-            )
-            .that_notifies('Exec[dump nftables ruleset]')
-            .that_requires('Package[nftables]')
-          is_expected.to contain_exec('adding rule output-tcp dport 53 accept')
-            .with(
+              'onlyif'  => 'test -z "$(nft list chain inet filter output | grep \'tcp dport 443 accept\')"'
+            ).
+            that_notifies('Exec[dump nftables ruleset]').
+            that_requires('Package[nftables]')
+          is_expected.to contain_exec('adding rule output-tcp dport 53 accept').
+            with(
               'command' => 'nft add rule inet filter output tcp dport 53 accept',
               'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-              'onlyif'  => 'test -z "$(nft list chain inet filter output | grep \'tcp dport 53 accept\')"',
-            )
-            .that_notifies('Exec[dump nftables ruleset]')
-            .that_requires('Package[nftables]')
-          is_expected.to contain_exec('adding rule output-tcp dport 80 accept')
-            .with(
+              'onlyif'  => 'test -z "$(nft list chain inet filter output | grep \'tcp dport 53 accept\')"'
+            ).
+            that_notifies('Exec[dump nftables ruleset]').
+            that_requires('Package[nftables]')
+          is_expected.to contain_exec('adding rule output-tcp dport 80 accept').
+            with(
               'command' => 'nft add rule inet filter output tcp dport 80 accept',
               'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-              'onlyif'  => 'test -z "$(nft list chain inet filter output | grep \'tcp dport 80 accept\')"',
-            )
-            .that_notifies('Exec[dump nftables ruleset]')
-            .that_requires('Package[nftables]')
-          is_expected.to contain_exec('adding rule output-udp dport 123 accept')
-            .with(
+              'onlyif'  => 'test -z "$(nft list chain inet filter output | grep \'tcp dport 80 accept\')"'
+            ).
+            that_notifies('Exec[dump nftables ruleset]').
+            that_requires('Package[nftables]')
+          is_expected.to contain_exec('adding rule output-udp dport 123 accept').
+            with(
               'command' => 'nft add rule inet filter output udp dport 123 accept',
               'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-              'onlyif'  => 'test -z "$(nft list chain inet filter output | grep \'udp dport 123 accept\')"',
-            )
-            .that_notifies('Exec[dump nftables ruleset]')
-            .that_requires('Package[nftables]')
-          is_expected.to contain_exec('adding rule output-udp dport 53 accept')
-            .with(
+              'onlyif'  => 'test -z "$(nft list chain inet filter output | grep \'udp dport 123 accept\')"'
+            ).
+            that_notifies('Exec[dump nftables ruleset]').
+            that_requires('Package[nftables]')
+          is_expected.to contain_exec('adding rule output-udp dport 53 accept').
+            with(
               'command' => 'nft add rule inet filter output udp dport 53 accept',
               'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-              'onlyif'  => 'test -z "$(nft list chain inet filter output | grep \'udp dport 53 accept\')"',
-            )
-            .that_notifies('Exec[dump nftables ruleset]')
-            .that_requires('Package[nftables]')
+              'onlyif'  => 'test -z "$(nft list chain inet filter output | grep \'udp dport 53 accept\')"'
+            ).
+            that_notifies('Exec[dump nftables ruleset]').
+            that_requires('Package[nftables]')
         else
           is_expected.not_to contain_exec('set input default policy')
           is_expected.not_to contain_exec('set forward default policy')

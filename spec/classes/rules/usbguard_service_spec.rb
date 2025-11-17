@@ -19,10 +19,10 @@ describe 'cis_security_hardening::rules::usbguard_service' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_service('usbguard')
-              .with(
+            is_expected.to contain_service('usbguard').
+              with(
                 'ensure' => 'running',
-                'enable' => true,
+                'enable' => true
               )
           else
             is_expected.not_to contain_service('usbguard')

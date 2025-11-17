@@ -27,12 +27,12 @@ describe 'cis_security_hardening::rules::rsyslog_service' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_service('rsyslog')
-              .with(
+            is_expected.to contain_service('rsyslog').
+              with(
                 'ensure' => 'running',
-                'enable' => true,
-              )
-              .that_requires('Package[rsyslog]')
+                'enable' => true
+              ).
+              that_requires('Package[rsyslog]')
           else
             is_expected.not_to contain_service('rsyslog')
           end

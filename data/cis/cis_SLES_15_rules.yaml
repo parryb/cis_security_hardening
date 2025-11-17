@@ -1,5 +1,5 @@
 ---
-cis_security_hardening::benchmark::sles::15:
+cis_security_hardening::benchmark::sles::v15:
   bundles:
     filesystem_config:
       level1:

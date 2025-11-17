@@ -19,19 +19,19 @@ describe 'cis_security_hardening::rules::sssd_use_start_tls' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file('/etc/sssd/sssd.conf')
-              .with(
+            is_expected.to contain_file('/etc/sssd/sssd.conf').
+              with(
                 'ensure' => 'file',
                 'owner' => 'root',
                 'group' => 'root',
-                'mode' => '0644',
+                'mode' => '0644'
               )
-            is_expected.to contain_file_line('add ldap tls')
-              .with(
+            is_expected.to contain_file_line('add ldap tls').
+              with(
                 'ensure' => 'present',
                 'path'   => '/etc/sssd/sssd.conf',
                 'match'  => '^ldap_id_use_start_tls =',
-                'line'   => 'ldap_id_use_start_tls = true',
+                'line'   => 'ldap_id_use_start_tls = true'
               )
           else
             is_expected.not_to contain_file('/etc/sssd/sssd.conf')

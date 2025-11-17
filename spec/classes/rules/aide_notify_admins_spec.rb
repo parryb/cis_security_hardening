@@ -25,13 +25,13 @@ describe 'cis_security_hardening::rules::aide_notify_admins' do
                  end
 
           if enforce
-            is_expected.to contain_file_line('set silentreports to no')
-              .with(
+            is_expected.to contain_file_line('set silentreports to no').
+              with(
                 'ensure'             => 'present',
                 'path'               => file.to_s,
                 'match'              => '^#?SILENTREPORTS',
                 'line'               => 'SILENTREPORTS=no',
-                'append_on_no_match' => true,
+                'append_on_no_match' => true
               )
           else
             is_expected.not_to contain_file_line('set silentreports to no')

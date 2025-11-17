@@ -55,7 +55,7 @@ describe 'cis_security_hardening::rules::sshd_max_startups' do
                 'clientalivecountmax' => 3,
                 'permituserenvironment' => 'yes',
               },
-            },
+            }
           )
         end
 
@@ -74,15 +74,15 @@ describe 'cis_security_hardening::rules::sshd_max_startups' do
                    else
                      '/etc/ssh/sshd_config'
                    end
-            is_expected.to contain_file_line('sshd-max-startups')
-              .with(
+            is_expected.to contain_file_line('sshd-max-startups').
+              with(
                 'ensure' => 'present',
-                'path'   => path,
-                'line'               => 'MaxStartups 10:30:60',
-                'match'              => '^#?MaxStartups.*',
-                'append_on_no_match' => true,
-              )
-              .that_notifies('Exec[reload-sshd]')
+                'path' => path,
+                'line' => 'MaxStartups 10:30:60',
+                'match' => '^#?MaxStartups.*',
+                'append_on_no_match' => true
+              ).
+              that_notifies('Exec[reload-sshd]')
           else
             is_expected.not_to contain_file_line('sshd-max-startups')
           end

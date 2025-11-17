@@ -15,7 +15,7 @@ describe 'cis_security_hardening::rules::firewalld_ports_services' do
           'cis_security_hardening' => {
             'firewalld' => {
               'ports' => ['23/tcp'],
-              'services' => ['cockpit', 'dhcpv6-client', 'ssh'],
+              'services' => %w[cockpit dhcpv6-client ssh],
               'ports_and_services_status' => true,
             },
           },
@@ -33,22 +33,22 @@ describe 'cis_security_hardening::rules::firewalld_ports_services' do
         is_expected.to compile
 
         if enforce
-          is_expected.to contain_exec('firewalld remove port 23/tcp')
-            .with(
+          is_expected.to contain_exec('firewalld remove port 23/tcp').
+            with(
               'command' => 'firewall-cmd --remove-port=23/tcp',
-              'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+              'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin']
             )
 
-          is_expected.to contain_exec('firewalld remove service cockpit')
-            .with(
+          is_expected.to contain_exec('firewalld remove service cockpit').
+            with(
               'command' => 'firewall-cmd --remove-service=cockpit',
-              'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+              'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin']
             )
 
-          is_expected.to contain_exec('firewalld remove service dhcpv6-client')
-            .with(
+          is_expected.to contain_exec('firewalld remove service dhcpv6-client').
+            with(
               'command' => 'firewall-cmd --remove-service=dhcpv6-client',
-              'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+              'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin']
             )
         else
           is_expected.not_to contain_exec('firewalld remove port 23/tcp')

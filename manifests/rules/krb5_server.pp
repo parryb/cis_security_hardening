@@ -33,7 +33,7 @@ class cis_security_hardening::rules::krb5_server (
     }
 
     stdlib::ensure_packages(['krb5-server'], {
-        ensure => $ensure,
+      ensure => $ensure,
     })
   }
 }

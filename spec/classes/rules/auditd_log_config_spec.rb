@@ -17,7 +17,7 @@ describe 'cis_security_hardening::rules::auditd_log_config' do
                 space_left_action: 'none',
                 disk_full_action: 'none'
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -30,21 +30,21 @@ describe 'cis_security_hardening::rules::auditd_log_config' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file('/etc/audit/auditd.conf')
-              .with(
+            is_expected.to contain_file('/etc/audit/auditd.conf').
+              with(
                 'ensure' => 'file',
                 'owner'  => 'root',
                 'group'  => 'root',
-                'mode'   => '0640',
+                'mode'   => '0640'
               )
 
-            is_expected.to contain_file_line('auditd log group')
-              .with(
+            is_expected.to contain_file_line('auditd log group').
+              with(
                 'ensure'             => 'present',
                 'path'               => '/etc/audit/auditd.conf',
                 'match'              => '^log_group =',
                 'line'               => 'log_group = root',
-                'append_on_no_match' => true,
+                'append_on_no_match' => true
               )
           else
             is_expected.not_to contain_file('/etc/audit/auditd.conf')

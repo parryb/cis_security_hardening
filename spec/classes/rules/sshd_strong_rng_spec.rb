@@ -55,7 +55,7 @@ describe 'cis_security_hardening::rules::sshd_strong_rng' do
                 'clientalivecountmax' => 3,
                 'permituserenvironment' => 'yes',
               },
-            },
+            }
           )
         end
 
@@ -69,15 +69,15 @@ describe 'cis_security_hardening::rules::sshd_strong_rng' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file_line('sshd_strong_rng')
-              .with(
+            is_expected.to contain_file_line('sshd_strong_rng').
+              with(
                 'ensure'             => 'present',
                 'path'               => '/etc/sysconfig/sshd',
                 'match'              => '^#?SSH_USE_STRONG_RNG=',
                 'line'               => 'SSH_USE_STRONG_RNG=32',
-                'append_on_no_match' => true,
-              )
-              .that_notifies('Exec[reload-sshd]')
+                'append_on_no_match' => true
+              ).
+              that_notifies('Exec[reload-sshd]')
           else
             is_expected.not_to contain_file_line('sshd_strong_rng')
           end

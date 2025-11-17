@@ -20,43 +20,43 @@ describe 'cis_security_hardening::rules::firewalld_install' do
 
           if enforce
             if os_facts[:os]['name'].casecmp('sles').zero?
-              is_expected.to contain_package('iptables')
-                .with(
-                  'ensure' => 'installed',
+              is_expected.to contain_package('iptables').
+                with(
+                  'ensure' => 'installed'
                 )
-              is_expected.to contain_package('nftables')
-                .with(
-                  'ensure' => 'absent',
+              is_expected.to contain_package('nftables').
+                with(
+                  'ensure' => 'absent'
                 )
             else
-              is_expected.to contain_package('iptables-services')
-                .with(
-                  'ensure' => 'purged',
+              is_expected.to contain_package('iptables-services').
+                with(
+                  'ensure' => 'purged'
                 )
-              is_expected.to contain_package('nftables')
-                .with(
-                  'ensure' => 'purged',
+              is_expected.to contain_package('nftables').
+                with(
+                  'ensure' => 'purged'
                 )
             end
 
-            is_expected.to contain_package('firewalld')
-              .with(
-                'ensure' => 'installed',
+            is_expected.to contain_package('firewalld').
+              with(
+                'ensure' => 'installed'
               )
-            is_expected.to contain_service('iptables')
-              .with(
+            is_expected.to contain_service('iptables').
+              with(
                 'ensure' => 'stopped',
-                'enable' => false,
+                'enable' => false
               )
-            is_expected.to contain_service('ip6tables')
-              .with(
+            is_expected.to contain_service('ip6tables').
+              with(
                 'ensure' => 'stopped',
-                'enable' => false,
+                'enable' => false
               )
-            is_expected.to contain_service('nftables')
-              .with(
+            is_expected.to contain_service('nftables').
+              with(
                 'ensure' => 'stopped',
-                'enable' => false,
+                'enable' => false
               )
           else
             is_expected.not_to contain_package('firewalld')

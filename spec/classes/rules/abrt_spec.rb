@@ -12,9 +12,9 @@ describe 'cis_security_hardening::rules::abrt' do
           os_facts.merge(
             cis_security_hardening: {
               abrt: {
-                packages: ['abrt-libs', 'abrt-cli-ng', 'abrt-cli']
+                packages: %w[abrt-libs abrt-cli-ng abrt-cli]
               }
-            },
+            }
           )
         end
         let(:params) do
@@ -33,17 +33,17 @@ describe 'cis_security_hardening::rules::abrt' do
                           'purged'
                         end
 
-            is_expected.to contain_package('abrt-libs')
-              .with(
-                'ensure' => ensureval,
+            is_expected.to contain_package('abrt-libs').
+              with(
+                'ensure' => ensureval
               )
-            is_expected.to contain_package('abrt-cli-ng')
-              .with(
-                'ensure' => ensureval,
+            is_expected.to contain_package('abrt-cli-ng').
+              with(
+                'ensure' => ensureval
               )
-            is_expected.to contain_package('abrt-cli')
-              .with(
-                'ensure' => ensureval,
+            is_expected.to contain_package('abrt-cli').
+              with(
+                'ensure' => ensureval
               )
           else
             is_expected.not_to contain_package('abrt-libs')

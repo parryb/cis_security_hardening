@@ -26,7 +26,7 @@ describe 'cis_security_hardening::rules::auditd_loginuid_immutable' do
               auditd: {
                 immutable: false,
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -39,11 +39,11 @@ describe 'cis_security_hardening::rules::auditd_loginuid_immutable' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_concat__fragment('make loginuid immutable')
-              .with(
+            is_expected.to contain_concat__fragment('make loginuid immutable').
+              with(
                 'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
                 'order' => '997',
-                'content' => '--loginuid-immutable',
+                'content' => '--loginuid-immutable'
               )
           else
             is_expected.not_to contain_concat__fragment('make loginuid immutable')

@@ -30,7 +30,7 @@ class cis_security_hardening::rules::opensc_pkcs11 (
     }
 
     stdlib::ensure_packages($pkgs, {
-        ensure => present,
+      ensure => present,
     })
   }
 }

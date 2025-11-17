@@ -29,13 +29,13 @@ describe 'cis_security_hardening::rules::debug_shell' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_exec('mask debug-shell')
-              .with(
+            is_expected.to contain_exec('mask debug-shell').
+              with(
                 'command' => 'systemctl mask debug-shell.service',
                 'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                'onlyif'  => 'test -z "$(systemctl status debug-shell.service | grep -i "Loaded: masked")"',
-              )
-              .that_notifies('Exec[systemd-daemon-reload]')
+                'onlyif'  => 'test -z "$(systemctl status debug-shell.service | grep -i "Loaded: masked")"'
+              ).
+              that_notifies('Exec[systemd-daemon-reload]')
           else
             is_expected.not_to contain_exec('mask debug-shell')
           end

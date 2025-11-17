@@ -6,7 +6,7 @@ enforce_options = [true, false]
 
 describe 'cis_security_hardening::rules::auditd_delete_module' do
   test_on = {
-    hardwaremodels: ['x86_64', 'i686'],
+    hardwaremodels: %w[x86_64 i686],
   }
 
   let(:pre_condition) do
@@ -31,7 +31,7 @@ describe 'cis_security_hardening::rules::auditd_delete_module' do
               auditd: {
                 auditing_process: 'none',
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -45,35 +45,35 @@ describe 'cis_security_hardening::rules::auditd_delete_module' do
 
           if enforce
             if os_facts[:os]['family'].casecmp('redhat').zero? && os_facts[:os]['release']['major'] >= '9'
-              is_expected.to contain_concat__fragment('watch delete_module command rule 1')
-                .with(
+              is_expected.to contain_concat__fragment('watch delete_module command rule 1').
+                with(
                   'order'   => '221',
                   'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-a always,exit -F arch=b32 -S delete_module -F auid>=1000 -F auid!=4294967295 -F key=modules',
+                  'content' => '-a always,exit -F arch=b32 -S delete_module -F auid>=1000 -F auid!=4294967295 -F key=modules'
                 )
 
-              if ['x86_64', 'amd64'].include?(os_facts[:os]['architecture'])
-                is_expected.to contain_concat__fragment('watch delete_module command rule 2')
-                  .with(
+              if %w[x86_64 amd64].include?(os_facts[:os]['architecture'])
+                is_expected.to contain_concat__fragment('watch delete_module command rule 2').
+                  with(
                     'order'   => '222',
                     'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                    'content' => '-a always,exit -F arch=b64 -S delete_module -F auid>=1000 -F auid!=4294967295 -F key=modules',
+                    'content' => '-a always,exit -F arch=b64 -S delete_module -F auid>=1000 -F auid!=4294967295 -F key=modules'
                   )
               end
             else
-              is_expected.to contain_concat__fragment('watch delete_module command rule 1')
-                .with(
+              is_expected.to contain_concat__fragment('watch delete_module command rule 1').
+                with(
                   'order'   => '221',
                   'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-a always,exit -F arch=b32 -S delete_module -F auid>=1000 -F auid!=4294967295 -k module_chng',
+                  'content' => '-a always,exit -F arch=b32 -S delete_module -F auid>=1000 -F auid!=4294967295 -k module_chng'
                 )
 
-              if ['x86_64', 'amd64'].include?(os_facts[:os]['architecture'])
-                is_expected.to contain_concat__fragment('watch delete_module command rule 2')
-                  .with(
+              if %w[x86_64 amd64].include?(os_facts[:os]['architecture'])
+                is_expected.to contain_concat__fragment('watch delete_module command rule 2').
+                  with(
                     'order'   => '222',
                     'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                    'content' => '-a always,exit -F arch=b64 -S delete_module -F auid>=1000 -F auid!=4294967295 -k module_chng',
+                    'content' => '-a always,exit -F arch=b64 -S delete_module -F auid>=1000 -F auid!=4294967295 -k module_chng'
                   )
               end
             end

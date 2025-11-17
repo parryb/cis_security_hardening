@@ -55,7 +55,7 @@ describe 'cis_security_hardening::rules::sshd_ignore_rhosts' do
                 'clientalivecountmax' => 3,
                 'permituserenvironment' => 'yes',
               },
-            },
+            }
           )
         end
 
@@ -74,14 +74,14 @@ describe 'cis_security_hardening::rules::sshd_ignore_rhosts' do
                    else
                      '/etc/ssh/sshd_config'
                    end
-            is_expected.to contain_file_line('sshd-ignore-rhosts')
-              .with(
+            is_expected.to contain_file_line('sshd-ignore-rhosts').
+              with(
                 'ensure' => 'present',
                 'path'   => path,
                 'line'   => 'IgnoreRhosts yes',
-                'match'  => '^#?IgnoreRhosts.*',
-              )
-              .that_notifies('Exec[reload-sshd]')
+                'match'  => '^#?IgnoreRhosts.*'
+              ).
+              that_notifies('Exec[reload-sshd]')
           else
             is_expected.not_to contain_file_line('sshd-ignore-rhosts')
           end

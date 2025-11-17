@@ -27,9 +27,9 @@ describe 'cis_security_hardening::rules::disable_rds' do
               cmd = '/bin/true'
             end
 
-            is_expected.to contain_kmod__install('rds')
-              .with(
-                command: cmd,
+            is_expected.to contain_kmod__install('rds').
+              with(
+                command: cmd
               )
           else
             is_expected.not_to contain_kmod__install('rds')

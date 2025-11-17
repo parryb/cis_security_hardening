@@ -22,14 +22,14 @@ describe 'cis_security_hardening::rules::rsh_client' do
 
             unless os_facts[:os]['name'].casecmp('ubuntu').zero?
               if os_facts[:os]['family'].casecmp('suse').zero?
-                is_expected.to contain_package('rsh')
-                  .with(
-                    'ensure' => 'absent',
+                is_expected.to contain_package('rsh').
+                  with(
+                    'ensure' => 'absent'
                   )
               else
-                is_expected.to contain_package('rsh')
-                  .with(
-                    'ensure' => 'purged',
+                is_expected.to contain_package('rsh').
+                  with(
+                    'ensure' => 'purged'
                   )
               end
             end

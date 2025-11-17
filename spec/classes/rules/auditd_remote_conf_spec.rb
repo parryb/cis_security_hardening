@@ -22,7 +22,7 @@ describe 'cis_security_hardening::rules::auditd_remote_conf' do
               auditd: {
                 immutable: false,
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -35,40 +35,40 @@ describe 'cis_security_hardening::rules::auditd_remote_conf' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file('/etc/audisp/plugins.d/au-remote.conf')
-              .with(
+            is_expected.to contain_file('/etc/audisp/plugins.d/au-remote.conf').
+              with(
                 'ensure' => 'file',
                 'owner'  => 'root',
                 'group'  => 'root',
-                'mode'   => '0644',
+                'mode'   => '0644'
               )
 
-            is_expected.to contain_file_line('off-load-direction')
-              .with(
+            is_expected.to contain_file_line('off-load-direction').
+              with(
                 'ensure' => 'present',
                 'path'   => '/etc/audisp/plugins.d/au-remote.conf',
                 'match'  => '^direction =',
-                'line'   => 'direction = out',
-              )
-              .that_notifies('Service[auditd]')
+                'line'   => 'direction = out'
+              ).
+              that_notifies('Service[auditd]')
 
-            is_expected.to contain_file_line('off-load-path')
-              .with(
+            is_expected.to contain_file_line('off-load-path').
+              with(
                 'ensure' => 'present',
                 'path'   => '/etc/audisp/plugins.d/au-remote.conf',
                 'match'  => '^path =',
-                'line'   => 'path = /sbin/audisp-remote',
-              )
-              .that_notifies('Service[auditd]')
+                'line'   => 'path = /sbin/audisp-remote'
+              ).
+              that_notifies('Service[auditd]')
 
-            is_expected.to contain_file_line('off-load-type')
-              .with(
+            is_expected.to contain_file_line('off-load-type').
+              with(
                 'ensure' => 'present',
                 'path'   => '/etc/audisp/plugins.d/au-remote.conf',
                 'match'  => '^type =',
-                'line'   => 'type = always',
-              )
-              .that_notifies('Service[auditd]')
+                'line'   => 'type = always'
+              ).
+              that_notifies('Service[auditd]')
 
           else
             is_expected.not_to contain_file_line('off-load-direction')

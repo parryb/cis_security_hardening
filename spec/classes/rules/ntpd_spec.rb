@@ -45,55 +45,59 @@ describe 'cis_security_hardening::rules::ntpd' do
 
             if enforce && !os_facts[:os]['name'].casecmp('sles').zero?
 
-              is_expected.to create_class('ntp')
-                .with(
+              is_expected.to create_class('ntp').
+                with(
                   'servers'         => ['10.10.10.1', '10.10.10.2'],
                   'restrict'        => ['127.0.0.1'],
                   'statsdir'        => '/var/tmp',
                   'driftfile'       => '/var/lib/ntp/drift',
                   'disable_monitor' => true,
                   'iburst_enable'   => false,
-                  'service_manage'  => true,
+                  'service_manage'  => true
                 )
 
               if os_facts[:os]['family'].casecmp('debian').zero?
-                is_expected.to contain_package('chrony')
-                  .with(
-                    'ensure' => 'purged',
+                is_expected.to contain_package('chrony').
+                  with(
+                    'ensure' => 'purged'
                   )
-                is_expected.to contain_service('systemd-timesyncd')
-                  .with(
+                is_expected.to contain_service('systemd-timesyncd').
+                  with(
                     'ensure' => 'stopped',
-                    'enable' => false,
+                    'enable' => false
                   )
 
                 if os_facts[:os]['name'].casecmp('debian').zero? && os_facts[:os]['release']['major'] >= '12'
-                  is_expected.to contain_file_line('ntp runas')
-                    .with(
+                  is_expected.to contain_file_line('ntp runas').
+                    with(
                       'ensure' => 'present',
                       'path'   => '/etc/init.d/ntpsec',
                       'match'  => '^RUNASUSER=',
-                      'line'   =>  'RUNASUSER=ntp',
+                      # rubocop:disable Layout/HashAlignment
+                      'line' => 'RUNASUSER=ntp'
+                      # rubocop:enable Layout/HashAlignment
                     )
                 else
-                  is_expected.to contain_file_line('ntp runas')
-                    .with(
+                  is_expected.to contain_file_line('ntp runas').
+                    with(
                       'ensure' => 'present',
                       'path'   => '/etc/init.d/ntp',
                       'match'  => '^RUNASUSER=',
-                      'line'   =>  'RUNASUSER=ntp',
+                      # rubocop:disable Layout/HashAlignment
+                      'line' => 'RUNASUSER=ntp'
+                      # rubocop:enable Layout/HashAlignment
                     )
                 end
 
               else
                 is_expected.not_to contain_service('systemd-timesyncd')
-                is_expected.to contain_file('/etc/sysconfig/ntpd')
-                  .with(
+                is_expected.to contain_file('/etc/sysconfig/ntpd').
+                  with(
                     'ensure'  => 'file',
                     'owner'   => 'root',
                     'group'   => 'root',
                     'mode'    => '0644',
-                    'content' => 'OPTIONS="-u ntp:ntp"',
+                    'content' => 'OPTIONS="-u ntp:ntp"'
                   )
               end
             else

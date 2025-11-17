@@ -20,9 +20,7 @@ def read_pam_pkcs11_conf
     policy = ''
     lines = File.readlines('/etc/pam_pkcs11/pam_pkcs11.conf')
     lines.each do |line|
-      if %r{pkcs11_module #{ret['module']} \{}.match?(line)
-        parse = true
-      end
+      parse = true if %r{pkcs11_module #{ret['module']} \{}.match?(line)
       if parse
         m = line.match(%r{cert_policy\s*=\s*(?<policy>.*);})
         unless m.nil?
@@ -30,9 +28,7 @@ def read_pam_pkcs11_conf
           next
         end
       end
-      if parse && line =~ %r{\}$}
-        parse = false
-      end
+      parse = false if parse && line =~ %r{\}$}
     end
 
     ret['policy'] = policy

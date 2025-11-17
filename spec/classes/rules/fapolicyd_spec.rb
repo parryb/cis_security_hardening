@@ -20,29 +20,29 @@ describe 'cis_security_hardening::rules::fapolicyd' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_package('fapolicyd')
-              .with(
-                'ensure' => 'installed',
+            is_expected.to contain_package('fapolicyd').
+              with(
+                'ensure' => 'installed'
               )
 
-            is_expected.to contain_file('/run/fapolicyd')
-              .with(
+            is_expected.to contain_file('/run/fapolicyd').
+              with(
                 'ensure' => 'directory',
                 'owner' => 'fapolicyd',
                 'group' => 'users',
-                'mode' => '0755',
-              )
-              .that_requires('Package[fapolicyd]')
+                'mode' => '0755'
+              ).
+              that_requires('Package[fapolicyd]')
 
-            is_expected.to contain_file_line('fix fapolicyd gid')
-              .with(
+            is_expected.to contain_file_line('fix fapolicyd gid').
+              with(
                 'ensure'             => 'present',
                 'path'               => '/etc/fapolicyd/fapolicyd.conf',
                 'match'              => '^gid = fapolicyd',
                 'line'               => 'gid = users',
-                'append_on_no_match' => true,
-              )
-              .that_requires('Package[fapolicyd]')
+                'append_on_no_match' => true
+              ).
+              that_requires('Package[fapolicyd]')
 
           else
             is_expected.not_to contain_package('fapolicyd')

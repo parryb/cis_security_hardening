@@ -31,10 +31,10 @@ describe 'cis_security_hardening::rules::firewalld_default_zone' do
         is_expected.to compile
 
         if enforce
-          is_expected.to contain_exec('set firewalld default zone')
-            .with(
+          is_expected.to contain_exec('set firewalld default zone').
+            with(
               'command' => 'firewall-cmd --set-default-zone=public',
-              'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+              'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin']
             )
 
         else

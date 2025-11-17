@@ -12,7 +12,7 @@ describe 'cis_security_hardening::rules::auditd_package' do
         let(:params) do
           {
             'enforce' => enforce,
-            'packages' => ['audit', 'audit-libs', 'audispd-plugins', 'auditd'],
+            'packages' => %w[audit audit-libs audispd-plugins auditd],
           }
         end
 
@@ -20,21 +20,21 @@ describe 'cis_security_hardening::rules::auditd_package' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_package('audit')
-              .with(
-                'ensure' => 'installed',
+            is_expected.to contain_package('audit').
+              with(
+                'ensure' => 'installed'
               )
-            is_expected.to contain_package('audit-libs')
-              .with(
-                'ensure' => 'installed',
+            is_expected.to contain_package('audit-libs').
+              with(
+                'ensure' => 'installed'
               )
-            is_expected.to contain_package('audispd-plugins')
-              .with(
-                'ensure' => 'installed',
+            is_expected.to contain_package('audispd-plugins').
+              with(
+                'ensure' => 'installed'
               )
-            is_expected.to contain_package('auditd')
-              .with(
-                'ensure' => 'installed',
+            is_expected.to contain_package('auditd').
+              with(
+                'ensure' => 'installed'
               )
           else
             is_expected.not_to contain_package('audit')

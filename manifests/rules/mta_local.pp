@@ -25,7 +25,7 @@ class cis_security_hardening::rules::mta_local (
 ) {
   if  $enforce and
   fact('cis_security_hardening.postfix') == 'yes' {
-    file_line { 'mta-loca-config':
+    file_line { 'mta-local-config':
       path     => '/etc/postfix/main.cf',
       line     => 'inet_interfaces = loopback-only',
       match    => 'inet_interfaces\s*=',

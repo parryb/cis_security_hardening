@@ -23,28 +23,28 @@ class cis_security_hardening::rules::httpd (
     case $facts['os']['name'].downcase() {
       'ubuntu', 'debian': {
         stdlib::ensure_packages(['apache2'], {
-            ensure => purged,
+          ensure => purged,
         })
       }
       'sles': {
         stdlib::ensure_packages(['httpd'], {
-            ensure => absent,
+          ensure => absent,
         })
       }
       'redhat': {
         if $facts['os']['release']['major'] >= '9' {
           stdlib::ensure_packages(['nginx'], {
-              ensure => purged,
+            ensure => purged,
           })
         }
         stdlib::ensure_packages(['httpd'], {
-            ensure => purged,
+          ensure => purged,
         })
       }
       default: {
         ensure_resource('service', ['httpd'], {
-            ensure => 'stopped',
-            enable => false
+          ensure => 'stopped',
+          enable => false
         })
       }
     }

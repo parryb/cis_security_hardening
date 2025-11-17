@@ -44,9 +44,11 @@ class cis_security_hardening::rules::passwd_min_days (
         if
         $attributes['password_expires_days'] != 'never' and
         $attributes['min_days_between_password_change'] != $min_pass_days {
+          # lint:ignore:exec_idempotency Idempotency handled by fact comparison above
           exec { "chage --mindays ${min_pass_days} ${user}":
             path => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
           }
+          # lint:endignore
         }
       }
     }

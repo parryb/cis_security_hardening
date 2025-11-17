@@ -24,10 +24,10 @@ class cis_security_hardening::rules::sssd_use_start_tls (
 ) {
   if $enforce {
     ensure_resource('file', '/etc/sssd/sssd.conf', {
-        ensure => file,
-        owner  => 'root',
-        group  => 'root',
-        mode   => '0644',
+      ensure => file,
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0644',
     })
 
     file_line { 'add ldap tls':

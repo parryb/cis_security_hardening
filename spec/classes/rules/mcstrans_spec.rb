@@ -8,7 +8,7 @@ describe 'cis_security_hardening::rules::mcstrans' do
   test_on = {
     supported_os: [{
       'operatingsystem'        => 'RedHat',
-      'operatingsystemrelease' => ['7', '8'],
+      'operatingsystemrelease' => %w[7 8],
     }]
   }
 
@@ -26,9 +26,9 @@ describe 'cis_security_hardening::rules::mcstrans' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_package('mcstrans')
-              .with(
-                'ensure' => 'purged',
+            is_expected.to contain_package('mcstrans').
+              with(
+                'ensure' => 'purged'
               )
           else
             is_expected.not_to contain_package('mcstrans')

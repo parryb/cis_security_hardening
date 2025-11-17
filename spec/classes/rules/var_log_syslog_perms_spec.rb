@@ -22,12 +22,12 @@ describe 'cis_security_hardening::rules::var_log_syslog_perms' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file('/var/log/syslog')
-              .with(
+            is_expected.to contain_file('/var/log/syslog').
+              with(
                 'ensure' => 'file',
                 'owner' => 'syslog',
                 'group' => 'adm',
-                'mode' => '0640',
+                'mode' => '0640'
               )
           else
             is_expected.not_to contain_file('/var/log/syslog')

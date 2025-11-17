@@ -24,8 +24,8 @@ class cis_security_hardening::rules::ufw_service (
   if($enforce) {
     if(!defined(Service['ufw'])) {
       ensure_resource('service', ['ufw'], {
-          ensure => running,
-          enable => true,
+        ensure => running,
+        enable => true,
       })
     }
     exec { 'enable-ufw':

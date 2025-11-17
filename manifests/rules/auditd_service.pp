@@ -24,8 +24,8 @@ class cis_security_hardening::rules::auditd_service (
 ) {
   if $enforce {
     ensure_resource('service', ['auditd'], {
-        ensure => running,
-        enable => true,
+      ensure => running,
+      enable => true,
     })
   }
 }

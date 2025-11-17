@@ -19,9 +19,9 @@ describe 'cis_security_hardening::rules::tftp_client' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_package('tftp')
-              .with(
-                'ensure' => 'absent',
+            is_expected.to contain_package('tftp').
+              with(
+                'ensure' => 'absent'
               )
           else
             is_expected.not_to contain_package('tftp')

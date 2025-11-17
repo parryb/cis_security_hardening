@@ -26,10 +26,10 @@ describe 'cis_security_hardening::rules::var_log_audit_noexec' do
         it {
           is_expected.to compile
           if enforce
-            is_expected.to contain_cis_security_hardening__set_mount_options('/var/log/audit-noexec')
-              .with(
+            is_expected.to contain_cis_security_hardening__set_mount_options('/var/log/audit-noexec').
+              with(
                 'mountpoint'   => '/var/log/audit',
-                'mountoptions' => 'noexec',
+                'mountoptions' => 'noexec'
               )
           else
             is_expected.not_to contain_cis_security_hardening__set_mount_options('/var/log/audit-noexec')

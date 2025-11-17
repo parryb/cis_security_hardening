@@ -33,14 +33,14 @@ describe 'cis_security_hardening::rules::rsyslog_remote_logs' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file_line('rsyslog-remote-log-host')
-              .with(
+            is_expected.to contain_file_line('rsyslog-remote-log-host').
+              with(
                 'ensure' => 'present',
                 'path'   => '/etc/rsyslog.conf',
                 'line'   => '*.* @@10.10.10.10',
-                'match'  => '^\*\.\* \@\@.*',
-              )
-              .that_notifies('Exec[reload-rsyslog]')
+                'match'  => '^\*\.\* \@\@.*'
+              ).
+              that_notifies('Exec[reload-rsyslog]')
           else
             is_expected.not_to contain_file_line('rsyslog-remote-log-host')
           end

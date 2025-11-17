@@ -26,17 +26,17 @@ describe 'cis_security_hardening::rules::fat' do
             if os_facts[:os]['release']['major'] == '7'
 
               if enforce
-                is_expected.to contain_kmod__install('fat')
-                  .with(
-                    command: '/bin/true',
+                is_expected.to contain_kmod__install('fat').
+                  with(
+                    command: '/bin/true'
                   )
-                is_expected.to contain_kmod__install('vfat')
-                  .with(
-                    command: '/bin/true',
+                is_expected.to contain_kmod__install('vfat').
+                  with(
+                    command: '/bin/true'
                   )
-                is_expected.to contain_kmod__install('msdos')
-                  .with(
-                    command: '/bin/true',
+                is_expected.to contain_kmod__install('msdos').
+                  with(
+                    command: '/bin/true'
                   )
               else
                 is_expected.not_to contain_kmod__install('fat')
@@ -46,9 +46,9 @@ describe 'cis_security_hardening::rules::fat' do
 
             elsif os_facts[:os]['release']['major'] == '8'
               if enforce
-                is_expected.to contain_kmod__install('vfat')
-                  .with(
-                    command: '/bin/true',
+                is_expected.to contain_kmod__install('vfat').
+                  with(
+                    command: '/bin/true'
                   )
               else
                 is_expected.not_to contain_kmod__install('vfat')
@@ -58,9 +58,9 @@ describe 'cis_security_hardening::rules::fat' do
           elsif os_facts[:os]['name'].casecmp('ubuntu').zero?
 
             if enforce
-              is_expected.to contain_kmod__install('vfat')
-                .with(
-                  command: '/bin/true',
+              is_expected.to contain_kmod__install('vfat').
+                with(
+                  command: '/bin/true'
                 )
               is_expected.not_to contain_kmod__install('fat')
               is_expected.not_to contain_kmod__install('msdos')
@@ -70,17 +70,17 @@ describe 'cis_security_hardening::rules::fat' do
 
           elsif os_facts[:os]['name'].casecmp('sles').zero?
             if enforce
-              is_expected.to contain_kmod__install('fat')
-                .with(
-                  command: '/bin/true',
+              is_expected.to contain_kmod__install('fat').
+                with(
+                  command: '/bin/true'
                 )
-              is_expected.to contain_kmod__install('vfat')
-                .with(
-                  command: '/bin/true',
+              is_expected.to contain_kmod__install('vfat').
+                with(
+                  command: '/bin/true'
                 )
-              is_expected.to contain_kmod__install('msdos')
-                .with(
-                  command: '/bin/true',
+              is_expected.to contain_kmod__install('msdos').
+                with(
+                  command: '/bin/true'
                 )
             else
               is_expected.not_to contain_kmod__install('fat')

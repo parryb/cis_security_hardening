@@ -21,19 +21,19 @@ describe 'cis_security_hardening::rules::nis_client' do
           if enforce
 
             if os_facts[:os]['name'].casecmp('ubuntu').zero?
-              is_expected.to contain_package('nis')
-                .with(
-                  'ensure' => 'purged',
+              is_expected.to contain_package('nis').
+                with(
+                  'ensure' => 'purged'
                 )
             elsif os_facts[:os]['family'].casecmp('suse').zero?
-              is_expected.to contain_package('ypbind')
-                .with(
-                    'ensure' => 'absent',
-                  )
+              is_expected.to contain_package('ypbind').
+                with(
+                  'ensure' => 'absent'
+                )
             else
-              is_expected.to contain_package('ypbind')
-                .with(
-                  'ensure' => 'purged',
+              is_expected.to contain_package('ypbind').
+                with(
+                  'ensure' => 'purged'
                 )
             end
           else

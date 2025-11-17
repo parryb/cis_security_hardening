@@ -47,32 +47,32 @@ describe 'cis_security_hardening::rules::nftables_base_chains' do
         is_expected.to compile
 
         if enforce
-          is_expected.to contain_exec('create base chain input')
-            .with(
+          is_expected.to contain_exec('create base chain input').
+            with(
               'command' => 'nft create chain inet filter input { type filter hook input priority 0 \; }',
               'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-              'onlyif'  => 'test -z "$(nft -n list ruleset inet | grep \'type filter hook input priority 0\')"',
-            )
-            .that_notifies('Exec[dump nftables ruleset]')
-            .that_requires('Package[nftables]')
+              'onlyif'  => 'test -z "$(nft -n list ruleset inet | grep \'type filter hook input priority 0\')"'
+            ).
+            that_notifies('Exec[dump nftables ruleset]').
+            that_requires('Package[nftables]')
 
-          is_expected.to contain_exec('create base chain forward')
-            .with(
+          is_expected.to contain_exec('create base chain forward').
+            with(
               'command' => 'nft create chain inet filter forward { type filter hook forward priority 0 \; }',
               'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-              'onlyif'  => 'test -z "$(nft -n list ruleset inet | grep \'type filter hook forward priority 0\')"',
-            )
-            .that_notifies('Exec[dump nftables ruleset]')
-            .that_requires('Package[nftables]')
+              'onlyif'  => 'test -z "$(nft -n list ruleset inet | grep \'type filter hook forward priority 0\')"'
+            ).
+            that_notifies('Exec[dump nftables ruleset]').
+            that_requires('Package[nftables]')
 
-          is_expected.to contain_exec('create base chain output')
-            .with(
+          is_expected.to contain_exec('create base chain output').
+            with(
               'command' => 'nft create chain inet filter output { type filter hook output priority 0 \; }',
               'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-              'onlyif'  => 'test -z "$(nft -n list ruleset inet | grep \'type filter hook output priority 0\')"',
-            )
-            .that_notifies('Exec[dump nftables ruleset]')
-            .that_requires('Package[nftables]')
+              'onlyif'  => 'test -z "$(nft -n list ruleset inet | grep \'type filter hook output priority 0\')"'
+            ).
+            that_notifies('Exec[dump nftables ruleset]').
+            that_requires('Package[nftables]')
         else
           is_expected.not_to contain_exec('create base chain input')
           is_expected.not_to contain_exec('create base chain forward')

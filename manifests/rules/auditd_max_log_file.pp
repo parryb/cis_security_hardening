@@ -26,6 +26,8 @@ class cis_security_hardening::rules::auditd_max_log_file (
   Integer $max_log_size = 16,
 ) {
   if $enforce {
+    require cis_security_hardening::rules::auditd_package
+
     file_line { 'auditd_max_log_size':
       path               => '/etc/audit/auditd.conf',
       line               => "max_log_file = ${max_log_size}",

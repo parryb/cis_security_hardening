@@ -20,29 +20,29 @@ describe 'cis_security_hardening::rules::nfs_utils' do
 
           if enforce
             if os_facts[:os]['name'].casecmp('sles').zero?
-              is_expected.to contain_package('nfs-utils')
-                .with(
-                  'ensure' => 'absent',
+              is_expected.to contain_package('nfs-utils').
+                with(
+                  'ensure' => 'absent'
                 )
 
-              is_expected.to contain_package('nfs-kernel-server')
-                .with(
-                  'ensure' => 'absent',
+              is_expected.to contain_package('nfs-kernel-server').
+                with(
+                  'ensure' => 'absent'
                 )
             elsif os_facts[:os]['name'].casecmp('rocky').zero? || os_facts[:os]['name'].casecmp('almalinux').zero?
-              is_expected.to contain_package('nfs-utils')
-                .with(
-                  'ensure' => 'absent',
+              is_expected.to contain_package('nfs-utils').
+                with(
+                  'ensure' => 'absent'
                 )
             else
-              is_expected.to contain_service('nfs-server')
-                .with(
+              is_expected.to contain_service('nfs-server').
+                with(
                   'ensure' => 'stopped',
-                  'enable' => false,
+                  'enable' => false
                 )
-              is_expected.to contain_package('nfs-utils')
-                .with(
-                  'ensure' => 'absent',
+              is_expected.to contain_package('nfs-utils').
+                with(
+                  'ensure' => 'absent'
                 )
             end
           else
@@ -66,17 +66,17 @@ describe 'cis_security_hardening::rules::nfs_utils' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_service('nfs-server')
-              .with(
+            is_expected.to contain_service('nfs-server').
+              with(
                 'ensure' => 'stopped',
-                'enable' => false,
+                'enable' => false
               )
 
-            is_expected.to contain_exec('mask nfs-server service')
-              .with(
+            is_expected.to contain_exec('mask nfs-server service').
+              with(
                 'command' => 'systemctl --now mask nfs-server',
                 'path'    => ['/usr/bin', '/bin'],
-                'unless'  => 'test "$(systemctl is-enabled nfs-server)" = "masked"',
+                'unless'  => 'test "$(systemctl is-enabled nfs-server)" = "masked"'
               )
           end
         }

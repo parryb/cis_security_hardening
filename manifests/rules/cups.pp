@@ -30,30 +30,30 @@ class cis_security_hardening::rules::cups (
     case $facts['os']['name'].downcase() {
       'ubuntu', 'sles': {
         stdlib::ensure_packages(['cups'], {
-            ensure => $ensure,
+          ensure => $ensure,
         })
       }
       'rocky', 'almalinux': {
         stdlib::ensure_packages(['cups'], {
-            ensure => $ensure,
+          ensure => $ensure,
         })
       }
       'debian': {
         if $facts['os']['release']['major'] > '10' {
           stdlib::ensure_packages('cups', {
-              ensure => $ensure,
+            ensure => $ensure,
           })
         } else {
           ensure_resource('service', ['cups'], {
-              ensure => 'stopped',
-              enable => false,
+            ensure => 'stopped',
+            enable => false,
           })
         }
       }
       default: {
         ensure_resource('service', ['cups'], {
-            ensure => 'stopped',
-            enable => false,
+          ensure => 'stopped',
+          enable => false,
         })
       }
     }

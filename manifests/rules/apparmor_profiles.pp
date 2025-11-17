@@ -24,10 +24,12 @@ class cis_security_hardening::rules::apparmor_profiles (
     $profiles = fact('cis_security_hardening.apparmor.profiles')
     $enforced = fact('cis_security_hardening.apparmor.profiles_enforced')
     if $profiles != $enforced {
+      # lint:ignore:exec_idempotency Idempotency handled by fact comparison above
       exec { 'apparmor enforce':
         command => 'aa-enforce /etc/apparmor.d/*',
         path    => ['/bin', '/sbin', '/usr/bin', '/usr/sbin'],
       }
+      # lint:endignore
     }
   }
 }

@@ -44,7 +44,7 @@ class cis_security_hardening::rules::net_snmp (
     }
 
     stdlib::ensure_packages($pkg, {
-        ensure => $ensure,
+      ensure => $ensure,
     })
   }
 }

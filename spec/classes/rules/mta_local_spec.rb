@@ -12,7 +12,7 @@ describe 'cis_security_hardening::rules::mta_local' do
           os_facts.merge(
             'cis_security_hardening' => {
               'postfix' => 'yes',
-            },
+            }
           )
         end
         let(:params) do
@@ -25,23 +25,23 @@ describe 'cis_security_hardening::rules::mta_local' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file_line('mta-loca-config')
-              .with(
+            is_expected.to contain_file_line('mta-local-config').
+              with(
                 'path'     => '/etc/postfix/main.cf',
                 'line'     => 'inet_interfaces = loopback-only',
                 'match'    => 'inet_interfaces\s*=',
-                'multiple' => true,
-              )
-              .that_notifies('Exec[restart postfix]')
+                'multiple' => true
+              ).
+              that_notifies('Exec[restart postfix]')
 
-            is_expected.to contain_exec('restart postfix')
-              .with(
+            is_expected.to contain_exec('restart postfix').
+              with(
                 'command'     => 'systemctl restart postfix',
                 'path'        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                'refreshonly' => true,
+                'refreshonly' => true
               )
           else
-            is_expected.not_to contain_file_line('mta-loca-config')
+            is_expected.not_to contain_file_line('mta-local-config')
             is_expected.not_to contain_exec('restart postfix')
           end
         }

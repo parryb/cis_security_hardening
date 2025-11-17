@@ -6,7 +6,7 @@ def read_auditd_data
 
   files = []
   if File.exist?('/usr/share/cis_security_hardening/data/auditd_priv_cmds.txt')
-    text = File.open('/usr/share/cis_security_hardening/data/auditd_priv_cmds.txt').read
+    text = File.read('/usr/share/cis_security_hardening/data/auditd_priv_cmds.txt')
     text.gsub!(%r{\r\n?}, "\n")
     files = text.split("\n")
   end

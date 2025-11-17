@@ -29,7 +29,7 @@ describe 'cis_security_hardening::rules::auditd_conf_perms' do
                 auditing_process: 'none',
                 config_files: ['/etc/audit/auditd.conf', '/etc/audit/audit.rules']
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -45,19 +45,19 @@ describe 'cis_security_hardening::rules::auditd_conf_perms' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file('/etc/audit/auditd.conf')
-              .with(
+            is_expected.to contain_file('/etc/audit/auditd.conf').
+              with(
                 'ensure' => 'file',
                 'owner'  => 'root',
                 'group'  => 'root',
-                'mode'   => '0640',
+                'mode'   => '0640'
               )
-            is_expected.to contain_file('/etc/audit/audit.rules')
-              .with(
+            is_expected.to contain_file('/etc/audit/audit.rules').
+              with(
                 'ensure' => 'file',
                 'owner'  => 'root',
                 'group'  => 'root',
-                'mode'   => '0640',
+                'mode'   => '0640'
               )
           else
             is_expected.not_to contain_file('/etc/audit/auditd.conf')

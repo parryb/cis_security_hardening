@@ -6,7 +6,7 @@ enforce_options = [true, false]
 
 describe 'cis_security_hardening::rules::auditd_privileged_functions_use' do
   test_on = {
-    hardwaremodels: ['x86_64', 'i686'],
+    hardwaremodels: %w[x86_64 i686],
   }
 
   let(:pre_condition) do
@@ -32,7 +32,7 @@ describe 'cis_security_hardening::rules::auditd_privileged_functions_use' do
                 uid_min: '1000',
                 auditing_process: 'none',
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -46,58 +46,58 @@ describe 'cis_security_hardening::rules::auditd_privileged_functions_use' do
 
           if enforce
             if os_facts[:os]['name'].casecmp('redhat').zero? && (os_facts[:os]['release']['major'] == '7' || os_facts[:os]['release']['major'] == '9')
-              if ['x86_64', 'amd64'].include?(os_facts[:os]['architecture'])
-                is_expected.to contain_concat__fragment('watch privileged_functions command rule 3')
-                  .with(
+              if %w[x86_64 amd64].include?(os_facts[:os]['architecture'])
+                is_expected.to contain_concat__fragment('watch privileged_functions command rule 3').
+                  with(
                     'order'   => '191',
                     'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                    'content' => '-a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid',
+                    'content' => '-a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid'
                   )
-                is_expected.to contain_concat__fragment('watch privileged_functions command rule 4')
-                  .with(
+                is_expected.to contain_concat__fragment('watch privileged_functions command rule 4').
+                  with(
                     'order'   => '192',
                     'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                    'content' => '-a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid',
+                    'content' => '-a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid'
                   )
               else
-                is_expected.to contain_concat__fragment('watch privileged_functions command rule 1')
-                  .with(
+                is_expected.to contain_concat__fragment('watch privileged_functions command rule 1').
+                  with(
                     'order'   => '189',
                     'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                    'content' => '-a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid',
+                    'content' => '-a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid'
                   )
-                is_expected.to contain_concat__fragment('watch privileged_functions command rule 2')
-                  .with(
+                is_expected.to contain_concat__fragment('watch privileged_functions command rule 2').
+                  with(
                     'order'   => '190',
                     'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                    'content' => '-a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid',
+                    'content' => '-a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid'
                   )
               end
-            elsif ['x86_64', 'amd64'].include?(os_facts[:os]['architecture'])
-              is_expected.to contain_concat__fragment('watch privileged_functions command rule 3')
-                .with(
-                    'order'   => '191',
-                    'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                    'content' => '-a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -F key=execpriv',
-                  )
-              is_expected.to contain_concat__fragment('watch privileged_functions command rule 4')
-                .with(
+            elsif %w[x86_64 amd64].include?(os_facts[:os]['architecture'])
+              is_expected.to contain_concat__fragment('watch privileged_functions command rule 3').
+                with(
+                  'order'   => '191',
+                  'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
+                  'content' => '-a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -F key=execpriv'
+                )
+              is_expected.to contain_concat__fragment('watch privileged_functions command rule 4').
+                with(
                   'order'   => '192',
                   'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -F key=execpriv',
+                  'content' => '-a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -F key=execpriv'
                 )
             else
-              is_expected.to contain_concat__fragment('watch privileged_functions command rule 1')
-                .with(
+              is_expected.to contain_concat__fragment('watch privileged_functions command rule 1').
+                with(
                   'order'   => '189',
                   'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -F key=execpriv',
+                  'content' => '-a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -F key=execpriv'
                 )
-              is_expected.to contain_concat__fragment('watch privileged_functions command rule 2')
-                .with(
+              is_expected.to contain_concat__fragment('watch privileged_functions command rule 2').
+                with(
                   'order'   => '190',
                   'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -F key=execpriv',
+                  'content' => '-a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -F key=execpriv'
                 )
             end
           else

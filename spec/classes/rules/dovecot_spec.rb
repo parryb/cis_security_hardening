@@ -21,34 +21,34 @@ describe 'cis_security_hardening::rules::dovecot' do
           if enforce
 
             if os_facts[:os]['name'].casecmp('ubuntu').zero?
-              is_expected.to contain_package('dovecot-imapd')
-                .with(
-                  'ensure' => 'purged',
+              is_expected.to contain_package('dovecot-imapd').
+                with(
+                  'ensure' => 'purged'
                 )
 
-              is_expected.to contain_package('dovecot-pop3d')
-                .with(
-                  'ensure' => 'purged',
+              is_expected.to contain_package('dovecot-pop3d').
+                with(
+                  'ensure' => 'purged'
                 )
             elsif os_facts[:os]['name'].casecmp('sles').zero?
-              is_expected.to contain_package('dovecot')
-                .with(
-                  'ensure' => 'absent',
+              is_expected.to contain_package('dovecot').
+                with(
+                  'ensure' => 'absent'
                 )
             elsif os_facts[:os]['name'].casecmp('redhat').zero?
-              is_expected.to contain_package('dovecot')
-                .with(
-                  'ensure' => 'purged',
+              is_expected.to contain_package('dovecot').
+                with(
+                  'ensure' => 'purged'
                 )
-              is_expected.to contain_package('cyrus-imapd')
-                .with(
-                  'ensure' => 'purged',
+              is_expected.to contain_package('cyrus-imapd').
+                with(
+                  'ensure' => 'purged'
                 )
             else
-              is_expected.to contain_service('dovecot')
-                .with(
+              is_expected.to contain_service('dovecot').
+                with(
                   'ensure' => 'stopped',
-                  'enable' => false,
+                  'enable' => false
                 )
             end
           else

@@ -34,7 +34,7 @@ class cis_security_hardening::rules::ldap_client (
     }
 
     stdlib::ensure_packages($pkg, {
-        ensure => $ensure,
+      ensure => $ensure,
     })
   }
 }

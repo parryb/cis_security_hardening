@@ -19,9 +19,9 @@ describe 'cis_security_hardening::rules::disable_atm' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_kmod__install('ATM')
-              .with(
-                command: '/bin/true',
+            is_expected.to contain_kmod__install('ATM').
+              with(
+                command: '/bin/true'
               )
             is_expected.to contain_kmod__blacklist('ATM')
           else

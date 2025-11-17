@@ -55,7 +55,7 @@ describe 'cis_security_hardening::rules::sshd_login_gracetime' do
                 'clientalivecountmax' => 3,
                 'permituserenvironment' => 'yes',
               },
-            },
+            }
           )
         end
 
@@ -75,14 +75,14 @@ describe 'cis_security_hardening::rules::sshd_login_gracetime' do
                    else
                      '/etc/ssh/sshd_config'
                    end
-            is_expected.to contain_file_line('sshd-login-gracetime')
-              .with(
+            is_expected.to contain_file_line('sshd-login-gracetime').
+              with(
                 'ensure' => 'present',
                 'path'   => path,
                 'line'   => 'LoginGraceTime 50',
-                'match'  => '^#?LoginGraceTime.*',
-              )
-              .that_notifies('Exec[reload-sshd]')
+                'match'  => '^#?LoginGraceTime.*'
+              ).
+              that_notifies('Exec[reload-sshd]')
           else
             is_expected.not_to contain_file_line('sshd-login-gracetime')
           end

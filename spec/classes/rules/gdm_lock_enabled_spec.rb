@@ -13,7 +13,7 @@ describe 'cis_security_hardening::rules::gdm_lock_enabled' do
             cis_security_hardening: {
               gnome_gdm_conf: false,
               gnome_gdm: true,
-            },
+            }
           )
         end
         let(:params) do
@@ -26,19 +26,21 @@ describe 'cis_security_hardening::rules::gdm_lock_enabled' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_dconf__db('lock-enabled')
-              .with(
+            is_expected.to contain_dconf__db('lock-enabled').
+              with(
                 'db_dir'         => '/etc/dconf/db/local.d',
                 'db_filename'    => '01-lock-enabled',
                 'locks_filename' => '01-lock-enabled',
-                'settings' => {
+                'settings'       => {
                   'org/gnome/desktop/screensaver' => {
                     'lock-enabled' => 'true',
                   },
                 },
+                # rubocop:disable Layout/HashAlignment
                 'locks' => [
-                  '/org/gnome/desktop/screensaver/lock-enabled',
-                ],
+                  '/org/gnome/desktop/screensaver/lock-enabled'
+                ]
+                # rubocop:enable Layout/HashAlignment
               )
           else
             is_expected.not_to contain_dconf__db('lock-enabled')

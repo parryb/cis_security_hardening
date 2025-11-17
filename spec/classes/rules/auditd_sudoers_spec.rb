@@ -28,7 +28,7 @@ describe 'cis_security_hardening::rules::auditd_sudoers' do
                 uid_min: '1000',
                 scope: false,
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -41,11 +41,11 @@ describe 'cis_security_hardening::rules::auditd_sudoers' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_concat__fragment('watch sudoers rule 1')
-              .with(
+            is_expected.to contain_concat__fragment('watch sudoers rule 1').
+              with(
                 'order' => '218',
                 'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                'content' => '-w /etc/sudoers -p wa -k identity',
+                'content' => '-w /etc/sudoers -p wa -k identity'
               )
           else
             is_expected.not_to contain_concat__fragment('watch sudoers rule 1')

@@ -27,11 +27,10 @@ describe 'cis_security_hardening::rules::tmp_nodev' do
         it {
           is_expected.to compile
           if enforce
-            is_expected.to contain_cis_security_hardening__set_mount_options('/tmp-nodev')
-              .with(
-                'mountpoint'   => '/tmp',
-                'mountoptions' => 'nodev',
-              )
+            is_expected.to contain_cis_security_hardening__set_mount_options('/tmp-nodev').with(
+              'mountpoint'   => '/tmp',
+              'mountoptions' => 'nodev'
+            )
           else
             is_expected.not_to contain_cis_security_hardening__set_mount_options('/tmp-nodev')
           end

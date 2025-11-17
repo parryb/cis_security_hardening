@@ -22,9 +22,9 @@ class cis_security_hardening::rules::nftables_service (
   if $enforce {
     if(!defined(Service['nftables'])) {
       ensure_resource('service', ['nftables'], {
-          ensure  => running,
-          enable  => true,
-          require => Package['nftables'],
+        ensure  => running,
+        enable  => true,
+        require => Package['nftables'],
       })
     }
   }

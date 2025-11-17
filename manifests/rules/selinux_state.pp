@@ -34,11 +34,11 @@ class cis_security_hardening::rules::selinux_state (
     }
 
     ensure_resource('file', '/etc/selinux/config', {
-        ensure => present,
-        owner  => 'root',
-        group  => 'root',
-        mode   => '0644',
-        notify => $notify
+      ensure => present,
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0644',
+      notify => $notify
     })
 
     file_line { 'selinux_enforce':

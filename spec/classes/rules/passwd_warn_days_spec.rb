@@ -31,7 +31,7 @@ describe 'cis_security_hardening::rules::passwd_warn_days' do
                 'pass_min_days_status' => true,
                 'pass_warn_age_status' => true,
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -49,17 +49,17 @@ describe 'cis_security_hardening::rules::passwd_warn_days' do
                    else
                      '/etc/login.defs'
                    end
-            is_expected.to contain_file_line('password warning days')
-              .with(
+            is_expected.to contain_file_line('password warning days').
+              with(
                 'ensure' => 'present',
                 'path'   => path,
                 'line'   => 'PASS_WARN_AGE 7',
-                'match'  => '^#?PASS_WARN_AGE',
+                'match'  => '^#?PASS_WARN_AGE'
               )
 
-            is_expected.to contain_exec('chage --warndays 7 test1')
-              .with(
-                'path' => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+            is_expected.to contain_exec('chage --warndays 7 test1').
+              with(
+                'path' => ['/bin', '/usr/bin', '/sbin', '/usr/sbin']
               )
           else
             is_expected.not_to contain_exec('chage --warndays 7 test1')

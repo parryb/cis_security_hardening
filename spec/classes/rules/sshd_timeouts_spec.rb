@@ -55,7 +55,7 @@ describe 'cis_security_hardening::rules::sshd_timeouts' do
                 'clientalivecountmax' => 3,
                 'permituserenvironment' => 'yes',
               },
-            },
+            }
           )
         end
 
@@ -76,25 +76,25 @@ describe 'cis_security_hardening::rules::sshd_timeouts' do
                    else
                      '/etc/ssh/sshd_config'
                    end
-            is_expected.to contain_file_line('sshd-timeouts')
-              .with(
+            is_expected.to contain_file_line('sshd-timeouts').
+              with(
                 'ensure' => 'present',
-                'path'   => path,
-                'line'   => 'ClientAliveInterval 300',
+                'path' => path,
+                'line' => 'ClientAliveInterval 300',
                 'multiple' => true,
-                'match'  => '^#?ClientAliveInterval.*',
-              )
-              .that_notifies('Exec[reload-sshd]')
+                'match' => '^#?ClientAliveInterval.*'
+              ).
+              that_notifies('Exec[reload-sshd]')
 
-            is_expected.to contain_file_line('sshd-timeouts-2')
-              .with(
+            is_expected.to contain_file_line('sshd-timeouts-2').
+              with(
                 'ensure' => 'present',
-                'path'   => path,
-                'line'   => 'ClientAliveCountMax 0',
+                'path' => path,
+                'line' => 'ClientAliveCountMax 0',
                 'multiple' => true,
-                'match' => '^#?ClientAliveCountMax.*',
-              )
-              .that_notifies('Exec[reload-sshd]')
+                'match' => '^#?ClientAliveCountMax.*'
+              ).
+              that_notifies('Exec[reload-sshd]')
           else
             is_expected.not_to contain_file_line('sshd-timeouts')
             is_expected.not_to contain_file_line('sshd-timeouts-2')

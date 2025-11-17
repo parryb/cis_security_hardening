@@ -207,7 +207,7 @@ describe 'cis_security_hardening::rules::iptables_open_ports' do
                 },
                 'policy_status' => false,
               },
-            },
+            }
           )
         end
 
@@ -258,45 +258,45 @@ describe 'cis_security_hardening::rules::iptables_open_ports' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_firewall('100 ssh inbound')
-              .with(
-                'chain'  => 'INPUT',
-                'proto'  => 'tcp',
-                'dport'  => 22,
-                'state'  => 'NEW',
-                'jump' => 'ACCEPT',
+            is_expected.to contain_firewall('100 ssh inbound').
+              with(
+                'chain' => 'INPUT',
+                'proto' => 'tcp',
+                'dport' => 22,
+                'state' => 'NEW',
+                'jump' => 'ACCEPT'
               )
-            is_expected.to contain_firewall('101 httpd inbound')
-              .with(
-                'chain'  => 'INPUT',
-                'proto'  => 'tcp',
-                'dport'  => 443,
-                'state'  => 'NEW',
-                'jump' => 'ACCEPT',
+            is_expected.to contain_firewall('101 httpd inbound').
+              with(
+                'chain' => 'INPUT',
+                'proto' => 'tcp',
+                'dport' => 443,
+                'state' => 'NEW',
+                'jump' => 'ACCEPT'
               )
-            is_expected.to contain_firewall('102 dns udp inbound')
-              .with(
-                'chain'  => 'INPUT',
-                'proto'  => 'udp',
-                'dport'  => 53,
-                'state'  => 'NEW',
-                'jump' => 'ACCEPT',
+            is_expected.to contain_firewall('102 dns udp inbound').
+              with(
+                'chain' => 'INPUT',
+                'proto' => 'udp',
+                'dport' => 53,
+                'state' => 'NEW',
+                'jump' => 'ACCEPT'
               )
-            is_expected.to contain_firewall('103 dns udp outbound')
-              .with(
-                'chain'  => 'OUTPUT',
-                'proto'  => 'udp',
-                'dport'  => 53,
-                'state'  => 'NEW',
-                'jump' => 'ACCEPT',
+            is_expected.to contain_firewall('103 dns udp outbound').
+              with(
+                'chain' => 'OUTPUT',
+                'proto' => 'udp',
+                'dport' => 53,
+                'state' => 'NEW',
+                'jump' => 'ACCEPT'
               )
-            is_expected.to contain_firewall('104 dns tcp inbound')
-              .with(
-                'chain'  => 'INPUT',
-                'proto'  => 'tcp',
-                'dport'  => 53,
-                'state'  => 'NEW',
-                'jump' => 'ACCEPT',
+            is_expected.to contain_firewall('104 dns tcp inbound').
+              with(
+                'chain' => 'INPUT',
+                'proto' => 'tcp',
+                'dport' => 53,
+                'state' => 'NEW',
+                'jump' => 'ACCEPT'
               )
           else
             is_expected.not_to contain_firewall('100 ssh inbound')

@@ -55,7 +55,7 @@ describe 'cis_security_hardening::rules::sshd_rsa_rhosts_authentication' do
                 'clientalivecountmax' => 3,
                 'permituserenvironment' => 'yes',
               },
-            },
+            }
           )
         end
 
@@ -68,21 +68,21 @@ describe 'cis_security_hardening::rules::sshd_rsa_rhosts_authentication' do
         it {
           is_expected.to compile
 
-          if enforce && os_facts[:operatingsystemrelease] < '7.4'
+          if enforce && os_facts['os'] && os_facts['os']['release'] && os_facts['os']['release']['full'] && Gem::Version.new(os_facts['os']['release']['full']) < Gem::Version.new('7.4')
             path = if os_facts[:os]['name'] == 'SLES' && os_facts[:os]['release']['major'] == '12'
                      '/usr/etc/ssh/sshd_config'
                    else
                      '/etc/ssh/sshd_config'
                    end
-            is_expected.to contain_file_line('sshd-rhosts-rsa-login')
-              .with(
+            is_expected.to contain_file_line('sshd-rhosts-rsa-login').
+              with(
                 'ensure' => 'present',
-                'path'   => path,
-                'line'               => 'RhostsRSAAuthentication no',
-                'match'              => '^#?RhostsRSAAuthentication.*',
-                'append_on_no_match' => true,
-              )
-              .that_notifies('Exec[reload-sshd]')
+                'path' => path,
+                'line' => 'RhostsRSAAuthentication no',
+                'match' => '^#?RhostsRSAAuthentication.*',
+                'append_on_no_match' => true
+              ).
+              that_notifies('Exec[reload-sshd]')
           else
             is_expected.not_to contain_file_line('sshd-rhosts-rsa-login')
           end

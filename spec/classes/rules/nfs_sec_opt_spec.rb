@@ -17,7 +17,7 @@ describe 'cis_security_hardening::rules::nfs_sec_opt' do
                   'mountoptions' => 'defaults,vers=3'
                 },
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -29,10 +29,10 @@ describe 'cis_security_hardening::rules::nfs_sec_opt' do
         it {
           is_expected.to compile
           if enforce
-            is_expected.to contain_cis_security_hardening__set_mount_options('/export/store-secopt')
-              .with(
+            is_expected.to contain_cis_security_hardening__set_mount_options('/export/store-secopt').
+              with(
                 'mountpoint'   => '/export/store',
-                'mountoptions' => 'sec=krb5:krb5i:krb5p',
+                'mountoptions' => 'sec=krb5:krb5i:krb5p'
               )
           else
             is_expected.not_to contain_cis_security_hardening__set_mount_options('/export/store-secopt')

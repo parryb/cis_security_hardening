@@ -21,7 +21,7 @@ class cis_security_hardening::rules::selinux (
 ) {
   if $enforce {
     stdlib::ensure_packages(['libselinux'], {
-        ensure => present,
+      ensure => present,
     })
   }
 }

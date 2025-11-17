@@ -17,32 +17,33 @@ describe 'cis_security_hardening::rules::timeout_setting' do
         end
 
         it { is_expected.to compile }
+
         it do
           if enforce
-            is_expected.to contain_file('/etc/profile.d/shell_timeout.sh')
-              .with(
-                'ensure'  => 'file',
-                'owner'   => 'root',
-                'group'   => 'root',
-                'mode'    => '0644',
+            is_expected.to contain_file('/etc/profile.d/shell_timeout.sh').
+              with(
+                'ensure' => 'file',
+                'owner' => 'root',
+                'group' => 'root',
+                'mode' => '0644'
               )
 
             if os_facts[:os]['name'].casecmp('debian').zero?
 
-              is_expected.to contain_file('/etc/profile')
-                .with(
-                  'ensure'  => 'file',
-                  'owner'   => 'root',
-                  'group'   => 'root',
-                  'mode'    => '0644',
+              is_expected.to contain_file('/etc/profile').
+                with(
+                  'ensure' => 'file',
+                  'owner' => 'root',
+                  'group' => 'root',
+                  'mode' => '0644'
                 )
 
-              is_expected.to contain_file('/etc/bash.bashrc')
-                .with(
-                  'ensure'  => 'file',
-                  'owner'   => 'root',
-                  'group'   => 'root',
-                  'mode'    => '0644',
+              is_expected.to contain_file('/etc/bash.bashrc').
+                with(
+                  'ensure' => 'file',
+                  'owner' => 'root',
+                  'group' => 'root',
+                  'mode' => '0644'
                 )
             end
           else

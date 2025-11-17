@@ -6,7 +6,7 @@ enforce_options = [true, false]
 
 describe 'cis_security_hardening::rules::auditd_removexattr_use' do
   test_on = {
-    hardwaremodels: ['x86_64', 'i686'],
+    hardwaremodels: %w[x86_64 i686],
   }
 
   let(:pre_condition) do
@@ -31,7 +31,7 @@ describe 'cis_security_hardening::rules::auditd_removexattr_use' do
               auditd: {
                 auditing_process: 'none',
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -44,31 +44,31 @@ describe 'cis_security_hardening::rules::auditd_removexattr_use' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_concat__fragment('watch removexattr command rule 1')
-              .with(
+            is_expected.to contain_concat__fragment('watch removexattr command rule 1').
+              with(
                 'order'   => '156',
                 'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                'content' => '-a always,exit -F arch=b32 -S removexattr -F auid>=1000 -F auid!=4294967295 -k perm_mod',
+                'content' => '-a always,exit -F arch=b32 -S removexattr -F auid>=1000 -F auid!=4294967295 -k perm_mod'
               )
-            is_expected.to contain_concat__fragment('watch removexattr command rule 2')
-              .with(
+            is_expected.to contain_concat__fragment('watch removexattr command rule 2').
+              with(
                 'order'   => '157',
                 'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                'content' => '-a always,exit -F arch=b32 -S removexattr -F auid=0 -k perm_mod',
+                'content' => '-a always,exit -F arch=b32 -S removexattr -F auid=0 -k perm_mod'
               )
 
-            if ['x86_64', 'amd64'].include?(os_facts[:os]['architecture'])
-              is_expected.to contain_concat__fragment('watch removexattr command rule 3')
-                .with(
+            if %w[x86_64 amd64].include?(os_facts[:os]['architecture'])
+              is_expected.to contain_concat__fragment('watch removexattr command rule 3').
+                with(
                   'order'   => '158',
                   'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-a always,exit -F arch=b64 -S removexattr -F auid>=1000 -F auid!=4294967295 -k perm_mod',
+                  'content' => '-a always,exit -F arch=b64 -S removexattr -F auid>=1000 -F auid!=4294967295 -k perm_mod'
                 )
-              is_expected.to contain_concat__fragment('watch removexattr command rule 4')
-                .with(
+              is_expected.to contain_concat__fragment('watch removexattr command rule 4').
+                with(
                   'order'   => '159',
                   'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-a always,exit -F arch=b64 -S removexattr -F auid=0 -k perm_mod',
+                  'content' => '-a always,exit -F arch=b64 -S removexattr -F auid=0 -k perm_mod'
                 )
             end
           else

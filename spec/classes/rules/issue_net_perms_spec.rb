@@ -19,12 +19,12 @@ describe 'cis_security_hardening::rules::issue_net_perms' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file('/etc/issue.net')
-              .with(
+            is_expected.to contain_file('/etc/issue.net').
+              with(
                 'ensure' => 'present',
                 'owner'  => 'root',
                 'group'  => 'root',
-                'mode'   => '0644',
+                'mode'   => '0644'
               )
           else
             is_expected.not_to contain_file('/etc/issue.net')
@@ -45,13 +45,13 @@ describe 'cis_security_hardening::rules::issue_net_perms' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file('/etc/issue.net')
-              .with(
+            is_expected.to contain_file('/etc/issue.net').
+              with(
                 'ensure'  => 'present',
                 'content' => 'test',
                 'owner'   => 'root',
                 'group'   => 'root',
-                'mode'    => '0644',
+                'mode'    => '0644'
               )
           else
             is_expected.not_to contain_file('/etc/issue.net')

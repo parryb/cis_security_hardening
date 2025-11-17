@@ -29,13 +29,13 @@ describe 'cis_security_hardening::rules::disable_coredump_socket' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_exec('mask coredump.socket')
-              .with(
+            is_expected.to contain_exec('mask coredump.socket').
+              with(
                 'command' => 'systemctl mask systemd-coredump.socket',
                 'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                'onlyif'  => 'test -z "$(systemctl status systemd-coredump.socket | grep -i "Loaded: masked")"',
-              )
-              .that_notifies('Exec[systemd-daemon-reload]')
+                'onlyif'  => 'test -z "$(systemctl status systemd-coredump.socket | grep -i "Loaded: masked")"'
+              ).
+              that_notifies('Exec[systemd-daemon-reload]')
           else
             is_expected.not_to contain_exec('mask coredump.socket')
           end

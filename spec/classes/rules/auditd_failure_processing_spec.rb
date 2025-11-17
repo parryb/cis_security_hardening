@@ -26,7 +26,7 @@ describe 'cis_security_hardening::rules::auditd_failure_processing' do
               auditd: {
                 immutable: false,
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -39,11 +39,11 @@ describe 'cis_security_hardening::rules::auditd_failure_processing' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_concat__fragment('failure_processing')
-              .with(
+            is_expected.to contain_concat__fragment('failure_processing').
+              with(
                 'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
                 'order' => '998',
-                'content' => '-f 2',
+                'content' => '-f 2'
               )
           else
             is_expected.not_to contain_concat__fragment('failure_processing')

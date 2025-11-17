@@ -20,13 +20,13 @@ describe 'cis_security_hardening::rules::limits_maxlogins' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file_line('set maxlogins')
-              .with(
+            is_expected.to contain_file_line('set maxlogins').
+              with(
                 'ensure'             => 'present',
                 'path'               => '/etc/security/limits.conf',
                 'match'              => "^*\s+hard\s+maxlogins\s+5",
                 'line'               => "*\thard\tmaxlogins\t5",
-                'append_on_no_match' => true,
+                'append_on_no_match' => true
               )
           else
             is_expected.not_to contain_file_line('set maxlogins')

@@ -43,9 +43,9 @@ describe 'cis_security_hardening::rules::disable_tipc' do
             else
               cmd = '/bin/true'
             end
-            is_expected.to contain_kmod__install('tipc')
-              .with(
-                command: cmd,
+            is_expected.to contain_kmod__install('tipc').
+              with(
+                command: cmd
               )
           else
             is_expected.not_to contain_kmod__install('tipc')

@@ -20,13 +20,13 @@ describe 'cis_security_hardening::rules::login_fail_delay' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file_line('fail_delay')
-              .with(
+            is_expected.to contain_file_line('fail_delay').
+              with(
                 'ensure'             => 'present',
                 'path'               => '/etc/login.defs',
                 'match'              => '^FAIL_DELAY',
                 'line'               => 'FAIL_DELAY 5',
-                'append_on_no_match' => true,
+                'append_on_no_match' => true
               )
           else
             is_expected.not_to contain_file_line('fail_delay')

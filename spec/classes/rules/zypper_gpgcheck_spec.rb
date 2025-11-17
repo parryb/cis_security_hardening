@@ -25,13 +25,13 @@ describe 'cis_security_hardening::rules::zypper_gpgcheck' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_ini_setting('enable ggpcheck')
-              .with(
+            is_expected.to contain_ini_setting('enable ggpcheck').
+              with(
                 'ensure'  => 'present',
                 'path'    => '/etc/zypp/zypp.conf',
                 'section' => 'main',
                 'setting' => 'gpgcheck',
-                'value'   => '1',
+                'value'   => '1'
               )
           else
             is_expected.not_to contain_ini_setting('enable ggpcheck')

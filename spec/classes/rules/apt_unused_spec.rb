@@ -19,30 +19,30 @@ describe 'cis_security_hardening::rules::apt_unused' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file('/etc/apt/apt.conf.d/50unattended-upgrades')
-              .with(
+            is_expected.to contain_file('/etc/apt/apt.conf.d/50unattended-upgrades').
+              with(
                 'ensure' => 'file',
                 'owner'  => 'root',
                 'group'  => 'root',
-                'mode'   => '0644',
+                'mode'   => '0644'
               )
 
-            is_expected.to contain_file_line('add Unattended-Upgrade::Remove-Unused-Dependencies')
-              .with(
+            is_expected.to contain_file_line('add Unattended-Upgrade::Remove-Unused-Dependencies').
+              with(
                 'ensure'             => 'present',
                 'path'               => '/etc/apt/apt.conf.d/50unattended-upgrades',
                 'match'              => '^Unattended-Upgrade::Remove-Unused-Dependencies',
                 'line'               => 'Unattended-Upgrade::Remove-Unused-Dependencies "true";',
-                'append_on_no_match' => true,
+                'append_on_no_match' => true
               )
 
-            is_expected.to contain_file_line('add Unattended-Upgrade::Remove-Unused-Kernel-Packages')
-              .with(
+            is_expected.to contain_file_line('add Unattended-Upgrade::Remove-Unused-Kernel-Packages').
+              with(
                 'ensure'             => 'present',
                 'path'               => '/etc/apt/apt.conf.d/50unattended-upgrades',
                 'match'              => '^Unattended-Upgrade::Remove-Unused-Kernel-Packages',
                 'line'               => 'Unattended-Upgrade::Remove-Unused-Kernel-Packages "true";',
-                'append_on_no_match' => true,
+                'append_on_no_match' => true
               )
           else
             is_expected.not_to contain_file('/etc/apt/apt.conf.d/50unattended-upgrades')

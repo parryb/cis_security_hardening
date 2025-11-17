@@ -25,9 +25,9 @@ describe 'cis_security_hardening::rules::ftp' do
                            'purged'
                          end
 
-            is_expected.to contain_package('ftp')
-              .with(
-                'ensure' => ensure_val,
+            is_expected.to contain_package('ftp').
+              with(
+                'ensure' => ensure_val
               )
           else
             is_expected.not_to contain_package('ftp')

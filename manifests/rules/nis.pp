@@ -27,18 +27,18 @@ class cis_security_hardening::rules::nis (
     case $facts['os']['name'].downcase() {
       'ubuntu': {
         stdlib::ensure_packages(['nis'], {
-            ensure => purged,
+          ensure => purged,
         })
       }
       'sles':{
         stdlib::ensure_packages(['ypserv'], {
-            ensure => absent,
+          ensure => absent,
         })
       }
       default: {
         ensure_resource('service', ['ypserv'], {
-            ensure => 'stopped',
-            enable => false
+          ensure => 'stopped',
+          enable => false
         })
       }
     }

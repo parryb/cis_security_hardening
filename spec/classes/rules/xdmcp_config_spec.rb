@@ -12,7 +12,7 @@ describe 'cis_security_hardening::rules::xdmcp_config' do
           os_facts.merge(
             cis_security_hardening: {
               xdcmp: true,
-            },
+            }
           )
         end
         let(:params) do
@@ -32,12 +32,12 @@ describe 'cis_security_hardening::rules::xdmcp_config' do
                          '/etc/gdm3/custom.conf'
                        end
 
-            is_expected.to contain_file_line('remove enable')
-              .with(
+            is_expected.to contain_file_line('remove enable').
+              with(
                 'ensure'            => 'absent',
                 'path'              => filename,
                 'match'             => 'Enable=true',
-                'match_for_absence' => true,
+                'match_for_absence' => true
               )
           else
             is_expected.not_to contain_file_line('remove enable')

@@ -22,7 +22,7 @@ describe 'cis_security_hardening::rules::auditd_remote_labeled' do
               auditd: {
                 immutable: false,
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -36,23 +36,23 @@ describe 'cis_security_hardening::rules::auditd_remote_labeled' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file('/etc/audisp/audispd.conf')
-              .with(
+            is_expected.to contain_file('/etc/audisp/audispd.conf').
+              with(
                 'ensure' => 'file',
                 'owner' => 'root',
                 'group' => 'root',
-                'mode' => '0644',
+                'mode' => '0644'
               )
 
-            is_expected.to contain_file_line('name-format')
-              .with(
+            is_expected.to contain_file_line('name-format').
+              with(
                 'ensure' => 'present',
                 'path'   => '/etc/audisp/audispd.conf',
                 'match'  => '^name_format =',
-                'line'   => 'name_format = fqd',
-              )
-              .that_notifies('Service[auditd]')
-              .that_requires('File[/etc/audisp/audispd.conf]')
+                'line'   => 'name_format = fqd'
+              ).
+              that_notifies('Service[auditd]').
+              that_requires('File[/etc/audisp/audispd.conf]')
           else
             is_expected.not_to contain_file_line('name-format')
             is_expected.not_to contain_file('/etc/audisp/audispd.conf')

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'pp'
-
 # read grub configuration data
 def read_grub_data
   grub = {}
@@ -11,14 +9,14 @@ def read_grub_data
   dev = ''
 
   lines.each do |line|
-    data = line.split("\s")
+    data = line.split
     dev = data[0]
     mp = data[1]
     val = Facter::Core::Execution.exec("/sbin/blkid #{dev}")
     data = if val.nil? || val.empty?
              {}
            else
-             val.split("\s")
+             val.split
            end
 
     uuid = data[1]

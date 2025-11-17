@@ -19,9 +19,9 @@ describe 'cis_security_hardening::rules::net_bpf_jit_harden' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_sysctl('net.core.bpf_jit_harden')
-              .with(
-                'value' => 2,
+            is_expected.to contain_sysctl('net.core.bpf_jit_harden').
+              with(
+                'value' => 2
               )
           else
             is_expected.not_to contain_sysctl('net.core.bpf_jit_harden')

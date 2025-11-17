@@ -27,7 +27,7 @@ class cis_security_hardening::rules::talk_client (
     }
 
     stdlib::ensure_packages(['talk'], {
-        ensure => $ensure,
+      ensure => $ensure,
     })
   }
 }

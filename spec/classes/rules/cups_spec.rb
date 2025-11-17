@@ -22,40 +22,40 @@ describe 'cis_security_hardening::rules::cups' do
             if os_facts[:os]['name'].casecmp('ubuntu').zero? || os_facts[:os]['name'].casecmp('sles').zero?
 
               if os_facts[:os]['family'].casecmp('suse').zero?
-                is_expected.to contain_package('cups')
-                  .with(
-                    'ensure' => 'absent',
+                is_expected.to contain_package('cups').
+                  with(
+                    'ensure' => 'absent'
                   )
               else
-                is_expected.to contain_package('cups')
-                  .with(
-                    'ensure' => 'purged',
+                is_expected.to contain_package('cups').
+                  with(
+                    'ensure' => 'purged'
                   )
               end
 
             elsif os_facts[:os]['name'].casecmp('rocky').zero? || os_facts[:os]['name'].casecmp('almalinux').zero?
-              is_expected.to contain_package('cups')
-                .with(
-                  'ensure' => 'purged',
+              is_expected.to contain_package('cups').
+                with(
+                  'ensure' => 'purged'
                 )
             elsif os_facts[:os]['name'].casecmp('debian').zero?
               if os_facts[:os]['release']['major'] > '10'
-                is_expected.to contain_package('cups')
-                  .with(
-                  'ensure' => 'purged',
-                )
+                is_expected.to contain_package('cups').
+                  with(
+                    'ensure' => 'purged'
+                  )
               else
-                is_expected.to contain_service('cups')
-                  .with(
-                  'ensure' => 'stopped',
-                  'enable' => false,
-                )
+                is_expected.to contain_service('cups').
+                  with(
+                    'ensure' => 'stopped',
+                    'enable' => false
+                  )
               end
             else
-              is_expected.to contain_service('cups')
-                .with(
+              is_expected.to contain_service('cups').
+                with(
                   'ensure' => 'stopped',
-                  'enable' => false,
+                  'enable' => false
                 )
             end
 

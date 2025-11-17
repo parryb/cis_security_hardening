@@ -27,7 +27,7 @@ class cis_security_hardening::rules::xinetd (
     }
 
     stdlib::ensure_packages(['xinetd'], {
-        ensure => $ensure,
+      ensure => $ensure,
     })
   }
 }

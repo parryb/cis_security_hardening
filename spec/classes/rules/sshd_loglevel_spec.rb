@@ -55,7 +55,7 @@ describe 'cis_security_hardening::rules::sshd_loglevel' do
                 'clientalivecountmax' => 3,
                 'permituserenvironment' => 'yes',
               },
-            },
+            }
           )
         end
 
@@ -75,14 +75,14 @@ describe 'cis_security_hardening::rules::sshd_loglevel' do
                    else
                      '/etc/ssh/sshd_config'
                    end
-            is_expected.to contain_file_line('sshd-loglevel')
-              .with(
+            is_expected.to contain_file_line('sshd-loglevel').
+              with(
                 'ensure' => 'present',
                 'path'   => path,
                 'line'   => 'LogLevel INFO',
-                'match'  => '^#?LogLevel.*',
-              )
-              .that_notifies('Exec[reload-sshd]')
+                'match'  => '^#?LogLevel.*'
+              ).
+              that_notifies('Exec[reload-sshd]')
           else
             is_expected.not_to contain_file_line('sshd-loglevel')
           end

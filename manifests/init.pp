@@ -63,7 +63,7 @@ class cis_security_hardening (
       default => 'purged',
     }
     stdlib::ensure_packages(['authconfig'], {
-        ensure => $ensure,
+      ensure => $ensure,
     })
   }
 
@@ -101,7 +101,7 @@ class cis_security_hardening (
     default  => $os_maj,
   }
 
-  $key = "cis_security_hardening::benchmark::${os}::${os_vers}"
+  $key = "cis_security_hardening::benchmark::${os}::v${os_vers}"
   $benchmark = lookup($key, undef, undef, {})
 
   if cis_security_hardening::hash_key($benchmark, 'bundles') {

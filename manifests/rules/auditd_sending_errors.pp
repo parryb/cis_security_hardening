@@ -30,10 +30,10 @@ class cis_security_hardening::rules::auditd_sending_errors (
     }
 
     ensure_resource('file', $file, {
-        ensure => file,
-        owner  => 'root',
-        group  => 'root',
-        mode   => '0644',
+      ensure => file,
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0644',
     })
 
     file_line { 'network-failure-action':

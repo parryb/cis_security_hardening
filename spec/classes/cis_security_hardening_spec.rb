@@ -20,7 +20,7 @@ describe 'cis_security_hardening' do
 
           it do
             os_vers = if os_facts[:os]['name'].casecmp('ubuntu').zero?
-                        os_facts[:os]['release']['major'].split("/\./")
+                        os_facts[:os]['release']['major'].split('/./')
                       else
                         os_facts[:os]['release']['major']
                       end
@@ -40,11 +40,11 @@ describe 'cis_security_hardening' do
                    os_facts[:os]['name'].casecmp('rocky').zero? ||
                    os_facts[:os]['name'].casecmp('sles').zero?
 
-              is_expected.to contain_echo('no bundles')
-                .with(
+              is_expected.to contain_echo('no bundles').
+                with(
                   'message'  => "No bundles found, enforcing nothing. (key = #{key})",
                   'loglevel' => 'warning',
-                  'withpath' => false,
+                  'withpath' => false
                 )
             end
           end

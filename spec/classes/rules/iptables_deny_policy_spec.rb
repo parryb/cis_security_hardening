@@ -33,22 +33,22 @@ describe 'cis_security_hardening::rules::iptables_deny_policy' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_firewallchain('OUTPUT:filter:IPv4')
-              .with(
+            is_expected.to contain_firewallchain('OUTPUT:filter:IPv4').
+              with(
                 'ensure' => 'present',
-                'policy' => 'drop',
+                'policy' => 'drop'
               )
 
-            is_expected.to contain_firewallchain('FORWARD:filter:IPv4')
-              .with(
+            is_expected.to contain_firewallchain('FORWARD:filter:IPv4').
+              with(
                 'ensure' => 'present',
-                'policy' => 'drop',
+                'policy' => 'drop'
               )
 
-            is_expected.to contain_firewallchain('INPUT:filter:IPv4')
-              .with(
+            is_expected.to contain_firewallchain('INPUT:filter:IPv4').
+              with(
                 'ensure' => 'present',
-                'policy' => 'drop',
+                'policy' => 'drop'
               )
           else
             is_expected.not_to contain_firewallchain('OUTPUT:filter:IPv4')

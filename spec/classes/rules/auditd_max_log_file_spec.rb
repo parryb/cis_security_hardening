@@ -14,7 +14,7 @@ describe 'cis_security_hardening::rules::auditd_max_log_file' do
               auditd: {
                 'max_log_file' => 'none',
               },
-            },
+            }
           )
         end
         let(:params) do
@@ -28,12 +28,12 @@ describe 'cis_security_hardening::rules::auditd_max_log_file' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file_line('auditd_max_log_size')
-              .with(
+            is_expected.to contain_file_line('auditd_max_log_size').
+              with(
                 'path' => '/etc/audit/auditd.conf',
-                'line'  => 'max_log_file = 16',
+                'line' => 'max_log_file = 16',
                 'match' => '^max_log_file =',
-                'append_on_no_match' => true,
+                'append_on_no_match' => true
               )
           else
             is_expected.not_to contain_file_line('auditd_max_log_size')

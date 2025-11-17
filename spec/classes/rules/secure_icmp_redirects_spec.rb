@@ -19,13 +19,13 @@ describe 'cis_security_hardening::rules::secure_icmp_redirects' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_sysctl('net.ipv4.conf.all.secure_redirects')
-              .with(
-                'value' => 0,
+            is_expected.to contain_sysctl('net.ipv4.conf.all.secure_redirects').
+              with(
+                'value' => 0
               )
-            is_expected.to contain_sysctl('net.ipv4.conf.default.secure_redirects')
-              .with(
-                'value' => 0,
+            is_expected.to contain_sysctl('net.ipv4.conf.default.secure_redirects').
+              with(
+                'value' => 0
               )
           else
             is_expected.not_to contain_sysctl('net.ipv4.conf.all.secure_redirects')
