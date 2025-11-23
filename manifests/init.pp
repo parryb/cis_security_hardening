@@ -150,10 +150,6 @@ class cis_security_hardening (
       }
     }
   } else {
-    echo { 'no bundles':
-      message  => "No bundles found, enforcing nothing. (key = ${key})",
-      loglevel => 'warning',
-      withpath => false,
-    }
+    fail("No bundles found for this OS. Expected to find bundles at hiera key: ${key}")
   }
 }
