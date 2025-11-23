@@ -4,7 +4,7 @@
 # The operating system must be configured to prevent unrestricted mail relaying.
 #
 # Rationale:
-# If unrestricted mail relaying is permitted, unauthorized senders could use this host as a 
+# If unrestricted mail relaying is permitted, unauthorized senders could use this host as a
 # mail relay for the purpose of sending spam or other unauthorized activity.
 #
 # @param enforce

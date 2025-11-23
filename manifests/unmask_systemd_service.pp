@@ -1,4 +1,4 @@
-# @summary 
+# @summary
 #    Unmask a systemd service
 #
 # Execute a systemd command to unmask a service.
@@ -7,8 +7,8 @@
 #    The service to unmask
 #
 # @example
-#   cis_security_hardening::unmask_systemd_service { 'namevar': 
-#       service => 'umask', 
+#   cis_security_hardening::unmask_systemd_service { 'namevar':
+#       service => 'umask',
 # }
 define cis_security_hardening::unmask_systemd_service (
   Cis_security_hardening::Servicename $service,

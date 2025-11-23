@@ -1,12 +1,12 @@
 # @summary
 #    Ensure ENCRYPT_METHOD is SHA512
 #
-# The operating system must encrypt all stored passwords with a FIPS 140-2 approved cryptographic 
+# The operating system must encrypt all stored passwords with a FIPS 140-2 approved cryptographic
 # hashing algorithm.
 #
 # Rationale:
-# Passwords need to be protected at all times, and encryption is the standard method for protecting 
-# passwords. If passwords are not encrypted, they can be plainly read (i.e., clear text) and easily 
+# Passwords need to be protected at all times, and encryption is the standard method for protecting
+# passwords. If passwords are not encrypted, they can be plainly read (i.e., clear text) and easily
 # compromised.
 #
 # @param enforce

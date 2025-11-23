@@ -1,19 +1,19 @@
-# @summary 
-#    Ensure only strong Key Exchange algorithms are used 
+# @summary
+#    Ensure only strong Key Exchange algorithms are used
 #
-# Key exchange is any method in cryptography by which cryptographic keys are exchanged between two parties, allowing 
-# use of a cryptographic algorithm. If the sender and receiver wish to exchange encrypted messages, each must be 
+# Key exchange is any method in cryptography by which cryptographic keys are exchanged between two parties, allowing
+# use of a cryptographic algorithm. If the sender and receiver wish to exchange encrypted messages, each must be
 # equipped to encrypt messages to be sent and decrypt messages received
 #
 # Rationale:
-# Key exchange methods that are considered weak should be removed. A key exchange method may be weak because too few 
-# bits are used, or the hashing algorithm is considered too weak. Using weak algorithms could expose connections to 
+# Key exchange methods that are considered weak should be removed. A key exchange method may be weak because too few
+# bits are used, or the hashing algorithm is considered too weak. Using weak algorithms could expose connections to
 # man-in-the-middle attacks.
 #
 # @param enforce
-#    Enforce the rule 
+#    Enforce the rule
 #
-# @param kexs 
+# @param kexs
 #    Key exchange methods to add to config
 #
 # @example

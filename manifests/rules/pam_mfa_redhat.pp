@@ -1,17 +1,17 @@
 # @summary
 #    Ensure multi-factor authentication is enable for users
 #
-# The operating system must uniquely identify and must authenticate organizational users (or processes acting on behalf of 
+# The operating system must uniquely identify and must authenticate organizational users (or processes acting on behalf of
 # organizational users) using multi-factor authentication.
 #
 # Rationale:
-# To assure accountability and prevent unauthenticated access, organizational users must be identified and authenticated 
-# to prevent potential misuse and compromise of the system. Organizational users include organizational employees or individuals 
-# the organization deems to have equivalent status of employees (e.g., contractors). Organizational users (and processes acting 
-# on behalf of users) must be uniquely identified and authenticated to all accesses, except for the following: Accesses explicitly 
-# identified and documented by the organization. Organizations document specific user actions that can be performed on the 
-# information system without identification or authentication; and Accesses that occur through authorized use of group authenticators 
-# without individual authentication. Organizations may require unique identification of individuals in group accounts (e.g., shared 
+# To assure accountability and prevent unauthenticated access, organizational users must be identified and authenticated
+# to prevent potential misuse and compromise of the system. Organizational users include organizational employees or individuals
+# the organization deems to have equivalent status of employees (e.g., contractors). Organizational users (and processes acting
+# on behalf of users) must be uniquely identified and authenticated to all accesses, except for the following: Accesses explicitly
+# identified and documented by the organization. Organizations document specific user actions that can be performed on the
+# information system without identification or authentication; and Accesses that occur through authorized use of group authenticators
+# without individual authentication. Organizations may require unique identification of individuals in group accounts (e.g., shared
 # privilege accounts) or for detailed accountability of individual activity.
 #
 # @param enforce

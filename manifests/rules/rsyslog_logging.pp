@@ -1,9 +1,9 @@
-# @summary 
-#    Ensure logging is configured 
+# @summary
+#    Ensure logging is configured
 #
-# The /etc/rsyslog.conf and /etc/rsyslog.d/*.conf files specifies rules for logging and which files are to be used to 
+# The /etc/rsyslog.conf and /etc/rsyslog.d/*.conf files specifies rules for logging and which files are to be used to
 # log certain classes of messages.
-# 
+#
 # Rationale:
 # A great deal of important security-related information is sent via rsyslog (e.g., successful and failed su attempts, f
 # ailed login attempts, root login attempts, etc.).

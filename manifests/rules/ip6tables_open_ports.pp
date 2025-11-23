@@ -1,15 +1,15 @@
-# @summary 
-#    Ensure IPv6 firewall rules exist for all open ports 
+# @summary
+#    Ensure IPv6 firewall rules exist for all open ports
 #
 # Any ports that have been opened on non-loopback addresses need firewall rules to govern traffic.
 #
 # Rationale:
-# Without a firewall rule configured for open ports default firewall policy will drop all packets to 
+# Without a firewall rule configured for open ports default firewall policy will drop all packets to
 # these ports.
 #
 # Notes:
 # * Changing firewall settings while connected over network can result in being locked out of the system.
-# * The remediation command opens up the port to traffic from all sources. Consult iptables documentation 
+# * The remediation command opens up the port to traffic from all sources. Consult iptables documentation
 #   and set any restrictions in compliance with site policy.
 #
 # @param enforce

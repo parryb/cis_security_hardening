@@ -1,10 +1,10 @@
-# @summary 
-#    Ensure unnecessary services and ports are not accepted 
+# @summary
+#    Ensure unnecessary services and ports are not accepted
 #
 # Services and ports can be accepted or explicitly rejected or dropped by a zone.
 #
-# For every zone, you can set a default behavior that handles incoming traffic that is not further specified. 
-# Such behavior is defined by setting the target of the zone. There are three options - default, ACCEPT, 
+# For every zone, you can set a default behavior that handles incoming traffic that is not further specified.
+# Such behavior is defined by setting the target of the zone. There are three options - default, ACCEPT,
 # REJECT, and DROP.
 #
 # * ACCEPT - you accept all incoming packets except those disabled by a specific rule.

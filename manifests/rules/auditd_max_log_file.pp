@@ -1,15 +1,15 @@
-# @summary 
-#    Ensure audit log storage size is configured 
+# @summary
+#    Ensure audit log storage size is configured
 #
-# Configure the maximum size of the audit log file. Once the log reaches the maximum size, it will be 
+# Configure the maximum size of the audit log file. Once the log reaches the maximum size, it will be
 # rotated and a new log file will be started.
 #
 # Rationale:
-# It is important that an appropriate size is determined for log files so that they do not impact the 
+# It is important that an appropriate size is determined for log files so that they do not impact the
 # system and audit data is not lost.
 #
 # @param enforce
-#    Sets rule enforcement. If set to true, code will be exeuted to bring the system into a comliant state.
+#    Sets rule enforcement. If set to true, code will be exeuted to bring the system into a compliant state.
 #
 # @param max_log_size
 #    Maximal log file size, defaults to 26 MB

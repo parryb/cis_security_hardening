@@ -1,11 +1,11 @@
-# @summary 
-#    Ensure authentication required for single user mode 
+# @summary
+#    Ensure authentication required for single user mode
 #
-# Single user mode (rescue mode) is used for recovery when the system detects an issue during boot 
+# Single user mode (rescue mode) is used for recovery when the system detects an issue during boot
 # or by manual selection from the bootloader.
 #
 # Rationale:
-# Requiring authentication in single user mode (rescue mode) prevents an unauthorized user from 
+# Requiring authentication in single user mode (rescue mode) prevents an unauthorized user from
 # rebooting the system into single user to gain root privileges without credentials.
 #
 # @param enforce

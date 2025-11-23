@@ -1,10 +1,10 @@
-# @summary 
-#    Ensure permissions on /etc/group- are configured 
+# @summary
+#    Ensure permissions on /etc/group- are configured
 #
-# The /etc/group- file contains a backup list of all the valid groups defined in the system. 
-# 
+# The /etc/group- file contains a backup list of all the valid groups defined in the system.
+#
 # Rationale:
-# It is critical to ensure that the /etc/group- file is protected from unauthorized access. Although it is protected by 
+# It is critical to ensure that the /etc/group- file is protected from unauthorized access. Although it is protected by
 # default, the file permissions could be changed either inadvertently or through malicious actions.
 #
 # @param enforce

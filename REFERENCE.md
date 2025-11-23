@@ -278,7 +278,7 @@ audited
 * `cis_security_hardening::rules::opensc_pkcs11`: Ensure the opensc-pcks11 is installed
 * `cis_security_hardening::rules::openssl_pkcs11`: Ensure the operating system has the packages required for multifactor authentication
 * `cis_security_hardening::rules::pam_cached_auth`: Ensure PAM prohibits the use of cached authentications after one day
-* `cis_security_hardening::rules::pam_fail_delay`: Ensure loging delay after failed logon attempt
+* `cis_security_hardening::rules::pam_fail_delay`: Ensure logging delay after failed logon attempt
 * `cis_security_hardening::rules::pam_last_logon`: Ensure last successful account logon is displayed upon logon
 * `cis_security_hardening::rules::pam_lockout`: Ensure lockout for failed password attempts is configured
 * `cis_security_hardening::rules::pam_mfa`: Ensure smart card logins for multifactor authentication for local and network access
@@ -299,7 +299,7 @@ audited
 * `cis_security_hardening::rules::perf_event_paranoid`: .   Ensure the operating system is configured to prevent kernel profiling by unprivileged users  The operating system must prevent kernel pro
 * `cis_security_hardening::rules::pki_certs_validation`: Ensure certificates are validated by constructing a certification path to an accepted trust anchor
 * `cis_security_hardening::rules::policycoreutils`: Ensure the operating system has the policycoreutils package installed
-* `cis_security_hardening::rules::postmaster_alias`: Ensure administrators are notified if an audit processing failure occurrs by modifying "/etc/aliases"
+* `cis_security_hardening::rules::postmaster_alias`: Ensure administrators are notified if an audit processing failure occurs by modifying "/etc/aliases"
 * `cis_security_hardening::rules::pti`: Ensure kernel page-table isolation is enabled
 * `cis_security_hardening::rules::ptrace_scope`: @summary#    Ensure the operating system restricts usage of ptrace to descendant processes  The operating system must restrict usage of ptrac
 * `cis_security_hardening::rules::restrict_core_dumps`: A core dump is the memory of an executable program. It is generally used to determine why a program aborted. It can also be used to glean con
@@ -384,7 +384,7 @@ audited
 * `cis_security_hardening::rules::system_cmd_group`: Ensure system command files are group-owned by root
 * `cis_security_hardening::rules::systemd_journal_remote`: Ensure systemd-journal-remote is installed
 * `cis_security_hardening::rules::systemd_journal_remote_config`: Ensure systemd-journal-remote is configured
-* `cis_security_hardening::rules::systemd_journal_remote_receive`: Ensure journald is not configured to recieve logs from a remote client (Automated)
+* `cis_security_hardening::rules::systemd_journal_remote_receive`: Ensure journald is not configured to receive logs from a remote client (Automated)
 * `cis_security_hardening::rules::systemd_journal_remote_service`: A
 Ensure systemd-journal-remote is enabled
 * `cis_security_hardening::rules::systemd_journald_service`: Ensure journald service is enabled (Automated)
@@ -439,7 +439,7 @@ Ensure systemd-journal-remote is enabled
 
 ### Defined types
 
-* [`cis_security_hardening::parent_dirs`](#cis_security_hardening--parent_dirs): Create directories recursivly
+* [`cis_security_hardening::parent_dirs`](#cis_security_hardening--parent_dirs): Create directories recursively
 * [`cis_security_hardening::set_mount_options`](#cis_security_hardening--set_mount_options): Change mount options
 * [`cis_security_hardening::unmask_systemd_service`](#cis_security_hardening--unmask_systemd_service): Unmask a systemd service
 
@@ -543,7 +543,7 @@ Default value: `'server'`
 Data type: `Enum['1', '2', 'stig']`
 
 The CIS Benchmark server security level. Higher levels include all rules of lover levels. Therefore level1 rules are all included
-in the level2 rules and stig includes level1 nd level 2 rules.
+in the level2 rules and stig includes level1 and level 2 rules.
 
 Default value: `'2'`
 
@@ -584,7 +584,7 @@ Default value: `['/usr']`
 Data type: `Integer`
 
 Time to wait until system is rebooted if required. Time in seconds. For `reboot` the `puppetlabs-reboot` module is used. Please obey
-the follwing comment from this module: POSIX systems (with the exception of Solaris) only support
+the following comment from this module: POSIX systems (with the exception of Solaris) only support
 specifying the timeout as minutes. As such, the value of timeout must be a multiple of 60. Other values will be rounded up to the
 nearest minute and a warning will be issued.
 
@@ -594,7 +594,7 @@ Default value: `120`
 
 Data type: `Boolean`
 
-Reboot when necessary after `time_until_reboot` is exeeded
+Reboot when necessary after `time_until_reboot` is exceeded
 
 Default value: `true`
 
@@ -634,7 +634,7 @@ Default value: `true`
 
 Auditd rules can monitor privileged command use. As filesystems cn be huge and searching
 the relevant commands can be time consuming this cron job will create a custom fact to
-provide the auditd rule with appriate imput.
+provide the auditd rule with appriate input.
 
 #### Examples
 
@@ -774,7 +774,7 @@ The following parameters are available in the `cis_security_hardening::reboot` c
 Data type: `Integer`
 
 Time to wait until system is rebooted if required. Time in seconds. For `reboot` the `puppetlabs-reboot` module is used. Please obey
-the follwing comment from this module: POSIX systems (with the exception of Solaris) only support
+the following comment from this module: POSIX systems (with the exception of Solaris) only support
 specifying the timeout as minutes. As such, the value of timeout must be a multiple of 60. Other values will be rounded up to the
 nearest minute and a warning will be issued.
 
@@ -784,7 +784,7 @@ Default value: `$cis_security_hardening::time_until_reboot`
 
 Data type: `Boolean`
 
-Reboot when necessary after `time_until_reboot` is exeeded
+Reboot when necessary after `time_until_reboot` is exceeded
 
 Default value: `$cis_security_hardening::auto_reboot`
 
@@ -817,7 +817,7 @@ The following parameters are available in the `cis_security_hardening::rules::au
 
 Data type: `Boolean`
 
-Sets rule enforcemt. If set to true, code will be exeuted to bring the system into a comliant state.
+Sets rule enforcemt. If set to true, code will be exeuted to bring the system into a compliant state.
 
 Default value: `false`
 
@@ -1111,7 +1111,7 @@ The directories to be created.
 
 Data type: `Optional[Stdlib::Unixpath]`
 
-A base path wich does not need to be created
+A base path which does not need to be created
 
 Default value: `undef`
 

@@ -1,14 +1,14 @@
-# @summary 
+# @summary
 #    Create custom authselect profile (Scored)
 #
-# A custom profile can be created by copying and customizing one of the default profiles. The default 
+# A custom profile can be created by copying and customizing one of the default profiles. The default
 # profiles include: sssd, winbind, or the nis.
 #
 # Rationale:
 # A custom profile is required to customize many of the pam options.
 #
 # @param enforce
-#    Sets rule enforcemt. If set to true, code will be exeuted to bring the system into a comliant state.
+#    Sets rule enforcemt. If set to true, code will be exeuted to bring the system into a compliant state.
 #
 # @param custom_profile
 #    name of the custom profile to create
@@ -20,7 +20,7 @@
 #    The authsselect feartures to enable.
 #
 # @example
-#   class { 'cis_security_hardening::rules::authselect_profile':   
+#   class { 'cis_security_hardening::rules::authselect_profile':
 #             enforce => true,
 #             custom_profile => 'testprofile',
 #             base_profile => 'sssd',

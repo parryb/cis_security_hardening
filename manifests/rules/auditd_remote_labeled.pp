@@ -8,7 +8,7 @@
 #
 # Off-loading is a common process in information systems with limited audit storage capacity.
 #
-# When audit logs are not labeled before they are sent to a central log server, the audit data will not be 
+# When audit logs are not labeled before they are sent to a central log server, the audit data will not be
 # able to be analyzed and tied back to the correct system.
 #
 # @param enforce

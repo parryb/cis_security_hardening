@@ -1,12 +1,12 @@
-# @summary 
+# @summary
 #    Ensure noexec option is configured for NFS.
 #
-# The operating system must prevent binary files from being executed on file systems that are being imported via 
+# The operating system must prevent binary files from being executed on file systems that are being imported via
 # Network File System (NFS).
 #
 # Rationale:
-# The "noexec" mount option causes the system to not execute binary files. This option must be used for mounting 
-# any file system not containing approved binary files as they may be incompatible. Executing files from untrusted 
+# The "noexec" mount option causes the system to not execute binary files. This option must be used for mounting
+# any file system not containing approved binary files as they may be incompatible. Executing files from untrusted
 # file systems increases the opportunity for unprivileged users to attain unauthorized administrative access.
 #
 # @param enforce

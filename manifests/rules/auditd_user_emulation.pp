@@ -1,11 +1,11 @@
-# @summary 
-#    Ensure actions as another user are always logged 
+# @summary
+#    Ensure actions as another user are always logged
 #
 # sudo provides users with temporary elevated privileges to perform operations, either as the superuser or another user.
 #
 # Rationale:
-# Creating an audit log of users with temporary elevated privileges and the operation(s) they performed is essential to reporting. 
-# Administrators will want to correlate the events written to the audit trail with the records written to sudo's logfile to verify 
+# Creating an audit log of users with temporary elevated privileges and the operation(s) they performed is essential to reporting.
+# Administrators will want to correlate the events written to the audit trail with the records written to sudo's logfile to verify
 # if unauthorized commands have been executed.
 #
 # @param enforce

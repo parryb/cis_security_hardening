@@ -1,22 +1,22 @@
-# @summary 
+# @summary
 #    Ensure the SSH server is configured to force frequent session key renegotiation
 #
 # The operating system must force a frequent session key renegotiation for SSH connections to the server.
 #
 # Rationale:
-# Without protection of the transmitted information, confidentiality and integrity may be compromised because unprotected 
+# Without protection of the transmitted information, confidentiality and integrity may be compromised because unprotected
 # communications can be intercepted and either read or altered.
 #
-# This requirement applies to both internal and external networks and all types of information system components from which 
-# information can be transmitted (e.g., servers, mobile devices, notebook computers, printers, copiers, scanners, and facsimile 
-# machines). Communication paths outside the physical protection of a controlled boundary are exposed to the possibility of 
+# This requirement applies to both internal and external networks and all types of information system components from which
+# information can be transmitted (e.g., servers, mobile devices, notebook computers, printers, copiers, scanners, and facsimile
+# machines). Communication paths outside the physical protection of a controlled boundary are exposed to the possibility of
 # interception and modification.
 #
-# Protecting the confidentiality and integrity of organizational information can be accomplished by physical means (e.g., employing 
-# physical distribution systems) or by logical means (e.g., employing cryptographic techniques). If physical means of protection are 
+# Protecting the confidentiality and integrity of organizational information can be accomplished by physical means (e.g., employing
+# physical distribution systems) or by logical means (e.g., employing cryptographic techniques). If physical means of protection are
 # employed, then logical means (cryptography) do not have to be employed, and vice versa.
 #
-# Session key regeneration limits the chances of a session key becoming compromised. Satisfies: SRG-OS-000033-GPOS-00014, 
+# Session key regeneration limits the chances of a session key becoming compromised. Satisfies: SRG-OS-000033-GPOS-00014,
 # SRG-OS-000420-GPOS-00186, SRG-OS-000424- GPOS-00188
 #
 # @param enforce

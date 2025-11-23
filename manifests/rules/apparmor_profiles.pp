@@ -1,11 +1,11 @@
 # @summary
-#    Ensure all AppArmor Profiles are enforcing 
+#    Ensure all AppArmor Profiles are enforcing
 #
 # AppArmor profiles define what resources applications are able to access.
 #
 # Rationale:
-# Security configuration requirements vary from site to site. Some sites may mandate a policy 
-# that is stricter than the default policy, which is perfectly acceptable. This item is intended 
+# Security configuration requirements vary from site to site. Some sites may mandate a policy
+# that is stricter than the default policy, which is perfectly acceptable. This item is intended
 # to ensure that any policies that exist on the system are activated.
 #
 # @param enforce

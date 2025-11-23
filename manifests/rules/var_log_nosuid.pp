@@ -1,9 +1,9 @@
-# @summary 
+# @summary
 #    Ensure nosuid option set on /var/log partition
 #
-# The nosuid mount option specifies that the filesystem cannot contain setuid files. 
+# The nosuid mount option specifies that the filesystem cannot contain setuid files.
 # Rationale:
-# Since the /var/log filesystem is only intended for log files, set this option to 
+# Since the /var/log filesystem is only intended for log files, set this option to
 # ensure that users cannot create setuid files in /var/log.
 #
 # @param enforce

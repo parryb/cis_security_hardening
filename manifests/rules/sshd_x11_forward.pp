@@ -1,12 +1,12 @@
-# @summary 
-#    Ensure SSH X11 forwarding is disabled 
+# @summary
+#    Ensure SSH X11 forwarding is disabled
 #
-# The X11Forwarding parameter provides the ability to tunnel X11 traffic through the connection to enable remote 
+# The X11Forwarding parameter provides the ability to tunnel X11 traffic through the connection to enable remote
 # graphic connections.
 #
 # Rationale:
-# Disable X11 forwarding unless there is an operational requirement to use X11 applications directly. There is a small 
-# risk that the remote X11 servers of users who are logged in via SSH with X11 forwarding could be compromised by other 
+# Disable X11 forwarding unless there is an operational requirement to use X11 applications directly. There is a small
+# risk that the remote X11 servers of users who are logged in via SSH with X11 forwarding could be compromised by other
 # users on the X11 server. Note that even if X11 forwarding is disabled, users can always install their own forwarders.
 #
 # @param enforce

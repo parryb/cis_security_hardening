@@ -1,4 +1,4 @@
-# @summary 
+# @summary
 #    Install ntp package
 #
 # Install packages for chrony or ntp.

@@ -1,12 +1,12 @@
-# @summary 
-#    Ensure X Window System is not installed 
+# @summary
+#    Ensure X Window System is not installed
 #
-# The X Window System provides a Graphical User Interface (GUI) where users can have multiple 
-# windows in which to run programs and various add on. The X Windows system is typically used 
+# The X Window System provides a Graphical User Interface (GUI) where users can have multiple
+# windows in which to run programs and various add on. The X Windows system is typically used
 # on workstations where users login, but not on servers where users typically do not login.
 #
 # Rationale:
-# Unless your organization specifically requires graphical login access via X Windows, remove it 
+# Unless your organization specifically requires graphical login access via X Windows, remove it
 # to reduce the potential attack surface.
 #
 # @param enforce
@@ -26,7 +26,7 @@ class cis_security_hardening::rules::x11_installed (
 
   if  $enforce and $x11_installed != undef and $x11_installed {
     $x11_packages.each |$pkg| {
-      # do not uninstall these packages due to dependances needed on the system
+      # do not uninstall these packages due to dependences needed on the system
       if $pkg !~ /^xorg-x11-font/ and $pkg !~ /^xorg-x11-server-utils/ {
         $ensure = $facts['os']['family'].downcase() ? {
           'suse'  => 'absent',

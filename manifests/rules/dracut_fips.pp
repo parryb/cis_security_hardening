@@ -8,8 +8,8 @@
 # laws, Executive Orders, directives, policies, regulations, and standards.
 #
 # Rationale:
-# Use of weak or untested encryption algorithms undermines the purposes of using encryption to protect data. 
-# The operating system must implement cryptographic modules adhering to the higher standards approved by the 
+# Use of weak or untested encryption algorithms undermines the purposes of using encryption to protect data.
+# The operating system must implement cryptographic modules adhering to the higher standards approved by the
 # federal government since this provides assurance they have been tested and validated.
 #
 # @param enforce

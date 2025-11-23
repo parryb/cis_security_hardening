@@ -1,21 +1,21 @@
-# @summary 
+# @summary
 #    Ensure FIPS mode is enabled
 #
-# The operating system must implement NIST FIPS-validated cryptography to protect classified information and for the following: 
-# to provision digital signatures, to generate cryptographic hashes, and to protect unclassified information requiring confidentiality 
-# and cryptographic protection in accordance with applicable federal laws, Executive Orders, directives, policies, regulations, 
+# The operating system must implement NIST FIPS-validated cryptography to protect classified information and for the following:
+# to provision digital signatures, to generate cryptographic hashes, and to protect unclassified information requiring confidentiality
+# and cryptographic protection in accordance with applicable federal laws, Executive Orders, directives, policies, regulations,
 # and standards.
 #
 # Rationale:
-# Use of weak or untested encryption algorithms undermines the purposes of utilizing encryption to protect data. The operating 
-# system must implement cryptographic modules adhering to the higher standards approved by the federal government since this 
+# Use of weak or untested encryption algorithms undermines the purposes of utilizing encryption to protect data. The operating
+# system must implement cryptographic modules adhering to the higher standards approved by the federal government since this
 # provides assurance they have been tested and validated.
 # Satisfies: SRG-OS-000396-GPOS-00176, SRG-OS-000478-GPOS-00223
 #
 # Impact:
-# Enabling a FIPS mode on a pre-existing system involves a number of modifications to the Ubuntu operating system. Refer 
+# Enabling a FIPS mode on a pre-existing system involves a number of modifications to the Ubuntu operating system. Refer
 # to the Ubuntu Server 18.04 FIPS 140-2 security policy document for instructions.
-# Note: A subscription to the "Ubuntu Advantage" plan is required in order to obtain the FIPS Kernel cryptographic modules 
+# Note: A subscription to the "Ubuntu Advantage" plan is required in order to obtain the FIPS Kernel cryptographic modules
 # and enable FIPS.
 #
 # @param enforce

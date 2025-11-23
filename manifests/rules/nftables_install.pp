@@ -1,18 +1,18 @@
-# @summary 
-#    Ensure nftables is installed 
+# @summary
+#    Ensure nftables is installed
 #
-# nftables provides a new in-kernel packet classification framework that is based on a 
-# network-specific Virtual Machine (VM) and a new nft userspace command line tool. nftables 
-# reuses the existing Netfilter subsystems such as the existing hook infrastructure, the 
+# nftables provides a new in-kernel packet classification framework that is based on a
+# network-specific Virtual Machine (VM) and a new nft userspace command line tool. nftables
+# reuses the existing Netfilter subsystems such as the existing hook infrastructure, the
 # connection tracking system, NAT, userspace queuing and logging subsystem.
 #
 # Notes:
 #    * nftables is available in Linux kernel 3.13 and newer.
-#    * Only one firewall utility should be installed and configured. 
+#    * Only one firewall utility should be installed and configured.
 #
 # Rationale:
-# nftables is a subsystem of the Linux kernel that can protect against threats originating 
-# from within a corporate network to include malicious mobile code and poorly configured 
+# nftables is a subsystem of the Linux kernel that can protect against threats originating
+# from within a corporate network to include malicious mobile code and poorly configured
 # software on a host.
 #
 # @param enforce

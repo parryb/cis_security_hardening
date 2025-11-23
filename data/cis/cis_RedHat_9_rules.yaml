@@ -69,8 +69,8 @@ cis_security_hardening::benchmark::redhat::v9:
         - gdm_auto_mount
         - gdm_lock_enabled
         - xdmcp_config
-      level2: 
-        - gnome_gdm_package  
+      level2:
+        - gnome_gdm_package
     crypto_policy:
       level1:
         - crypto_policy
@@ -260,4 +260,3 @@ cis_security_hardening::benchmark::redhat::v9:
         - shadow_bak_perms
         - gshadow_perms
         - gshadow_bak_perms
-        

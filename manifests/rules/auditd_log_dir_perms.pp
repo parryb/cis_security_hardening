@@ -1,13 +1,13 @@
-# @summary 
+# @summary
 #    Ensure the audit log directory is 0750 or more restrictive
 #
 # The operating system must be configured so that the audit log directory is not write- accessible by unauthorized users.
 #
 # Rationale:
-# If audit information were to become compromised, then forensic analysis and discovery of the true source of potentially 
+# If audit information were to become compromised, then forensic analysis and discovery of the true source of potentially
 # malicious system activity is impossible to achieve.
 #
-# To ensure the veracity of audit information, the operating system must protect audit information from unauthorized 
+# To ensure the veracity of audit information, the operating system must protect audit information from unauthorized
 # deletion. This requirement can be achieved through multiple methods, which will depend upon system architecture and design.
 #
 # Audit information includes all information (e.g., audit records, audit settings, audit reports) needed to successfully

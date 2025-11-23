@@ -1,18 +1,18 @@
-# @summary 
+# @summary
 #    Ensure automatic mounting of removable media is disabled
 #
 # By default GNOME automatically mounts removable media when inserted as a convenience to the user.
 #
 # Rationale:
-# With automounting enabled anyone with physical access could attach a USB drive or disc and have its contents 
+# With automounting enabled anyone with physical access could attach a USB drive or disc and have its contents
 # available in system even if they lacked permissions to mount it themselves.
 #
 # Impact:
-# The use of portable hard drives is very common for workstation users. If your organization allows the use of 
-# portable storage or media on workstations and physical access controls to workstations is considered adequate 
+# The use of portable hard drives is very common for workstation users. If your organization allows the use of
+# portable storage or media on workstations and physical access controls to workstations is considered adequate
 # there is little value add in turning off automounting.
 #
-# @param enforce 
+# @param enforce
 #    Enforce the rule.
 #
 # @example

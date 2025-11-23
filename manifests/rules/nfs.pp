@@ -1,11 +1,11 @@
-# @summary 
-#    Ensure NFS is not enabled 
+# @summary
+#    Ensure NFS is not enabled
 #
-# The Network File System (NFS) is one of the first and most widely distributed file systems in the UNIX 
+# The Network File System (NFS) is one of the first and most widely distributed file systems in the UNIX
 # environment. It provides the ability for systems to mount file systems of other servers through the network.
 #
 # Rationale:
-# If the system does not export NFS shares, it is recommended that the NFS be disabled to reduce the remote attack 
+# If the system does not export NFS shares, it is recommended that the NFS be disabled to reduce the remote attack
 # surface.
 #
 # @param enforce

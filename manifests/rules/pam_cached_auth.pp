@@ -1,11 +1,11 @@
-# @summary 
+# @summary
 #    Ensure PAM prohibits the use of cached authentications after one day
 #
-# The operating system must be configured such that Pluggable Authentication Module (PAM) 
+# The operating system must be configured such that Pluggable Authentication Module (PAM)
 # prohibits the use of cached authentications after one day.
 #
 # Rationale:
-# If cached authentication information is out-of-date, the validity of the authentication 
+# If cached authentication information is out-of-date, the validity of the authentication
 # information may be questionable.
 #
 # @param enforce

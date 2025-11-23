@@ -1,12 +1,12 @@
-# @summary 
-#    Ensure cron daemon is enabled and running 
+# @summary
+#    Ensure cron daemon is enabled and running
 #
 # The cron daemon is used to execute batch jobs on the system.
 #
 # Rationale:
-# While there may not be user jobs that need to be run on the system, the system does have 
-# maintenance jobs that may include security monitoring that have to run. If another method 
-# for scheduling tasks is not being used, cron is used to execute them, and needs to be enabled 
+# While there may not be user jobs that need to be run on the system, the system does have
+# maintenance jobs that may include security monitoring that have to run. If another method
+# for scheduling tasks is not being used, cron is used to execute them, and needs to be enabled
 # and running.
 #
 # @param enforce

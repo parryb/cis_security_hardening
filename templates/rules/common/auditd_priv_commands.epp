@@ -1,4 +1,3 @@
 <%- $data.each |$cmd| { -%>
 -a always,exit -S all -F path=<%= $cmd %> -F perm=x -F auid>=<%= $uid %> -F auid!=<%= $auid %> -F key=privileged
 <% } -%>
-

@@ -1,20 +1,20 @@
-# @summary 
-#    Ensure discretionary access control permission modification events are collected 
+# @summary
+#    Ensure discretionary access control permission modification events are collected
 #
-# Monitor changes to file permissions, attributes, ownership and group. The parameters in this section track 
-# changes for system calls that affect file permissions and attributes. The chmod , fchmod and fchmodat system 
-# calls affect the permissions associated with a file. The chown , fchown , fchownat and lchown system calls 
-# affect owner and group attributes on a file. The setxattr , lsetxattr , fsetxattr (set extended file attributes) 
-# and removexattr , lremovexattr , fremovexattr (remove extended file attributes) control extended file attributes. 
-# In all cases, an audit record will only be written for non-system user ids (auid >= 1000) and will ignore Daemon 
+# Monitor changes to file permissions, attributes, ownership and group. The parameters in this section track
+# changes for system calls that affect file permissions and attributes. The chmod , fchmod and fchmodat system
+# calls affect the permissions associated with a file. The chown , fchown , fchownat and lchown system calls
+# affect owner and group attributes on a file. The setxattr , lsetxattr , fsetxattr (set extended file attributes)
+# and removexattr , lremovexattr , fremovexattr (remove extended file attributes) control extended file attributes.
+# In all cases, an audit record will only be written for non-system user ids (auid >= 1000) and will ignore Daemon
 # events (auid = 4294967295). All audit records will be tagged with the identifier "perm_mod."
 #
 # Rationale:
-# Monitoring for changes in file attributes could alert a system administrator to activity that could indicate 
+# Monitoring for changes in file attributes could alert a system administrator to activity that could indicate
 # intruder activity or policy violation.
 #
 # @param enforce
-#    Sets rule enforcement. If set to true, code will be exeuted to bring the system into a comliant state.
+#    Sets rule enforcement. If set to true, code will be exeuted to bring the system into a compliant state.
 #
 # @example
 #   class { 'cis_security_hardening::rules::auditd_perm_mod':

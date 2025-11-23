@@ -1,12 +1,12 @@
 # @summary
 #    Ensure SSH does not permit GSSAPI
 #
-# The operating system must be configured so that the SSH daemon does not permit Generic Security Service Application 
+# The operating system must be configured so that the SSH daemon does not permit Generic Security Service Application
 # Program Interface (GSSAPI) authentication unless needed.
 #
 # Rationale:
-# GSSAPI authentication is used to provide additional authentication mechanisms to applications. Allowing GSSAPI authentication 
-# through SSH exposes the system's GSSAPI to remote hosts, increasing the attack surface of the system. GSSAPI authentication 
+# GSSAPI authentication is used to provide additional authentication mechanisms to applications. Allowing GSSAPI authentication
+# through SSH exposes the system's GSSAPI to remote hosts, increasing the attack surface of the system. GSSAPI authentication
 # must be disabled unless needed.
 #
 # @param enforce

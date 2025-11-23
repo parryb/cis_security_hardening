@@ -1,10 +1,10 @@
-# @summary 
+# @summary
 #    Ensure nodev option set on /var/log/audit partition
 #
-# The nodev mount option specifies that the filesystem cannot contain special devices. 
-# 
+# The nodev mount option specifies that the filesystem cannot contain special devices.
+#
 # Rationale:
-# Since the /var/log/audit filesystem is not intended to support devices, set this option 
+# Since the /var/log/audit filesystem is not intended to support devices, set this option
 # to ensure that users cannot create a block or character special devices in /var/log/audit.
 #
 # @param enforce

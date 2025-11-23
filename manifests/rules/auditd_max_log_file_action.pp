@@ -1,15 +1,15 @@
-# @summary 
-#    Ensure audit logs are not automatically deleted 
+# @summary
+#    Ensure audit logs are not automatically deleted
 #
-# The max_log_file_action setting determines how to handle the audit log file reaching the max file 
+# The max_log_file_action setting determines how to handle the audit log file reaching the max file
 # size. A value of keep_logs will rotate the logs but never delete old logs.
 #
 # Rationale:
-# In high security contexts, the benefits of maintaining a long audit history exceed the cost of storing 
+# In high security contexts, the benefits of maintaining a long audit history exceed the cost of storing
 # the audit history.
 #
 # @param enforce
-#    Sets rule enforcement. If set to true, code will be exeuted to bring the system into a comliant state.
+#    Sets rule enforcement. If set to true, code will be exeuted to bring the system into a compliant state.
 #
 # @param max_log_file_action
 #    Action to be taken of lofs reach max. size.

@@ -1,10 +1,10 @@
-# @summary 
+# @summary
 #    Ensure nosuid option set on /home partition
 #
-# The nosuid mount option specifies that the filesystem cannot contain setuid files. 
+# The nosuid mount option specifies that the filesystem cannot contain setuid files.
 #
 # Rationale:
-# Since the /home filesystem is only intended for user file storage, set this option 
+# Since the /home filesystem is only intended for user file storage, set this option
 # to ensure that users cannot create setuid files in /home.
 #
 # @param enforce

@@ -1,12 +1,12 @@
-# @summary 
-#    Ensure loopback traffic is configured 
+# @summary
+#    Ensure loopback traffic is configured
 #
-# Configure the loopback interface to accept traffic. Configure all other interfaces to deny traffic 
+# Configure the loopback interface to accept traffic. Configure all other interfaces to deny traffic
 # to the loopback network.
 #
 # Rationale:
-# Loopback traffic is generated between processes on machine and is typically critical to operation of 
-# the system. The loopback interface is the only place that loopback network traffic should be seen, 
+# Loopback traffic is generated between processes on machine and is typically critical to operation of
+# the system. The loopback interface is the only place that loopback network traffic should be seen,
 # all other interfaces should ignore traffic on this network as an anti- spoofing measure.
 #
 # @param enforce

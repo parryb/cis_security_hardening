@@ -12,7 +12,7 @@ cis_security_hardening::system_file_permissions: '/usr/share/cis_security_harden
 
 cis_security_hardening::suid_fact_file: '/opt/puppetlabs/facter/facts.d/cis_security_hardening_suid_programs.yaml'
 cis_security_hardening::sgid_fact_file: '/opt/puppetlabs/facter/facts.d/cis_security_hardening_sgid_programs.yaml'
-cis_security_hardening::auditd_dirs_to_include: 
+cis_security_hardening::auditd_dirs_to_include:
   - '/usr'
 cis_security_hardening::auditd_rules_fact_file: '/opt/puppetlabs/facter/facts.d/cis_security_hardening_auditd.yaml'
 
@@ -98,7 +98,7 @@ cis_security_hardening::rules::mcstrans::enforce: true
 
 cis_security_hardening::rules::motd_perms::enforce: true
 cis_security_hardening::rules::motd_perms::content: |
-  
+
   ###################################################################
   # This system is for the use of authorized users only.            #
   # Individuals using this computer system without authority, or in #
@@ -115,7 +115,7 @@ cis_security_hardening::rules::motd_perms::content: |
   # evidence of criminal activity, system personnel may provide the #
   # evidence of such monitoring to law enforcement officials.       #
   ###################################################################
-  
+
 cis_security_hardening::rules::issue_perms::enforce: true
 cis_security_hardening::rules::issue_net_perms::enforce: true
 cis_security_hardening::rules::gnome_gdm::enforce: true
@@ -298,7 +298,7 @@ cis_security_hardening::rules::auditd_init::buffer_size: 8192
 cis_security_hardening::rules::auditd_init::rules_file: /etc/audit/rules.d/cis_security_hardening.rules
 cis_security_hardening::rules::auditd_init::auto_reboot: true
 cis_security_hardening::rules::auditd_package::enforce: true
-cis_security_hardening::rules::auditd_package::packages: 
+cis_security_hardening::rules::auditd_package::packages:
   - audit
   - audit-libs
 cis_security_hardening::rules::auditd_service::enforce: true

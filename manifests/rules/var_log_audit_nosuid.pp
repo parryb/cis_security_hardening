@@ -1,10 +1,10 @@
-# @summary 
+# @summary
 #    Ensure nosuid option set on /var/log/audit partition
 #
-# The nosuid mount option specifies that the filesystem cannot contain setuid files. 
+# The nosuid mount option specifies that the filesystem cannot contain setuid files.
 #
 # Rationale:
-# Since the /var/log/audit filesystem is only intended for variable files such as logs, 
+# Since the /var/log/audit filesystem is only intended for variable files such as logs,
 # set this option to ensure that users cannot create setuid files in /var/log/audit.
 #
 # @param enforce

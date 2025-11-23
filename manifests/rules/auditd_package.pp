@@ -1,15 +1,15 @@
-# @summary 
-#    Ensure auditd is installed 
+# @summary
+#    Ensure auditd is installed
 #
-# auditd is the userspace component to the Linux Auditing System. It's responsible for writing audit 
+# auditd is the userspace component to the Linux Auditing System. It's responsible for writing audit
 # records to the disk.
 #
 # Rationale:
-# The capturing of system events provides system administrators with information to allow them to 
+# The capturing of system events provides system administrators with information to allow them to
 # determine if unauthorized access to their system is occurring.
 #
 # @param enforce
-#    Sets rule enforcementen. If set to true, code will be exeuted to bring the system into a comliant state.
+#    Sets rule enforcementen. If set to true, code will be exeuted to bring the system into a compliant state.
 #
 # @param packages
 #    Packages for auditd to install

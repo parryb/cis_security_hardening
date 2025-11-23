@@ -1,10 +1,10 @@
 # @summary
-#    Ensure AppArmor is installed 
+#    Ensure AppArmor is installed
 #
 # AppArmor provides Mandatory Access Controls.
 #
 # Rationale:
-# Without a Mandatory Access Control system installed only the default Discretionary 
+# Without a Mandatory Access Control system installed only the default Discretionary
 # Access Control system will be available.
 #
 # @param enforce

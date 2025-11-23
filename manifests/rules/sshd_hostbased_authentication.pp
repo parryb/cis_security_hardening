@@ -1,12 +1,12 @@
-# @summary 
-#    Ensure SSH HostbasedAuthentication is disabled 
+# @summary
+#    Ensure SSH HostbasedAuthentication is disabled
 #
-# The HostbasedAuthentication parameter specifies if authentication is allowed through trusted hosts via the user 
-# of .rhosts , or /etc/hosts.equiv , along with successful public key client host authentication. This option only 
+# The HostbasedAuthentication parameter specifies if authentication is allowed through trusted hosts via the user
+# of .rhosts , or /etc/hosts.equiv , along with successful public key client host authentication. This option only
 # applies to SSH Protocol Version 2.
 #
 # Rationale:
-# Even though the .rhosts files are ineffective if support is disabled in /etc/pam.conf , disabling the ability to 
+# Even though the .rhosts files are ineffective if support is disabled in /etc/pam.conf , disabling the ability to
 # use .rhosts files in SSH provides an additional layer of protection .
 #
 # @param enforce

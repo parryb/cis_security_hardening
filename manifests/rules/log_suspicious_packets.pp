@@ -1,10 +1,10 @@
-# @summary 
-#    Ensure suspicious packets are logged 
+# @summary
+#    Ensure suspicious packets are logged
 #
 # When enabled, this feature logs packets with un-routable source addresses to the kernel log.
 #
 # Rationale:
-# Enabling this feature and logging these packets allows an administrator to investigate the possibility 
+# Enabling this feature and logging these packets allows an administrator to investigate the possibility
 # that an attacker is sending spoofed packets to their system.
 #
 # @param enforce

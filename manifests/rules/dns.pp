@@ -4,8 +4,8 @@
 # The operating systems that are using DNS resolution, must have at least two name servers configured.
 #
 # Rationale:
-# To provide availability for name resolution services, multiple redundant name servers are mandated. 
-# A failure in name resolution could lead to the failure of security functions requiring name resolution, 
+# To provide availability for name resolution services, multiple redundant name servers are mandated.
+# A failure in name resolution could lead to the failure of security functions requiring name resolution,
 # which may include time synchronization, centralized authentication, and remote system logging.
 #
 # @param enforce

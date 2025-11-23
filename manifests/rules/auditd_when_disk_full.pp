@@ -1,21 +1,21 @@
-# @summary 
-#    Ensure system is disabled when audit logs are full 
+# @summary
+#    Ensure system is disabled when audit logs are full
 #
 # The auditd daemon can be configured to halt the system when the audit logs are full.
 #
 # Rationale:
-# In high security contexts, the risk of detecting unauthorized access or nonrepudiation exceeds 
+# In high security contexts, the risk of detecting unauthorized access or nonrepudiation exceeds
 # the benefit of the system's availability.
 #
 # @param enforce
-#    Sets rule enforcement. If set to true, code will be exeuted to bring the system into a comliant state.
+#    Sets rule enforcement. If set to true, code will be exeuted to bring the system into a compliant state.
 #
 # @param space_left_action
 #    What to do when space get low
 #
 # @param action_mail_acct
-#    This option should contain a valid email address or alias. The default address is root. If the email address is not local to 
-#    the machine, you must make sure you have email properly configured on your machine and network. Also, this option requires 
+#    This option should contain a valid email address or alias. The default address is root. If the email address is not local to
+#    the machine, you must make sure you have email properly configured on your machine and network. Also, this option requires
 #    that /usr/lib/sendmail exists on the machine.
 #
 # @param admin_space_left_action

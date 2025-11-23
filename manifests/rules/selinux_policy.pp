@@ -1,11 +1,11 @@
-# @summary 
-#    Ensure SELinux policy is configured 
+# @summary
+#    Ensure SELinux policy is configured
 #
 # Configure SELinux to meet or exceed the default targeted policy, which constrains daemons and system software only.
 #
 # Rationale:
-# Security configuration requirements vary from site to site. Some sites may mandate a policy that is 
-# stricter than the default policy, which is perfectly acceptable. This item is intended to ensure that 
+# Security configuration requirements vary from site to site. Some sites may mandate a policy that is
+# stricter than the default policy, which is perfectly acceptable. This item is intended to ensure that
 # at least the default recommendations are met.
 #
 # @param enforce

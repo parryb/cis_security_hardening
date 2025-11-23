@@ -4,7 +4,7 @@
 # The operating system must be configured so that the SSH daemon uses privilege separation.
 #
 # Rationale:
-# SSH daemon privilege separation causes the SSH process to drop root privileges when not needed, which would 
+# SSH daemon privilege separation causes the SSH process to drop root privileges when not needed, which would
 # decrease the impact of software vulnerabilities in the unprivileged section.
 #
 # @param enforce

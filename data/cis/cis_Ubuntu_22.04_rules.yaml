@@ -277,4 +277,3 @@ cis_security_hardening::benchmark::ubuntu::v22:
     configure_user_groups:
       level1:
         - shadowed_passwords
-

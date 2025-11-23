@@ -1,20 +1,20 @@
-# @summary 
-#    Ensure SSH AllowTcpForwarding is disabled 
+# @summary
+#    Ensure SSH AllowTcpForwarding is disabled
 #
-# SSH port forwarding is a mechanism in SSH for tunneling application ports from the client to the server, 
-# or servers to clients. It can be used for adding encryption to legacy applications, going through firewalls, 
-# and some system administrators and IT professionals use it for opening backdoors into the internal network 
+# SSH port forwarding is a mechanism in SSH for tunneling application ports from the client to the server,
+# or servers to clients. It can be used for adding encryption to legacy applications, going through firewalls,
+# and some system administrators and IT professionals use it for opening backdoors into the internal network
 # from their home machines
 #
 # Rationale:
 # Leaving port forwarding enabled can expose the organization to security risks and backdoors.
-# SSH connections are protected with strong encryption. This makes their contents invisible to most deployed 
-#network monitoring and traffic filtering solutions. This invisibility carries considerable risk potential if 
-# it is used for malicious purposes such as data exfiltration. Cybercriminals or malware could exploit SSH to 
+# SSH connections are protected with strong encryption. This makes their contents invisible to most deployed
+#network monitoring and traffic filtering solutions. This invisibility carries considerable risk potential if
+# it is used for malicious purposes such as data exfiltration. Cybercriminals or malware could exploit SSH to
 # hide their unauthorized communications, or to exfiltrate stolen data from the target network
 #
 # @param enforce
-#    Enforce the rule 
+#    Enforce the rule
 #
 # @example
 #   class { 'cis_security_hardening::rules::sshd_tcp_forwarding':

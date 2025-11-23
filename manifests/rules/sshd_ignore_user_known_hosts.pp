@@ -1,10 +1,10 @@
-# @summary 
+# @summary
 #    Ensure SSH IgnoreUserKnownHosts is enabled
 #
 # The operating system must be configured so that the SSH daemon does not allow authentication using known hosts authentication.
 #
 # Rationale:
-# Configuring this setting for the SSH daemon provides additional assurance that remote logon via SSH will require a password, 
+# Configuring this setting for the SSH daemon provides additional assurance that remote logon via SSH will require a password,
 # even in the event of misconfiguration elsewhere.
 #
 # @param enforce

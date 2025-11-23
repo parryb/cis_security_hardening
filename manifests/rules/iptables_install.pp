@@ -1,7 +1,7 @@
 # @summary
-#    Ensure iptables is installed 
+#    Ensure iptables is installed
 #
-# iptables allows configuration of the IPv4 tables in the linux kernel and the rules stored within them. 
+# iptables allows configuration of the IPv4 tables in the linux kernel and the rules stored within them.
 # Most firewall configuration utilities operate as a front end to iptables.
 #
 # Rationale:

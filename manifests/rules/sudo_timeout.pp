@@ -1,7 +1,7 @@
-# @summary 
+# @summary
 #    Ensure sudo authentication timeout is configured correctly
 #
-# sudo caches used credentials for a default of 5 minutes. This is for ease of use when there are multiple 
+# sudo caches used credentials for a default of 5 minutes. This is for ease of use when there are multiple
 # administrative tasks to perform. The timeout can be modified to suit local security policies.
 #
 # Rationale:

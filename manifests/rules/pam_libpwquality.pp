@@ -11,7 +11,7 @@
 # @param enforce
 #    Enforce the rule
 # @example
-#   class {'cis_security_hardening::rules::pam_libpwquality': 
+#   class {'cis_security_hardening::rules::pam_libpwquality':
 #    enforce +> true,
 #   }
 #

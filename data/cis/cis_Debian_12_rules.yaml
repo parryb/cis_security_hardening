@@ -85,7 +85,7 @@ cis_security_hardening::benchmark::debian::v12:
         - tftp_server
         - httpd
         - squid
-        - xinetd        
+        - xinetd
         - x11_installed
         - mta_local
     service_clients:

@@ -4,17 +4,17 @@
 # The Apport Error Reporting Service automatically generates crash reports for debugging
 #
 # Rationale:
-# Apport collects potentially sensitive data, such as core dumps, stack traces, and log files. They can contain passwords, 
+# Apport collects potentially sensitive data, such as core dumps, stack traces, and log files. They can contain passwords,
 # credit card numbers, serial numbers, and other private material.
 #
 # @param enforce
-#    Sets rule enforcemt. If set to true, code will be exeuted to bring the system into a comliant state.
+#    Sets rule enforcemt. If set to true, code will be exeuted to bring the system into a compliant state.
 # @param delete_package
 #    If set to trur apport package will be removed, otherwise onle the service gets stopped and masked
 #
 #
 # @example
-#   class { 'cis_security_hardening::rules::automatic_error_reporting':   
+#   class { 'cis_security_hardening::rules::automatic_error_reporting':
 #             enforce => true,
 #   }
 #

@@ -115,7 +115,7 @@ describe 'cis_security_hardening::rules::authselect' do
           }
         end
 
-        context "on #{os} with enforce = #{enforce} and check = #{check} and with no available fetures" do
+        context "on #{os} with enforce = #{enforce} and check = #{check} and with no available features" do
           let(:facts) do
             os_facts.merge(
               cis_security_hardening: {

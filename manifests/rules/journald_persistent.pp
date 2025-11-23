@@ -1,15 +1,15 @@
-# @summary 
-#    Ensure journald is configured to write logfiles to persistent disk 
+# @summary
+#    Ensure journald is configured to write logfiles to persistent disk
 #
-# Data from journald may be stored in volatile memory or persisted locally on the server. Logs in memory 
-# will be lost upon a system reboot. By persisting logs to local disk on the server they are protected 
+# Data from journald may be stored in volatile memory or persisted locally on the server. Logs in memory
+# will be lost upon a system reboot. By persisting logs to local disk on the server they are protected
 # from loss.
-# 
-# Note: The main configuration file /etc/systemd/journald.conf is read before any of the custom *.conf 
+#
+# Note: The main configuration file /etc/systemd/journald.conf is read before any of the custom *.conf
 # files. If there are custom configs present, they override the main configuration parameters
 #
 # Rationale:
-# Writing log data to disk will provide the ability to forensically reconstruct events which may have impacted 
+# Writing log data to disk will provide the ability to forensically reconstruct events which may have impacted
 # the operations or security of a system even after a system crash or reboot.
 #
 # @param enforce

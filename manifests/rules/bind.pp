@@ -1,11 +1,11 @@
-# @summary 
-#    Ensure DNS Server is not installed 
+# @summary
+#    Ensure DNS Server is not installed
 #
-# The Domain Name System (DNS) is a hierarchical naming system that maps names to IP addresses for 
+# The Domain Name System (DNS) is a hierarchical naming system that maps names to IP addresses for
 # computers, services and other resources connected to a network.
 #
 # Rationale:
-# Unless a system is specifically designated to act as a DNS server, it is recommended that the package 
+# Unless a system is specifically designated to act as a DNS server, it is recommended that the package
 # be removed to reduce the potential attack surface.
 #
 # @param enforce

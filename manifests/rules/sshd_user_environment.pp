@@ -1,10 +1,10 @@
-# @summary 
-#    Ensure SSH PermitUserEnvironment is disabled 
+# @summary
+#    Ensure SSH PermitUserEnvironment is disabled
 #
 # The PermitUserEnvironment option allows users to present environment options to the ssh daemon.
 #
 # Rationale:
-# Permitting users the ability to set environment variables through the SSH daemon could potentially allow users to 
+# Permitting users the ability to set environment variables through the SSH daemon could potentially allow users to
 # bypass security controls (e.g. setting an execution path that has ssh executing trojan'd programs)
 #
 # @param enforce

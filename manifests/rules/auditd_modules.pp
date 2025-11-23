@@ -1,21 +1,21 @@
-# @summary 
-#    Ensure kernel module loading and unloading is collected 
+# @summary
+#    Ensure kernel module loading and unloading is collected
 #
-# Monitor the loading and unloading of kernel modules. The programs insmod (install a kernel module), 
-# rmmod (remove a kernel module), and modprobe (a more sophisticated program to load and unload modules, 
-# as well as some other features) control loading and unloading of modules. The init_module (load a module) 
-# and delete_module (delete a module) system calls control loading and unloading of modules. Any execution 
-# of the loading and unloading module programs and system calls will trigger an audit record with an 
+# Monitor the loading and unloading of kernel modules. The programs insmod (install a kernel module),
+# rmmod (remove a kernel module), and modprobe (a more sophisticated program to load and unload modules,
+# as well as some other features) control loading and unloading of modules. The init_module (load a module)
+# and delete_module (delete a module) system calls control loading and unloading of modules. Any execution
+# of the loading and unloading module programs and system calls will trigger an audit record with an
 # identifier of "modules".
 #
 # Rationale:
-# Monitoring the use of insmod , rmmod and modprobe could provide system administrators with evidence that 
-# an unauthorized user loaded or unloaded a kernel module, possibly compromising the security of the system. 
-# Monitoring of the init_module and delete_module system calls would reflect an unauthorized user attempting 
+# Monitoring the use of insmod , rmmod and modprobe could provide system administrators with evidence that
+# an unauthorized user loaded or unloaded a kernel module, possibly compromising the security of the system.
+# Monitoring of the init_module and delete_module system calls would reflect an unauthorized user attempting
 # to use a different program to load and unload modules.
 #
 # @param enforce
-#    Sets rule enforcement. If set to true, code will be exeuted to bring the system into a comliant state.
+#    Sets rule enforcement. If set to true, code will be exeuted to bring the system into a compliant state.
 #
 # @example
 #   class { 'cis_security_hardening::rules::auditd_modules':

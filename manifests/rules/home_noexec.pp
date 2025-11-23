@@ -4,8 +4,8 @@
 # The operating system must prevent code from being executed on file systems that contain user home directories.
 #
 # Rationale:
-# The "noexec" mount option causes the system not to execute binary files. This option must be used for mounting 
-# any file system not containing approved binary files, as they may be incompatible. Executing files from untrusted 
+# The "noexec" mount option causes the system not to execute binary files. This option must be used for mounting
+# any file system not containing approved binary files, as they may be incompatible. Executing files from untrusted
 # file systems increases the opportunity for unprivileged users to attain unauthorized administrative access.
 #
 # @param enforce

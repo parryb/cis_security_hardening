@@ -1,7 +1,7 @@
-# @summary 
+# @summary
 #    Ensure smart card logins for multifactor authentication for local and network access
 #
-# The operating system must implement smart card logins for multifactor authentication for local 
+# The operating system must implement smart card logins for multifactor authentication for local
 # and network access to privileged and non-privileged accounts.
 #
 # Rationale:
@@ -14,7 +14,7 @@
 #
 # A privileged account is defined as an information system account with authorizations of a privileged user.
 #
-# Network access is defined as access to an information system by a user (or a process acting on behalf of a 
+# Network access is defined as access to an information system by a user (or a process acting on behalf of a
 # user) communicating through a network (e.g., local area network, wide area network, or the internet).
 #
 # The DoD CAC with DoD-approved PKI is an example of multifactor authentication.

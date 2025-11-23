@@ -1,13 +1,13 @@
 # @summary
 #    Ensure the "/boot/efi" directory is mounted with the "nosuid" option
 #
-# The operating system must prevent files with the "setuid" and "setgid" bit set from being executed on 
+# The operating system must prevent files with the "setuid" and "setgid" bit set from being executed on
 # the "/boot/efi" directory.
 #
 # Rationale:
-# The "nosuid" mount option causes the system not to execute "setuid" and "setgid" files with owner privileges. 
-# This option must be used for mounting any file system not containing approved "setuid" and "setguid" files. 
-# Executing files from untrusted file systems increases the opportunity for unprivileged users to attain 
+# The "nosuid" mount option causes the system not to execute "setuid" and "setgid" files with owner privileges.
+# This option must be used for mounting any file system not containing approved "setuid" and "setguid" files.
+# Executing files from untrusted file systems increases the opportunity for unprivileged users to attain
 # unauthorized administrative access.
 #
 # @param enforce

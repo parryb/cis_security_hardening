@@ -72,7 +72,7 @@ cis_security_hardening::benchmark::redhat::v8:
         - grub_password
         - grub_bootloader_config
         - single_user_mode
-      stig: 
+      stig:
         - grub_page_poison
         - grub_vsyscall
         - grub_slub_debug
@@ -106,7 +106,7 @@ cis_security_hardening::benchmark::redhat::v8:
         - gnome_gdm
         - gdm_auto_mount
         - xdmcp_config
-      level2: 
+      level2:
         - gnome_gdm_package
       stig:
         - gdm_autologin

@@ -1,13 +1,13 @@
 # @summary
-#    Ensure prelink is disabled 
+#    Ensure prelink is disabled
 #
-# prelinkis a program that modifies ELF shared libraries and ELF dynamically linked binaries 
-# in such a way that the time needed for the dynamic linker to perform relocations at startup 
+# prelinkis a program that modifies ELF shared libraries and ELF dynamically linked binaries
+# in such a way that the time needed for the dynamic linker to perform relocations at startup
 # significantly decreases.
 #
 # Rationale:
-# The prelinking feature can interfere with the operation of AIDE, because it changes binaries. 
-# Prelinking can also increase the vulnerability of the system if a malicious user is able to 
+# The prelinking feature can interfere with the operation of AIDE, because it changes binaries.
+# Prelinking can also increase the vulnerability of the system if a malicious user is able to
 # compromise a common library such as libc.
 #
 # @param enforce

@@ -1,18 +1,18 @@
-# @summary 
-#    Ensure a table exists 
+# @summary
+#    Ensure a table exists
 #
-# Tables hold chains. Each table only has one address family and only applies to packets of this family. 
+# Tables hold chains. Each table only has one address family and only applies to packets of this family.
 # Tables can have one of five families.
 #
 # Rationale:
-# nftables doesn't have any default tables. Without a table being build, nftables will not filter 
+# nftables doesn't have any default tables. Without a table being build, nftables will not filter
 # network traffic.
 #
 # @param enforce
 #    Enforce the rule
 #
 # @param nftables_default_table
-#    Table to be created if none exists 
+#    Table to be created if none exists
 #
 # @example
 #   class  { 'cis_security_hardening::rules::nftables_table':

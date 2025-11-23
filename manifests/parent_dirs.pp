@@ -1,5 +1,5 @@
-# @summary 
-#    Create directories recursivly
+# @summary
+#    Create directories recursively
 #
 # Create all missing directories
 #
@@ -7,7 +7,7 @@
 #    The directories to be created.
 #
 # @param [Optional[Stdlib::Unixpath]] base_path
-#    A base path wich does not need to be created
+#    A base path which does not need to be created
 #
 # @param owner
 #    The directory owner.

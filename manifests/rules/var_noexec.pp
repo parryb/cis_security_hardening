@@ -1,10 +1,10 @@
-# @summary 
+# @summary
 #    Ensure noexec option set on /var partition
 #
-# The noexec mount option specifies that the filesystem cannot contain executable binaries. 
+# The noexec mount option specifies that the filesystem cannot contain executable binaries.
 #
 # Rationale:
-# Since the /var filesystem is only intended for variable files such as logs, set this option 
+# Since the /var filesystem is only intended for variable files such as logs, set this option
 # to ensure that users cannot run executable binaries from /var.
 #
 # @param enforce

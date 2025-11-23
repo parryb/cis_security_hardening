@@ -1,12 +1,12 @@
-# @summary 
-#    Ensure logrotate is configured 
+# @summary
+#    Ensure logrotate is configured
 #
-# The system includes the capability of rotating log files regularly to avoid filling up the 
-# system with logs or making the logs unmanageable large. The file /etc/logrotate.d/syslog is 
+# The system includes the capability of rotating log files regularly to avoid filling up the
+# system with logs or making the logs unmanageable large. The file /etc/logrotate.d/syslog is
 # the configuration file used to rotate log files created by syslog or rsyslog.
 #
 # Rationale:
-# By keeping the log files smaller and more manageable, a system administrator can easily archive these files 
+# By keeping the log files smaller and more manageable, a system administrator can easily archive these files
 # to another system and spend less time looking through inordinately large log files.
 #
 # @param enforce

@@ -1,10 +1,10 @@
-# @summary 
+# @summary
 #    Ensure noexec option set on /var/log/audit partition
 #
-# The noexec mount option specifies that the filesystem cannot contain executable binaries. 
+# The noexec mount option specifies that the filesystem cannot contain executable binaries.
 #
 # Rationale:
-# Since the /var/log/audit filesystem is only intended for audit logs, set this option 
+# Since the /var/log/audit filesystem is only intended for audit logs, set this option
 # to ensure that users cannot run executable binaries from /var/log/audit.
 #
 # @param enforce

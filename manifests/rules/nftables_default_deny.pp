@@ -1,11 +1,11 @@
-# @summary 
-#     Ensure default deny firewall policy 
+# @summary
+#     Ensure default deny firewall policy
 #
 # Base chain policy is the default verdict that will be applied to packets reaching the end of the chain.
 #
 # Rationale:
-# There are two policies: accept (Default) and drop. If the policy is set to accept, the firewall will 
-# accept any packet that is not configured to be denied and the packet will continue transversing the 
+# There are two policies: accept (Default) and drop. If the policy is set to accept, the firewall will
+# accept any packet that is not configured to be denied and the packet will continue transversing the
 # network stack.
 # It is easier to white list acceptable usage than to black list unacceptable usage.
 #
@@ -25,7 +25,7 @@
 #    nftable table to add rules
 #
 # @param additional_rules
-#    additinals rules to add to te policy. Add an array with rules to teh hash. Hash key is the chain 
+#    additinals rules to add to the policy. Add an array with rules to the hash. Hash key is the chain
 #    to add the rules.
 #
 # @example

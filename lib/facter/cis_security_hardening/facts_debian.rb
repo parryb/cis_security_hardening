@@ -35,7 +35,7 @@ def facts_debian(os, distid, release)
   cis_security_hardening['iptables'] = read_iptables_rules('4')
   cis_security_hardening['ip6tables'] = read_iptables_rules('6')
 
-  # get account informtion
+  # get account information
   accounts = {}
   wrong_shell = []
   cmd = "egrep -v \"^/+\" /etc/passwd | awk -F: '($1!=\"root\" && $1!=\"sync\" && $1!=\"shutdown\" && $1!=\"halt\" && $3<1000 && $7!=\"/usr/sbin/nologin\" && $7!=\"/bin/false\") {print}'"

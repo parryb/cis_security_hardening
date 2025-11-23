@@ -4,7 +4,7 @@
 # The operating system must audit all uses of the rmdir syscall.
 #
 # Rationale:
-# If the system is not configured to audit certain activities and write them to an audit log, it is more 
+# If the system is not configured to audit certain activities and write them to an audit log, it is more
 # difficult to detect and track system compromises and damages incurred during a system compromise.
 #
 # @param enforce

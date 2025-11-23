@@ -1,19 +1,19 @@
-# @summary 
+# @summary
 #    Ensure audit tools are mode of 0755 or more restrictive and owned by the right user and group
 #
 # The operating system must configure audit tools with a mode of 0755 or less permissive.
 #
 # Rationale:
-# Protecting audit information also includes identifying and protecting the tools used to view and 
-# manipulate log data. Therefore, protecting audit tools is necessary to prevent unauthorized operation 
+# Protecting audit information also includes identifying and protecting the tools used to view and
+# manipulate log data. Therefore, protecting audit tools is necessary to prevent unauthorized operation
 # on audit information.
 #
-# Operating systems providing tools to interface with audit information will leverage user permissions 
-# and roles identifying the user accessing the tools and the corresponding rights the user enjoys in order 
+# Operating systems providing tools to interface with audit information will leverage user permissions
+# and roles identifying the user accessing the tools and the corresponding rights the user enjoys in order
 # to make access decisions regarding the access to audit tools.
 #
-# Audit tools include, but are not limited to, vendor-provided and open source audit tools needed to 
-# successfully view and manipulate audit information system activity and records. Audit tools include 
+# Audit tools include, but are not limited to, vendor-provided and open source audit tools needed to
+# successfully view and manipulate audit information system activity and records. Audit tools include
 # custom queries and report generators.
 #
 # Satisfies: SRG-OS-000256-GPOS-00097, SRG-OS-000257-GPOS-00098

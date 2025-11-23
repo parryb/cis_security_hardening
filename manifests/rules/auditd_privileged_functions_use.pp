@@ -1,16 +1,16 @@
-# @summary 
+# @summary
 #    Ensure execution of privileged functions is recorded
 #
-# The operating system must prevent all software from executing at higher privilege levels than users executing 
+# The operating system must prevent all software from executing at higher privilege levels than users executing
 # the software and the audit system must be configured to audit the execution of privileged functions.
 #
 # Rationale:
-# In certain situations, software applications/programs need to execute with elevated privileges to perform required 
-# functions. However, if the privileges required for execution are at a higher level than the privileges assigned to 
-# organizational users invoking such applications/programs, those users are indirectly provided with greater privileges 
+# In certain situations, software applications/programs need to execute with elevated privileges to perform required
+# functions. However, if the privileges required for execution are at a higher level than the privileges assigned to
+# organizational users invoking such applications/programs, those users are indirectly provided with greater privileges
 # than assigned by the organizations.
 #
-# Some programs and processes are required to operate at a higher privilege level and therefore should be excluded 
+# Some programs and processes are required to operate at a higher privilege level and therefore should be excluded
 # from the organization-defined software list after review.
 #
 # Satisfies: SRG-OS-000326-GPOS-00126, SRG-OS-000327-GPOS-00127

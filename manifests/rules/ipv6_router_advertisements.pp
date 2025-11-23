@@ -1,11 +1,11 @@
-# @summary 
-#    Ensure IPv6 router advertisements are not accepted 
+# @summary
+#    Ensure IPv6 router advertisements are not accepted
 #
 # This setting disables the system's ability to accept IPv6 router advertisements.
 #
 # Rationale:
-# It is recommended that systems not accept router advertisements as they could be tricked into routing 
-# traffic to compromised machines. Setting hard routes within the system (usually a single default route 
+# It is recommended that systems not accept router advertisements as they could be tricked into routing
+# traffic to compromised machines. Setting hard routes within the system (usually a single default route
 # to a trusted router) protects the system from bad routes.
 #
 # @param enforce

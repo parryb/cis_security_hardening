@@ -1,11 +1,11 @@
-# @summary 
-#    Ensure nftables service is enabled 
+# @summary
+#    Ensure nftables service is enabled
 #
 # The nftables service allows for the loading of nftables rulesets during boot, or starting of the nftables service.
 #
 # Rationale:
-# The nftables service restores the nftables rules from the rules files referenced in the /etc/sysconfig/nftables.conf 
-# file durring boot or the starting of the nftables service
+# The nftables service restores the nftables rules from the rules files referenced in the /etc/sysconfig/nftables.conf
+# file during boot or the starting of the nftables service
 #
 # @param enforce
 #    Enforce the rule

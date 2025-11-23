@@ -1,7 +1,7 @@
-# @summary 
-#    Ensure permissions on /etc/ssh/sshd_config are configured 
+# @summary
+#    Ensure permissions on /etc/ssh/sshd_config are configured
 #
-# The /etc/ssh/sshd_config file contains configuration specifications for sshd. The command below sets 
+# The /etc/ssh/sshd_config file contains configuration specifications for sshd. The command below sets
 # the owner and group of the file to root.
 #
 # Rationale:

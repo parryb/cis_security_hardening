@@ -1,16 +1,16 @@
-# @summary 
-#    Ensure unsuccessful unauthorized file access attempts are collected 
+# @summary
+#    Ensure unsuccessful unauthorized file access attempts are collected
 #
-# Monitor for unsuccessful attempts to access files. The parameters below are associated with 
-# system calls that control creation ( creat ), opening ( open , openat ) and truncation 
-# ( truncate , ftruncate ) of files. An audit log record will only be written if the user is a 
-# non- privileged user (auid >= 1000), is not a Daemon event (auid=4294967295) and if the 
-# system call returned EACCES (permission denied to the file) or EPERM (some other permanent 
-# error associated with the specific system call). All audit records will be tagged with the 
+# Monitor for unsuccessful attempts to access files. The parameters below are associated with
+# system calls that control creation ( creat ), opening ( open , openat ) and truncation
+# ( truncate , ftruncate ) of files. An audit log record will only be written if the user is a
+# non- privileged user (auid >= 1000), is not a Daemon event (auid=4294967295) and if the
+# system call returned EACCES (permission denied to the file) or EPERM (some other permanent
+# error associated with the specific system call). All audit records will be tagged with the
 # identifier "access."
 #
 # Rationale:
-# Failed attempts to open, create or truncate files could be an indication that an individual 
+# Failed attempts to open, create or truncate files could be an indication that an individual
 # or process is trying to gain unauthorized access to the system.
 #
 # @param enforce

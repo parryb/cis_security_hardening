@@ -1,10 +1,10 @@
-# @summary 
-#    Ensure SSH MaxSessions is set to 4 or less 
+# @summary
+#    Ensure SSH MaxSessions is set to 4 or less
 #
 # The MaxSessions parameter specifies the maximum number of open sessions permitted from a given connection.
 #
 # Rationale:
-# To protect a system from denial of service due to a large number of concurrent sessions, use the rate 
+# To protect a system from denial of service due to a large number of concurrent sessions, use the rate
 # limiting function of MaxSessions to protect availability of sshd logins and prevent overwhelming the daemon.
 #
 # @param enforce

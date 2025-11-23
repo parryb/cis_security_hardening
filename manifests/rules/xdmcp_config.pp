@@ -1,13 +1,13 @@
 # @summary
-#    Ensure XDCMP is not enabled 
+#    Ensure XDCMP is not enabled
 #
-# X Display Manager Control Protocol (XDMCP) is designed to provide authenticated access to display 
+# X Display Manager Control Protocol (XDMCP) is designed to provide authenticated access to display
 # management services for remote displays
 #
 # Rationale:
 # XDMCP is inherently insecure.
 #   * XDMCP is not a ciphered protocol. This may allow an attacker to capture keystrokes entered by a user
-#   * XDMCP is vulnerable to man-in-the-middle attacks. This may allow an attacker to steal the credentials 
+#   * XDMCP is vulnerable to man-in-the-middle attacks. This may allow an attacker to steal the credentials
 #     of legitimate users by impersonating the XDMCP server.
 #
 #

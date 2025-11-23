@@ -1,13 +1,13 @@
-# @summary 
-#   Ensure /tmp is configured 
+# @summary
+#   Ensure /tmp is configured
 #
 # The /tmp directory is a world-writable directory used for temporary storage by all users and some applications.
 #
 # Rationale:
-# Making /tmp its own file system allows an administrator to set the noexec option on the mount, making /tmp useless 
-# for an attacker to install executable code. It would also prevent an attacker from establishing a hardlink to a 
-# system setuid program and wait for it to be updated. Once the program was updated, the hardlink would be broken 
-# and the attacker would have his own copy of the program. If the program happened to have a security vulnerability, 
+# Making /tmp its own file system allows an administrator to set the noexec option on the mount, making /tmp useless
+# for an attacker to install executable code. It would also prevent an attacker from establishing a hardlink to a
+# system setuid program and wait for it to be updated. Once the program was updated, the hardlink would be broken
+# and the attacker would have his own copy of the program. If the program happened to have a security vulnerability,
 # the attacker could continue to exploit the known flaw.
 #
 # This can be accomplished by either mounting tmpfs to /tmp, or creating a separate partition for /tmp.

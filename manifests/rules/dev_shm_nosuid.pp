@@ -1,10 +1,10 @@
-# @summary 
-#    Ensure nosuid option set on /dev/shm partition 
+# @summary
+#    Ensure nosuid option set on /dev/shm partition
 #
 # The nosuid mount option specifies that the filesystem cannot contain setuid files.
 #
 # Rationale:
-# Setting this option on a file system prevents users from introducing privileged programs onto 
+# Setting this option on a file system prevents users from introducing privileged programs onto
 # the system and allowing non-root users to execute them.
 #
 # @param enforce

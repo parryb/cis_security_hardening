@@ -1,11 +1,11 @@
-# @summary 
-#    Ensure password hashing algorithm is SHA-512 
+# @summary
+#    Ensure password hashing algorithm is SHA-512
 #
-# The commands below change password encryption from md5 to sha512 (a much stronger hashing algorithm). All 
+# The commands below change password encryption from md5 to sha512 (a much stronger hashing algorithm). All
 # existing accounts will need to perform a password change to upgrade the stored hashes to the new algorithm.
 #
 # Rationale:
-# The SHA-512 algorithm provides much stronger hashing than MD5, thus providing additional protection to the system by 
+# The SHA-512 algorithm provides much stronger hashing than MD5, thus providing additional protection to the system by
 # increasing the level of effort for an attacker to successfully determine passwords.
 #
 # Note that these change only apply to accounts configured on the local system.
@@ -13,7 +13,7 @@
 # This rule is done together with sec_pam_old_passwords
 #
 # @param enforce
-#    Enforce the rule 
+#    Enforce the rule
 #
 # @example
 #   class { 'cis_security_hardening::rules::pam_passwd_sha512':

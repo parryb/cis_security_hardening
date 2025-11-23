@@ -1,10 +1,10 @@
-# @summary 
-#    Ensure noexec option set on /var/tmp partition 
+# @summary
+#    Ensure noexec option set on /var/tmp partition
 #
 # The noexec mount option specifies that the filesystem cannot contain executable binaries.
 #
 # Rationale:
-# Since the /var/tmp filesystem is only intended for temporary file storage, set this option to 
+# Since the /var/tmp filesystem is only intended for temporary file storage, set this option to
 # ensure that users cannot run executable binaries from /var/tmp .
 #
 # @param enforce

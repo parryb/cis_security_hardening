@@ -1,16 +1,16 @@
-# @summary 
-#    Ensure password expiration warning days is 7 or more 
+# @summary
+#    Ensure password expiration warning days is 7 or more
 #
-# The PASS_WARN_AGE parameter in /etc/login.defs allows an administrator to notify users that their 
-# password will expire in a defined number of days. It is recommended that the PASS_WARN_AGE 
+# The PASS_WARN_AGE parameter in /etc/login.defs allows an administrator to notify users that their
+# password will expire in a defined number of days. It is recommended that the PASS_WARN_AGE
 # parameter be set to 7 or more days.
-# 
+#
 # Rationale:
-# Providing an advance warning that a password will be expiring gives users time to think of a secure 
+# Providing an advance warning that a password will be expiring gives users time to think of a secure
 # password. Users caught unaware may choose a simple password or write it down where it may be discovered.
 #
 # @param enforce
-#    Enforce the rule 
+#    Enforce the rule
 #
 # @param warn_pass_days
 #    Minimum dfays before a expiration warning is given.
