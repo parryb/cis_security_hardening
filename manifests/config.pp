@@ -1,4 +1,4 @@
-# @summary 
+# @summary
 #    Configure the module
 #
 # Create files, install scripts and cron jobs

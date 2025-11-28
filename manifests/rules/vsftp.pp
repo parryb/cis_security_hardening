@@ -1,12 +1,12 @@
-# @summary 
-#    Ensure FTP Server is not enabled 
+# @summary
+#    Ensure FTP Server is not enabled
 #
 # The File Transfer Protocol (FTP) provides networked computers with the ability to transfer files.
 #
 # Rationale:
-# FTP does not protect the confidentiality of data or authentication credentials. It is recommended 
-# sftp be used if file transfer is required. Unless there is a need to run the system as a FTP server 
-# (for example, to allow anonymous downloads), it is recommended that the service be disabled to reduce 
+# FTP does not protect the confidentiality of data or authentication credentials. It is recommended
+# sftp be used if file transfer is required. Unless there is a need to run the system as a FTP server
+# (for example, to allow anonymous downloads), it is recommended that the service be disabled to reduce
 # the potential attack surface.
 #
 # @param enforce

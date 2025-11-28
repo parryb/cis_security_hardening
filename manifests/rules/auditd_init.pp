@@ -1,7 +1,7 @@
-# @summary 
+# @summary
 #    Initialize auditd rules file
 #
-# Write inital rules for auditd
+# Write initial rules for auditd
 #
 # @param enforce
 #    Enforce the rule

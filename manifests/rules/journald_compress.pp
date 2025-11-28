@@ -1,14 +1,14 @@
-# @summary 
-#    Ensure journald is configured to compress large log files 
+# @summary
+#    Ensure journald is configured to compress large log files
 #
-# The journald system includes the capability of compressing overly large files to avoid filling up 
+# The journald system includes the capability of compressing overly large files to avoid filling up
 # the system with logs or making the logs unmanageably large.
 #
-# Note: The main configuration file /etc/systemd/journald.conf is read before any of the custom *.conf files. 
+# Note: The main configuration file /etc/systemd/journald.conf is read before any of the custom *.conf files.
 # If there are custom configs present, they override the main configuration parameters.
 #
 # Rationale:
-# Uncompressed large files may unexpectedly fill a filesystem leading to resource unavailability. Compressing logs 
+# Uncompressed large files may unexpectedly fill a filesystem leading to resource unavailability. Compressing logs
 # prior to write can prevent sudden, unexpected filesystem impacts.
 #
 # @param enforce

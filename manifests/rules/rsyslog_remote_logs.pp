@@ -1,11 +1,11 @@
-# @summary 
-#    Ensure rsyslog is configured to send logs to a remote log host 
+# @summary
+#    Ensure rsyslog is configured to send logs to a remote log host
 #
-# The rsyslog utility supports the ability to send logs it gathers to a remote log host running syslogd(8) or 
+# The rsyslog utility supports the ability to send logs it gathers to a remote log host running syslogd(8) or
 # to receive messages from remote hosts, reducing administrative overhead.
 #
 # Rationale:
-# Storing log data on a remote host protects log integrity from local attacks. If an attacker gains root access 
+# Storing log data on a remote host protects log integrity from local attacks. If an attacker gains root access
 # on the local system, they could tamper with or remove log data that is stored on the local system
 #
 # @param enforce

@@ -1,4 +1,4 @@
-# @summary 
+# @summary
 #    Ensure audit log files are not read or write-accessible by unauthorized users
 #
 # The operating system must be configured so that audit log files are not read or write- accessible by unauthorized users.
@@ -10,21 +10,21 @@
 # Rationale:
 # Unauthorized disclosure of audit records can reveal system and configuration data to attackers, thus compromising its confidentiality.
 #
-# Audit information includes all information (e.g., audit records, audit settings, audit reports) needed to successfully audit 
+# Audit information includes all information (e.g., audit records, audit settings, audit reports) needed to successfully audit
 # operating system activity.
 #
 # Satisfies: SRG-OS-000057-GPOS-00027, SRG-OS-000058-GPOS-00028
 #
 # Unauthorized disclosure of audit records can reveal system and configuration data to attackers, thus compromising its confidentiality.
 #
-# Audit information includes all information (e.g., audit records, audit settings, audit reports) needed to successfully audit 
+# Audit information includes all information (e.g., audit records, audit settings, audit reports) needed to successfully audit
 # operating system activity.
 #
 # Satisfies: SRG-OS-000057-GPOS-00027, SRG-OS-000058-GPOS-00028, SRG-OS-000059- GPOS-00029
 #
 # Unauthorized disclosure of audit records can reveal system and configuration data to attackers, thus compromising its confidentiality.
 #
-# Audit information includes all information (e.g., audit records, audit settings, audit reports) needed to successfully audit 
+# Audit information includes all information (e.g., audit records, audit settings, audit reports) needed to successfully audit
 # operating system activity.
 #
 # Satisfies: SRG-OS-000057-GPOS-00027, SRG-OS-000058-GPOS-00028, SRG-OS-000059- GPOS-00029

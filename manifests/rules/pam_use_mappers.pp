@@ -1,11 +1,11 @@
-# @summary 
+# @summary
 #    Ensure authenticated identity is mapped to the user or group account for PKI-based authentication
 #
-# The operating system must map the authenticated identity to the user or group account for PKI-based 
+# The operating system must map the authenticated identity to the user or group account for PKI-based
 # authentication.
 #
 # Rationale:
-# Without mapping the certificate used to authenticate to the user account, the ability to determine 
+# Without mapping the certificate used to authenticate to the user account, the ability to determine
 # the identity of the individual user or group will not be available for forensic analysis.
 #
 # @param enforce

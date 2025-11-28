@@ -1,12 +1,12 @@
-# @summary 
+# @summary
 #    Ensure user's session lock is enabled
 #
-# The operating system must retain a user's session lock until that user reestablishes access using 
+# The operating system must retain a user's session lock until that user reestablishes access using
 # established identification and authentication procedures.
 #
 # Rationale:
-# A session lock is a temporary action taken when a user stops work and moves away from the immediate 
-# physical vicinity of the information system but does not want to log out because of the temporary 
+# A session lock is a temporary action taken when a user stops work and moves away from the immediate
+# physical vicinity of the information system but does not want to log out because of the temporary
 # nature of the absence.
 #
 # @param enforce

@@ -1,4 +1,4 @@
-# @summary 
+# @summary
 #    Change mount options
 #
 # Change the mount options of a mountpoint.
@@ -10,9 +10,9 @@
 #    Options to set
 #
 # @example
-#   cis_security_hardening::set_mount_options { 
+#   cis_security_hardening::set_mount_options {
 #     mountpoint => '/home',
-#     mountoptions => 'nodev', 
+#     mountoptions => 'nodev',
 #   }
 define cis_security_hardening::set_mount_options (
   Cis_security_hardening::Mountpoint $mountpoint,

@@ -1,10 +1,10 @@
-# @summary 
+# @summary
 #    Ensure nosuid option set on /var partition
 #
-# The nosuid mount option specifies that the filesystem cannot contain setuid files. 
+# The nosuid mount option specifies that the filesystem cannot contain setuid files.
 #
 # Rationale:
-# Since the /var filesystem is only intended for variable files such as logs, set this 
+# Since the /var filesystem is only intended for variable files such as logs, set this
 # option to ensure that users cannot create setuid files in /var.
 #
 # @param enforce

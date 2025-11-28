@@ -4,7 +4,7 @@
 # The Apport Error Reporting Service automatically generates crash reports for debugging.
 #
 # Rationale:
-# Apport collects potentially sensitive data, such as core dumps, stack traces, and log files. They can contain passwords, credit 
+# Apport collects potentially sensitive data, such as core dumps, stack traces, and log files. They can contain passwords, credit
 # card numbers, serial numbers, and other private material.
 #
 # @param enforce

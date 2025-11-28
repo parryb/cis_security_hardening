@@ -1,11 +1,11 @@
-# @summary 
-#    Ensure default user shell timeout is configured 
+# @summary
+#    Ensure default user shell timeout is configured
 #
 # The default TMOUT determines the shell timeout for users. The TMOUT value is measured in seconds.
 #
 # Rationale:
-# Having no timeout value associated with a shell could allow an unauthorized user access to another user's 
-# shell session (e.g. user walks away from their computer and doesn't lock the screen). Setting a timeout 
+# Having no timeout value associated with a shell could allow an unauthorized user access to another user's
+# shell session (e.g. user walks away from their computer and doesn't lock the screen). Setting a timeout
 # value at least reduces the risk of this happening.
 #
 # @param enforce

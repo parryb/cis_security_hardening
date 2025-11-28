@@ -1,11 +1,11 @@
 # @summary
 #    Ensure logrotate assigns appropriate permissions
 #
-# Log files contain logged information from many services on the system, or on log 
+# Log files contain logged information from many services on the system, or on log
 # hosts others as well.
-# 
+#
 # Rationale:
-# It is important to ensure that log files have the correct permissions to ensure 
+# It is important to ensure that log files have the correct permissions to ensure
 # that sensitive data is archived and protected.
 #
 # @param enforce

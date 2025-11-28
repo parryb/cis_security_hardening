@@ -1,9 +1,9 @@
-# @summary 
-#    Ensure permissions on SSH private host key files are configured 
+# @summary
+#    Ensure permissions on SSH private host key files are configured
 #
-# An SSH private key is one of two files used in SSH public key authentication. In this authentication 
-# method, The possession of the private key is proof of identity. Only a private key that corresponds 
-# to a public key will be able to authenticate successfully. The private keys need to be stored and 
+# An SSH private key is one of two files used in SSH public key authentication. In this authentication
+# method, The possession of the private key is proof of identity. Only a private key that corresponds
+# to a public key will be able to authenticate successfully. The private keys need to be stored and
 # handled carefully, and no copies of the private key should be distributed.
 #
 # Rationale:

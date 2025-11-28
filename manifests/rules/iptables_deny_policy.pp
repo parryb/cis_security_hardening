@@ -1,10 +1,10 @@
-# @summary 
-#     Ensure default deny firewall policy 
+# @summary
+#     Ensure default deny firewall policy
 #
 # A default deny all policy on connections ensures that any unconfigured network usage will be rejected.
 #
 # Rationale:
-# With a default accept policy the firewall will accept any packet that is not configured to be denied. It is easier 
+# With a default accept policy the firewall will accept any packet that is not configured to be denied. It is easier
 # to white list acceptable usage than to black list unacceptable usage.
 #
 # @param enforce

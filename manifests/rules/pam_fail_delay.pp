@@ -1,11 +1,11 @@
 # @summary
-#    Ensure loging delay after failed logon attempt
+#    Ensure logging delay after failed logon attempt
 #
-# The operating system must enforce a delay of at least 4 seconds between logon prompts 
+# The operating system must enforce a delay of at least 4 seconds between logon prompts
 # following a failed logon attempt.
 #
 # Rationale:
-# Limiting the number of logon attempts over a certain time interval reduces the chances 
+# Limiting the number of logon attempts over a certain time interval reduces the chances
 # that an unauthorized user may gain access to an account.
 #
 # @param enforce

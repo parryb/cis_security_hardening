@@ -1,15 +1,15 @@
-# @summary 
-#    Ensure audit_backlog_limit is sufficient 
+# @summary
+#    Ensure audit_backlog_limit is sufficient
 #
 # The backlog limit has a default setting of 64
 #
 # Rationale:
-# during boot if audit=1, then the backlog will hold 64 records. If more that 64 records are 
-# created during boot, auditd records will be lost and potential malicious activity could go 
+# during boot if audit=1, then the backlog will hold 64 records. If more that 64 records are
+# created during boot, auditd records will be lost and potential malicious activity could go
 # undetected.
 #
 # @param enforce
-#    Sets rule enforcement. If set to true, code will be exeuted to bring the system into a comliant state.
+#    Sets rule enforcement. If set to true, code will be exeuted to bring the system into a compliant state.
 #
 # @param backlog_limit
 #    Number of records in backlog

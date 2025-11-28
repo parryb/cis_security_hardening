@@ -352,7 +352,7 @@ cis_security_hardening:
     ntp_options: none
     ntp_restrict: |-
       restrict default nomodify notrap nopeer noquery
-      restrict 127.0.0.1 
+      restrict 127.0.0.1
       restrict ::1
     ntp_server: |-
       server 0.centos.pool.ntp.org iburst
@@ -420,7 +420,7 @@ cis_security_hardening:
       - aes128-ctr
     clientalivecountmax: '0'
     clientaliveinterval: '300'
-    crypto_policy: 
+    crypto_policy:
       legacy: yes
       policy: legacy
     denygroups: []

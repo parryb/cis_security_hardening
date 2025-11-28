@@ -8,7 +8,7 @@
 #
 # Off-loading is a common process in information systems with limited audit storage capacity.
 #
-# Without the configuration of the "au-remote" plugin, the audisp-remote daemon will not off load the logs from the 
+# Without the configuration of the "au-remote" plugin, the audisp-remote daemon will not off load the logs from the
 # system being audited.
 #
 # @param enforce

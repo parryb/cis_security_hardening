@@ -1,10 +1,10 @@
-# @summary 
-#    Ensure nodev option set on /dev/shm partition 
+# @summary
+#    Ensure nodev option set on /dev/shm partition
 #
 # The nodev mount option specifies that the filesystem cannot contain special devices.
 #
 # Rationale:
-# Since the /dev/shm filesystem is not intended to support devices, set this option to ensure that users 
+# Since the /dev/shm filesystem is not intended to support devices, set this option to ensure that users
 # cannot attempt to create special devices in /dev/shm partitions.
 #
 # @param enforce

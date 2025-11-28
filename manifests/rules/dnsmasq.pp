@@ -4,7 +4,7 @@
 # dnsmasq is a lightweight tool that provides DNS caching, DNS forwarding and DHCP (Dynamic Host Configuration Protocol) services.
 #
 # Rationale:
-# Unless a system is specifically designated to act as a DNS caching, DNS forwarding and/or DHCP server, it is recommended that the 
+# Unless a system is specifically designated to act as a DNS caching, DNS forwarding and/or DHCP server, it is recommended that the
 # package be removed to reduce the potential attack surface.
 #
 # @param enforce

@@ -1,10 +1,10 @@
-# @summary 
-#    Disable Automounting 
+# @summary
+#    Disable Automounting
 #
 # autofs allows automatic mounting of devices, typically including CD/DVDs and USB drives.
 #
 # Rationale:
-# With automounting enabled anyone with physical access could attach a USB drive or disc and have its contents 
+# With automounting enabled anyone with physical access could attach a USB drive or disc and have its contents
 # available in system even if they lacked permissions to mount it themselves.
 #
 # @param enforce

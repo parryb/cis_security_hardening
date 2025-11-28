@@ -101,7 +101,7 @@ cis_security_hardening::benchmark::centos::v7:
         - ldap_client
         - nis_client
         - telnet_client
-        - tftp_client        
+        - tftp_client
     unused_network_protocols:
       level1:
         - disable_ipv6

@@ -1,13 +1,13 @@
-# @summary 
-#    Ensure rsh client is not installed 
+# @summary
+#    Ensure rsh client is not installed
 #
 # The rsh package contains the client commands for the rsh services.
 #
 # Rationale:
-# These legacy clients contain numerous security exposures and have been replaced with the more 
-# secure SSH package. Even if the server is removed, it is best to ensure the clients are also 
-# removed to prevent users from inadvertently attempting to use these commands and therefore 
-# exposing their credentials. Note that removing the rsh package removes the clients for rsh , 
+# These legacy clients contain numerous security exposures and have been replaced with the more
+# secure SSH package. Even if the server is removed, it is best to ensure the clients are also
+# removed to prevent users from inadvertently attempting to use these commands and therefore
+# exposing their credentials. Note that removing the rsh package removes the clients for rsh ,
 # rcp and rlogin .
 #
 # @param enforce

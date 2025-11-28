@@ -1,17 +1,17 @@
-# @summary 
-#    Ensure events that modify date and time information are collected 
+# @summary
+#    Ensure events that modify date and time information are collected
 #
-# Capture events where the system date and/or time has been modified. The parameters in this section are set to 
-# determine if the adjtimex (tune kernel clock), settimeofday (Set time, using timeval and timezone structures) 
-# stime (using seconds since 1/1/1970) or clock_settime (allows for the setting of several internal clocks and 
-# timers) system calls have been executed and always write an audit record to the /var/log/audit.log file upon 
+# Capture events where the system date and/or time has been modified. The parameters in this section are set to
+# determine if the adjtimex (tune kernel clock), settimeofday (Set time, using timeval and timezone structures)
+# stime (using seconds since 1/1/1970) or clock_settime (allows for the setting of several internal clocks and
+# timers) system calls have been executed and always write an audit record to the /var/log/audit.log file upon
 # exit, tagging the records with the identifier "time-change"
 #
 # Rationale:
 # Unexpected changes in system date and/or time could be a sign of malicious activity on the system.
 #
 # @param enforce
-#    Sets rule enforcement. If set to true, code will be exeuted to bring the system into a comliant state.
+#    Sets rule enforcement. If set to true, code will be exeuted to bring the system into a compliant state.
 #
 # @example
 #   class { 'cis_security_hardening::rules::auditd_time_change':

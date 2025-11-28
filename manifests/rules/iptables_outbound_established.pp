@@ -1,10 +1,10 @@
-# @summary 
-#    Ensure outbound and established connections are configured 
+# @summary
+#    Ensure outbound and established connections are configured
 #
 # Configure the firewall rules for new outbound, and established connections.
 #
 # Rationale:
-# If rules are not in place for new outbound, and established connections all packets will be dropped 
+# If rules are not in place for new outbound, and established connections all packets will be dropped
 # by the default policy preventing network usage.
 #
 # @param enforce

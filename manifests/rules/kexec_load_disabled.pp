@@ -1,15 +1,15 @@
 # @summary
 #    Ensure kernel image loading is disabled
 #
-# The operating system must prevent the loading of a new kernel for later execution. 
+# The operating system must prevent the loading of a new kernel for later execution.
 #
 # Rationale:
 #
-# Changes to any software components can have significant effects on the overall security of the operating system. This 
+# Changes to any software components can have significant effects on the overall security of the operating system. This
 # requirement ensures the software has not been tampered with and that it has been provided by a trusted vendor.
 #
-# Disabling kexec_load prevents an unsigned kernel image (that could be a windows kernel or modified vulnerable kernel) 
-# from being loaded. Kexec can be used subvert the entire secureboot process and should be avoided at all costs especially 
+# Disabling kexec_load prevents an unsigned kernel image (that could be a windows kernel or modified vulnerable kernel)
+# from being loaded. Kexec can be used subvert the entire secureboot process and should be avoided at all costs especially
 # since it can load unsigned kernel images.
 #
 # @param enforce

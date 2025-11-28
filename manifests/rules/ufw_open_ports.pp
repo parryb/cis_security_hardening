@@ -1,5 +1,5 @@
-# @summary 
-#    Ensure firewall rules exist for all open ports 
+# @summary
+#    Ensure firewall rules exist for all open ports
 #
 # Any ports that have been opened on non-loopback addresses need firewall rules to govern traffic.
 #
@@ -89,7 +89,7 @@ class cis_security_hardening::rules::ufw_open_ports (
         $cmd = "ufw ${action} ${queue} to ${data['to']} port ${port}"
         $check = "test -z \"$(ufw status verbose | grep -E -i '^${port}.*ALLOW ${queue}')\""
       } else {
-        fail("unknow ufw queue ${queue}")
+        fail("unknown ufw queue ${queue}")
       }
 
       exec { $title:

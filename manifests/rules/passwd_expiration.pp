@@ -1,12 +1,12 @@
-# @summary 
-#    Ensure password expiration is 365 days or less 
+# @summary
+#    Ensure password expiration is 365 days or less
 #
-# The PASS_MAX_DAYS parameter in /etc/login.defs allows an administrator to force passwords to expire once they reach a defined age. 
+# The PASS_MAX_DAYS parameter in /etc/login.defs allows an administrator to force passwords to expire once they reach a defined age.
 # It is recommended that the PASS_MAX_DAYS parameter be set to less than or equal to 365 days.
 #
 # Rationale:
-# The window of opportunity for an attacker to leverage compromised credentials or successfully compromise credentials via an online 
-# brute force attack is limited by the age of the password. Therefore, reducing the maximum age of a password also reduces an 
+# The window of opportunity for an attacker to leverage compromised credentials or successfully compromise credentials via an online
+# brute force attack is limited by the age of the password. Therefore, reducing the maximum age of a password also reduces an
 # attacker's window of opportunity.
 #
 # @param enforce
@@ -19,7 +19,7 @@
 #   class { 'cis_security_hardening::rules::passwd_expiration':
 #       enforce => true,
 #       max_pass_days => 50,
-#   } 
+#   }
 #
 # @api private
 class cis_security_hardening::rules::passwd_expiration (

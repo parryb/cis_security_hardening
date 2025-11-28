@@ -1,8 +1,8 @@
-# @summary 
-#    Ensure password creation requirements are configured 
+# @summary
+#    Ensure password creation requirements are configured
 #
-# The pam_pwquality.so module checks the strength of passwords. It performs checks such as making sure a password is not a 
-# dictionary word, it is a certain length, contains a mix of characters (e.g. alphabet, numeric, other) and more. The 
+# The pam_pwquality.so module checks the strength of passwords. It performs checks such as making sure a password is not a
+# dictionary word, it is a certain length, contains a mix of characters (e.g. alphabet, numeric, other) and more. The
 # following are definitions of the pam_pwquality .so options.
 #
 # - try_first_pass - retrieve the password from a previous stacked PAM module. If not available, then prompt the user for a password.
@@ -39,14 +39,14 @@
 #    Minimum number of lower case characters a password must contain
 #
 # @param minclass
-#    Minimum to provide character classes (only used for Redhat 8, ignored in oler RedHat versios). 
+#    Minimum to provide character classes (only used for Redhat 8, ignored in oler RedHat versions).
 #    Will be ignored if value is -1. Instead *credit values are used.
 #
 # @param retry
 #    allowed retries when password is wrong
 #
 # @param dictcheck
-#   Ensure passwords can not use dictonary words
+#   Ensure passwords can not use dictionary words
 #
 # @param difok
 #    Number of characters to change.

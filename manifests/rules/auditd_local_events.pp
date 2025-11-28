@@ -1,14 +1,14 @@
 # @summary
 #    Ensure the operating system's audit daemon is configured to include local events
 #
-# The audit system must audit local events. 
+# The audit system must audit local events.
 #
 # Rationale:
-# Without establishing what type of events occurred, the source of events, where events occurred, and the outcome of events, 
+# Without establishing what type of events occurred, the source of events, where events occurred, and the outcome of events,
 # it would be difficult to establish, correlate, and investigate the events leading up to an outage or attack.
 #
-# Audit record content that may be necessary to satisfy this requirement includes, for example, time stamps, source and 
-# destination addresses, user/process identifiers, event descriptions, success/fail indications, filenames involved, and 
+# Audit record content that may be necessary to satisfy this requirement includes, for example, time stamps, source and
+# destination addresses, user/process identifiers, event descriptions, success/fail indications, filenames involved, and
 # access control or flow control rules invoked.
 #
 # @param enforce

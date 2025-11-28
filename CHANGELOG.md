@@ -50,7 +50,7 @@ All notable changes to this project will be documented in this file.
   auditd privileged commands might be too time consuming you can disable the cronjobs completely.
   The default value for both jobs in `present`.
 
-  > Please note that not running the auditd privileged commands cronjob might result in not monitoring newly installed prvileged commands.
+  > Please note that not running the auditd privileged commands cronjob might result in not monitoring newly installed privileged commands.
 
   Keep in mind that the cronjobs are only running once a day during night hours.
 
@@ -87,14 +87,14 @@ Thanks to `kenyon` for the two PRs above.
 
 ## Release 0.8.1 (not released)
 
-* fix for issue #52, write auditd rules in a way the scanner recognices them
+* fix for issue #52, write auditd rules in a way the scanner recognizes them
 
 ## Release 0.8.0
 
 * added Debian 11 support
 * renamed cronjobs in /etc/cron.d and removed `.cron` extension from filenames
 * added replacement for has_key (deprecated in stdlib and was now removed)
-* fix for issue #48, rsyslogd service is now notifed when rsyslogd.conf is changed.<br>Thanks to Ben Parry
+* fix for issue #48, rsyslogd service is now notified when rsyslogd.conf is changed.<br>Thanks to Ben Parry
 * changed to fiddyspence-sysctl module
 
 ## Release 0.7.13
@@ -175,7 +175,7 @@ Fixed issue #23: nftables resources should be within if !defined
 ## Release 0.7.3
 
 * Solved issue with missing grub passwords in some paramedter files
-* use a valid grub password insted of a fake string. See README.md for the default password.
+* use a valid grub password instead of a fake string. See README.md for the default password.
 * removed augeaproviders_mounttab module
 
 ## Release v0.7.2
@@ -224,7 +224,7 @@ Please review the following changes before updating to this version module:
     - with-sudo
   ```
 
-* This release introduces a fact containing all available features for the slected `authselect` profile. nIf you add a profile option not available a waring message is printed and the configured option will be ignored.
+* This release introduces a fact containing all available features for the selected `authselect` profile. nIf you add a profile option not available a warning message is printed and the configured option will be ignored.
 
 * The PAM configuration rules have been changed to work with `authselect`.
 
@@ -257,4 +257,4 @@ Unpublished release with the following benchmarks:
 
 ## Release 0.1.0
 
-Initial unpublished code transfered from my security_baseline module.
+Initial unpublished code transferred from my security_baseline module.

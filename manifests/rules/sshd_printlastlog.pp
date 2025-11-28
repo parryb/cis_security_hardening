@@ -1,10 +1,10 @@
-# @summary 
+# @summary
 #    Ensure Printlastlog is enabled
 #
 # The operating system must display the date and time of the last successful account logon upon an SSH logon.
 #
 # Rationale:
-# Providing users with feedback on when account accesses via SSH last occurred facilitates user recognition 
+# Providing users with feedback on when account accesses via SSH last occurred facilitates user recognition
 # and reporting of unauthorized account use.
 #
 # @param enforce

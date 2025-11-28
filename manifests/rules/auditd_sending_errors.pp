@@ -1,11 +1,11 @@
 # @summary
 #    Ensure audit system action is defined for sending errors
 #
-# The operating system must be configured so that the audit system takes appropriate action when there is 
+# The operating system must be configured so that the audit system takes appropriate action when there is
 # an error sending audit records to a remote system.
 #
 # Rationale:
-# Taking appropriate action when there is an error sending audit records to a remote system will minimize 
+# Taking appropriate action when there is an error sending audit records to a remote system will minimize
 # the possibility of losing audit records.
 #
 # @param enforce
@@ -15,7 +15,7 @@
 #
 # @example
 #   class { 'cis_security_hardening::rules::auditd_sending_errors':
-#     enforce => tru,
+#     enforce => true,
 #   }
 #
 # @api private

@@ -1,11 +1,11 @@
-# @summary 
-#    Ensure rsyslog default file permissions configured 
+# @summary
+#    Ensure rsyslog default file permissions configured
 #
-# rsyslog will create logfiles that do not already exist on the system. This setting controls what permissions 
+# rsyslog will create logfiles that do not already exist on the system. This setting controls what permissions
 # will be applied to these newly created files.
 #
 # Rationale:
-# It is important to ensure that log files have the correct permissions to ensure that sensitive data is 
+# It is important to ensure that log files have the correct permissions to ensure that sensitive data is
 # archived and protected.
 #
 # @param enforce

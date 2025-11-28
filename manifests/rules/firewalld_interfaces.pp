@@ -1,10 +1,10 @@
-# @summary 
-#    Ensure network interfaces are assigned to appropriate zone 
+# @summary
+#    Ensure network interfaces are assigned to appropriate zone
 #
 # firewall zones define the trust level of network connections or interfaces.
 #
 # Rationale:
-# A network interface not assigned to the appropriate zone can allow unexpected or undesired network 
+# A network interface not assigned to the appropriate zone can allow unexpected or undesired network
 # traffic to be accepted on the interface
 #
 # @param enforce

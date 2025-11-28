@@ -1,15 +1,15 @@
-# @summary 
-#    Ensure nftables rules are permanent 
+# @summary
+#    Ensure nftables rules are permanent
 #
-# nftables is a subsystem of the Linux kernel providing filtering and classification of 
+# nftables is a subsystem of the Linux kernel providing filtering and classification of
 # network packets/datagrams/frames.
-# The nftables service reads the /etc/sysconfig/nftables.conf file for a nftables file or 
+# The nftables service reads the /etc/sysconfig/nftables.conf file for a nftables file or
 # files to include in the nftables ruleset.
-# A nftables ruleset containing the input, forward, and output base chains allow network 
+# A nftables ruleset containing the input, forward, and output base chains allow network
 # traffic to be filtered.
 #
 # Rationale:
-# Changes made to nftables ruleset only affect the live system, you will also need to 
+# Changes made to nftables ruleset only affect the live system, you will also need to
 # configure the nftables ruleset to apply on boot.
 #
 # @param enforce

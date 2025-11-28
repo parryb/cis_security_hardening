@@ -1,10 +1,10 @@
-# @summary 
-#    Ensure iptables are flushed 
+# @summary
+#    Ensure iptables are flushed
 #
 # nftables is a replacement for iptables, ip6tables, ebtables and arptables
 #
 # Rationale:
-# It is possible to mix iptables and nftables. However, this increases complexity and also the chance to introduce 
+# It is possible to mix iptables and nftables. However, this increases complexity and also the chance to introduce
 # errors. For simplicity flush out all iptables rules, and ensure it is not loaded.
 #
 # @param enforce

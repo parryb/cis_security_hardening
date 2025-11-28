@@ -10,7 +10,7 @@ cis_security_hardening::fact_upload_command: '/usr/share/cis_security_hardening/
 cis_security_hardening::system_file_permissions: '/usr/share/cis_security_hardening/data/system-file-permissions.txt'
 cis_security_hardening::suid_fact_file: '/opt/puppetlabs/facter/facts.d/cis_security_hardening_suid_programs.yaml'
 cis_security_hardening::sgid_fact_file: '/opt/puppetlabs/facter/facts.d/cis_security_hardening_sgid_programs.yaml'
-cis_security_hardening::auditd_dirs_to_include: 
+cis_security_hardening::auditd_dirs_to_include:
   - '/usr'
 cis_security_hardening::auditd_rules_fact_file: '/opt/puppetlabs/facter/facts.d/cis_security_hardening_auditd.yaml'
 
@@ -121,7 +121,7 @@ cis_security_hardening::rules::policycoreutils::enforce: true
 
 cis_security_hardening::rules::motd_perms::enforce: true
 cis_security_hardening::rules::motd_perms::content: |
-  
+
   ###################################################################
   # This system is for the use of authorized users only.            #
   # Individuals using this computer system without authority, or in #
@@ -138,7 +138,7 @@ cis_security_hardening::rules::motd_perms::content: |
   # evidence of criminal activity, system personnel may provide the #
   # evidence of such monitoring to law enforcement officials.       #
   ###################################################################
-  
+
 
 cis_security_hardening::rules::issue_perms::enforce: true
 cis_security_hardening::rules::issue_perms::content: ''
@@ -199,7 +199,7 @@ cis_security_hardening::rules::debug_shell::enforce: true
 cis_security_hardening::rules::mta_unrestriced_relay::enforce: true
 cis_security_hardening::rules::gssproxy::enforce: true
 cis_security_hardening::rules::iprutils::enforce: true
-cis_security_hardening::rules::tuned::enforce: 
+cis_security_hardening::rules::tuned::enforce: true
 cis_security_hardening::rules::krb5_server::enforce: true
 
 cis_security_hardening::rules::nis_client::enforce: true
@@ -287,7 +287,7 @@ cis_security_hardening::rules::auditd_init::buffer_size: 8192
 cis_security_hardening::rules::auditd_init::rules_file: /etc/audit/rules.d/cis_security_hardening.rules
 cis_security_hardening::rules::auditd_init::auto_reboot: true
 cis_security_hardening::rules::auditd_package::enforce: true
-cis_security_hardening::rules::auditd_package::packages: 
+cis_security_hardening::rules::auditd_package::packages:
   - audit
   - audit-libs
   - audispd-plugins

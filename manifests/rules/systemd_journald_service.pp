@@ -10,12 +10,12 @@
 #    Enforce the rule.
 #
 # @example
-#   include 
+#   include
 # @example
 #   class { 'cis_security_hardening::rules::systemd_journald_service':
 #     enforce => true,
 #   }
-# 
+#
 # @api private
 class cis_security_hardening::rules::systemd_journald_service (
   Boolean $enforce = false,

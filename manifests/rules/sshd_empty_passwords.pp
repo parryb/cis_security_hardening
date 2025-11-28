@@ -1,11 +1,11 @@
-# @summary 
-#    Ensure SSH PermitEmptyPasswords is disabled 
+# @summary
+#    Ensure SSH PermitEmptyPasswords is disabled
 #
-# The PermitEmptyPasswords parameter specifies if the SSH server allows login to accounts with 
+# The PermitEmptyPasswords parameter specifies if the SSH server allows login to accounts with
 # empty password strings.
 #
 # Rationale:
-# Disallowing remote shell access to accounts that have an empty password reduces the probability 
+# Disallowing remote shell access to accounts that have an empty password reduces the probability
 # of unauthorized access to the system
 #
 # @param enforce

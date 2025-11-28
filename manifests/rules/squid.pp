@@ -1,10 +1,10 @@
-# @summary 
-#    Ensure HTTP Proxy Server is not enabled 
+# @summary
+#    Ensure HTTP Proxy Server is not enabled
 #
 # Squid is a standard proxy server used in many distributions and environments.
 #
 # Rationale:
-# If there is no need for a proxy server, it is recommended that the squid proxy be disabled to 
+# If there is no need for a proxy server, it is recommended that the squid proxy be disabled to
 # reduce the potential attack surface.
 #
 # @param enforce

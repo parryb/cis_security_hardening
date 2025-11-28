@@ -1,27 +1,27 @@
-# @summary 
-#    Ensure SSH access is limited 
+# @summary
+#    Ensure SSH access is limited
 #
-# There are several options available to limit which users and group can access the system via SSH. It is recommended that at least 
+# There are several options available to limit which users and group can access the system via SSH. It is recommended that at least
 # one of the following options be leveraged:
 #
 # AllowUsers
-# The AllowUsers variable gives the system administrator the option of allowing specific users to ssh into the system. The list 
-# consists of space separated user names. Numeric user IDs are not recognized with this variable. If a system administrator wants 
-# to restrict user access further by only allowing the allowed users to log in from a particular host, the entry can be specified 
-# in the form of user@host. 
+# The AllowUsers variable gives the system administrator the option of allowing specific users to ssh into the system. The list
+# consists of space separated user names. Numeric user IDs are not recognized with this variable. If a system administrator wants
+# to restrict user access further by only allowing the allowed users to log in from a particular host, the entry can be specified
+# in the form of user@host.
 #
 # AllowGroups
-# The AllowGroups variable gives the system administrator the option of allowing specific groups of users to ssh into the system. 
-# The list consists of space separated group names. Numeric group IDs are not recognized with this variable. 
+# The AllowGroups variable gives the system administrator the option of allowing specific groups of users to ssh into the system.
+# The list consists of space separated group names. Numeric group IDs are not recognized with this variable.
 #
 # DenyUsers
-# The DenyUsers variable gives the system administrator the option of denying specific users to ssh into the system. The list 
-# consists of space separated user names. Numeric user IDs are not recognized with this variable. If a system administrator wants 
-# to restrict user access further by specifically denying a user's access from a particular host, the entry can be specified in 
-# the form of user@host. 
+# The DenyUsers variable gives the system administrator the option of denying specific users to ssh into the system. The list
+# consists of space separated user names. Numeric user IDs are not recognized with this variable. If a system administrator wants
+# to restrict user access further by specifically denying a user's access from a particular host, the entry can be specified in
+# the form of user@host.
 #
 # DenyGroups
-# The DenyGroups variable gives the system administrator the option of denying specific groups of users to ssh into the system. 
+# The DenyGroups variable gives the system administrator the option of denying specific groups of users to ssh into the system.
 # The list consists of space separated group names. Numeric group IDs are not recognized with this variable.
 #
 # Rationale:
@@ -31,7 +31,7 @@
 #    Enforce the rule
 #
 # @param allow_users
-#    Array with allowd users to connect by ssh
+#    Array with allowed users to connect by ssh
 #
 # @param allow_groups
 #    Array with unix groups allowed to connect by ssh

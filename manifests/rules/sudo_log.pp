@@ -1,5 +1,5 @@
-# @summary 
-#    Ensure sudo log file exists 
+# @summary
+#    Ensure sudo log file exists
 #
 # sudo can use a custom log file
 #

@@ -4,9 +4,9 @@
 # The operating system must prevent a user from overriding the screensaver lock-delay setting for the graphical user interface.
 #
 # Rationale:
-# A session time-out lock is a temporary action taken when a user stops work and moves away from the immediate physical vicinity 
-# of the information system but does not log out because of the temporary nature of the absence. Rather than relying on the user 
-# to manually lock their operating system session prior to vacating the vicinity, operating systems need to be able to identify 
+# A session time-out lock is a temporary action taken when a user stops work and moves away from the immediate physical vicinity
+# of the information system but does not log out because of the temporary nature of the absence. Rather than relying on the user
+# to manually lock their operating system session prior to vacating the vicinity, operating systems need to be able to identify
 # when a user's session has idled and take action to initiate the session lock.
 #
 # The session lock is implemented at the point where session activity can be determined and/or controlled.

@@ -1,10 +1,10 @@
-# @summary 
-#    Ensure outbound and established connections are configured 
+# @summary
+#    Ensure outbound and established connections are configured
 #
 # Configure the firewall rules for new outbound, and established connections.
 #
 # Rationale:
-# If rules are not in place for new outbound, and established connections all packets will be dropped 
+# If rules are not in place for new outbound, and established connections all packets will be dropped
 # by the default policy preventing network usage.
 #
 # @param enforce
@@ -12,7 +12,7 @@
 #
 # @example
 #   class { 'cis_security_hardening::rules::ip6tables_outbound_established':
-#       enforce => true, 
+#       enforce => true,
 #   }
 #
 # @api private

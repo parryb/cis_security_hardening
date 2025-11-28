@@ -1,19 +1,19 @@
-# @summary 
-#    Ensure file deletion events by users are collected 
+# @summary
+#    Ensure file deletion events by users are collected
 #
-# Monitor the use of system calls associated with the deletion or renaming of files and file 
-# attributes. This configuration statement sets up monitoring for the unlink (remove a file), 
-# unlinkat (remove a file attribute), rename (rename a file) and renameat (rename a file attribute) 
+# Monitor the use of system calls associated with the deletion or renaming of files and file
+# attributes. This configuration statement sets up monitoring for the unlink (remove a file),
+# unlinkat (remove a file attribute), rename (rename a file) and renameat (rename a file attribute)
 # system calls and tags them with the identifier "delete".
 #
 # Rationale:
-# Monitoring these calls from non-privileged users could provide a system administrator with evidence 
-# that inappropriate removal of files and file attributes associated with protected files is occurring. 
-# While this audit option will look at all events, system administrators will want to look for specific 
+# Monitoring these calls from non-privileged users could provide a system administrator with evidence
+# that inappropriate removal of files and file attributes associated with protected files is occurring.
+# While this audit option will look at all events, system administrators will want to look for specific
 # privileged files that are being deleted or altered.
 #
 # @param enforce
-#    Sets rule enforcement. If set to true, code will be exeuted to bring the system into a comliant state.
+#    Sets rule enforcement. If set to true, code will be exeuted to bring the system into a compliant state.
 #
 # @example
 #   class { 'cis_security_hardening::rules::auditd_delete':

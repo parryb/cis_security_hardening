@@ -1,5 +1,5 @@
-# @summary 
-#    Ensure rsync is not installed or the rsyncd service is masked 
+# @summary
+#    Ensure rsync is not installed or the rsyncd service is masked
 #
 # The rsyncd service can be used to synchronize files between systems over network links.
 #

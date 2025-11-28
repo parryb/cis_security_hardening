@@ -4,7 +4,7 @@
 # The Linux operating system must be configured so that the SSH daemon is configured to only use the SSHv2 protocol.
 #
 # Rationale:
-# SSHv1 is an insecure implementation of the SSH protocol and has many well-known vulnerability exploits. Exploits of 
+# SSHv1 is an insecure implementation of the SSH protocol and has many well-known vulnerability exploits. Exploits of
 # the SSH daemon could provide immediate root access to the system.
 #
 # Satisfies: SRG-OS-000074-GPOS-00042, SRG-OS-000480-GPOS-00227

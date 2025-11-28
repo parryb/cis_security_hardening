@@ -11,7 +11,7 @@
 #    The benchmark profile to use. Currently only server profiles are supported.
 # @param level
 #    The CIS Benchmark server security level. Higher levels include all rules of lover levels. Therefore level1 rules are all included
-#    in the level2 rules and stig includes level1 nd level 2 rules.
+#    in the level2 rules and stig includes level1 and level 2 rules.
 # @param update_postrun_command
 #    Update Puppet agent post run command
 # @param fact_upload_command
@@ -22,11 +22,11 @@
 #    Directories to search for privileged commands to create auditd rules.
 # @param time_until_reboot
 #    Time to wait until system is rebooted if required. Time in seconds. For `reboot` the `puppetlabs-reboot` module is used. Please obey
-#    the follwing comment from this module: POSIX systems (with the exception of Solaris) only support
+#    the following comment from this module: POSIX systems (with the exception of Solaris) only support
 #    specifying the timeout as minutes. As such, the value of timeout must be a multiple of 60. Other values will be rounded up to the
 #    nearest minute and a warning will be issued.
 # @param auto_reboot
-#    Reboot when necessary after `time_until_reboot` is exeeded
+#    Reboot when necessary after `time_until_reboot` is exceeded
 # @param verbose_logging
 #    Print various info messages
 # @param remove_authconfig

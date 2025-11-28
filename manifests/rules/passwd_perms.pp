@@ -1,11 +1,11 @@
-# @summary 
-#    Ensure permissions on /etc/passwd are configured 
+# @summary
+#    Ensure permissions on /etc/passwd are configured
 #
-# The /etc/passwd file contains user account information that is used by many system utilities and therefore must be readable 
+# The /etc/passwd file contains user account information that is used by many system utilities and therefore must be readable
 # for these utilities to operate.
-# 
+#
 # Rationale:
-# It is critical to ensure that the /etc/passwd file is protected from unauthorized write access. Although it is protected by 
+# It is critical to ensure that the /etc/passwd file is protected from unauthorized write access. Although it is protected by
 # default, the file permissions could be changed either inadvertently or through malicious actions.
 #
 # @param enforce

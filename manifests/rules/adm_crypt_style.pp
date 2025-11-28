@@ -1,12 +1,12 @@
 # @summary
 #    nsure user and group account administration utilities are configured to store only encrypted representations of passwords
 #
-# The operating system must be configured so that user and group account administration utilities are configured to store only 
+# The operating system must be configured so that user and group account administration utilities are configured to store only
 # encrypted representations of passwords.
 #
 # Rationale:
-# Passwords need to be protected at all times, and encryption is the standard method for protecting passwords. If passwords are 
-# not encrypted, they can be plainly read (i.e., clear text) and easily compromised. Passwords encrypted with a weak algorithm 
+# Passwords need to be protected at all times, and encryption is the standard method for protecting passwords. If passwords are
+# not encrypted, they can be plainly read (i.e., clear text) and easily compromised. Passwords encrypted with a weak algorithm
 # are no more protected than if they are kept in plain text.
 #
 # @param enforce

@@ -1,12 +1,12 @@
-# @summary 
+# @summary
 #    Ensure the graphical user Ctrl-Alt-Delete key sequence is disabled
 #
 # The operating system must disable the x86 Ctrl-Alt-Delete key sequence if a graphical user interface is installed.
 #
 # Rationale:
-# A locally logged-on user who presses Ctrl-Alt-Delete, when at the console, can reboot the system. If accidentally 
-# pressed, as could happen in the case of a mixed OS environment, this can create the risk of short-term loss of 
-# availability of systems due to unintentional reboot. In the graphical environment, risk of unintentional reboot 
+# A locally logged-on user who presses Ctrl-Alt-Delete, when at the console, can reboot the system. If accidentally
+# pressed, as could happen in the case of a mixed OS environment, this can create the risk of short-term loss of
+# availability of systems due to unintentional reboot. In the graphical environment, risk of unintentional reboot
 # from the Ctrl-Alt-Delete sequence is reduced because the user will be prompted before any action is taken.
 #
 # @param enforce

@@ -4,10 +4,10 @@
 # The operating system must audit all uses of the postqueue command.
 #
 # Rationale:
-# Reconstruction of harmful events or forensic analysis is not possible if audit records do not 
+# Reconstruction of harmful events or forensic analysis is not possible if audit records do not
 # contain enough information.
 #
-# At a minimum, the organization must audit the full-text recording of privileged postfix commands. The organization 
+# At a minimum, the organization must audit the full-text recording of privileged postfix commands. The organization
 # must maintain audit trails in sufficient detail to reconstruct events to determine the cause and impact of compromise.
 #
 # @param enforce

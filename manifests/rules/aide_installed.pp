@@ -1,19 +1,19 @@
-# @summary 
-#    Ensure AIDE is installed 
+# @summary
+#    Ensure AIDE is installed
 #
-# AIDE takes a snapshot of filesystem state including modification times, permissions, and file hashes 
-# which can then be used to compare against the current state of the filesystem to detect modifications 
+# AIDE takes a snapshot of filesystem state including modification times, permissions, and file hashes
+# which can then be used to compare against the current state of the filesystem to detect modifications
 # to the system.
 #
 # Rationale:
-# By monitoring the filesystem state compromised files can be detected to prevent or limit the exposure 
+# By monitoring the filesystem state compromised files can be detected to prevent or limit the exposure
 # of accidental or malicious misconfigurations or modified binaries.
 #
 # @param enforce
 #    Enforce the rule
 #
 # @param aide_init_timeout
-#    Timeout in secords for aide init command to complete
+#    Timeout in seconds for aide init command to complete
 #
 # @example
 #   class { 'cis_security_hardening::rules::aide_installed':

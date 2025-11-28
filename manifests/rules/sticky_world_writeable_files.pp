@@ -1,11 +1,11 @@
-# @summary 
-#    Ensure sticky bit is set on all world-writable directories 
+# @summary
+#    Ensure sticky bit is set on all world-writable directories
 #
-# Setting the sticky bit on world writable directories prevents users from deleting or renaming files in 
+# Setting the sticky bit on world writable directories prevents users from deleting or renaming files in
 # that directory that are not owned by them.
 #
 # Rationale:
-# This feature prevents the ability to delete or rename files in world writable directories (such as /tmp ) 
+# This feature prevents the ability to delete or rename files in world writable directories (such as /tmp )
 # that are owned by another user.
 #
 # @param enforce

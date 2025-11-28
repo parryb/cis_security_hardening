@@ -1,10 +1,10 @@
-# @summary 
+# @summary
 #    Ensure nodev option set on /home partition
 #
 # The nodev mount option specifies that the filesystem cannot contain special devices.
 #
 # Rationale:
-# Since the user partitions are not intended to support devices, set this option to ensure that users 
+# Since the user partitions are not intended to support devices, set this option to ensure that users
 # cannot attempt to create block or character special devices.
 #
 # @param enforce

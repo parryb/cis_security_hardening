@@ -4,7 +4,7 @@
 # The operating system must be configured so that all local interactive user accounts, upon creation, are assigned a home directory.
 #
 # Rationale:
-# If local interactive users are not assigned a valid home directory, there is no place for the storage and control of files they 
+# If local interactive users are not assigned a valid home directory, there is no place for the storage and control of files they
 # should own.
 #
 # @param enforce

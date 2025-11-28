@@ -1,10 +1,10 @@
 # @summary
-#    Ensure SELinux is installed 
+#    Ensure SELinux is installed
 #
 # SELinux provides Mandatory Access Controls.
 #
 # Rationale:
-# Without a Mandatory Access Control system installed only the default Discretionary Access Control system 
+# Without a Mandatory Access Control system installed only the default Discretionary Access Control system
 # will be available.
 #
 # @param enforce

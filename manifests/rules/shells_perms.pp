@@ -1,4 +1,4 @@
-# @summary 
+# @summary
 #    Ensure permissions on /etc/shells are configured
 #
 # /etc/shells is a text file which contains the full pathnames of valid login shells. This file

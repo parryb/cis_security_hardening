@@ -1,23 +1,23 @@
 # @summary
-#    Ensure system-wide crypto policy is FUTURE or FIPS 
+#    Ensure system-wide crypto policy is FUTURE or FIPS
 #
-# The system-wide crypto-policies followed by the crypto core components allow consistently deprecating 
+# The system-wide crypto-policies followed by the crypto core components allow consistently deprecating
 # and disabling algorithms system-wide.
-# The individual policy levels (DEFAULT, LEGACY, FUTURE, and FIPS) are included in the crypto-policies(7) 
+# The individual policy levels (DEFAULT, LEGACY, FUTURE, and FIPS) are included in the crypto-policies(7)
 # package.
 #
 # Rationale:
-# If the Legacy system-wide crypto policy is selected, it includes support for TLS 1.0, TLS 1.1, and SSH2 protocols 
-# or later. The algorithms DSA, 3DES, and RC4 are allowed, while RSA and Diffie-Hellman parameters are accepted if 
+# If the Legacy system-wide crypto policy is selected, it includes support for TLS 1.0, TLS 1.1, and SSH2 protocols
+# or later. The algorithms DSA, 3DES, and RC4 are allowed, while RSA and Diffie-Hellman parameters are accepted if
 # larger than 1023-bits.
-# 
+#
 # These legacy protocols and algorithms can make the system vulnerable to attacks, including those listed in RFC 7457.
-# 
-# FUTURE: Is a conservative security level that is believed to withstand any near-term future attacks. This level does 
-# not allow the use of SHA-1 in signature algorithms. The RSA and Diffie-Hellman parameters are accepted if larger than 
+#
+# FUTURE: Is a conservative security level that is believed to withstand any near-term future attacks. This level does
+# not allow the use of SHA-1 in signature algorithms. The RSA and Diffie-Hellman parameters are accepted if larger than
 # 3071 bits. The level provides at least 128-bit security.
 #
-# FIPS: Conforms to the FIPS 140-2 requirements. This policy is used internally by the fips-mode-setup(8) tool which can 
+# FIPS: Conforms to the FIPS 140-2 requirements. This policy is used internally by the fips-mode-setup(8) tool which can
 # switch the system into the FIPS 140-2 compliance mode. The level provides at least 112-bit security
 #
 # @param enforce
@@ -65,7 +65,7 @@ class cis_security_hardening::rules::crypto_policy (
       stdlib::ensure_packages(['crypto-policies', 'crypto-policies-scripts'])
 
       exec { "set crypto policy to ${crypto_policy} (current: ${policy})":
-        command => "update-crypto-policies --set ${crypto_policy}", #lint:ignore:security_class_or_define_parameter_in_exec 
+        command => "update-crypto-policies --set ${crypto_policy}", #lint:ignore:security_class_or_define_parameter_in_exec
         path    => ['/sbin', '/usr/sbin', '/bin', '/usr/bin'],
         onlyif  => "test -z \"\$(update-crypto-policies --show | grep ${crypto_policy})\"",
         notify  => $notify,

@@ -1,10 +1,10 @@
 # @summary
-#    Ensure noexec option set on /dev/shm partition 
+#    Ensure noexec option set on /dev/shm partition
 #
 # The noexec mount option specifies that the filesystem cannot contain executable binaries.
 #
 # Rationale:
-# Setting this option on a file system prevents users from executing programs from shared memory. 
+# Setting this option on a file system prevents users from executing programs from shared memory.
 # This deters users from introducing potentially malicious software on the system.
 #
 # @param enforce

@@ -1,10 +1,10 @@
-# @summary 
-#    Ensure nosuid option set on /tmp partition     
+# @summary
+#    Ensure nosuid option set on /tmp partition
 #
 # The nosuid mount option specifies that the filesystem cannot contain setuid files.
 #
 # Rationale:
-# Since the /tmp filesystem is only intended for temporary file storage, set this option to ensure 
+# Since the /tmp filesystem is only intended for temporary file storage, set this option to ensure
 # that users cannot create setuid files in /tmp .
 #
 # @param enforce

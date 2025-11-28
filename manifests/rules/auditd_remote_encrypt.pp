@@ -1,7 +1,7 @@
-# @summary 
+# @summary
 #    Ensure audit logs on separate system are encrypted
 #
-# The operating system must encrypt the transfer of audit records off-loaded onto a different system or media from 
+# The operating system must encrypt the transfer of audit records off-loaded onto a different system or media from
 # the system being audited and encrypted the records.
 #
 # Rationale:

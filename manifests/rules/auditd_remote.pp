@@ -1,8 +1,8 @@
 # @summary
-#    Ensure audit event multiplexor is configured to off-load audit logs onto a different system or storage media from the system being 
+#    Ensure audit event multiplexor is configured to off-load audit logs onto a different system or storage media from the system being
 #    audited
 #
-# The operating system audit event multiplexor must be configured to off-load audit logs onto a different system or storage media from 
+# The operating system audit event multiplexor must be configured to off-load audit logs onto a different system or storage media from
 # the system being audited.
 #
 # Rationale:

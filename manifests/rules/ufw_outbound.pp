@@ -1,10 +1,10 @@
-# @summary 
+# @summary
 #    Ensure outbound connections are configured (Not Scored)
 #
 # Configure the firewall rules for new outbound connections.
 #
 # Rationale:
-# If rules are not in place for new outbound connections all packets will be dropped by the 
+# If rules are not in place for new outbound connections all packets will be dropped by the
 # default policy preventing network usage.
 #
 # @param enforce
@@ -90,7 +90,7 @@ class cis_security_hardening::rules::ufw_outbound (
         $cmd = "ufw ${action} ${queue} to ${data['to']} port ${port}"
         $check = "test -z \"$(ufw status verbose | grep -E -i '^${port}.*ALLOW ${queue}')\""
       } else {
-        fail("unknow ufw queue ${data['queue']}")
+        fail("unknown ufw queue ${data['queue']}")
       }
 
       exec { $title:

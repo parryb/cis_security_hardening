@@ -1,11 +1,11 @@
-# @summary 
+# @summary
 #    Ensure systemd-journal-remote is configured
 #
-# Journald (via systemd-journal-remote) supports the ability to send log events it gathers to a remote 
+# Journald (via systemd-journal-remote) supports the ability to send log events it gathers to a remote
 # log host or to receive messages from remote hosts, thus enabling centralised log management.
 #
 # Rationale:
-# Storing log data on a remote host protects log integrity from local attacks. If an attacker gains root 
+# Storing log data on a remote host protects log integrity from local attacks. If an attacker gains root
 # access on the local system, they could tamper with or remove log data that is stored on the local system.
 #
 # @param enforce
@@ -16,7 +16,7 @@
 #
 # @param server_key_file
 #    SSL server key file.
-# 
+#
 # @param server_cert_file
 #    SSL server certificate file.
 #
@@ -34,7 +34,7 @@
 #     server_cert_file => '/etc/ssl/certs/journal-upload.pem',
 #     trusted_cert_file => '/etc/ssl/ca/trusted.pem'
 #   }
-# 
+#
 # @api private
 class cis_security_hardening::rules::systemd_journal_remote_config (
   Boolean $enforce = false,

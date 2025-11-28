@@ -1,4 +1,4 @@
-# @summary 
+# @summary
 #    Ensure permissions on /etc/security/opasswd are configured
 #
 # /etc/security/opasswd and it's backup /etc/security/opasswd.old hold user's

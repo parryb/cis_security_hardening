@@ -124,7 +124,7 @@ cis_security_hardening::benchmark::redhat::v7:
         - ldap_client
         - nis_client
         - telnet_client
-        - tftp_client   
+        - tftp_client
     mfa:
       stig:
         - pam_pkcs11
@@ -220,7 +220,7 @@ cis_security_hardening::benchmark::redhat::v7:
         - sshd_root_login
         - sshd_user_environment
         - sshd_use_pam
-      stig: 
+      stig:
         - sshd_install
         - sshd_printlastlog
         - sshd_ignore_user_known_hosts
@@ -368,4 +368,3 @@ cis_security_hardening::benchmark::redhat::v7:
         - shells_perms
         - opassword_perms
         - shadowed_passwords
-

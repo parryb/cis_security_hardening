@@ -1,10 +1,10 @@
 # @summary
-#    Ensure filesystem integrity is regularly checked 
+#    Ensure filesystem integrity is regularly checked
 #
 # Periodic checking of the filesystem integrity is needed to detect changes to the filesystem.
 #
 # Rationale:
-# Periodic file checking allows the system administrator to determine on a regular basis if critical 
+# Periodic file checking allows the system administrator to determine on a regular basis if critical
 # files have been changed in an unauthorized fashion.
 #
 # @param enforce

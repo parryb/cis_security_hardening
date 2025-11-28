@@ -1,11 +1,11 @@
 # @summary
 #    Ensure RSA rhosts authentication is not allowed
 #
-# The operating system must be configured so that the SSH daemon does not allow authentication using RSA rhosts 
+# The operating system must be configured so that the SSH daemon does not allow authentication using RSA rhosts
 # authentication. If the release is 7.4 or newer this requirement is Not Applicable.
-# 
+#
 # Rationale:
-# Configuring this setting for the SSH daemon provides additional assurance that remote logon via SSH will require 
+# Configuring this setting for the SSH daemon provides additional assurance that remote logon via SSH will require
 # a password, even in the event of misconfiguration elsewhere.
 #
 # @param enforce

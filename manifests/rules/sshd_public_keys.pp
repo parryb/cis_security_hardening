@@ -1,8 +1,8 @@
-# @summary 
-#    Ensure permissions on SSH public host key files are configured 
+# @summary
+#    Ensure permissions on SSH public host key files are configured
 #
-# An SSH public key is one of two files used in SSH public key authentication. In this authentication method, 
-# a public key is a key that can be used for verifying digital signatures generated using a corresponding private 
+# An SSH public key is one of two files used in SSH public key authentication. In this authentication method,
+# a public key is a key that can be used for verifying digital signatures generated using a corresponding private
 # key. Only a public key that corresponds to a private key will be able to authenticate successfully.
 #
 # Rationale:

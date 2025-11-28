@@ -4,9 +4,9 @@
 # The operating system must be configured so that the Network File System (NFS) is configured to use RPCSEC_GSS.
 #
 # Rationale:
-# When an NFS server is configured to use RPCSEC_SYS, a selected userid and groupid are used to handle requests 
-# from the remote user. The userid and groupid could mistakenly or maliciously be set incorrectly. The RPCSEC_GSS 
-# method of authentication uses certificates on the server and client systems to more securely authenticate the 
+# When an NFS server is configured to use RPCSEC_SYS, a selected userid and groupid are used to handle requests
+# from the remote user. The userid and groupid could mistakenly or maliciously be set incorrectly. The RPCSEC_GSS
+# method of authentication uses certificates on the server and client systems to more securely authenticate the
 # remote mount request.
 #
 # @param enforce

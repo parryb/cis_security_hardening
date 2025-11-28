@@ -1,13 +1,13 @@
-# @summary 
-#    Ensure password reuse is limited 
+# @summary
+#    Ensure password reuse is limited
 #
-# The /etc/security/opasswd file stores the users' old passwords and can be checked to ensure that users 
+# The /etc/security/opasswd file stores the users' old passwords and can be checked to ensure that users
 # are not recycling recent passwords.
 #
 # Rationale:
-# Forcing users not to reuse their past 5 passwords make it less likely that an attacker will be able to 
+# Forcing users not to reuse their past 5 passwords make it less likely that an attacker will be able to
 # guess the password.
-# 
+#
 # Note that these change only apply to accounts configured on the local system.
 #
 # @param enforce

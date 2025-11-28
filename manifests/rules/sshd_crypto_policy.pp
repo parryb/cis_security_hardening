@@ -1,10 +1,10 @@
-# @summary 
-#    Ensure system-wide crypto policy is not over-ridden 
+# @summary
+#    Ensure system-wide crypto policy is not over-ridden
 #
 # System-wide Crypto policy can be over-ridden or opted out of for openSSH.
 #
 # Rationale:
-# Over-riding or opting out of the system-wide crypto policy could allow for the use of 
+# Over-riding or opting out of the system-wide crypto policy could allow for the use of
 # less secure Ciphers, MACs, KexAlgoritms and GSSAPIKexAlgorithsm.
 #
 # @param enforce

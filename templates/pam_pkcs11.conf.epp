@@ -93,7 +93,7 @@ pam_pkcs11 {
     # module = /lib/pam_pkcs11/pwent_mapper.so;
   }
 
-  # Null ( no map ) mapper. when user as finder matchs to NULL or "nobody"
+  # Null ( no map ) mapper. when user as finder matches to NULL or "nobody"
   mapper null {
     debug = false;
     # module = /lib/pam_pkcs11/null_mapper.so;
@@ -113,7 +113,7 @@ pam_pkcs11 {
     #   if no port is given in URI below
     #   if empty, then 389 for TLS and 636 for SSL is used
     ldapport = ;
-    # space separted list of LDAP URIs (URIs are used by given order)
+    # space separated list of LDAP URIs (URIs are used by given order)
     URI = "";
     # Scope of search: 0-2
     scope = 2;
@@ -141,7 +141,7 @@ pam_pkcs11 {
     module = internal;
     # module = /lib/pam_pkcs11/mail_mapper.so;
     # Declare mapfile or
-    # leave empty "" or "none" to use no map 
+    # leave empty "" or "none" to use no map
     mapfile = file:///etc/pam_pkcs11/mail_mapping;
     ignorecase = true;
     ignoredomain = false;

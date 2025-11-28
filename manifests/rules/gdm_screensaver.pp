@@ -4,9 +4,9 @@
 # The operating system must initiate a screensaver after a 15-minute period of inactivity for graphical user interfaces.
 #
 # Rationale:
-# A session time-out lock with the screensaver is a temporary action taken when a user stops work and moves away from the 
-# immediate physical vicinity of the information system but does not log out because of the temporary nature of the absence. 
-# Rather than relying on the user to manually lock their operating system session prior to vacating the vicinity, operating 
+# A session time-out lock with the screensaver is a temporary action taken when a user stops work and moves away from the
+# immediate physical vicinity of the information system but does not log out because of the temporary nature of the absence.
+# Rather than relying on the user to manually lock their operating system session prior to vacating the vicinity, operating
 # systems need to be able to identify when a user's session has idled and take action to initiate the session lock.
 #
 # The screensaver is implemented at the point where session activity can be determined and/or controlled.
@@ -15,7 +15,7 @@
 #    Enforce the rule.
 # @param timeout
 #    The idle time.
-#    
+#
 #
 # @example
 #   class { 'cis_security_hardening::rules::gdm_screensaver':

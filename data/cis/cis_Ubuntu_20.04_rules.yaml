@@ -102,7 +102,7 @@ cis_security_hardening::benchmark::ubuntu::v20:
         - mta_local
         - rsyncd
         - nis
-      stig: 
+      stig:
         - timezone_utc_gmt
         - telnet_server
         - rsh_server
@@ -175,7 +175,7 @@ cis_security_hardening::benchmark::ubuntu::v20:
         - ip6tables_outbound_established
         - ip6tables_open_ports
     configure_accounting:
-      level1: 
+      level1:
         - aide_audit_integrity
       level2:
         - auditd_init
@@ -253,7 +253,7 @@ cis_security_hardening::benchmark::ubuntu::v20:
         - logfile_permissions
         - logrotate
         - logrotate_configuration
-      stig: 
+      stig:
         - var_log_syslog_perms
     configure_job_schedulers:
       level1:
@@ -343,4 +343,3 @@ cis_security_hardening::benchmark::ubuntu::v20:
         - shadowed_passwords
       stig:
         - system_cmd_group
-        

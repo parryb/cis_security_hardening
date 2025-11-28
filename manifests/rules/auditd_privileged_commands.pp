@@ -1,15 +1,15 @@
-# @summary 
-#    Ensure use of privileged commands is collected 
+# @summary
+#    Ensure use of privileged commands is collected
 #
-# Monitor privileged programs (those that have the setuid and/or setgid bit set on execution) to 
+# Monitor privileged programs (those that have the setuid and/or setgid bit set on execution) to
 # determine if unprivileged users are running these commands.
 #
 # Rationale:
-# Execution of privileged commands by non-privileged users could be an indication of someone trying 
+# Execution of privileged commands by non-privileged users could be an indication of someone trying
 # to gain unauthorized access to the system.
 #
 # @param enforce
-#    Sets rule enforcement. If set to true, code will be exeuted to bring the system into a comliant state.
+#    Sets rule enforcement. If set to true, code will be exeuted to bring the system into a compliant state.
 #
 # @example
 #   class { 'cis_security_hardening::rules::auditd_privileged_commands':

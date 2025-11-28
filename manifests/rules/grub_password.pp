@@ -1,24 +1,24 @@
 # @summary
-#    Ensure bootloader password is set 
+#    Ensure bootloader password is set
 #
-# Setting the boot loader password will require that anyone rebooting the system must enter a password 
+# Setting the boot loader password will require that anyone rebooting the system must enter a password
 # before being able to set command line boot parameters
 #
 # Notes:
-# * This recommendation is designed around the grub2 bootloader, if LILO or another bootloader is in use in 
-#    your environment enact equivalent settings. Replace `/boot/grub2/grub.cfg with the appropriate grub 
+# * This recommendation is designed around the grub2 bootloader, if LILO or another bootloader is in use in
+#    your environment enact equivalent settings. Replace `/boot/grub2/grub.cfg with the appropriate grub
 #    configuration file for your environment
 # * For older grub2 based systems:
 #   o The superuser/user information and password should not be contained in the
-#     /etc/grub.d/00_header file. The information can be placed in any /etc/grub.d file as long as that file 
-#     is incorporated into grub.cfg. The user may prefer to enter this data into a custom file, such as 
+#     /etc/grub.d/00_header file. The information can be placed in any /etc/grub.d file as long as that file
+#     is incorporated into grub.cfg. The user may prefer to enter this data into a custom file, such as
 #     /etc/grub.d/40_custom so it is not overwritten should the Grub package be updated.
-#   o If placing the information in a custom file, do not include the "cat << EOF" and "EOF" lines as the content 
+#   o If placing the information in a custom file, do not include the "cat << EOF" and "EOF" lines as the content
 #     is automatically added from these files.
 #
 # Rationale:
-# Requiring a boot password upon execution of the boot loader will prevent an unauthorized user from entering boot 
-# parameters or changing the boot partition. This prevents users from weakening security (e.g. turning off SELinux 
+# Requiring a boot password upon execution of the boot loader will prevent an unauthorized user from entering boot
+# parameters or changing the boot partition. This prevents users from weakening security (e.g. turning off SELinux
 # at boot time).
 #
 # @param enforce
@@ -32,7 +32,7 @@
 #       enforce              => true,
 #       grub_password_pbkdf2 => 'grub.pbkdf2.sha512.10000.943.......',
 #   }
-# 
+#
 # @api private
 class cis_security_hardening::rules::grub_password (
   Boolean $enforce                       = false,

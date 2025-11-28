@@ -1,16 +1,16 @@
-# @summary 
-#    Ensure the audit configuration is immutable 
+# @summary
+#    Ensure the audit configuration is immutable
 #
-# Set system audit so that audit rules cannot be modified with auditctl . Setting the flag "-e 2" 
+# Set system audit so that audit rules cannot be modified with auditctl . Setting the flag "-e 2"
 # forces audit to be put in immutable mode. Audit changes can only be made on system reboot.
 #
 # Rationale:
-# In immutable mode, unauthorized users cannot execute changes to the audit system to potentially 
-# hide malicious activity and then put the audit rules back. Users would most likely notice a 
+# In immutable mode, unauthorized users cannot execute changes to the audit system to potentially
+# hide malicious activity and then put the audit rules back. Users would most likely notice a
 # system reboot and that could alert administrators of an attempt to make unauthorized audit changes.
 #
 # @param enforce
-#    Sets rule enforcement. If set to true, code will be exeuted to bring the system into a comliant state.
+#    Sets rule enforcement. If set to true, code will be exeuted to bring the system into a compliant state.
 #
 # @example
 #   class { 'cis_security_hardening::rules::auditd_immutable':

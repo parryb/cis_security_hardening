@@ -1,7 +1,7 @@
-# @summary 
+# @summary
 #    Ensure wireless interfaces are disabled (Not Scored)
 #
-# Wireless networking is used when wired networks are unavailable. Ubuntu contains a wireless tool kit 
+# Wireless networking is used when wired networks are unavailable. Ubuntu contains a wireless tool kit
 # to allow system administrators to configure and use wireless networks.
 #
 # Rationale:

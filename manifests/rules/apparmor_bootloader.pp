@@ -1,11 +1,11 @@
 # @summary
-#    Ensure AppArmor is enabled in the bootloader configuration 
+#    Ensure AppArmor is enabled in the bootloader configuration
 #
-# Configure AppArmor to be enabled at boot time and verify that it has not been 
+# Configure AppArmor to be enabled at boot time and verify that it has not been
 # overwritten by the bootloader boot parameters.
 #
 # Rationale:
-# AppArmor must be enabled at boot time in your bootloader configuration to ensure 
+# AppArmor must be enabled at boot time in your bootloader configuration to ensure
 # that the controls it provides are not overridden.
 #
 # @param enforce

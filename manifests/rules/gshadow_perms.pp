@@ -1,12 +1,12 @@
-# @summary 
-#    Ensure permissions on /etc/gshadow are configured 
+# @summary
+#    Ensure permissions on /etc/gshadow are configured
 #
-# The /etc/gshadow file is used to store the information about groups that is critical to 
+# The /etc/gshadow file is used to store the information about groups that is critical to
 # the security of those accounts, such as the hashed password and other security information.
 #
 # Rationale:
-# If attackers can gain read access to the /etc/gshadow file, they can easily run a password cracking 
-# program against the hashed password to break it. Other security information that is stored in the 
+# If attackers can gain read access to the /etc/gshadow file, they can easily run a password cracking
+# program against the hashed password to break it. Other security information that is stored in the
 # /etc/gshadow file (such as group administrators) could also be useful to subvert the group.
 #
 # @param enforce

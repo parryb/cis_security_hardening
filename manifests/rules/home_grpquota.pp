@@ -1,10 +1,10 @@
-# @summary 
+# @summary
 #    Ensure grpquota option set on /home partition
 #
-# The grpquota mount option allows for the filesystem to have disk quotas configured. 
+# The grpquota mount option allows for the filesystem to have disk quotas configured.
 # Rationale:
-# To ensure the availability of disk space on /home, it is important to limit the impact a single user or 
-# group can cause for other users (or the wider system) by accidentally filling up the partition. Quotas 
+# To ensure the availability of disk space on /home, it is important to limit the impact a single user or
+# group can cause for other users (or the wider system) by accidentally filling up the partition. Quotas
 # can also be applied to inodes for filesystems where inode exhaustion is a concern.
 #
 # @param enforce

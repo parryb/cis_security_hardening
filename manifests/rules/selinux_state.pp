@@ -1,5 +1,5 @@
 # @summary
-#    Ensure the SELinux state is enforcing or permissive 
+#    Ensure the SELinux state is enforcing or permissive
 #
 # Set SELinux to enable when the system is booted.
 #

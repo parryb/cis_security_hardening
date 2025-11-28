@@ -1,8 +1,8 @@
-# @summary 
-#    Ensure SETroubleshoot is not installed 
+# @summary
+#    Ensure SETroubleshoot is not installed
 #
-# The SETroubleshoot service notifies desktop users of SELinux denials through a user- friendly interface. 
-# The service provides important information around configuration errors, unauthorized intrusions, and other 
+# The SETroubleshoot service notifies desktop users of SELinux denials through a user- friendly interface.
+# The service provides important information around configuration errors, unauthorized intrusions, and other
 # potential errors.
 #
 # Rationale:

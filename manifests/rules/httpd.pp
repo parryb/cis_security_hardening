@@ -1,10 +1,10 @@
-# @summary 
-#    Ensure HTTP server is not enabled 
+# @summary
+#    Ensure HTTP server is not enabled
 #
 # HTTP or web servers provide the ability to host web site content.
 #
 # Rationale:
-# Unless there is a need to run the system as a web server, it is recommended that the service be 
+# Unless there is a need to run the system as a web server, it is recommended that the service be
 # disabled to reduce the potential attack surface.
 #
 # @param enforce

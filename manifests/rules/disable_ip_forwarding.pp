@@ -1,10 +1,10 @@
-# @summary 
-#    Ensure IP forwarding is disabled 
+# @summary
+#    Ensure IP forwarding is disabled
 #
 # The net.ipv4.ip_forward flag is used to tell the system whether it can forward packets or not.
 #
 # Rationale:
-# Setting the flag to 0 ensures that a system with multiple interfaces (for example, a hard proxy), 
+# Setting the flag to 0 ensures that a system with multiple interfaces (for example, a hard proxy),
 # will never be able to forward packets, and therefore, never serve as a router.
 #
 # @param enforce

@@ -7,7 +7,7 @@ enforce_options = [true, false]
 describe 'cis_security_hardening::rules::vsftp' do
   on_supported_os.each do |os, os_facts|
     enforce_options.each do |enforce|
-      context "on #{os} eith enforce = #{enforce}" do
+      context "on #{os} with enforce = #{enforce}" do
         let(:facts) { os_facts }
         let(:params) do
           {

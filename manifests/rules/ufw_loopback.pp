@@ -1,12 +1,12 @@
-# @summary 
-#    Ensure loopback traffic is configured 
+# @summary
+#    Ensure loopback traffic is configured
 #
-# Configure the loopback interface to accept traffic. Configure all other interfaces to deny traffic to the 
+# Configure the loopback interface to accept traffic. Configure all other interfaces to deny traffic to the
 # loopback network (127.0.0.0/8 for IPv4 and ::1/128 for IPv6).
 #
 # Rationale:
-# Loopback traffic is generated between processes on machine and is typically critical to operation of the 
-# system. The loopback interface is the only place that loopback network (127.0.0.0/8 for IPv4 and ::1/128 for IPv6) 
+# Loopback traffic is generated between processes on machine and is typically critical to operation of the
+# system. The loopback interface is the only place that loopback network (127.0.0.0/8 for IPv4 and ::1/128 for IPv6)
 # traffic should be seen, all other interfaces should ignore traffic on this network as an anti-spoofing measure.
 #
 # @param enforce

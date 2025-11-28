@@ -1,12 +1,12 @@
-# @summary 
-#    Ensure password hashing algorithm is SHA-512 
+# @summary
+#    Ensure password hashing algorithm is SHA-512
 #
 # Login passwords are hashed and stored in the /etc/shadow file.
 #
 # Note: These changes only apply to accounts configured on the local system.
 #
 # Rationale:
-# The SHA-512 algorithm provides much stronger hashing than MD5, thus providing additional protection to the system 
+# The SHA-512 algorithm provides much stronger hashing than MD5, thus providing additional protection to the system
 # by increasing the level of effort for an attacker to successfully determine passwords.
 #
 # @param enforce
