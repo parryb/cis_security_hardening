@@ -60,6 +60,15 @@
 # @param maxsequence
 #    Maximum length of monotonic character sequences
 #
+# @param usercheck
+#    Check if password contains the username (only for pwquality 1.4.1+)
+#
+# @param gecoscheck
+#    Check if password contains words from the GECOS field (only for pwquality 1.4.1+)
+#
+# @param enforce_for_root
+#    Apply password restrictions to the root account
+#
 # @example
 #   class { 'cis_security_hardening::rules::pam_pw_requirements':
 #       enforce => true,
@@ -68,19 +77,22 @@
 #
 # @api private
 class cis_security_hardening::rules::pam_pw_requirements (
-  Boolean $enforce        = false,
-  Integer $minlen         = 14,
-  Integer $dcredit        = -1,
-  Integer $ucredit        = -1,
-  Integer $ocredit        = -1,
-  Integer $lcredit        = -1,
-  Integer $minclass       = -1,
-  Integer $retry          = 3,
-  Boolean $dictcheck      = false,
-  Integer $difok          = 0,
-  Integer $maxrepeat      = 0,
-  Integer $maxclassrepeat = 0,
-  Integer $maxsequence    = 0,
+  Boolean $enforce         = false,
+  Integer $minlen          = 14,
+  Integer $dcredit         = -1,
+  Integer $ucredit         = -1,
+  Integer $ocredit         = -1,
+  Integer $lcredit         = -1,
+  Integer $minclass        = -1,
+  Integer $retry           = 3,
+  Boolean $dictcheck       = false,
+  Integer $difok           = 0,
+  Integer $maxrepeat       = 0,
+  Integer $maxclassrepeat  = 0,
+  Integer $maxsequence     = 0,
+  Boolean $usercheck       = false,
+  Boolean $gecoscheck      = false,
+  Boolean $enforce_for_root = false,
 ) {
   if $enforce {
     require cis_security_hardening::rules::pam_old_passwords
@@ -192,6 +204,36 @@ class cis_security_hardening::rules::pam_pw_requirements (
           }
         }
 
+        if $usercheck {
+          file_line { 'pam usercheck':
+            ensure             => 'present',
+            path               => '/etc/security/pwquality.conf',
+            line               => 'usercheck = 1',
+            match              => '^#? ?usercheck',
+            append_on_no_match => true,
+          }
+        }
+
+        if $gecoscheck {
+          file_line { 'pam gecoscheck':
+            ensure             => 'present',
+            path               => '/etc/security/pwquality.conf',
+            line               => 'gecoscheck = 1',
+            match              => '^#? ?gecoscheck',
+            append_on_no_match => true,
+          }
+        }
+
+        if $enforce_for_root {
+          file_line { 'pam enforce_for_root':
+            ensure             => 'present',
+            path               => '/etc/security/pwquality.conf',
+            line               => 'enforce_for_root',
+            match              => '^#? ?enforce_for_root',
+            append_on_no_match => true,
+          }
+        }
+
         $profile = fact('cis_security_hardening.authselect.profile')
         if $profile != undef and $profile != 'none' {
           $pf_path = "/etc/authselect/custom/${profile}"
@@ -252,10 +294,7 @@ class cis_security_hardening::rules::pam_pw_requirements (
             ensure => installed,
           }
         }
-        stdlib::ensure_packages(['libpam-pwquality'], {
-          ensure => installed,
-          notify => Exec['update-pam-config'],
-        })
+        stdlib::ensure_packages(['libpam-pwquality'], $pkg_opts)
 
         exec { 'update-pam-config':
           command     => 'pam-auth-update --package pwquality',
@@ -336,6 +375,36 @@ class cis_security_hardening::rules::pam_pw_requirements (
             path               => '/etc/security/pwquality.conf',
             line               => 'dictcheck = 1',
             match              => '^#? ?dictcheck',
+            append_on_no_match => true,
+          }
+        }
+
+        if $usercheck {
+          file_line { 'pam usercheck debian':
+            ensure             => 'present',
+            path               => '/etc/security/pwquality.conf',
+            line               => 'usercheck = 1',
+            match              => '^#? ?usercheck',
+            append_on_no_match => true,
+          }
+        }
+
+        if $gecoscheck {
+          file_line { 'pam gecoscheck debian':
+            ensure             => 'present',
+            path               => '/etc/security/pwquality.conf',
+            line               => 'gecoscheck = 1',
+            match              => '^#? ?gecoscheck',
+            append_on_no_match => true,
+          }
+        }
+
+        if $enforce_for_root {
+          file_line { 'pam enforce_for_root debian':
+            ensure             => 'present',
+            path               => '/etc/security/pwquality.conf',
+            line               => 'enforce_for_root',
+            match              => '^#? ?enforce_for_root',
             append_on_no_match => true,
           }
         }

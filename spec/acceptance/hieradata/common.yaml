@@ -1,5 +1,6 @@
 ---
 # TODO: Fix idempotency issues with these rules
+cis_security_hardening::rules::log_suspicious_packets::enforce: false  # Ubuntu 24.04 containers reset live value between runs
 cis_security_hardening::rules::logrotate_configuration::enforce: false
 cis_security_hardening::rules::mta_local::enforce: false
 

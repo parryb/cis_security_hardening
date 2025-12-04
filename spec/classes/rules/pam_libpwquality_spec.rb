@@ -19,16 +19,20 @@ describe 'cis_security_hardening::rules::pam_libpwquality' do
           is_expected.to compile.with_all_deps
 
           if enforce
-            # if os_facts[:os]['name'].casecmp('centos').zero?
-            is_expected.to contain_package('libpwquality').
-              with(
-                'ensure' => 'installed'
-              )
-            # else
-            #   is_expected.not_to contain_package('libpwquality')
-            # end
+            if os_facts[:os]['family'].casecmp('debian').zero?
+              is_expected.to contain_package('libpam-pwquality').
+                with(
+                  'ensure' => 'installed'
+                )
+            else
+              is_expected.to contain_package('libpwquality').
+                with(
+                  'ensure' => 'installed'
+                )
+            end
           else
             is_expected.not_to contain_package('libpwquality')
+            is_expected.not_to contain_package('libpam-pwquality')
           end
         }
       end

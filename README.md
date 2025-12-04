@@ -59,6 +59,7 @@ The code of this security hardening module is based on the following CIS Benchma
 | Ubuntu 20.04 | CIS Ubuntu Linux 20.04 LTS Benchmark                         | 2.0.1   | 06-29-2023 |
 | Ubuntu 20.04 | CIS Ubuntu Linux 20.04 LTS STIG Benchmark                    | 1.0.0   | 07-26-2021 |
 | Ubuntu 22.04 | CIS Ubuntu Linux 22.04 LTS Benchmark                         | 1.0.0   | 06-30-2022 |
+| Ubuntu 24.04 | CIS Ubuntu Linux 24.04 LTS Benchmark                         | 1.0.0   | 06-30-2024 |
 | Debian 10    | CIS Debian Linux 10 Benchmark                                | 1.0.0   | 02-13-2020 |
 | Debian 11    | CIS Debian Linux 11 Benchmark                                | 1.0.0   | 09-22-2022 |
 | Debian 12.   | CIS Debian Linus 12 Benchmark                                | 1.0.1   | 04-15-2024 |
@@ -165,7 +166,7 @@ See [REFERENCE.md](https://github.com/tom-krieger/cis_security_hardening/blob/ma
 
 ## Limitations
 
-Currently the module is tested with RedHat 7, 8, CentOS 7, 8, AlmaLinux 8, Rocky Linux 8, Suse SLES 12, Debian 10, Ubuntu 18.04 and Ubuntu 20.04. Other OSes may work but there's no guarantee.
+Currently the module is tested with RedHat 7, 8, 9, CentOS 7, 8, AlmaLinux 8, 9, Rocky Linux 8, 9, Suse SLES 12, 15, Debian 10, 11, 12, Ubuntu 18.04, 20.04, 22.04 and 24.04. Other OSes may work but there's no guarantee.
 
 More testing is needed as for every supported OS there are different setups in the wild and some of them might not be covered.
 
