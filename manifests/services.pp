@@ -6,8 +6,10 @@
 # @example
 #   include cis_security_hardening::services
 class cis_security_hardening::services {
-  $sshd_reload_command = if fact('os.release.major') <= '6' and fact('os.family') == 'redhat' {
+  $sshd_reload_command = if $facts['os']['family'].downcase() == 'redhat' and versioncmp($facts['os']['release']['major'], '6') <= 0 {
     'service sshd reload'
+  } elsif $facts['os']['family'].downcase() == 'debian' {
+    'systemctl reload ssh'
   } else {
     'systemctl reload sshd'
   }

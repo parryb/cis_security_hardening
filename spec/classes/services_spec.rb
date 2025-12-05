@@ -10,21 +10,20 @@ describe 'cis_security_hardening::services' do
       it {
         is_expected.to compile
 
-        if os_facts[:os]['release']['major'] == '6' && os_facts[:os]['family'] == 'RedHat'
-          is_expected.to contain_exec('reload-sshd').
-            with(
-              'command'     => 'service sshd reload',
-              'path'        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-              'refreshonly' => true
-            )
-        else
-          is_expected.to contain_exec('reload-sshd').
-            with(
-              'command'     => 'systemctl reload sshd',
-              'path'        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-              'refreshonly' => true
-            )
-        end
+        cmd = if os_facts[:os]['release']['major'] == '6' && os_facts[:os]['family'] == 'RedHat'
+                'service sshd reload'
+              elsif os_facts[:os]['family'].downcase == 'debian'
+                'systemctl reload ssh'
+              else
+                'systemctl reload sshd'
+              end
+
+        is_expected.to contain_exec('reload-sshd').
+          with(
+            'command'     => cmd,
+            'path'        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+            'refreshonly' => true
+          )
 
         is_expected.to contain_exec('reload-rsyslogd').
           with(
