@@ -22,6 +22,7 @@ class cis_security_hardening::rules::sshd_x11_forward (
   Boolean $enforce = false,
 ) {
   if $enforce {
+    require cis_security_hardening::rules::sshd_install
     $path = ($facts['os']['name'] == 'SLES' and $facts['os']['release']['major'] == '12') ? {
       true  => '/usr/etc/ssh/sshd_config',
       false => '/etc/ssh/sshd_config',

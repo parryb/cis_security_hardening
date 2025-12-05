@@ -35,6 +35,7 @@ class cis_security_hardening::rules::sshd_rekey_limit (
   String $limit    = '1G 1h',
 ) {
   if $enforce {
+    require cis_security_hardening::rules::sshd_install
     $path = ($facts['os']['name'] == 'SLES' and $facts['os']['release']['major'] == '12') ? {
       true    => '/usr/etc/ssh/sshd_config',
       default => '/etc/ssh/sshd_config',
