@@ -8,11 +8,13 @@ All notable changes to this project will be documented in this file.
 
 * Redhat 7 4.0.0 benchmark
 
-> **Please note that with 4.0.0 the Redhat 7 benchmark and CentOS 7 benchmark removes ntp and uses chrony**
+> **Please note that with 4.0.0 the Redhat 7 benchmark and CentOS 7 benchmark**
+> **removes ntp and uses chrony**
 
 ## Release 0.9.6
 
-* fix dependencies in metadata, removed systemd as it is an indirect dependency (thanks to `canihavethisone` for figuring this out and testing the fix)
+* fix dependencies in metadata, removed systemd as it is an indirect dependency
+  (thanks to `canihavethisone` for figuring this out and testing the fix)
 * fixed some typos
 
 ## Release 0.9.5
@@ -50,7 +52,8 @@ All notable changes to this project will be documented in this file.
   auditd privileged commands might be too time consuming you can disable the cronjobs completely.
   The default value for both jobs in `present`.
 
-  > Please note that not running the auditd privileged commands cronjob might result in not monitoring newly installed privileged commands.
+  > Please note that not running the auditd privileged commands cronjob might
+  > result in not monitoring newly installed privileged commands.
 
   Keep in mind that the cronjobs are only running once a day during night hours.
 
@@ -62,7 +65,8 @@ Thanks to `kenyon` for the two PRs above.
 * switched from `action` parameter to `jump` parameter for iptables
 * switched from `provider` parameter to `protocol` parameter for iptables
 
-  > Note that this change may affect you IPTables configuration. So please check your configuration before updating to this version.
+  > Note that this change may affect you IPTables configuration. So please
+  > check your configuration before updating to this version.
 
 * Updated and added some unit tests
 
@@ -80,7 +84,8 @@ Thanks to `kenyon` for the two PRs above.
 * added Redhat 9 support
 * added AlmaLinux 9 support
 * added Rocky Linux 9 support
-* fix for issue #56 "Permissions on /var/log incorrect". Added module npwalker-recursive_file_permissions for that reason.
+* fix for issue #56 "Permissions on /var/log incorrect". Added module
+  npwalker-recursive_file_permissions for that reason.
 * Updated dependencies for stdlib v9 (thanks to `canihavethisone` for the PR)
 
 > Note that stdlib v9 is now the minimum version required
@@ -121,35 +126,48 @@ Thanks to @canihavethisone:
 * Refactor grub_password.pp to create user.cfg in correct path on RedHat
 * ensure all ntp restrict defaults to match CIS requirements
 * add type to ntp servers array
-* remove default rsyslog server as not required, class will fail if no remote syslog server is defined when remote syslog should be enforced
+* remove default rsyslog server as not required, class will fail if no remote
+  syslog server is defined when remote syslog should be enforced
 * changed `remote_log_host` parameter to type Stdlib::Host
 * sshd permit root login is now configurable
 
 ## Release 0.7.9
 
-> This release changes the default values for `ntp_statsdir` and `ntp_driftfile`. Please check your configurations if needed.
+> This release changes the default values for `ntp_statsdir` and `ntp_driftfile`.
+> Please check your configurations if needed.
 
 * The GRUB boot password is set to `undef` and the previous used default password was removed
 * Fix facts not resolving CentOS in 3 classes
 * Make NTP servers optional and raise warning if not provided, also remove hardcoded default ones
-* NTP driftfile and NTP statsfile are now defined as Stdlib::Absolutepath with default values set to the same values the puppetlabs-ntp module uses
+* NTP driftfile and NTP statsfile are now defined as Stdlib::Absolutepath with
+  default values set to the same values the puppetlabs-ntp module uses
 * added a fact to determine if a system is booted via efi
-* fixed handling GRUB configuration for UEFI systems as the grub.cfg in the EFI directory was not updated. The grub.cfg in the EFI is only updated if there are changes to roll out.
+* fixed handling GRUB configuration for UEFI systems as the grub.cfg in the EFI
+  directory was not updated. The grub.cfg in the EFI is only updated if there
+  are changes to roll out.
 * removed old legacy facts
-* the predefined GRUB password was removed from Hiera files. If you want to enforce a GRUB bootloader password you must define this password within Hiera. Otherwise the catalog will fail with an error message pointing you to that fact.
+* the predefined GRUB password was removed from Hiera files. If you want to
+  enforce a GRUB bootloader password you must define this password within Hiera.
+  Otherwise the catalog will fail with an error message pointing you to that
+  fact.
 
 ## Release 0.7.8
 
-* Optout for automatic reboots is now working, new parameter `auto_reboot` is available. The default value is set to `true`.
+* Optout for automatic reboots is now working, new parameter `auto_reboot` is
+  available. The default value is set to `true`.
 * SELinux default state is now `enforcing`
 * the service for /tmp filesystem management is now enabled by default
 * replaced sysctl module with `thias-sysctl`
 
-If some of the defaults changed do not fit for your environment, just copy the parameters configuration into your control repository and set the values suitable for your environment.
+If some of the defaults changed do not fit for your environment, just copy the
+parameters configuration into your control repository and set the values
+suitable for your environment.
 
 ## Release 0.7.7
 
-> This release changes the hiera.yaml configuration to use OS facts to determine the files to load. Keep in mind that the OS names are written in CamelCase and therefore the filenames in the data folder will change.
+> This release changes the hiera.yaml configuration to use OS facts to
+> determine the files to load. Keep in mind that the OS names are written in
+> CamelCase and therefore the filenames in the data folder will change.
 
 * changed hiera config to use facts and renamed hiera config files to use camelcase
 
@@ -163,7 +181,8 @@ If some of the defaults changed do not fit for your environment, just copy the p
 
 ## Release 0.7.5
 
-> This release changed from herculesteam/augeasproviders_sysctl to fiddyspence/sysctl module. make sure to check your dependencies.
+> This release changed from herculesteam/augeasproviders_sysctl to
+> fiddyspence/sysctl module. make sure to check your dependencies.
 
 * Replaced herculesteam-augeasproviders_sysctl module by fiddyspence-sysctl module (fix for issue #28)
 * removed old modules from .fixtures and metadata.json
@@ -193,11 +212,16 @@ Fixed issue #23: nftables resources should be within if !defined
 
 ## Release 0.7.0
 
-> This release contains some breaking changes to how `authselect` is configured. Please check your configuration and test before using in production environments.
+> This release contains some breaking changes to how `authselect` is
+> configured. Please check your configuration and test before using in
+> production environments.
 
 Please review the following changes before updating to this version module:
 
-* This release changes the authselect compliance rules. If you use Rocky Linux 8 or Alma Linux 8 please change your Hiera configuration. All `authselect` related stuff is consolidated into one rule file. This makes a change in your Hiera configuration necessary. The old configuration looks like this:
+* This release changes the authselect compliance rules. If you use Rocky Linux 8
+  or Alma Linux 8 please change your Hiera configuration. All `authselect`
+  related stuff is consolidated into one rule file. This makes a change in your
+  Hiera configuration necessary. The old configuration looks like this:
 
   ```hiera
   cis_security_hardening::rules::authselect_profile::enforce: true
@@ -224,7 +248,9 @@ Please review the following changes before updating to this version module:
     - with-sudo
   ```
 
-* This release introduces a fact containing all available features for the selected `authselect` profile. nIf you add a profile option not available a warning message is printed and the configured option will be ignored.
+* This release introduces a fact containing all available features for the
+  selected `authselect` profile. nIf you add a profile option not available a
+  warning message is printed and the configured option will be ignored.
 
 * The PAM configuration rules have been changed to work with `authselect`.
 

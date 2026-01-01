@@ -1,12 +1,12 @@
 {
-  "name": "tomkrieger-cis_security_hardening",
+  "name": "bwitt-cis_security_hardening",
   "version": "0.9.7",
-  "author": "Thomas Krieger",
+  "author": "Brian Witt",
   "summary": "Secure your systems according to CIS benchmarks",
   "license": "Apache-2.0",
-  "source": "https://github.com/tom-krieger/cis_security_hardening.git",
-  "project_page": "https://github.com/tom-krieger/cis_security_hardening",
-  "issues_url": "https://github.com/tom-krieger/cis_security_hardening/issues",
+  "source": "https://github.com/bwitt/cis_security_hardening.git",
+  "project_page": "https://github.com/bwitt/cis_security_hardening",
+  "issues_url": "https://github.com/bwitt/cis_security_hardening/issues",
   "dependencies": [
     {
       "name": "puppetlabs-stdlib",
