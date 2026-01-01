@@ -26,19 +26,39 @@
 
 ## Description
 
-Define a complete security baseline and monitor the baseline's rules. The definition of the baseline should be done in Hiera. The purpose of the module is to give the ability to setup a complete security baseline which not necessarily have to stick to industry security guides like the CIS benchmarks.
+Define a complete security baseline and monitor the baseline's rules.
+The definition of the baseline should be done in Hiera.
+The purpose of the module is to give the ability to setup a complete security baseline
+which not necessarily have to stick to industry security guides like the CIS
+benchmarks.
 
-The *cis_security_hardening* module does not use benchmark numbers for the class names of the rules. These numbers change from OS version to OS version and even from benchmark version to benchmark version. One main purpose is to ensure this module can be extended by further security settings and monitorings without changing the code of this module. Therefore the module uses a generic interface to call classes implementing particular security baseline rules.
+The *cis_security_hardening* module does not use benchmark numbers for the class
+names of the rules. These numbers change from OS version to OS version and even
+from benchmark version to benchmark version. One main purpose is to ensure this
+module can be extended by further security settings and monitorings without
+changing the code of this module. Therefore the module uses a generic interface
+to call classes implementing particular security baseline rules.
 
-This module also has the ability to create compliance reports. The reports can be created as a Puppet fact uploaded to the Puppet Master or as a CSV file which will remain on the servers for later collection.
+This module also has the ability to create compliance reports. The reports can be
+created as a Puppet fact uploaded to the Puppet Master or as a CSV file which
+will remain on the servers for later collection.
 
 ## Security baseline
 
-A security baseline describes how servers in your environment are setup with a secure configuration. The baseline may be different for each server class like database servers, application or web servers.
+A security baseline describes how servers in your environment are setup with a
+secure configuration. The baseline may be different for each server class like
+database servers, application or web servers.
 
-A security baseline can be based on a CIS benchmark but can include more rules specific to your environment. But depending on server classes not all rules of a CIS benchmark will be used. Sometimes the benchmarks contain different ways to achieve a goal, e.g. with RedHat 8 you can use firewalld, iptables or nftables to setup a firewall. Surely it makes no sense to have all of them running in parallel. So it is your task to define a security baseline to define which tool to use or which settings to use.
+A security baseline can be based on a CIS benchmark but can include more rules
+specific to your environment.
+But depending on server classes not all rules of a CIS benchmark will be used.
+Sometimes the benchmarks contain different ways to achieve a goal, e.g. with
+RedHat 8 you can use firewalld, iptables or nftables to setup a firewall.
+Surely it makes no sense to have all of them running in parallel.
+So it is your task to define a security baseline to define which tool to use or which settings to use.
 
-> For this module level 1 and level 2 server tests from the CIS benchmarks below are taken into account. For the STIG benchmarks there's a third level `stig` available as STIG benchmarks are more strict than level 2 is.
+> For this module level 1 and level 2 server tests from the CIS benchmarks below are taken into account.
+> For the STIG benchmarks there's a third level `stig` available as STIG benchmarks are more strict than level 2 is.
 
 ## CIS Benchmark Reference
 
@@ -68,30 +88,48 @@ The code of this security hardening module is based on the following CIS Benchma
 | Rocky Linux 8| CIS Rocky Linux 8 Benchmark                                  | 1.0.0   | 03-29-2022 |
 | Rocky Linux 9| CIS Rocky Linux 9 Benchmark                                  | 1.0.0   | 12-13-2022 |
 
-The benchmarks can be found at [CIS Benchmarks Website](https://downloads.cisecurity.org/#/).
+The benchmarks can be found at [CIS Benchmarks Website](https://downloads.cisecurity.org/).
 
 ### Deprecation notices
 
-> **Version 4.0.0 will be the final CIS benchmark for CentOS 7 and Redhat 7. There will be a final CentOS 7/Redhat 7 update to cover these versions but there will be no further development on CentOS 7/Redhat 7. Bug fixes will be done on basis of PRs.**
+> **Version 4.0.0 will be the final CIS benchmark for CentOS 7 and Redhat 7.**
+> **There will be a final CentOS 7/Redhat 7 update to cover these versions but**
+> **there will be no further development on CentOS 7/Redhat 7. Bug fixes will**
+> **be done on basis of PRs.**
 
 ## Setup
 
-It is highly recommended to have the complete security baseline definition written in Hiera definitions. This enables you to have different security baselines for groups of servers, environments or even special single servers.
+It is highly recommended to have the complete security baseline definition
+written in Hiera definitions. This enables you to have different security
+baselines for groups of servers, environments or even special single servers.
 
 ### What cis_security_hardening affects
 
-The *cis_security_hardening* module has a parameter `enforce` for each rule. If this parameter is set to true all necessary changes are made to make a server compliant to the security baseline rules. This can have severe impacts to the machines, especially if security settings are defined in a wrong way.
+The *cis_security_hardening* module has a parameter `enforce` for each rule. If
+this parameter is set to true all necessary changes are made to make a server
+compliant to the security baseline rules. This can have severe impacts to the
+machines, especially if security settings are defined in a wrong way.
 > Please test your settings before rolling out to production environments.
 
 Some rules have additional parameters available to get a fine grained configuration in place.
 
-The module needs a base directory. The base directory `/usr/share/cis_security_hardening` is created by the module during the first run. Some data is collected with cronjobs once a day as collecting this data is somewhat expensive and time consuming depending on the server size, e. g. searching for s-bit programs . Under the base directory there will be a directory `bin` where all scripts for gathering information are located.
+The module needs a base directory. The base directory
+`/usr/share/cis_security_hardening` is created by the module during the first
+run. Some data is collected with cronjobs once a day as collecting this data is
+somewhat expensive and time consuming depending on the server size, e. g.
+searching for s-bit programs . Under the base directory there will be a
+directory `bin` where all scripts for gathering information are located.
 
-This module creates a larger fact `cis_security_hardening` to have all required information for applying the rules. Some information is collected with cronjobs once a day as these jobs might run for a long time (e. g. searching filesystems for s-bit programs).
+This module creates a larger fact `cis_security_hardening` to have all required
+information for applying the rules. Some information is collected with cronjobs
+once a day as these jobs might run for a long time (e. g. searching filesystems
+for s-bit programs).
 
 ### Setup Requirements
 
-The *cis_security_hardening* module needs several other Puppet modules. These modules are defined in the [metadata.json](https://github.com/tom-krieger/cis_security_hardening/blob/master/metadata.json) file and are all available at [Puppet Forge](https://forge.puppet.com/).
+The *cis_security_hardening* module needs several other Puppet modules. These modules are defined in the
+[metadata.json](https://github.com/bwitt/cis_security_hardening/blob/master/metadata.json) file and are all available at
+[Puppet Forge](https://forge.puppet.com/).
 
 ### Beginning with cis_security_hardening
 
@@ -112,7 +150,12 @@ The `data` folder contains example Hiera definitions for various operation syste
 
 ### Cronjobs
 
-Gathering information can sometime consume a lot of time. Gathering those facts during Puppet runs would have a significant impact on the time consumed by a Puppet run. Therefore some facts are only gathered once a day using cronjobs. The `cis_security_hardening` module installs the following cronjobs to collect information and provide the information to the fact scripts creating the `cis_security_hardening` fact.
+Gathering information can sometime consume a lot of time. Gathering those facts
+during Puppet runs would have a significant impact on the time consumed by a
+Puppet run. Therefore some facts are only gathered once a day using cronjobs.
+The `cis_security_hardening` module installs the following cronjobs to collect
+information and provide the information to the fact scripts creating the
+`cis_security_hardening` fact.
 
 #### Cron /etc/cron.d/sticky-world-writebale
 
@@ -124,7 +167,9 @@ This cronjob searched privileged commands to be included into auditd rules.
 
 ## Usage
 
-The most easiest way to use the security baseline module is just calling the class or including the class. The security baseline data has to be defined in a Hiera configuration file.
+The most easiest way to use the security baseline module is just calling the
+class or including the class. The security baseline data has to be defined in a
+Hiera configuration file.
 
 ```puppet
 class { 'cis_security_hardening':
@@ -158,44 +203,61 @@ cis_security_hardening::rules::fat::enforce: false
 cis_security_hardening::rules::udf::enforce: true
 ```
 
-The `data` folder contains files named `*_param.yaml` which contain all configurable options for each benchmark. You also can look into the reference documentation.
+The `data` folder contains files named `*_param.yaml` which contain all
+configurable options for each benchmark. You also can look into the reference
+documentation.
 
 ## Reference
 
-See [REFERENCE.md](https://github.com/tom-krieger/cis_security_hardening/blob/master/REFERENCE.md)
+See [REFERENCE.md](https://github.com/bwitt/cis_security_hardening/blob/master/REFERENCE.md)
 
 ## Limitations
 
-Currently the module is tested with RedHat 7, 8, 9, CentOS 7, 8, AlmaLinux 8, 9, Rocky Linux 8, 9, Suse SLES 12, 15, Debian 10, 11, 12, Ubuntu 18.04, 20.04, 22.04 and 24.04. Other OSes may work but there's no guarantee.
+Currently the module is tested with RedHat 7, 8, 9, CentOS 7, 8, AlmaLinux 8,
+9, Rocky Linux 8, 9, Suse SLES 12, 15, Debian 10, 11, 12, Ubuntu 18.04, 20.04,
+22.04 and 24.04. Other OSes may work but there's no guarantee.
 
-More testing is needed as for every supported OS there are different setups in the wild and some of them might not be covered.
+More testing is needed as for every supported OS there are different setups in
+the wild and some of them might not be covered.
 
 For a list of supported OSes please look into the `metadata.json` file.
 
 ### Auditd
 
-Auditd is normally configured with immutable rules. This means that changing rules will require a *reboot* to make the new rules effective.
+Auditd is normally configured with immutable rules. This means that changing
+rules will require a *reboot* to make the new rules effective.
 
 ### SELinux and Apparmor
 
-SELinux and AppArmor are - if configured - activated while this module is applied. To make them effective a *reboot* is required.
+SELinux and AppArmor are - if configured - activated while this module is
+applied. To make them effective a *reboot* is required.
 
 ### Automatic reboot
 
-Automatic reboots might be *dangerous* as servers would be rebooted if one of the classes subscribed for reboot takes any action. But some changes need a reboot, e. g. enabling SELinux or changing auditd rules. As servers in production environments may not be rebooted at any time you have to choose if you will allow reboots by settings the parameter *auto_reboot*. Currently the following rules or group of rules trigger reboots:
+Automatic reboots might be *dangerous* as servers would be rebooted if one of
+the classes subscribed for reboot takes any action. But some changes need a
+reboot, e. g. enabling SELinux or changing auditd rules. As servers in
+production environments may not be rebooted at any time you have to choose if
+you will allow reboots by settings the parameter *auto_reboot*. Currently the
+following rules or group of rules trigger reboots:
 
 * auditd changes in immutable rules
 * crypto_policy
 * selinux changes in policy or state
 
-The default value for *auto_reboot* is `true` and can easily be changed by setting it to `false` in the Hiera configuration of this module.
+The default value for *auto_reboot* is `true` and can easily be changed by
+setting it to `false` in the Hiera configuration of this module.
 
-The global parameter `time_until_reboot` sets the waiting time until the reboot will be performed. On Linux systems you can cancel this reboot with the `shutdown -c` command. But keep in mind that canceling the reboot won't activate some changes.
+The global parameter `time_until_reboot` sets the waiting time until the reboot
+will be performed. On Linux systems you can cancel this reboot with the
+`shutdown -c` command. But keep in mind that canceling the reboot won't
+activate some changes.
 
 For `rebooting` the `puppetlabs-reboot` module is used. Please obey the following comment from this module:
 > POSIX systems (with the exception of Solaris) only support
-specifying the timeout as minutes. As such, the value of timeout must be a multiple of 60. Other values will be rounded up to the
-nearest minute and a warning will be issued.
+specifying the timeout as minutes. As such, the value of timeout must be a
+multiple of 60. Other values will be rounded up to the nearest minute and a
+warning will be issued.
 
 Hiera example:
 
@@ -208,19 +270,33 @@ cis_security_hardening::rules::selinux_policy::auto_reboot: true
 
 ### Suse SLES 12 and 15
 
-The compliance rules have been implemented without or very limited testing. Please report problems or create pull requests to improve the Suse SLES compliance code.
+The compliance rules have been implemented without or very limited testing.
+Please report problems or create pull requests to improve the Suse SLES
+compliance code.
 
 ### Redhat 8 STIG benchmark
 
-The Redhat 8 STIG benchmark contains many different and in my opinion older configurations to the Redhat 8 benchmark. For the Redhat 8 STIG benchmark in this module, the configurations from the current Redhat 8 benchmark were used and extended by the additional configurations of the Redhat 8 STIG benchmark. For example, version 2.0.0 of the Redhat 8 benchmark recommends disabling the 'cramfs' module using `install /bin/false` and blacklisting the module. The Redhat 8 STIG benchmark gives the following configuration: `install /bin/true`. Blacklisting the module is not recommended.
+The Redhat 8 STIG benchmark contains many different and in my opinion older
+configurations to the Redhat 8 benchmark. For the Redhat 8 STIG benchmark in
+this module, the configurations from the current Redhat 8 benchmark were used
+and extended by the additional configurations of the Redhat 8 STIG benchmark.
+For example, version 2.0.0 of the Redhat 8 benchmark recommends disabling the
+'cramfs' module using `install /bin/false` and blacklisting the module. The
+Redhat 8 STIG benchmark gives the following configuration: `install /bin/true`.
+Blacklisting the module is not recommended.
 
 ### Issues with CISCAT scanner
 
 * CISCAT scanner for Ubuntu 20.04 LTS STIG false positives:
-  * reports a not correct configured TMOUT setting but running the check task from the benchmark reports PASSED.
-  * reports that not all audit log files re not read or write-accessible by unauthorized users which seems to be caused by a `lost+found` directory with permissions 0700
-  * reports that audit log directory is not set 0750 or more restrictive but it is 0750
-  * reports that not all system command files are group-owned by root but the check searches for all files and not only these not having permissions /2000
+  * reports a not correct configured TMOUT setting but running the check task
+    from the benchmark reports PASSED.
+  * reports that not all audit log files re not read or write-accessible by
+    unauthorized users which seems to be caused by a `lost+found` directory with
+    permissions 0700
+  * reports that audit log directory is not set 0750 or more restrictive but it
+    is 0750
+  * reports that not all system command files are group-owned by root but the
+    check searches for all files and not only these not having permissions /2000
 
 * CISCAT scanner for Redhat 7 STIG false positives:
   * nosuid flag on home directory filesystems is reported as missing but is set
@@ -228,7 +304,13 @@ The Redhat 8 STIG benchmark contains many different and in my opinion older conf
 
 ## Credits
 
-This project is highly inspired by the [fervid/secure_linux_cis](https://forge.puppet.com/fervid/secure_linux_cis) module from Puppet Forge and uses my [security_baseline](https://forge.puppet.com/modules/tomkrieger/security_baseline) module as basis.
+This project is highly inspired by the
+[fervid/secure_linux_cis](https://forge.puppet.com/fervid/secure_linux_cis)
+module from Puppet Forge and uses the
+[security_baseline](https://forge.puppet.com/modules/tomkrieger/security_baseline)
+module as basis.
+
+This module was originally created and maintained by Thomas Krieger.
 
 ## Development
 
@@ -236,12 +318,17 @@ Contributions are welcome in any form, pull requests and issues should be filed 
 
 ## Changelog
 
-See [CHANGELOG.md](https://github.com/tom-krieger/cis_security_hardening/blob/master/CHANGELOG.md)
+See [CHANGELOG.md](https://github.com/bwitt/cis_security_hardening/blob/master/CHANGELOG.md)
 
 ## Contributors
 
-The list of contributors can be found at: [https://github.com/tom-krieger/cis_security_hardening/graphs/contributors](https://github.com/tom-krieger/cis_security_hardening/graphs/contributors).
+The list of contributors can be found at the
+[contributors graph](https://github.com/bwitt/cis_security_hardening/graphs/contributors).
 
 ## Warranty
 
-This Puppet module is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the Apache 2.0 License for more details.
+This Puppet module is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+[the Apache 2.0 License](https://github.com/bwitt/cis_security_hardening/blob/master/LICENSE)
+for more details.
