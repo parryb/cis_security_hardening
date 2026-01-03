@@ -1,286 +1,63 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-
-## Release 0.9.7
-
-* CentOS 7 4.0.0 benchmark
-
-* Redhat 7 4.0.0 benchmark
-
-> **Please note that with 4.0.0 the Redhat 7 benchmark and CentOS 7 benchmark**
-> **removes ntp and uses chrony**
-
-## Release 0.9.6
-
-* fix dependencies in metadata, removed systemd as it is an indirect dependency
-  (thanks to `canihavethisone` for figuring this out and testing the fix)
-* fixed some typos
-
-## Release 0.9.5
-
-* added Debian 12 support (based on PR #80)
-* PR: 86 and 88:
-  * Replace legacy facts causing silent failures
-  * Increase firewall dependency version
-  * Add systemd to fixtures
-
-## Release 0.9.4
-
-* added puppet-systemd module as it's a dependency of the puppet-logrotate module
-* added Debian 12 support (thanks the PRs)
-
-## Release 0.9.3
-
-* Fix fotr automaticq error reporting in Ubuntu 20.04:
-  * use flag for package uninstallation
-  * disable and mask service
-
-## Release 0.9.2
-
-* Updated to Ubuntu 20.04 benchmark version 2.0.1
-* fix for issue #76: umask setting on Redhat like OSes only if authselect is not enforced
-
-## Release 0.9.1
-
-* Fix for issue #66
-* Fix for issue #70
-* Updated Github action
-* PR #71: Replace legacy facts with modern facts
-* PR #72: Allow for disabling of the sticky world writable and auditd cron jobs. If you have
-  bigger systems where cronjobs collecting file information like for world writable files or
-  auditd privileged commands might be too time consuming you can disable the cronjobs completely.
-  The default value for both jobs in `present`.
-
-  > Please note that not running the auditd privileged commands cronjob might
-  > result in not monitoring newly installed privileged commands.
-
-  Keep in mind that the cronjobs are only running once a day during night hours.
-
-Thanks to `kenyon` for the two PRs above.
-
-## Release 0.9.0
-
-* Puppetlabs Firewall module minimal version is now 7.0.0
-* switched from `action` parameter to `jump` parameter for iptables
-* switched from `provider` parameter to `protocol` parameter for iptables
-
-  > Note that this change may affect you IPTables configuration. So please
-  > check your configuration before updating to this version.
-
-* Updated and added some unit tests
-
-## Release 0.8.4
-
-* fix for issue #62
-
-## Release 0.8.3
-
-* added Ubuntu 22.04 support
-* minor bigfixes for Redhat 9
-
-## Release 0.8.2
-
-* added Redhat 9 support
-* added AlmaLinux 9 support
-* added Rocky Linux 9 support
-* fix for issue #56 "Permissions on /var/log incorrect". Added module
-  npwalker-recursive_file_permissions for that reason.
-* Updated dependencies for stdlib v9 (thanks to `canihavethisone` for the PR)
-
-> Note that stdlib v9 is now the minimum version required
-
-## Release 0.8.1 (not released)
-
-* fix for issue #52, write auditd rules in a way the scanner recognizes them
-
-## Release 0.8.0
-
-* added Debian 11 support
-* renamed cronjobs in /etc/cron.d and removed `.cron` extension from filenames
-* added replacement for has_key (deprecated in stdlib and was now removed)
-* fix for issue #48, rsyslogd service is now notified when rsyslogd.conf is changed.<br>Thanks to Ben Parry
-* changed to fiddyspence-sysctl module
-
-## Release 0.7.13
-
-* omit comments during /etc/fstab reading
-
-## Release 0.7.12
-
-* updated dependencies
-* fixed nfs fact
-
-## Release 0.7.11
-
-* Updated to PDK 2.7
-* some linting related to PDK 2.7
-* dropped support for puppet 5 and 6
-
-Thanks to @canihavethisone:
-
-* Updated dependencies, removed version from fixtures, added github_changelog_generator to gemfile
-
-## Release 0.7.10
-
-* Refactor grub_password.pp to create user.cfg in correct path on RedHat
-* ensure all ntp restrict defaults to match CIS requirements
-* add type to ntp servers array
-* remove default rsyslog server as not required, class will fail if no remote
-  syslog server is defined when remote syslog should be enforced
-* changed `remote_log_host` parameter to type Stdlib::Host
-* sshd permit root login is now configurable
-
-## Release 0.7.9
-
-> This release changes the default values for `ntp_statsdir` and `ntp_driftfile`.
-> Please check your configurations if needed.
-
-* The GRUB boot password is set to `undef` and the previous used default password was removed
-* Fix facts not resolving CentOS in 3 classes
-* Make NTP servers optional and raise warning if not provided, also remove hardcoded default ones
-* NTP driftfile and NTP statsfile are now defined as Stdlib::Absolutepath with
-  default values set to the same values the puppetlabs-ntp module uses
-* added a fact to determine if a system is booted via efi
-* fixed handling GRUB configuration for UEFI systems as the grub.cfg in the EFI
-  directory was not updated. The grub.cfg in the EFI is only updated if there
-  are changes to roll out.
-* removed old legacy facts
-* the predefined GRUB password was removed from Hiera files. If you want to
-  enforce a GRUB bootloader password you must define this password within Hiera.
-  Otherwise the catalog will fail with an error message pointing you to that
-  fact.
-
-## Release 0.7.8
-
-* Optout for automatic reboots is now working, new parameter `auto_reboot` is
-  available. The default value is set to `true`.
-* SELinux default state is now `enforcing`
-* the service for /tmp filesystem management is now enabled by default
-* replaced sysctl module with `thias-sysctl`
-
-If some of the defaults changed do not fit for your environment, just copy the
-parameters configuration into your control repository and set the values
-suitable for your environment.
-
-## Release 0.7.7
-
-> This release changes the hiera.yaml configuration to use OS facts to
-> determine the files to load. Keep in mind that the OS names are written in
-> CamelCase and therefore the filenames in the data folder will change.
-
-* changed hiera config to use facts and renamed hiera config files to use camelcase
-
-## Release 0.7.6
-
-* Bugfix for /dev/shm fstab entry
-* check in crypto policy exec with onlyif for idempotency
-* changed default firewall to nftables for Redhat like OSes version 8
-* fixed nftables rules handling
-* added basic ruleset for nftables
-
-## Release 0.7.5
-
-> This release changed from herculesteam/augeasproviders_sysctl to
-> fiddyspence/sysctl module. make sure to check your dependencies.
-
-* Replaced herculesteam-augeasproviders_sysctl module by fiddyspence-sysctl module (fix for issue #28)
-* removed old modules from .fixtures and metadata.json
-
-## Release 0.7.4
-
-Fixed issue #23: nftables resources should be within if !defined
-
-## Release 0.7.3
-
-* Solved issue with missing grub passwords in some paramedter files
-* use a valid grub password instead of a fake string. See README.md for the default password.
-* removed augeaproviders_mounttab module
-
-## Release v0.7.2
-
-* Added STIG benchmarks for Redhat 7 and 8
-* fixed incorrect publisher for chrony
-* changed augeasproviders core, pam, shellvar and grub to the new puppet modules
-* removed purplehazech-syslogng dependency
-
-## Release 0.7.1
-
-* Added support for Redhat Linux 7 and 8
-* Updated documentation
-* several minor bug fixes
-
-## Release 0.7.0
-
-> This release contains some breaking changes to how `authselect` is
-> configured. Please check your configuration and test before using in
-> production environments.
-
-Please review the following changes before updating to this version module:
-
-* This release changes the authselect compliance rules. If you use Rocky Linux 8
-  or Alma Linux 8 please change your Hiera configuration. All `authselect`
-  related stuff is consolidated into one rule file. This makes a change in your
-  Hiera configuration necessary. The old configuration looks like this:
-
-  ```hiera
-  cis_security_hardening::rules::authselect_profile::enforce: true
-  cis_security_hardening::rules::authselect_profile::custom_profile: cis
-  cis_security_hardening::rules::authselect_profile::base_profile: minimal
-  cis_security_hardening::rules::authselect_profile_select::enforce: true
-  cis_security_hardening::rules::authselect_profile_select::custom_profile: cis
-  cis_security_hardening::rules::authselect_profile_select::profile_options:
-    - with-faillock
-    - without-nullok
-    - with-sudo
-  cis_security_hardening::rules::authselect_with_faillock::enforce: true
-  ```
-
-  This should be changed into this configuration:
-
-  ```hiera
-  cis_security_hardening::rules::authselect::enforce: true
-  cis_security_hardening::rules::authselect::custom_profile: cis
-  cis_security_hardening::rules::authselect::base_profile: sssd
-  cis_security_hardening::rules::authselect::profile_options:
-    - with-faillock
-    - without-nullok
-    - with-sudo
-  ```
-
-* This release introduces a fact containing all available features for the
-  selected `authselect` profile. nIf you add a profile option not available a
-  warning message is printed and the configured option will be ignored.
-
-* The PAM configuration rules have been changed to work with `authselect`.
-
-## Release 0.6.2
-
-Use a cronjob to find `suid` and `sgid` binaries to create auditd rules for these binaries.
-
-## Release 0.6.1
-
-Enable configuration of automatic reboots for each rule triggering such a reboot.
-
-## Release 0.6.0
-
-First published release indludein:
-
-* Added Ubuntu 20.04 STIG benchmark
-* Added Rocky 8 benchmark
-* Added Alma Linux 8 benchmark
-
-## Release 0.5.6
-
-Unpublished release with the following benchmarks:
-
-* CentOS 7
-* Debian 10
-* Ubuntu 18.04
-* Ubuntu 20.04
-* Suse Linux 12
-* Suse Linux 15
-
-## Release 0.1.0
-
-Initial unpublished code transferred from my security_baseline module.
+Each new release typically also includes the latest modulesync defaults.
+These should not affect the functionality of the module.
+
+## [v1.0.0](https://github.com/bwitt/cis_security_hardening/tree/v1.0.0) (2026-01-03)
+
+[Full Changelog](https://github.com/bwitt/cis_security_hardening/compare/6529c07f4c95f5cf4249bfa8b521782f19d85ba4...v1.0.0)
+
+**Breaking changes:**
+
+- Remove space from login screen settings on sles [\#9](https://github.com/bwitt/cis_security_hardening/pull/9) ([bwitt](https://github.com/bwitt))
+
+**Implemented enhancements:**
+
+- Add precommit [\#37](https://github.com/bwitt/cis_security_hardening/pull/37) ([bwitt](https://github.com/bwitt))
+- Add Ubuntu 24.04 Support [\#35](https://github.com/bwitt/cis_security_hardening/pull/35) ([bwitt](https://github.com/bwitt))
+- Migrate to voxpupuli modulesync\_config [\#34](https://github.com/bwitt/cis_security_hardening/pull/34) ([bwitt](https://github.com/bwitt))
+- Add rubocop settings and strings [\#33](https://github.com/bwitt/cis_security_hardening/pull/33) ([bwitt](https://github.com/bwitt))
+- Use dconf module for GNOME dconf [\#31](https://github.com/bwitt/cis_security_hardening/pull/31) ([bwitt](https://github.com/bwitt))
+- Clean ups and additions [\#30](https://github.com/bwitt/cis_security_hardening/pull/30) ([bwitt](https://github.com/bwitt))
+- Use tabs for sudo defaults [\#28](https://github.com/bwitt/cis_security_hardening/pull/28) ([bwitt](https://github.com/bwitt))
+- Remove sysctl exec [\#27](https://github.com/bwitt/cis_security_hardening/pull/27) ([bwitt](https://github.com/bwitt))
+- Switch to gha-puppet workflow [\#26](https://github.com/bwitt/cis_security_hardening/pull/26) ([bwitt](https://github.com/bwitt))
+- Make grub bootloader line a param [\#19](https://github.com/bwitt/cis_security_hardening/pull/19) ([bwitt](https://github.com/bwitt))
+- Update devcontainer and CI [\#18](https://github.com/bwitt/cis_security_hardening/pull/18) ([bwitt](https://github.com/bwitt))
+- Manage world writeable cron file [\#14](https://github.com/bwitt/cis_security_hardening/pull/14) ([bwitt](https://github.com/bwitt))
+- allow params to be set for logrotate class [\#8](https://github.com/bwitt/cis_security_hardening/pull/8) ([bwitt](https://github.com/bwitt))
+- adopt augeasproviders\_sysctl module [\#6](https://github.com/bwitt/cis_security_hardening/pull/6) ([bwitt](https://github.com/bwitt))
+- Load gdm\_screensaver on ubuntu 22.04 [\#5](https://github.com/bwitt/cis_security_hardening/pull/5) ([bwitt](https://github.com/bwitt))
+
+**Fixed bugs:**
+
+- ignore devcontainer json [\#44](https://github.com/bwitt/cis_security_hardening/pull/44) ([bwitt](https://github.com/bwitt))
+- Ignore CHANGELOG.md for markdown checks [\#43](https://github.com/bwitt/cis_security_hardening/pull/43) ([bwitt](https://github.com/bwitt))
+- Fix remaining issues on Ubuntu 24.04 [\#38](https://github.com/bwitt/cis_security_hardening/pull/38) ([bwitt](https://github.com/bwitt))
+- Fail if no bundles match [\#36](https://github.com/bwitt/cis_security_hardening/pull/36) ([bwitt](https://github.com/bwitt))
+- Add missing namespaced ensure\_packages [\#29](https://github.com/bwitt/cis_security_hardening/pull/29) ([bwitt](https://github.com/bwitt))
+- Notify timesyncd on change [\#23](https://github.com/bwitt/cis_security_hardening/pull/23) ([bwitt](https://github.com/bwitt))
+- Set nologin for ubuntu and sles [\#22](https://github.com/bwitt/cis_security_hardening/pull/22) ([bwitt](https://github.com/bwitt))
+- Make cron.allow world readable [\#21](https://github.com/bwitt/cis_security_hardening/pull/21) ([bwitt](https://github.com/bwitt))
+- Have auditd\_init require the auditd package [\#20](https://github.com/bwitt/cis_security_hardening/pull/20) ([bwitt](https://github.com/bwitt))
+- Fix logrotate spec so tests pass [\#17](https://github.com/bwitt/cis_security_hardening/pull/17) ([bwitt](https://github.com/bwitt))
+- Manage auditd cron output file and fix cron [\#16](https://github.com/bwitt/cis_security_hardening/pull/16) ([bwitt](https://github.com/bwitt))
+- Use audit for pam\_faillock [\#15](https://github.com/bwitt/cis_security_hardening/pull/15) ([bwitt](https://github.com/bwitt))
+- Use success=1 for faillock [\#13](https://github.com/bwitt/cis_security_hardening/pull/13) ([bwitt](https://github.com/bwitt))
+- Use pam\_pwhistory for ubuntu 22.04 [\#12](https://github.com/bwitt/cis_security_hardening/pull/12) ([bwitt](https://github.com/bwitt))
+- Fix ufw classes [\#11](https://github.com/bwitt/cis_security_hardening/pull/11) ([bwitt](https://github.com/bwitt))
+- Manage systemd-timesyncd package if enforced [\#10](https://github.com/bwitt/cis_security_hardening/pull/10) ([bwitt](https://github.com/bwitt))
+- Update fixtures file for new sysctl module [\#7](https://github.com/bwitt/cis_security_hardening/pull/7) ([bwitt](https://github.com/bwitt))
+- Use /etc/gdm3/greeter.dconf-defaults for ubuntu [\#4](https://github.com/bwitt/cis_security_hardening/pull/4) ([bwitt](https://github.com/bwitt))
+- Add /sbin and /usr/sbin to path for dpkg-reconfigure [\#3](https://github.com/bwitt/cis_security_hardening/pull/3) ([bwitt](https://github.com/bwitt))
+- Use namespaced stdlib function [\#2](https://github.com/bwitt/cis_security_hardening/pull/2) ([bwitt](https://github.com/bwitt))
+- fix logrotate\_configuration enforcement [\#1](https://github.com/bwitt/cis_security_hardening/pull/1) ([bwitt](https://github.com/bwitt))
+
+**Merged pull requests:**
+
+- Markdown and maintainer change [\#40](https://github.com/bwitt/cis_security_hardening/pull/40) ([bwitt](https://github.com/bwitt))
+
+
+
+\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
