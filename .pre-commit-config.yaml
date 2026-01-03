@@ -35,8 +35,8 @@ repos:
     rev: v0.47.0
     hooks:
       - id: markdownlint
-        exclude: ^(REFERENCE\.md|\.github/(ISSUE_TEMPLATE|PULL_REQUEST_TEMPLATE)\.md)$
         args:
           - --config
           - .markdownlint.json
-          - --
+          - --ignore-path
+          - .markdownlintignore
