@@ -4,9 +4,9 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
-## [v1.0.0](https://github.com/bwitt/cis_security_hardening/tree/v1.0.0) (2026-01-03)
+## [v1.0.0](https://github.com/bwitt/cis_security_hardening/tree/v1.0.0) (2026-01-04)
 
-[Full Changelog](https://github.com/bwitt/cis_security_hardening/compare/6529c07f4c95f5cf4249bfa8b521782f19d85ba4...v1.0.0)
+[Full Changelog](https://github.com/bwitt/cis_security_hardening/compare/v0.9.7...v1.0.0)
 
 **Breaking changes:**
 
@@ -57,6 +57,94 @@ These should not affect the functionality of the module.
 **Merged pull requests:**
 
 - Markdown and maintainer change [\#40](https://github.com/bwitt/cis_security_hardening/pull/40) ([bwitt](https://github.com/bwitt))
+
+## [v0.9.7](https://github.com/bwitt/cis_security_hardening/tree/v0.9.7) (2024-09-16)
+
+[Full Changelog](https://github.com/bwitt/cis_security_hardening/compare/v0.9.6...v0.9.7)
+
+## [v0.9.6](https://github.com/bwitt/cis_security_hardening/tree/v0.9.6) (2024-09-07)
+
+[Full Changelog](https://github.com/bwitt/cis_security_hardening/compare/v0.9.3...v0.9.6)
+
+## [v0.9.3](https://github.com/bwitt/cis_security_hardening/tree/v0.9.3) (2024-03-28)
+
+[Full Changelog](https://github.com/bwitt/cis_security_hardening/compare/v0.9.2...v0.9.3)
+
+## [v0.9.2](https://github.com/bwitt/cis_security_hardening/tree/v0.9.2) (2024-01-28)
+
+[Full Changelog](https://github.com/bwitt/cis_security_hardening/compare/v0.9.1...v0.9.2)
+
+## [v0.9.1](https://github.com/bwitt/cis_security_hardening/tree/v0.9.1) (2023-12-28)
+
+[Full Changelog](https://github.com/bwitt/cis_security_hardening/compare/v0.8.4...v0.9.1)
+
+## [v0.8.4](https://github.com/bwitt/cis_security_hardening/tree/v0.8.4) (2023-09-04)
+
+[Full Changelog](https://github.com/bwitt/cis_security_hardening/compare/v0.8.2...v0.8.4)
+
+## [v0.8.2](https://github.com/bwitt/cis_security_hardening/tree/v0.8.2) (2023-08-15)
+
+[Full Changelog](https://github.com/bwitt/cis_security_hardening/compare/v0.8.0...v0.8.2)
+
+## [v0.8.0](https://github.com/bwitt/cis_security_hardening/tree/v0.8.0) (2023-08-07)
+
+[Full Changelog](https://github.com/bwitt/cis_security_hardening/compare/v0.7.13...v0.8.0)
+
+## [v0.7.13](https://github.com/bwitt/cis_security_hardening/tree/v0.7.13) (2023-05-09)
+
+[Full Changelog](https://github.com/bwitt/cis_security_hardening/compare/v0.7.10...v0.7.13)
+
+## [v0.7.10](https://github.com/bwitt/cis_security_hardening/tree/v0.7.10) (2022-11-13)
+
+[Full Changelog](https://github.com/bwitt/cis_security_hardening/compare/v0.7.9...v0.7.10)
+
+## [v0.7.9](https://github.com/bwitt/cis_security_hardening/tree/v0.7.9) (2022-11-08)
+
+[Full Changelog](https://github.com/bwitt/cis_security_hardening/compare/v0.7.8...v0.7.9)
+
+## [v0.7.8](https://github.com/bwitt/cis_security_hardening/tree/v0.7.8) (2022-10-28)
+
+[Full Changelog](https://github.com/bwitt/cis_security_hardening/compare/v0.7.7...v0.7.8)
+
+## [v0.7.7](https://github.com/bwitt/cis_security_hardening/tree/v0.7.7) (2022-10-25)
+
+[Full Changelog](https://github.com/bwitt/cis_security_hardening/compare/v0.7.6...v0.7.7)
+
+## [v0.7.6](https://github.com/bwitt/cis_security_hardening/tree/v0.7.6) (2022-10-18)
+
+[Full Changelog](https://github.com/bwitt/cis_security_hardening/compare/v0.7.5...v0.7.6)
+
+## [v0.7.5](https://github.com/bwitt/cis_security_hardening/tree/v0.7.5) (2022-10-16)
+
+[Full Changelog](https://github.com/bwitt/cis_security_hardening/compare/v0.7.3...v0.7.5)
+
+## [v0.7.3](https://github.com/bwitt/cis_security_hardening/tree/v0.7.3) (2022-10-07)
+
+[Full Changelog](https://github.com/bwitt/cis_security_hardening/compare/v0.7.2...v0.7.3)
+
+## [v0.7.2](https://github.com/bwitt/cis_security_hardening/tree/v0.7.2) (2022-10-06)
+
+[Full Changelog](https://github.com/bwitt/cis_security_hardening/compare/v0.7.1...v0.7.2)
+
+## [v0.7.1](https://github.com/bwitt/cis_security_hardening/tree/v0.7.1) (2022-09-02)
+
+[Full Changelog](https://github.com/bwitt/cis_security_hardening/compare/v0.7.0...v0.7.1)
+
+## [v0.7.0](https://github.com/bwitt/cis_security_hardening/tree/v0.7.0) (2022-08-27)
+
+[Full Changelog](https://github.com/bwitt/cis_security_hardening/compare/v0.6.2...v0.7.0)
+
+## [v0.6.2](https://github.com/bwitt/cis_security_hardening/tree/v0.6.2) (2022-08-24)
+
+[Full Changelog](https://github.com/bwitt/cis_security_hardening/compare/v0.6.1...v0.6.2)
+
+## [v0.6.1](https://github.com/bwitt/cis_security_hardening/tree/v0.6.1) (2022-08-22)
+
+[Full Changelog](https://github.com/bwitt/cis_security_hardening/compare/v0.6.0...v0.6.1)
+
+## [v0.6.0](https://github.com/bwitt/cis_security_hardening/tree/v0.6.0) (2022-08-21)
+
+[Full Changelog](https://github.com/bwitt/cis_security_hardening/compare/6529c07f4c95f5cf4249bfa8b521782f19d85ba4...v0.6.0)
 
 
 
