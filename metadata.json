@@ -1,6 +1,6 @@
 {
   "name": "bwitt-cis_security_hardening",
-  "version": "1.0.0",
+  "version": "1.0.1-rc0",
   "author": "Brian Witt",
   "summary": "Secure your systems according to CIS benchmarks",
   "license": "Apache-2.0",
