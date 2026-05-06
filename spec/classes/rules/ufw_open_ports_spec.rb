@@ -79,7 +79,7 @@ describe 'cis_security_hardening::rules::ufw_open_ports' do
               with(
                 'command' => 'ufw allow proto tcp from 192.168.1.0/24 to any port 22',
                 'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                'onlyif'  => 'test -z "$(ufw status verbose | grep -E -i \'^22/tcp.*ALLOW in\')"'
+                'onlyif'  => 'test -z "$(ufw status verbose | grep -E -i \'^22/tcp.*ALLOW in.*192.168.1.0/24\')"'
               )
           else
             is_expected.not_to contain_exec('allow ssh')
