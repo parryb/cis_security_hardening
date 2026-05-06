@@ -47,6 +47,14 @@ describe 'cis_security_hardening::rules::ufw_open_ports' do
                 'proto' => 'tcp',
                 'action' => 'allow',
               },
+              'allow ssh from cidr' => {
+                'queue' => 'in',
+                'port' => '22',
+                'proto' => 'tcp',
+                'action' => 'allow',
+                'from' => '192.168.1.0/24',
+                'to' => 'any',
+              },
             },
           }
         end
@@ -66,6 +74,12 @@ describe 'cis_security_hardening::rules::ufw_open_ports' do
                 'command' => 'ufw allow proto udp from any to any port 53',
                 'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
                 'onlyif'  => 'test -z "$(ufw status verbose | grep -E -i \'^53/udp.*ALLOW in\')"'
+              )
+            is_expected.to contain_exec('allow ssh from cidr').
+              with(
+                'command' => 'ufw allow proto tcp from 192.168.1.0/24 to any port 22',
+                'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+                'onlyif'  => 'test -z "$(ufw status verbose | grep -E -i \'^22/tcp.*ALLOW in\')"'
               )
           else
             is_expected.not_to contain_exec('allow ssh')

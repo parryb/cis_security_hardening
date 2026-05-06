@@ -53,7 +53,7 @@ class cis_security_hardening::rules::ufw_open_ports (
 
       if ($data['queue'] == 'in') {
         if(cis_security_hardening::hash_key($data, 'from')) {
-          unless $data['from'] =~ /^[a-zA-Z0-9\-_\.]+$/ {
+          unless $data['from'] =~ /^[a-zA-Z0-9\-_\.\/:]+$/ {
             fail("Illegal from value: ${data['from']}")
           }
           $from = "from ${data['from']} "
@@ -62,7 +62,7 @@ class cis_security_hardening::rules::ufw_open_ports (
         }
 
         if (cis_security_hardening::hash_key($data, 'to')) {
-          unless $data['to'] =~ /^[a-zA-Z0-9\-_\.]+$/ {
+          unless $data['to'] =~ /^[a-zA-Z0-9\-_\.\/:]+$/ {
             fail("Illegal to value: ${data['to']}")
           }
           $to = "to ${data['to']} "
