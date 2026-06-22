@@ -44,10 +44,10 @@ class cis_security_hardening::rules::ufw_outbound (
       }
 
       if cis_security_hardening::hash_key($data, 'port') {
-        unless $data['port'] =~ /^\d+$/ {
+        $port = String($data['port'])
+        unless $port =~ /^\d+(:\d+)?$/ {
           fail("Illegal port: ${data['port']}")
         }
-        $port = $data['port']
       } else {
         $port = ''
       }

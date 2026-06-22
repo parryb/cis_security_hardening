@@ -55,6 +55,22 @@ describe 'cis_security_hardening::rules::ufw_open_ports' do
                 'from' => '192.168.1.0/24',
                 'to' => 'any',
               },
+              'allow speedify data integer port' => {
+                'queue' => 'in',
+                'port' => 8443,
+                'proto' => 'tcp',
+                'action' => 'allow',
+                'from' => 'any',
+                'to' => 'any',
+              },
+              'allow speedify data range' => {
+                'queue' => 'in',
+                'port' => '37000:38000',
+                'proto' => 'tcp',
+                'action' => 'allow',
+                'from' => 'any',
+                'to' => 'any',
+              },
             },
           }
         end
@@ -80,6 +96,18 @@ describe 'cis_security_hardening::rules::ufw_open_ports' do
                 'command' => 'ufw allow proto tcp from 192.168.1.0/24 to any port 22',
                 'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
                 'onlyif'  => 'test -z "$(ufw status verbose | grep -E -i \'^22/tcp.*ALLOW in.*192.168.1.0/24\')"'
+              )
+            is_expected.to contain_exec('allow speedify data integer port').
+              with(
+                'command' => 'ufw allow proto tcp from any to any port 8443',
+                'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+                'onlyif'  => 'test -z "$(ufw status verbose | grep -E -i \'^8443/tcp.*ALLOW in\')"'
+              )
+            is_expected.to contain_exec('allow speedify data range').
+              with(
+                'command' => 'ufw allow proto tcp from any to any port 37000:38000',
+                'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+                'onlyif'  => 'test -z "$(ufw status verbose | grep -E -i \'^37000:38000/tcp.*ALLOW in\')"'
               )
           else
             is_expected.not_to contain_exec('allow ssh')
